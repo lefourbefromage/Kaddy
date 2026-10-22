@@ -348,37 +348,79 @@
   color: var(--kd-text-muted);
 }
 
-/* "Reste de…" */
-.leftoverPicker {
+/* "Reste de quel plat ?" dialog */
+.leftoverHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--kd-space-3);
+  padding: var(--kd-space-5) var(--kd-space-5) var(--kd-space-3);
+}
+
+.leftoverHeadText {
   display: flex;
   flex-direction: column;
   gap: var(--kd-space-1);
+  min-width: 0;
 }
 
 .leftoverTitle {
-  font: var(--kd-text-body-small);
-  font-weight: 700;
-  color: var(--kd-text-muted);
+  font: var(--kd-text-headline);
+  letter-spacing: var(--kd-tracking-display);
+  font-variation-settings: "wdth" var(--kd-wdth-display);
+}
+
+.leftoverClose {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-field);
+  cursor: pointer;
+}
+
+.leftoverClose svg {
+  fill: none;
+  stroke: var(--kd-ink);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.leftoverList {
+  margin: 0;
+  padding: 0 var(--kd-space-5) var(--kd-space-5);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-2);
 }
 
 .leftoverOption {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 2px;
   min-height: var(--kd-target);
-  padding: 6px 10px;
+  padding: var(--kd-space-3) var(--kd-space-4);
   border: 0;
-  border-radius: var(--kd-radius-sm);
-  background: var(--kd-lavender-mist);
+  border-radius: var(--kd-radius-md);
+  background: var(--kd-field);
   color: var(--kd-ink);
   text-align: left;
-  font: var(--kd-text-body-medium);
-  font-weight: 700;
   cursor: pointer;
 }
 
 .leftoverOption:hover {
-  background: var(--kd-lavender-soft);
+  background: var(--kd-lavender-mist);
+}
+
+.leftoverDish {
+  font: var(--kd-text-title);
+  overflow-wrap: anywhere;
 }
 
 .leftoverWhen {
@@ -387,7 +429,8 @@
 }
 
 .leftoverNone {
-  font: var(--kd-text-body-small);
+  padding: 0 var(--kd-space-5) var(--kd-space-5);
+  font: var(--kd-text-body);
   color: var(--kd-text-muted);
 }
 

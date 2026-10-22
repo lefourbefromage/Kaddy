@@ -15,6 +15,7 @@ export function Modal({
   as = "div",
   onSubmit,
   wide = false,
+  narrow = false,
   children,
 }: {
   labelledBy: string;
@@ -24,6 +25,8 @@ export function Modal({
   as?: "div" | "form";
   onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   wide?: boolean;
+  /** short pickers: a small card on desktop */
+  narrow?: boolean;
   children: ReactNode;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -41,7 +44,7 @@ export function Modal({
     };
   }, []);
 
-  const panelClass = `${styles.panel} ${wide ? styles.wide : ""}`;
+  const panelClass = `${styles.panel} ${wide ? styles.wide : ""} ${narrow ? styles.narrow : ""}`;
   return (
     <dialog
       ref={ref}

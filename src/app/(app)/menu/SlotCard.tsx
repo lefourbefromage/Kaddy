@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { Modal } from "@/components/Modal";
 import { areClose, fold, titleWords } from "@/lib/normalize";
 import type { Recipe } from "@/lib/recipes";
 import { parseSlotKey, slotLabel, type Slot, type SlotRef } from "@/lib/weeks";
@@ -111,7 +112,10 @@ function SlotEditor({ slotRef, recipes, leftoverSources, onCancel, onChoose }: P
         // Leaving the slot (click elsewhere, Tab out) cancels the entry.
         if (!boxRef.current?.contains(e.relatedTarget as Node | null)) onCancel();
       }}
-      onClick={() => inputRef.current?.focus()}
+      // clicks inside the leftover dialog bubble here through the DOM: leave them alone
+      onClick={(e) => {
+        if (!(e.target as Element).closest("dialog")) inputRef.current?.focus();
+      }}
     >
       <label htmlFor={`${uid}-input`} className={`kd-label ${styles.editingLabel}`}>
         {mealLabel(slotRef)}
@@ -162,34 +166,72 @@ function SlotEditor({ slotRef, recipes, leftoverSources, onCancel, onChoose }: P
       {!query.trim() && (
         <>
           <span className={styles.flexFill} />
-          {pickingLeftover ? (
-            <div className={styles.leftoverPicker} role="group" aria-label="Reste de quel plat ?">
-              <span className={styles.leftoverTitle}>Reste de…</span>
-              {leftoverSources.length ? (
-                leftoverSources.map((s) => (
-                  <button
-                    key={s.key}
-                    type="button"
-                    className={styles.leftoverOption}
-                    onClick={() => onChoose({ kind: "leftover", recipeId: s.recipeId, of: s.key })}
-                  >
-                    <span>{s.title}</span>
-                    <span className={styles.leftoverWhen}>{slotLabel(s.ref)}</span>
-                  </button>
-                ))
-              ) : (
-                <span className={styles.leftoverNone}>Aucun plat plus tôt dans la semaine.</span>
-              )}
-            </div>
-          ) : (
-            <button type="button" className={`${styles.resteButton} kd-hit`} onClick={() => setPickingLeftover(true)}>
-              <RefreshIcon />
-              Reste
-            </button>
-          )}
+          <button type="button" className={`${styles.resteButton} kd-hit`} onClick={() => setPickingLeftover(true)}>
+            <RefreshIcon />
+            Reste
+          </button>
         </>
       )}
+
+      {pickingLeftover && (
+        <LeftoverDialog
+          slotRef={slotRef}
+          sources={leftoverSources}
+          onClose={() => setPickingLeftover(false)}
+          onChoose={onChoose}
+        />
+      )}
     </div>
+  );
+}
+
+/** "Reste de quel plat ?": the dishes earlier in the week. Rendered inside the slot so focus stays "in" it. */
+function LeftoverDialog({
+  slotRef,
+  sources,
+  onClose,
+  onChoose,
+}: {
+  slotRef: SlotRef;
+  sources: LeftoverSource[];
+  onClose: () => void;
+  onChoose: (choice: Choice) => void;
+}) {
+  const uid = useId();
+  return (
+    <Modal labelledBy={`${uid}-title`} onClose={onClose} narrow>
+      <div className={styles.leftoverHead}>
+        <div className={styles.leftoverHeadText}>
+          <span className="kd-label">{slotLabel(slotRef)}</span>
+          <h2 id={`${uid}-title`} className={styles.leftoverTitle}>
+            Reste de quel plat ?
+          </h2>
+        </div>
+        <button type="button" aria-label="Fermer" className={styles.leftoverClose} onClick={onClose}>
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+      {sources.length ? (
+        <ul className={styles.leftoverList}>
+          {sources.map((s) => (
+            <li key={s.key}>
+              <button
+                type="button"
+                className={styles.leftoverOption}
+                onClick={() => onChoose({ kind: "leftover", recipeId: s.recipeId, of: s.key })}
+              >
+                <span className={styles.leftoverDish}>{s.title}</span>
+                <span className={styles.leftoverWhen}>{slotLabel(s.ref)}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className={styles.leftoverNone}>Aucun plat plus tôt dans la semaine.</p>
+      )}
+    </Modal>
   );
 }
 

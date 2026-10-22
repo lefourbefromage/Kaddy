@@ -60,6 +60,10 @@
   .wide {
     max-width: 980px;
   }
+
+  .narrow {
+    max-width: 480px;
+  }
 }
 
 @keyframes fade {
