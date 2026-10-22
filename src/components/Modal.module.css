@@ -1,0 +1,80 @@
+/* Mobile: full-screen sheet. Desktop (≥ 900px): centred card over the veil, scrolling with it. */
+
+.dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--kd-surface);
+  color: var(--kd-ink);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.dialog[open] {
+  animation: sheet-up 300ms cubic-bezier(.2, .9, .3, 1.05) both;
+}
+
+.dialog::backdrop {
+  background: var(--kd-veil);
+}
+
+.panel {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--kd-surface);
+}
+
+@keyframes sheet-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (min-width: 900px) {
+  .dialog {
+    padding: var(--kd-space-12) var(--kd-space-6);
+    background: transparent;
+  }
+
+  .dialog[open] {
+    animation: fade 200ms ease-out both;
+  }
+
+  .panel {
+    min-height: 0;
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: var(--kd-radius-dialog);
+    box-shadow: var(--kd-shadow-float);
+    animation: card-up 280ms cubic-bezier(.2, .9, .3, 1.1) both;
+  }
+
+  .wide {
+    max-width: 980px;
+  }
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes card-up {
+  from { opacity: 0; transform: translateY(16px) scale(.98); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open],
+  .panel {
+    animation: none;
+  }
+}

@@ -54,7 +54,7 @@
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--kd-space-3) var(--kd-space-5);
   padding: var(--kd-space-2) var(--kd-space-2) var(--kd-space-2) 18px;
@@ -65,7 +65,7 @@
 .desktopNav {
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--kd-space-1);
   padding: var(--kd-space-1);
   background: var(--kd-field);
@@ -417,6 +417,28 @@
   .mobileTop,
   .mobileNav {
     display: none;
+  }
+}
+
+/* Narrow desktop (900–1179px): the bar stays on one line by dropping the wordmark
+   and the household name (the menu button keeps its full aria-label). */
+@media (min-width: 900px) and (max-width: 1179px) {
+  .topBar {
+    gap: var(--kd-space-3);
+  }
+
+  .wordmark,
+  .householdName {
+    display: none;
+  }
+
+  .desktopLink {
+    padding: 0 14px;
+    white-space: nowrap;
+  }
+
+  .householdSummary {
+    padding-right: 10px;
   }
 }
 

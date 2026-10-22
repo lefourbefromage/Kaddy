@@ -38,7 +38,10 @@ households/{hid}/recipes/{recipeId}
   sourceUrl: string | null     // YouTube, Instagram, recipe site
   ingredients: { name: string, key: string, qty: number | null, unit: "g"|"kg"|"ml"|"l"|"pièce"|null }[]
   steps: string[]
-  status: "complete" | "todo"  // "todo" = added from the Menu without ingredients
+  status: "complete" | "todo"  // derived on every save: "todo" when there is no ingredient
+                               // (a recipe added from the Menu starts as "todo")
+                               // no image field: the card picture comes from the aisle of the
+                               // first ingredient found in the catalogue (src/lib/recipeArt.ts)
   cookedCount: number
   lastCookedOn: string | null  // "2026-10-21"
   dismissedDuplicates: string[] // ids of recipes declared "not a duplicate"

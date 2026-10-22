@@ -103,6 +103,11 @@ typography:
     fontSize: "22px"
     fontWeight: 800
     lineHeight: 1.15
+  headline-xs:
+    fontFamily: "'Bricolage Grotesque', sans-serif"
+    fontSize: "18px"
+    fontWeight: 800
+    lineHeight: 1.15
   title:
     fontFamily: "Figtree, system-ui, sans-serif"
     fontSize: "17px"
@@ -323,7 +328,7 @@ The same pastels are reused for recipe-card backgrounds and the summary tiles. T
 - **Display medium** (800, 44px): the sign-in title, which sits in a narrower card.
 - **Display** (800, 52px desktop / 36–40px mobile, line-height 1, tracking −0.02em): page title, always next to its illustration.
 - **Numeral** (800, 56–64px, `wdth` 80, line-height .9): the big numbers of the summary and of Mon Kaddy.
-- **Headline** (800, 20–26px): section titles ("Pas cuisinées depuis longtemps", week headers, recipe sheets).
+- **Headline** (800, 18–26px; 18px for recipe-card names): section titles ("Pas cuisinées depuis longtemps", week headers, recipe sheets).
 - **Title** (Figtree 700, 16–18px): dish names, items, aisle names.
 - **Body** (Figtree 600, 15–16px): actions, fields, descriptions. 16px minimum in mobile fields.
 - **Body small** (Figtree 600, 13–14px): subtitles ("de mardi soir", "Hors menu").

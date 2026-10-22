@@ -64,6 +64,8 @@
   --kd-text-numeral: 800 56px/.9 var(--font-display);
   --kd-text-headline-lg: 800 26px/1.1 var(--font-display);
   --kd-text-headline: 800 22px/1.15 var(--font-display);
+  --kd-text-headline-sm: 800 20px/1.15 var(--font-display);
+  --kd-text-headline-xs: 800 18px/1.15 var(--font-display); /* recipe card name */
   --kd-text-title: 700 17px/1.25 var(--font-body);
   --kd-text-body: 600 15px/1.45 var(--font-body);
   --kd-text-body-lg: 600 16px/1.45 var(--font-body);

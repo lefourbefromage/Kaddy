@@ -67,3 +67,10 @@ export function HouseholdProvider({ children }: { children: ReactNode }) {
 }
 
 export const useHousehold = () => useContext(HouseholdContext);
+
+/** The signed-in household's id, for screens rendered inside RequireHousehold. */
+export function useHouseholdId() {
+  const state = useContext(HouseholdContext);
+  if (state.status !== "signedIn") throw new Error("useHouseholdId outside RequireHousehold");
+  return state.householdId;
+}
