@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isMember(hid) {
+      return request.auth != null && request.auth.token.householdId == hid;
+    }
+
+    // Shared catalogue of common products → aisle (seeded by scripts/seed-catalog.mjs)
+    match /catalog/{key} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    match /households/{hid} {
+      allow read: if isMember(hid);
+      // The household itself: only the aisle order can be changed from the app.
+      allow update: if isMember(hid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['aisleOrder', 'updatedAt']);
+      allow create, delete: if false; // reserved to scripts/create-household.mjs (Admin SDK)
+
+      match /{document=**} {
+        allow read, write: if isMember(hid);
+      }
+    }
+  }
+}

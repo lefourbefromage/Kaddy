@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Kaddy · A · Ordre des rayons desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#2D2848}
+a{color:#2D2848}a:hover{color:#6A57CC}
+.kd-row{transition:background .15s ease}
+.kd-row:hover{background:#FBF8F3}
+.kd-check{transition:transform .15s ease}
+.kd-row:active .kd-check{transform:scale(.9)}
+@media (prefers-reduced-motion: reduce){.kd-row,.kd-check{transition:none}}
+.kd-box{position:relative;flex:none}
+.kd-tick{position:absolute;inset:0;margin:auto;pointer-events:none;opacity:0}
+.kd-leave{max-height:90px;animation:kdOut .26s .22s cubic-bezier(.5,0,.75,0) forwards}
+.kd-leave .kd-check{background:#6A57CC !important;border-color:#6A57CC !important;animation:kdPop .24s cubic-bezier(.16,1,.3,1) both}
+.kd-leave .kd-tick{opacity:1}
+.kd-leave .kd-tick path{stroke-dasharray:22;stroke-dashoffset:22;animation:kdDraw .2s .05s cubic-bezier(.16,1,.3,1) forwards}
+.kd-leave .kd-name{color:#6B6680;text-decoration:line-through;text-decoration-color:#6A57CC;text-decoration-thickness:2px}
+.kd-back{animation:kdBack .32s cubic-bezier(.16,1,.3,1) both}
+.kd-bumpA{display:inline-block;animation:kdBumpA .34s cubic-bezier(.16,1,.3,1)}
+.kd-bumpB{display:inline-block;animation:kdBumpB .34s cubic-bezier(.16,1,.3,1)}
+.kd-hop{animation:kdHop .6s cubic-bezier(.16,1,.3,1) .1s both}
+.kd-roll{animation:kdRoll .9s cubic-bezier(.16,1,.3,1) both}
+.kd-appear{animation:kdAppear .3s cubic-bezier(.16,1,.3,1) both}
+.kd-bar{transition:width .45s cubic-bezier(.16,1,.3,1)}
+@keyframes kdPop{0%{transform:scale(.82)}100%{transform:scale(1)}}
+@keyframes kdDraw{to{stroke-dashoffset:0}}
+@keyframes kdOut{to{opacity:0;transform:translateX(18px);max-height:0;min-height:0;border-top-width:0}}
+@keyframes kdBack{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+@keyframes kdBumpA{40%{transform:scale(1.22)}100%{transform:none}}
+@keyframes kdBumpB{40%{transform:scale(1.22)}100%{transform:none}}
+@keyframes kdHop{0%{transform:none}30%{transform:translateY(-12px) rotate(-8deg)}62%{transform:translateY(0) rotate(4deg)}100%{transform:none}}
+@keyframes kdRoll{0%{transform:none}35%{transform:translateX(-8px) rotate(-3deg)}70%{transform:translateX(14px) rotate(2deg)}100%{transform:none}}
+@keyframes kdAppear{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.kd-leave,.kd-back,.kd-bumpA,.kd-bumpB,.kd-hop,.kd-roll,.kd-appear,.kd-leave .kd-check{animation:none}.kd-leave{opacity:.55}.kd-leave .kd-tick path{animation:none;stroke-dashoffset:0}.kd-bar{transition:none}}
+:where(button,a,summary,[tabindex]:not([tabindex="-1"])):focus-visible{outline:3px solid #6A57CC;outline-offset:3px}
+:where(input,textarea,select):focus-visible{outline:3px solid #6A57CC !important;outline-offset:2px}
+nav[aria-label="Navigation principale"] :focus-visible{outline-color:#F9D86E}
+[role="dialog"]:focus{outline:none}
+.kd-hit{position:relative}
+.kd-hit::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+.kd-foyer{position:relative}
+.kd-foyer>summary{list-style:none}
+.kd-foyer>summary::-webkit-details-marker{display:none}
+.kd-foyer>summary:hover{background:#EEE7DC}
+.kd-foyer[open]>summary svg.kd-chev{transform:rotate(180deg)}
+.kd-foyer-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:5;min-width:220px;background:#fff;border-radius:22px;padding:6px;box-shadow:0 8px 24px rgba(45,40,72,.14);display:flex;flex-direction:column;gap:2px;animation:kdMenu .18s cubic-bezier(.16,1,.3,1) both}
+.kd-foyer-menu a{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;text-decoration:none;color:#2D2848;font:600 15px Figtree,sans-serif}
+.kd-foyer-menu a:hover{background:#F6F1EA;color:#2D2848}
+@keyframes kdMenu{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.kd-foyer-menu{animation:none}}
+.kd-rrow{transition:background-color .25s ease}
+.kd-rrow.kd-moved{animation:kdMoved .7s cubic-bezier(.16,1,.3,1)}
+.kd-rrow.kd-drag{opacity:.45}
+.kd-rrow.kd-over{box-shadow:inset 0 3px 0 #6A57CC}
+.kd-mv:disabled{opacity:.3;cursor:default}
+.kd-mv:not(:disabled):hover{background:#EEE7DC}
+.kd-handle{cursor:grab}
+.kd-reset:hover{background:#EEE7DC}
+@keyframes kdMoved{0%{background:#E4DCFD}100%{background:#fff}}
+@media (prefers-reduced-motion: reduce){.kd-rrow.kd-moved{animation:none;background:#F1EDFD}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F0E9E0; display: flex; flex-direction: column; font-family: Figtree, system-ui, sans-serif; color: #2D2848">
+
+<header style="position: sticky; top: 0; z-index: 2; padding: 16px 24px 8px; background: #F0E9E0">
+  <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; background: #fff; border-radius: 999px; padding: 8px 8px 8px 18px">
+    <a href="menu-desktop.html" aria-label="Kaddy, accueil" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+      <img width="128" height="128" decoding="async" src="../public/illustrations/app-icon.webp" alt="" style="width: 46px; height: 46px; display: block">
+      <img width="238" height="88" decoding="async" src="../public/illustrations/logo-wordmark.webp" alt="Kaddy" style="height: 32px; width: auto; display: block">
+    </a>
+    <nav aria-label="Navigation principale" style="margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4px; background: #F6F1EA; border-radius: 999px; padding: 4px">
+      <a href="menu-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>Menu</a>
+      <a href="liste-de-courses-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"></path><circle cx="4.5" cy="6" r="1.2"></circle><circle cx="4.5" cy="12" r="1.2"></circle><circle cx="4.5" cy="18" r="1.2"></circle></svg>Liste de courses</a>
+      <a href="recettes-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5c0-1.1.9-2 2-2h13v14H6c-1.1 0-2 .9-2 2V5z"></path><path d="M4 19c0 1.1.9 2 2 2h13v-4"></path></svg>Recettes</a>
+      <a href="mon-kaddy-desktop.html" aria-current="page" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 18px; border-radius: 999px; background: #2D2848; color: #fff; text-decoration: none; font-weight: 700; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h3l2.5 11h11l2-8H6.5"></path><circle cx="9" cy="19.5" r="1.5"></circle><circle cx="17" cy="19.5" r="1.5"></circle></svg>Mon Kaddy<span style="font-size: 12px; font-weight: 800; background: #F9D86E; color: #2D2848; border-radius: 999px; padding: 2px 8px">{{ left }}</span></a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 6px">
+      <button aria-label="Rechercher une recette" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #F6F1EA; display: grid; place-items: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg></button>
+      <details class="kd-foyer">
+        <summary aria-label="Foyer Famille Martin : réglages et déconnexion" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 6px; border-radius: 999px; background: #F6F1EA; cursor: pointer; font: 700 15px Figtree, sans-serif; color: #2D2848; white-space: nowrap"><span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 50%; background: #FDD3C6; display: grid; place-items: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6.5 8 6.5"></path><path d="M6 9.5V19h12V9.5"></path><path d="M10 19v-5h4v5"></path></svg></span>Famille Martin<svg class="kd-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transition: transform .2s ease"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="kd-foyer-menu">
+          <a href="ordre-des-rayons-desktop.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><path d="M3.5 5l1 1-1 1M3.5 11l1 1-1 1M3.5 17l1 1-1 1"></path></svg>Ordre des rayons</a>
+          <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"></rect><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"></path></svg>Mot de passe du foyer</a>
+          <a href="connexion-desktop.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 16l-4-4 4-4M6 12h10"></path></svg>Se déconnecter</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main style="width: 100%; max-width: 760px; margin: 0 auto; padding: 32px 48px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 20px">
+  <a href="mon-kaddy-desktop.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px 0 8px; border-radius: 999px; background: #fff; text-decoration: none; font-weight: 700; font-size: 14px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg>Retour à Mon Kaddy</a>
+  <div style="display: flex; align-items: flex-end; gap: 20px">
+    <img width="397" height="280" decoding="async" src="../public/illustrations/titre-mon-kaddy.webp" alt="" style="height: 120px; width: auto; display: block; margin-bottom: -8px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 85%; font-size: 52px; line-height: 1; letter-spacing: -0.02em">Ordre des rayons</h1>
+      <p style="margin: 0; font-size: 16px; color: #5F5A70; max-width: 52ch">Range les rayons dans l'ordre où tu les croises au magasin. Mon Kaddy suivra cet ordre. Glisse un rayon ou utilise les flèches.</p>
+    </div>
+  </div>
+  <div style="position: relative; display: flex; flex-direction: column; gap: 16px">
+    <ol aria-label="Ordre des rayons" style="list-style: none; margin: 0; padding: 0; background: #fff; border-radius: 22px; overflow: hidden">
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="7">
+        <li class="{{ r.cls }}" draggable="true" onDragStart="{{ r.dragStart }}" onDragOver="{{ r.dragOver }}" onDrop="{{ r.drop }}" onDragEnd="{{ r.dragEnd }}" style="display: flex; align-items: center; gap: 10px; min-height: 68px; padding: 8px 8px 8px 10px; border-top: {{ r.sep }}; background: #fff">
+          <span class="kd-handle" aria-hidden="true" title="Glisser pour déplacer" style="flex: none; width: 24px; display: grid; place-items: center; color: #857F98"><svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"><circle cx="5" cy="4" r="1.7"></circle><circle cx="11" cy="4" r="1.7"></circle><circle cx="5" cy="10" r="1.7"></circle><circle cx="11" cy="10" r="1.7"></circle><circle cx="5" cy="16" r="1.7"></circle><circle cx="11" cy="16" r="1.7"></circle></svg></span>
+          <span aria-hidden="true" style="flex: none; width: 28px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px; color: #5F5A70; text-align: center">{{ r.pos }}</span>
+          <span aria-hidden="true" style="flex: none; width: 48px; height: 48px; border-radius: 16px; background: {{ r.bg }}; display: grid; place-items: center">
+            <sc-if value="{{ r.img }}" hint-placeholder-val="{{ true }}"><img loading="lazy" decoding="async" src="{{ r.img }}" alt="" style="max-width: 40px; max-height: 38px; width: auto; height: auto"></sc-if>
+            <sc-if value="{{ r.noImg }}" hint-placeholder-val="{{ false }}"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px">?</span></sc-if>
+          </span>
+          <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+            <span style="font-size: 16px; font-weight: 700; line-height: 1.2">{{ r.name }}</span>
+            <span style="font-size: 13px; font-weight: 600; color: #5F5A70">{{ r.count }}</span>
+          </span>
+          <button type="button" class="kd-mv" onClick="{{ r.up }}" disabled="{{ r.isFirst }}" aria-label="Monter {{ r.name }}" style="flex: none; width: 44px; height: 44px; border-radius: 12px; border: 0; background: #F6F1EA; display: grid; place-items: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg></button>
+          <button type="button" class="kd-mv" onClick="{{ r.down }}" disabled="{{ r.isLast }}" aria-label="Descendre {{ r.name }}" style="flex: none; width: 44px; height: 44px; border-radius: 12px; border: 0; background: #F6F1EA; display: grid; place-items: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+        </li>
+      </sc-for>
+    </ol>
+    <div role="status" aria-live="polite" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">{{ announce }}</div>
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #3F6B4C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Enregistré pour tout le foyer</span>
+      <button type="button" class="kd-reset" onClick="{{ reset }}" disabled="{{ isDefault }}" style="height: 44px; padding: 0 16px; border-radius: 999px; border: 0; background: #F6F1EA; font: 700 14px Figtree, sans-serif; color: #2D2848; cursor: pointer">Ordre par défaut</button>
+    </div>
+  </div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.aisles = {
+      fl: { name: 'Fruits & légumes', bg: '#CFE6D3', img: '../public/illustrations/thumbs/rayon-fruits-legumes.webp', n: 10 },
+      bo: { name: 'Boucherie & charcuterie', bg: '#FDD3C6', img: '../public/illustrations/thumbs/rayon-boucherie.webp', n: 4 },
+      cr: { name: 'Crémerie & fromages', bg: '#F8EDC8', img: '../public/illustrations/thumbs/rayon-cremerie.webp', n: 9 },
+      ep: { name: 'Épicerie salée', bg: '#F1E2CC', img: '../public/illustrations/thumbs/rayon-epicerie.webp', n: 4 },
+      bl: { name: 'Boulangerie', bg: '#FBE3B8', img: '../public/illustrations/thumbs/rayon-boulangerie.webp', n: 2 },
+      hy: { name: 'Hygiène & entretien', bg: '#DCE7F7', img: '../public/illustrations/rayon-hygiene.webp', n: 2 },
+      au: { name: 'Autres', bg: '#ECE5F5', img: '', n: 2 },
+    };
+    this.def = ['fl', 'bo', 'cr', 'ep', 'bl', 'hy', 'au'];
+    this.state = { order: this.def.slice(), moved: null, drag: null, over: null, announce: '' };
+  }
+  move(from, to) {
+    const o = this.state.order.slice();
+    if (to < 0 || to >= o.length || from === to) return;
+    const [id] = o.splice(from, 1); o.splice(to, 0, id);
+    this.setState({ order: o, moved: id, drag: null, over: null, announce: this.aisles[id].name + ', position ' + (to + 1) + ' sur ' + o.length });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({ moved: null }), 800);
+  }
+  renderVals() {
+    const { order, moved, drag, over, announce } = this.state;
+    const rows = order.map((id, i) => {
+      const a = this.aisles[id];
+      return {
+        name: a.name, bg: a.bg, img: a.img, noImg: !a.img, pos: i + 1,
+        count: a.n + (a.n > 1 ? ' articles cette semaine' : ' article cette semaine'),
+        sep: i === 0 ? '0' : '1.5px solid #F3EEE7',
+        cls: 'kd-rrow' + (moved === id ? ' kd-moved' : '') + (drag === i ? ' kd-drag' : '') + (over === i && drag !== null && drag !== i ? ' kd-over' : ''),
+        isFirst: i === 0, isLast: i === order.length - 1,
+        up: () => this.move(i, i - 1), down: () => this.move(i, i + 1),
+        dragStart: (e) => { try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', id); } catch (x) {} this.setState({ drag: i }); },
+        dragOver: (e) => { e.preventDefault(); if (this.state.over !== i) this.setState({ over: i }); },
+        drop: (e) => { e.preventDefault(); if (this.state.drag !== null) this.move(this.state.drag, i); },
+        dragEnd: () => this.setState({ drag: null, over: null }),
+      };
+    });
+    return {
+      rows, announce,
+      isDefault: order.join() === this.def.join(),
+      reset: () => this.setState({ order: this.def.slice(), moved: null, announce: 'Ordre par défaut rétabli' }),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+# Data model: Firebase (draft to validate)
+
+## Principles
+- **One Firestore database** for every household (multi-tenant). Everything lives under `households/{householdId}`.
+- **No personal account.** A household = **one Firebase Auth user** (email/password), created by Vincent with `scripts/create-household.mjs`.
+- On the sign-in screen, the person types the **household name** and the **household password**:
+  - the app turns the name into an identifier (`"Famille Martin"` → `famille-martin`);
+  - then it calls `signInWithEmailAndPassword("famille-martin@foyers.kaddy.app", password)`.
+- The email address is **technical, invisible and never used** (the domain does not need to exist).
+- The Auth user carries a **custom claim** `householdId`, set by the creation script. The security rules rely on it.
+- "Rester connecté sur cet appareil": `browserLocalPersistence` when checked, `browserSessionPersistence` otherwise.
+- If more households join later, nothing changes: the same database, one more document per household.
+
+## Collections
+
+```
+catalog/{key}                                // SHARED catalogue of common products (read-only for households)
+  name: string                 // "Pommes de terre"
+  aisleId: "fl"|"bo"|"cr"|"ep"|"bl"|"hy"|"au"
+  aliases: string[]            // ["pdt", "patates"] → also matched by the autocomplete
+  defaultUnit: string | null   // "kg", "pièce"…
+  // seeded from data/products.json with scripts/seed-catalog.mjs (taken over from the old "courses" project)
+
+households/{householdId}
+  name: string                 // "Famille Martin"
+  slug: string                 // "famille-martin" (= householdId)
+  aisleOrder: string[]         // ["fl","bo","cr","ep","bl","hy","au"]
+  createdAt, updatedAt: timestamp
+
+households/{hid}/recipes/{recipeId}
+  title: string
+  titleWords: string[]         // normalised words (no accents, no small words, singular) → duplicate detection
+  description: string
+  sourceUrl: string | null     // YouTube, Instagram, recipe site
+  ingredients: { name: string, key: string, qty: number | null, unit: "g"|"kg"|"ml"|"l"|"pièce"|null }[]
+  steps: string[]
+  status: "complete" | "todo"  // "todo" = added from the Menu without ingredients
+  cookedCount: number
+  lastCookedOn: string | null  // "2026-10-21"
+  dismissedDuplicates: string[] // ids of recipes declared "not a duplicate"
+  createdAt, updatedAt
+
+households/{hid}/ingredients/{key}           // household's own aisle choice (wins over the catalogue)
+  name: string
+  aisleId: "fl"|"bo"|"cr"|"ep"|"bl"|"hy"|"au" | null   // null = "Ingrédients à classer"
+
+households/{hid}/weeks/{weekId}              // weekId = ISO "2026-W43"
+  slots: {
+    "mon.lunch": { kind: "recipe", recipeId } |
+                 { kind: "leftover", recipeId, of: "sun.dinner" },
+    ...                                       // absent key = empty slot
+  }
+  listOverrides: { "<recipeId>:<key>": { qty?: number, unit?: string, removed?: true } }
+  updatedAt
+
+households/{hid}/weeks/{weekId}/extras/{extraId}     // "Hors menu"
+  name, key, qty, unit, aisleId | null, createdAt
+
+households/{hid}/weeks/{weekId}/checks/{itemKey}     // Mon Kaddy ticks: ONE doc per item
+  checked: boolean
+  at: serverTimestamp
+```
+
+### Why one document per ticked item
+Two people in the shop tick **different items at the same time**. With one document per item there is no write conflict, and every phone receives the change in under a second (`onSnapshot` on `checks`). A single document holding a map would force transactions.
+
+### Mon Kaddy computation (client side)
+1. Take the recipes from the week's slots of kind `recipe`. A **leftover** adds no ingredient.
+2. Apply `listOverrides`, then add `extras`.
+3. Merge by `key + unit`, summing quantities, and keep the sources for the "2 Gnocchi + 3 One pot" label.
+4. Find each item's aisle, in this order:
+   1. `households/{hid}/ingredients/{key}.aisleId` (the household's choice);
+   2. `catalog/{key}.aisleId`, also searched via the `aliases`;
+   3. otherwise "Autres", marked "Rayon à choisir", and the product shows in "Ingrédients à classer".
+5. Order the aisles by `household.aisleOrder`, and **sort alphabetically** inside each aisle: `localeCompare('fr', { sensitivity: 'base' })`.
+6. `itemKey` = `${key}__${unit ?? "-"}`, used for `checks`.
+
+### Duplicate detection
+`titleWords` = title in lowercase, without accents, without small words (`à, au, aux, de, des, du, d, la, le, les, l, et, en, avec, sans, un, une, sur, façon`), without a final s/x.
+- Two titles are close if `max(common/len(A), common/len(B)) > 0.8`.
+- Show the message "Une recette identique semble déjà exister : …", which can be dismissed. Dismissing it adds the other recipe's id to `dismissedDuplicates`.
+
+### Product autocomplete
+When typing an ingredient or an off-menu item, the app suggests matches from `catalog` (name + aliases, normalised: no accents, no plural), merged with the household's own `ingredients`. The catalogue is a few hundred entries: load it once into memory (and the offline cache) rather than querying it on every keystroke.
+
+## Security rules (`firestore.rules`)
+See the `firestore.rules` file at the root. Summary:
+- `catalog/{key}` can be read by every signed-in user; writing it is reserved to the seed script (Admin SDK).
+- Every document under `households/{hid}` can only be read or written by a user whose `token.householdId == hid`.
+- The household document itself can only be updated for `aisleOrder` and `updatedAt`. Creating and deleting it is reserved to the admin script (the Admin SDK bypasses the rules).

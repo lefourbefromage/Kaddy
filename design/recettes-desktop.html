@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Kaddy · A · Recettes desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#2D2848}
+a{color:#2D2848}a:hover{color:#6A57CC}
+.kd-card{transition:transform .18s ease}
+.kd-card:hover{transform:translateY(-3px)}
+.kd-card:hover .kd-thumb img{transform:rotate(-4deg) scale(1.05)}
+.kd-thumb img{transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.kd-veil{animation:kdFade .2s ease-out both}
+.kd-dialog{animation:kdUp .28s cubic-bezier(.2,.9,.3,1.1) both}
+.kd-dup{animation:kdFade .2s ease-out both}
+@keyframes kdFade{from{opacity:0}to{opacity:1}}
+@keyframes kdUp{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.kd-card,.kd-thumb img,.kd-veil,.kd-dialog{transition:none;animation:none}}
+:where(button,a,summary,[tabindex]:not([tabindex="-1"])):focus-visible{outline:3px solid #6A57CC;outline-offset:3px}
+:where(input,textarea,select):focus-visible{outline:3px solid #6A57CC !important;outline-offset:2px}
+nav[aria-label="Navigation principale"] :focus-visible{outline-color:#F9D86E}
+[role="dialog"]:focus{outline:none}
+.kd-hit{position:relative}
+.kd-hit::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+.kd-foyer{position:relative}
+.kd-foyer>summary{list-style:none}
+.kd-foyer>summary::-webkit-details-marker{display:none}
+.kd-foyer>summary:hover{background:#EEE7DC}
+.kd-foyer[open]>summary svg.kd-chev{transform:rotate(180deg)}
+.kd-foyer-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:5;min-width:220px;background:#fff;border-radius:22px;padding:6px;box-shadow:0 8px 24px rgba(45,40,72,.14);display:flex;flex-direction:column;gap:2px;animation:kdMenu .18s cubic-bezier(.16,1,.3,1) both}
+.kd-foyer-menu a{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;text-decoration:none;color:#2D2848;font:600 15px Figtree,sans-serif}
+.kd-foyer-menu a:hover{background:#F6F1EA;color:#2D2848}
+@keyframes kdMenu{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.kd-foyer-menu{animation:none}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F0E9E0; display: flex; flex-direction: column; font-family: Figtree, system-ui, sans-serif; color: #2D2848">
+
+<header style="position: sticky; top: 0; z-index: 2; padding: 16px 24px 8px; background: #F0E9E0">
+  <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; background: #fff; border-radius: 999px; padding: 8px 8px 8px 18px">
+    <a href="menu-desktop.html" aria-label="Kaddy, accueil" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+      <img width="128" height="128" decoding="async" src="../public/illustrations/app-icon.webp" alt="" style="width: 46px; height: 46px; display: block">
+      <img width="238" height="88" decoding="async" src="../public/illustrations/logo-wordmark.webp" alt="Kaddy" style="height: 32px; width: auto; display: block">
+    </a>
+    <nav aria-label="Navigation principale" style="margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4px; background: #F6F1EA; border-radius: 999px; padding: 4px">
+      <a href="menu-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>Menu</a>
+      <a href="liste-de-courses-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"></path><circle cx="4.5" cy="6" r="1.2"></circle><circle cx="4.5" cy="12" r="1.2"></circle><circle cx="4.5" cy="18" r="1.2"></circle></svg>Liste de courses</a>
+      <a href="#" aria-current="page" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; background: #2D2848; color: #fff; text-decoration: none; font-weight: 700; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5c0-1.1.9-2 2-2h13v14H6c-1.1 0-2 .9-2 2V5z"></path><path d="M4 19c0 1.1.9 2 2 2h13v-4"></path></svg>Recettes</a>
+      <a href="mon-kaddy-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h3l2.5 11h11l2-8H6.5"></path><circle cx="9" cy="19.5" r="1.5"></circle><circle cx="17" cy="19.5" r="1.5"></circle></svg>Mon Kaddy<span style="font-size: 12px; font-weight: 800; background: #F9D86E; border-radius: 999px; padding: 2px 8px">21</span></a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 6px">
+      <details class="kd-foyer">
+        <summary aria-label="Foyer Famille Martin : réglages et déconnexion" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 6px; border-radius: 999px; background: #F6F1EA; cursor: pointer; font: 700 15px Figtree, sans-serif; color: #2D2848; white-space: nowrap"><span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 50%; background: #FDD3C6; display: grid; place-items: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6.5 8 6.5"></path><path d="M6 9.5V19h12V9.5"></path><path d="M10 19v-5h4v5"></path></svg></span>Famille Martin<svg class="kd-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transition: transform .2s ease"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="kd-foyer-menu">
+          <a href="ordre-des-rayons-desktop.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><path d="M3.5 5l1 1-1 1M3.5 11l1 1-1 1M3.5 17l1 1-1 1"></path></svg>Ordre des rayons</a>
+          <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"></rect><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"></path></svg>Mot de passe du foyer</a>
+          <a href="connexion-desktop.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 16l-4-4 4-4M6 12h10"></path></svg>Se déconnecter</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main style="width: 100%; max-width: 1448px; margin: 0 auto; padding: 32px 48px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
+    <div style="display: flex; align-items: flex-end; gap: 20px">
+      <img width="721" height="450" decoding="async" src="../public/illustrations/titre-recettes.webp" alt="" style="height: 140px; width: auto; display: block; margin-bottom: -8px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 85%; font-size: 52px; line-height: 1; letter-spacing: -0.02em">Recettes</h1>
+        <p style="margin: 0; font-size: 16px; color: #5F5A70">{{ subtitle }}</p>
+      </div>
+    </div>
+    <button onClick="{{ newRecipe }}" style="display: inline-flex; align-items: center; gap: 12px; height: 52px; padding: 0 8px 0 22px; border-radius: 999px; border: 0; background: #2D2848; color: #fff; font: 700 15px Figtree, sans-serif; cursor: pointer">Nouvelle recette
+      <span style="width: 36px; height: 36px; border-radius: 50%; background: #F9D86E; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></span></button>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+    <div role="tablist" aria-label="Catégories de recettes" style="display: flex; gap: 4px; background: #fff; border-radius: 999px; padding: 4px">
+      <button role="tab" aria-selected="{{ tabAll }}" onClick="{{ showAll }}" style="height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: {{ tabAllBg }}; color: {{ tabAllFg }}; font: 700 15px Figtree, sans-serif; cursor: pointer">Recettes · {{ nAll }}</button>
+      <button role="tab" aria-selected="{{ tabTodo }}" onClick="{{ showTodo }}" style="height: 44px; display: flex; align-items: center; gap: 8px; padding: 0 18px; border-radius: 999px; border: 0; background: {{ tabTodoBg }}; color: {{ tabTodoFg }}; font: 700 15px Figtree, sans-serif; cursor: pointer"><span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: #FFB54D; color: #2D2848; display: grid; place-items: center; font-size: 12px; font-weight: 800">!</span>À compléter · {{ nTodo }}</button>
+    </div>
+    <label style="flex: 1 1 260px; max-width: 420px; display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px; background: #fff; border-radius: 999px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5A70" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg>
+      <input type="search" aria-label="Chercher une recette" placeholder="Chercher une recette…" value="{{ query }}" onChange="{{ onQuery }}" style="flex: 1; min-width: 0; border: 0; background: transparent; font: 600 15px Figtree, sans-serif; color: #2D2848; outline: none">
+    </label>
+    <sc-if value="{{ tabAll }}" hint-placeholder-val="{{ true }}">
+      <div role="group" aria-label="Trier" style="margin-left: auto; display: flex; gap: 4px; background: #fff; border-radius: 999px; padding: 4px">
+        <sc-for list="{{ sorts }}" as="s" hint-placeholder-count="3">
+          <button class="kd-hit" aria-pressed="{{ s.on }}" onClick="{{ s.pick }}" style="height: 40px; padding: 0 14px; border-radius: 999px; border: 0; background: {{ s.bg }}; color: #2D2848; font: {{ s.font }}; cursor: pointer">{{ s.label }}</button>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{ tabAll }}" hint-placeholder-val="{{ true }}">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 16px">
+      <sc-for list="{{ list }}" as="r" hint-placeholder-count="8">
+        <button class="kd-card" onClick="{{ r.open }}" aria-label="Ouvrir la recette {{ r.name }}" style="text-align: left; border: 0; padding: 0; background: #fff; border-radius: 28px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; font: inherit; color: inherit">
+          <span class="kd-thumb" style="height: 150px; background: {{ r.bg }}; display: grid; place-items: center; overflow: hidden">
+            <img loading="lazy" decoding="async" src="{{ r.img }}" alt="" style="height: 118px; width: auto; display: block">
+          </span>
+          <span style="padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px">
+            <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px; line-height: 1.15">{{ r.name }}</span>
+            <span style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span style="font-size: 12px; font-weight: 700; background: #F6F1EA; border-radius: 999px; padding: 4px 10px">{{ r.cookedLabel }}</span>
+              <sc-if value="{{ r.source }}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; background: #E4DCFD; color: #4B3F8F; border-radius: 999px; padding: 4px 10px"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"></path></svg>{{ r.sourceShort }}</span></sc-if>
+            </span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="background: #fff; border-radius: 28px; padding: 40px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px">
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px">Aucune recette ne correspond.</span>
+        <span style="font-size: 15px; color: #5F5A70">Essaie un autre mot, ou crée la recette.</span>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <sc-if value="{{ tabTodo }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 900px">
+      <sc-for list="{{ todos }}" as="t" hint-placeholder-count="1">
+        <div style="background: #fff; border-radius: 22px; padding: 16px 16px 16px 20px; display: flex; align-items: center; gap: 16px">
+          <span aria-hidden="true" style="flex: none; width: 28px; height: 28px; border-radius: 50%; background: #FFB54D; display: grid; place-items: center; font-weight: 800">!</span>
+          <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px">{{ t.name }}</span>
+            <span style="font-size: 14px; color: #5F5A70">{{ t.ingLabel }}</span>
+          </div>
+          <button onClick="{{ t.complete }}" style="border: 0; cursor: pointer; font-family: Figtree, sans-serif; flex: none; display: inline-flex; align-items: center; height: 44px; padding: 0 18px; border-radius: 999px; background: #2D2848; color: #fff; text-decoration: none; font-weight: 700; font-size: 14px">Compléter</button>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+</main>
+
+<sc-if value="{{ isView }}" hint-placeholder-val="{{ false }}">
+  <div class="kd-veil" onClick="{{ close }}" style="position: fixed; inset: 0; z-index: 10; background: rgba(45, 40, 72, .5); display: flex; align-items: flex-start; justify-content: center; padding: 48px 24px; box-sizing: border-box; overflow-y: auto">
+    <div class="kd-dialog" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="recTitle" onClick="{{ stop }}" style="width: 100%; max-width: 920px; background: #fff; border-radius: 32px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; background: {{ sel.bg }}; padding: 28px 96px 28px 32px; display: flex; align-items: center; gap: 24px">
+        <img loading="lazy" decoding="async" src="{{ sel.img }}" alt="" style="flex: none; height: 130px; width: auto">
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+          <h2 id="recTitle" style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 85%; font-size: 40px; line-height: 1; letter-spacing: -0.01em">{{ sel.name }}</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+            <span style="font-size: 13px; font-weight: 700; background: #fff; border-radius: 999px; padding: 5px 12px">{{ sel.cookedLabel }}</span>
+            <sc-if value="{{ sel.source }}" hint-placeholder-val="{{ true }}"><a href="https://example.com" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px 0 6px; border-radius: 999px; background: #2D2848; color: #fff; text-decoration: none; font-size: 14px; font-weight: 700"><span aria-hidden="true" style="width: 26px; height: 26px; border-radius: 50%; background: #F9D86E; display: grid; place-items: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="#2D2848" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"></path></svg></span>{{ sel.source }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a></sc-if>
+          </div>
+        </div>
+        <button aria-label="Fermer" onClick="{{ close }}" style="position: absolute; top: 28px; right: 28px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; display: grid; place-items: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 0">
+        <section aria-labelledby="ingTitle" style="flex: 1 1 280px; padding: 28px 32px; background: #FBF8F3; display: flex; flex-direction: column; gap: 14px">
+          <h3 id="ingTitle" style="margin: 0; display: flex; align-items: baseline; justify-content: space-between; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px">Ingrédients<span style="font-family: Figtree, sans-serif; font-size: 13px; font-weight: 700; color: #5F5A70">{{ sel.ingCount }}</span></h3>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column">
+            <sc-for list="{{ sel.ings }}" as="i" hint-placeholder-count="5">
+              <li style="display: flex; align-items: center; gap: 12px; min-height: 44px; border-bottom: 1.5px solid #EFE8DD">
+                <span style="flex: 1; font-size: 16px; font-weight: 600">{{ i.name }}</span>
+                <sc-if value="{{ i.qty }}" hint-placeholder-val="{{ true }}"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 15px; background: #EEE7DC; border-radius: 999px; padding: 3px 10px">{{ i.qty }}</span></sc-if>
+              </li>
+            </sc-for>
+          </ul>
+        </section>
+
+        <section aria-labelledby="stepTitle" style="flex: 999 1 380px; padding: 28px 32px; display: flex; flex-direction: column; gap: 16px">
+          <h3 id="stepTitle" style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px">Préparation</h3>
+          <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px">
+            <sc-for list="{{ sel.steps }}" as="st" hint-placeholder-count="4">
+              <li style="display: flex; gap: 14px; align-items: flex-start">
+                <span aria-hidden="true" style="flex: none; width: 30px; height: 30px; border-radius: 50%; background: #D6CBFD; display: grid; place-items: center; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 15px">{{ st.n }}</span>
+                <span style="font-size: 16px; line-height: 1.5; padding-top: 3px; text-wrap: pretty">{{ st.text }}</span>
+              </li>
+            </sc-for>
+          </ol>
+        </section>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 18px 32px; border-top: 1.5px solid #EFE8DD">
+        <button onClick="{{ edit }}" style="height: 48px; padding: 0 18px; border-radius: 999px; border: 0; background: #F6F1EA; font: 700 15px Figtree, sans-serif; color: #2D2848; cursor: pointer">Modifier</button>
+        <button style="height: 48px; padding: 0 12px; border-radius: 999px; border: 0; background: transparent; font: 700 15px Figtree, sans-serif; color: #7A2E17; cursor: pointer">Supprimer</button>
+        <button style="margin-left: auto; display: inline-flex; align-items: center; gap: 12px; height: 52px; padding: 0 8px 0 22px; border-radius: 999px; border: 0; background: #2D2848; color: #fff; font: 700 15px Figtree, sans-serif; cursor: pointer">Mettre au menu
+          <span style="width: 36px; height: 36px; border-radius: 50%; background: #F9D86E; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg></span></button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+<sc-if value="{{ isEdit }}" hint-placeholder-val="{{ false }}">
+  <div class="kd-veil" style="position: fixed; inset: 0; z-index: 10; background: rgba(45, 40, 72, .5); display: flex; align-items: flex-start; justify-content: center; padding: 48px 24px; box-sizing: border-box; overflow-y: auto">
+    <form class="kd-dialog" role="dialog" aria-modal="true" tabindex="-1" aria-labelledby="editLabel" onSubmit="{{ save }}" style="width: 100%; max-width: 980px; background: #fff; border-radius: 32px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="position: relative; background: {{ draft.bg }}; padding: 28px 96px 28px 32px; display: flex; align-items: center; gap: 24px">
+        <img loading="lazy" decoding="async" src="{{ draft.img }}" alt="" style="flex: none; height: 110px; width: auto">
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+          <span id="editLabel" style="font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #4B3F8F">{{ draft.label }}</span>
+          <label for="edName" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Nom de la recette</label>
+          <input id="edName" type="text" value="{{ draft.name }}" placeholder="Nom de la recette" onChange="{{ onName }}" style="width: 100%; box-sizing: border-box; height: 56px; padding: 0 16px; border: 2px solid transparent; border-radius: 16px; background: rgba(255,255,255,.75); font: 800 30px 'Bricolage Grotesque', sans-serif; color: #2D2848; outline: none">
+          <sc-if value="{{ hasDup }}" hint-placeholder-val="{{ false }}"><div role="status" class="kd-dup" style="display: flex; align-items: center; gap: 10px; padding: 6px 6px 6px 14px; border-radius: 16px; background: #2D2848; color: #fff; font-size: 14px; font-weight: 600; line-height: 1.3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F9D86E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><rect x="8" y="8" width="12" height="12" rx="2.5"></rect><path d="M16 8V6.5A2.5 2.5 0 0 0 13.5 4h-7A2.5 2.5 0 0 0 4 6.5v7A2.5 2.5 0 0 0 6.5 16H8"></path></svg><span style="flex: 1; min-width: 0">Une recette identique semble déjà exister : <strong style="font-weight: 800; color: #F9D86E">{{ dupName }}</strong></span><button class="kd-hit" type="button" onClick="{{ hideDup }}" aria-label="Masquer l'alerte : ce n'est pas un doublon" title="Ce n'est pas un doublon" style="flex: none; width: 36px; height: 36px; border-radius: 10px; border: 0; background: rgba(255,255,255,.14); display: grid; place-items: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-if>
+        </div>
+        <button type="button" aria-label="Fermer sans enregistrer" onClick="{{ cancel }}" style="position: absolute; top: 28px; right: 28px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; display: grid; place-items: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+
+      <div style="padding: 20px 32px 4px; display: flex; flex-direction: column; gap: 8px">
+        <label for="edSrc" style="font-size: 14px; font-weight: 800">Lien de la recette <span style="font-weight: 600; color: #5F5A70">· optionnel</span></label>
+        <div style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 8px 0 16px; border-radius: 16px; background: #F6F1EA">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5A70" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"></path><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"></path></svg>
+          <input id="edSrc" type="url" value="{{ draft.url }}" placeholder="Colle un lien YouTube, Instagram ou d'un site de recettes" onChange="{{ onUrl }}" style="flex: 1; min-width: 0; border: 0; background: transparent; font: 600 15px Figtree, sans-serif; color: #2D2848; outline: none">
+          <sc-if value="{{ draft.kind }}" hint-placeholder-val="{{ true }}"><span style="flex: none; display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 999px; background: #E4DCFD; color: #4B3F8F; font-size: 13px; font-weight: 800"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"></path></svg>{{ draft.kind }}</span></sc-if>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap">
+        <section aria-labelledby="edIng" style="flex: 1 1 320px; padding: 24px 32px; background: #FBF8F3; display: flex; flex-direction: column; gap: 12px; margin-top: 16px">
+          <h3 id="edIng" style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px">Ingrédients</h3>
+          <div aria-hidden="true" style="display: grid; grid-template-columns: 20px minmax(0, 1fr) 64px 80px 32px; gap: 8px; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #6B6680"><span></span><span>Nom</span><span>Qté</span><span>Unité</span><span></span></div>
+          <sc-for list="{{ draft.ings }}" as="i" hint-placeholder-count="5">
+            <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr) 64px 80px 32px; gap: 8px; align-items: center">
+              <span aria-hidden="true" title="Glisser pour réordonner" style="cursor: grab; color: #8E88A0; display: grid; place-items: center"><svg width="14" height="18" viewBox="0 0 14 18" fill="currentColor"><circle cx="4" cy="3" r="1.6"></circle><circle cx="10" cy="3" r="1.6"></circle><circle cx="4" cy="9" r="1.6"></circle><circle cx="10" cy="9" r="1.6"></circle><circle cx="4" cy="15" r="1.6"></circle><circle cx="10" cy="15" r="1.6"></circle></svg></span>
+              <input type="text" aria-label="Ingrédient {{ i.n }}" value="{{ i.name }}" onChange="{{ i.onName }}" placeholder="Ingrédient" style="min-width: 0; height: 42px; box-sizing: border-box; padding: 0 12px; border: 0; border-radius: 12px; background: #fff; font: 600 15px Figtree, sans-serif; color: #2D2848">
+              <input type="text" inputmode="decimal" aria-label="Quantité de {{ i.name }}" value="{{ i.qty }}" onChange="{{ i.onQty }}" placeholder="—" style="width: 100%; height: 42px; box-sizing: border-box; border: 0; border-radius: 12px; background: #fff; text-align: center; font: 800 16px 'Bricolage Grotesque', sans-serif; color: #2D2848">
+              <button class="kd-hit" type="button" onClick="{{ i.cycleUnit }}" aria-label="Unité de {{ i.name }} : {{ i.unit }}" style="height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 0 8px 0 10px; border: 0; border-radius: 12px; background: #fff; font: 700 14px Figtree, sans-serif; color: #2D2848; cursor: pointer">{{ i.unit }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+              <button class="kd-hit" type="button" onClick="{{ i.remove }}" aria-label="Retirer {{ i.name }}" style="width: 32px; height: 32px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6680" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+            </div>
+          </sc-for>
+          <button type="button" onClick="{{ addIng }}" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; border-radius: 12px; border: 2px dashed #CFC6DA; background: transparent; font: 700 14px Figtree, sans-serif; color: #5F5A70; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Ajouter un ingrédient</button>
+        </section>
+
+        <section aria-labelledby="edSteps" style="flex: 999 1 380px; padding: 24px 32px; display: flex; flex-direction: column; gap: 12px; margin-top: 16px">
+          <h3 id="edSteps" style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px">Préparation</h3>
+          <sc-for list="{{ draft.steps }}" as="st" hint-placeholder-count="4">
+            <div style="display: flex; gap: 10px; align-items: flex-start">
+              <span aria-hidden="true" style="flex: none; width: 30px; height: 30px; margin-top: 8px; border-radius: 50%; background: #D6CBFD; display: grid; place-items: center; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 15px">{{ st.n }}</span>
+              <textarea aria-label="Étape {{ st.n }}" onChange="{{ st.onText }}" value="{{ st.text }}" rows="2" style="flex: 1; min-width: 0; box-sizing: border-box; padding: 10px 12px; border: 0; border-radius: 12px; background: #F6F1EA; font: 500 15px/1.45 Figtree, sans-serif; color: #2D2848; resize: vertical"></textarea>
+              <button class="kd-hit" type="button" onClick="{{ st.remove }}" aria-label="Retirer l'étape {{ st.n }}" style="flex: none; width: 32px; height: 32px; margin-top: 8px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6680" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+            </div>
+          </sc-for>
+          <button type="button" onClick="{{ addStep }}" style="display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; border-radius: 12px; border: 2px dashed #CFC6DA; background: transparent; font: 700 14px Figtree, sans-serif; color: #5F5A70; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Ajouter une étape</button>
+        </section>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 18px 32px; border-top: 1.5px solid #EFE8DD">
+        <sc-if value="{{ draft.canDelete }}" hint-placeholder-val="{{ true }}"><button type="button" style="height: 48px; padding: 0 12px; border-radius: 999px; border: 0; background: transparent; font: 700 15px Figtree, sans-serif; color: #7A2E17; cursor: pointer">Supprimer la recette</button></sc-if>
+        <button type="button" onClick="{{ cancel }}" style="margin-left: auto; height: 48px; padding: 0 18px; border-radius: 999px; border: 0; background: #F6F1EA; font: 700 15px Figtree, sans-serif; color: #2D2848; cursor: pointer">Annuler</button>
+        <button type="submit" style="display: inline-flex; align-items: center; gap: 12px; height: 52px; padding: 0 8px 0 22px; border-radius: 999px; border: 0; background: #2D2848; color: #fff; font: 700 15px Figtree, sans-serif; cursor: pointer">{{ draft.saveLabel }}
+          <span style="width: 36px; height: 36px; border-radius: 50%; background: #F9D86E; display: grid; place-items: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span></button>
+      </div>
+    </form>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"vue":{"editor":"enum","options":["liste","fiche","edition","doublon"],"default":"edition"},"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const I = {
+      carotte: '../public/illustrations/rayon-fruits-legumes.webp', poulet: '../public/illustrations/rayon-boucherie.webp',
+      baguette: '../public/illustrations/rayon-boulangerie.webp', fromage: '../public/illustrations/rayon-cremerie.webp',
+      pates: '../public/illustrations/rayon-epicerie.webp', lentilles: '../public/illustrations/recette-lentilles.webp',
+      pomme: '../public/illustrations/recette-pomme.webp', confiture: '../public/illustrations/recette-confiture.webp',
+    };
+    this.recipes = [
+      { id: 'gno', name: 'Gnocchi crème de courgette', img: I.pates, bg: '#F8EDC8', cooked: 6, last: 0, order: 1, source: 'Voir sur YouTube', url: 'https://www.youtube.com/watch?v=xxxx',
+        ings: [['Gnocchis', '500 g'], ['Courgettes', '2 pièces'], ['Poulet', '2 pièces'], ['Saint-Môret', '60 g'], ['Parmesan', '']],
+        steps: ['Coupe le poulet en dés et fais-le dorer 5 min dans une poêle avec un filet d\'huile.', 'Ajoute les courgettes en petits dés, sale, poivre et laisse cuire 8 min à feu moyen.', 'Fais revenir les gnocchis dans une autre poêle jusqu\'à ce qu\'ils soient dorés.', 'Mélange le Saint-Môret aux courgettes avec un peu d\'eau pour faire une crème.', 'Ajoute les gnocchis, mélange et sers avec du parmesan râpé.'] },
+      { id: 'sal', name: 'Salade chèvre chaud', img: I.fromage, bg: '#CFE6D3', cooked: 4, last: 0, order: 2, source: '',
+        ings: [['Salade verte', '1 pièce'], ['Chèvre bûche', '1 pièce'], ['Œufs', '12 pièces'], ['Noix', '']],
+        steps: ['Lave et essore la salade.', 'Coupe le chèvre en rondelles et pose-les sur des tranches de pain.', 'Passe-les 5 min sous le gril du four.', 'Dresse la salade, ajoute les toasts, les noix et une vinaigrette.'] },
+      { id: 'one', name: 'One pot butternut', img: I.carotte, bg: '#FDD3C6', cooked: 3, last: 0, order: 3, source: 'Voir la recette', url: 'https://www.marmiton.org/recettes/xxxx',
+        ings: [['Poulet', '3 pièces'], ['Épinards', '200 g'], ['Pulpe de tomate', '400 g'], ['Feta', ''], ['Cheddar râpé', ''], ['Concentré de tomates', '']],
+        steps: ['Épluche la butternut et coupe-la en cubes.', 'Fais dorer le poulet dans une grande cocotte.', 'Ajoute la butternut, la pulpe et le concentré de tomates, couvre d\'eau et laisse mijoter 20 min.', 'Ajoute les épinards en fin de cuisson, puis la feta et le cheddar au moment de servir.'] },
+      { id: 'sou', name: 'Soupe œufs', img: I.carotte, bg: '#DCE7F7', cooked: 2, last: 0, order: 4, source: '',
+        ings: [['Poireau', '1 pièce'], ['Pommes de terre', '1 kg'], ['Œufs', '4 pièces'], ['Gruyère râpé', ''], ['Pain au four', '1 pièce'], ['Bouillon de légumes', '1 l']],
+        steps: ['Émince le poireau et coupe les pommes de terre en cubes.', 'Fais-les cuire 25 min dans le bouillon.', 'Mixe la soupe.', 'Poche les œufs et sers-les sur la soupe avec du gruyère et du pain grillé.'] },
+      { id: 'bur', name: 'Burger poulet et patate douce', img: I.poulet, bg: '#FBE3B8', cooked: 1, last: 0, order: 5, source: 'Voir sur Instagram', url: 'https://www.instagram.com/reel/xxxx',
+        ings: [['Patates douces', '2 pièces'], ['Buns', '4 pièces'], ['Avocat', '1 pièce'], ['Bacon', '150 g'], ['Cheddar', '4 pièces']],
+        steps: ['Coupe les patates douces en frites et fais-les cuire 30 min au four à 200 °C.', 'Fais griller le bacon.', 'Toaste les buns et écrase l\'avocat.', 'Monte les burgers avec le cheddar et sers avec les frites.'] },
+      { id: 'car', name: 'Pâtes carbonara', img: I.pates, bg: '#F8EDC8', cooked: 9, last: 6, order: 6, source: '',
+        ings: [['Spaghetti', '500 g'], ['Lardons', '200 g'], ['Œufs', '4 pièces'], ['Parmesan', '50 g']],
+        steps: ['Fais cuire les pâtes.', 'Fais dorer les lardons à sec.', 'Bats les œufs avec le parmesan.', 'Hors du feu, mélange pâtes, lardons et œufs avec un peu d\'eau de cuisson.'] },
+      { id: 'cur', name: 'Curry de lentilles', img: I.lentilles, bg: '#F1E2CC', cooked: 5, last: 9, order: 7, source: 'Voir la recette', url: 'https://www.marmiton.org/recettes/xxxx',
+        ings: [['Lentilles corail', '300 g'], ['Lait de coco', '400 ml'], ['Oignon', '1 pièce'], ['Riz', '250 g']],
+        steps: ['Fais revenir l\'oignon émincé avec le curry.', 'Ajoute les lentilles rincées et le lait de coco, puis 300 ml d\'eau.', 'Laisse mijoter 20 min en remuant.', 'Sers avec le riz.'] },
+      { id: 'qui', name: 'Quiche poireaux', img: I.fromage, bg: '#CFE6D3', cooked: 3, last: 7, order: 8, source: '',
+        ings: [['Pâte brisée', '1 pièce'], ['Poireaux', '3 pièces'], ['Œufs', '3 pièces'], ['Crème fraîche', '200 ml'], ['Gruyère râpé', '100 g']],
+        steps: ['Fais fondre les poireaux émincés 15 min.', 'Mélange œufs, crème et gruyère.', 'Garnis la pâte, verse l\'appareil.', 'Enfourne 35 min à 180 °C.'] },
+      { id: 'ris', name: 'Risotto champignons', img: I.fromage, bg: '#ECE5F5', cooked: 2, last: 5, order: 9, source: '',
+        ings: [['Riz arborio', '300 g'], ['Champignons', '250 g'], ['Bouillon de légumes', '1 l'], ['Parmesan', '50 g']],
+        steps: ['Fais revenir les champignons et réserve-les.', 'Nacre le riz, puis ajoute le bouillon louche par louche pendant 18 min.', 'Ajoute les champignons et le parmesan, mélange et sers.'] },
+      { id: 'chi', name: 'Chili con carne', img: I.poulet, bg: '#FDD3C6', cooked: 0, last: null, order: 10, source: 'Voir sur YouTube', url: 'https://www.youtube.com/watch?v=xxxx',
+        ings: [['Bœuf haché', '500 g'], ['Haricots rouges', '400 g'], ['Pulpe de tomate', '400 g'], ['Oignon', '1 pièce']],
+        steps: ['Fais revenir l\'oignon puis le bœuf.', 'Ajoute la pulpe, les haricots et les épices.', 'Laisse mijoter 30 min.'] },
+      { id: 'gra', name: 'Gratin dauphinois', img: I.fromage, bg: '#FBE3B8', cooked: 0, last: null, order: 11, source: '',
+        ings: [['Pommes de terre', '1 kg'], ['Crème fraîche', '400 ml'], ['Lait', '200 ml'], ['Ail', '1 pièce']],
+        steps: ['Coupe les pommes de terre en fines rondelles.', 'Frotte le plat avec l\'ail, dispose les pommes de terre.', 'Verse crème et lait, enfourne 1 h à 160 °C.'] },
+    ];
+    this.todos = [{ id: 'riz', name: 'Riz champi poulet', when: 'dimanche midi', ingLabel: 'Aucun ingrédient' }];
+    this._onKey = (e) => {
+      const dlg = document.querySelector('[role="dialog"]');
+      if (!dlg) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        if (this.state.draft) this.setState({ draft: null, dupHide: null }); else this.setState({ sel: null });
+        return;
+      }
+      if (e.key === 'Tab') {
+        const f = Array.from(dlg.querySelectorAll('button, [href], input, textarea, select')).filter((el) => !el.disabled && el.getClientRects().length);
+        if (!f.length) return;
+        const first = f[0], last = f[f.length - 1], cur = document.activeElement;
+        if (!dlg.contains(cur) || cur === dlg) { e.preventDefault(); (e.shiftKey ? last : first).focus(); }
+        else if (e.shiftKey && cur === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && cur === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    if (typeof document !== 'undefined') document.addEventListener('keydown', this._onKey);
+    const vue = props.vue || 'edition';
+    this.state = { tab: 'all', sort: 'recent', query: '', sel: vue === 'liste' ? null : 'gno', draft: null, dupHide: null };
+    if (vue === 'edition') this.state.draft = this.makeDraft(this.recipes[0]);
+    if (vue === 'doublon') { const d = this.blankDraft('new'); d.name = 'Risotto aux champignons'; this.state.draft = d; }
+  }
+  kindOf(url) {
+    if (!url) return '';
+    if (/youtu/i.test(url)) return 'YouTube';
+    if (/instagram/i.test(url)) return 'Instagram';
+    return 'Site de recette';
+  }
+  blankDraft(kind, t) {
+    return { id: kind === 'todo' ? 'todo-' + t.id : 'new', kind, todoId: t ? t.id : null, name: t ? t.name : '', url: '',
+      bg: '#ECE5F5', img: '../public/illustrations/recette-a-completer.webp',
+      ings: [{ name: '', qty: '', unit: '—' }], steps: [''] };
+  }
+  makeDraft(r) {
+    return { kind: 'edit', id: r.id, name: r.name, url: r.url || '', bg: r.bg, img: r.img,
+      ings: r.ings.map(([name, qty]) => { const m = /^([\d.,]*)\s*(.*)$/.exec(qty || ''); return { name, qty: m[1], unit: m[2] || '—' }; }),
+      steps: r.steps.slice() };
+  }
+  patch(fn) { const d = JSON.parse(JSON.stringify(this.state.draft)); fn(d); this.setState({ draft: d }); }
+  renderVals() {
+    const { tab, sort, query, sel, draft } = this.state;
+    const openKey = draft ? 'edit' : (sel ? 'view' : '');
+    if (this._openKey === undefined) this._openKey = openKey;
+    else if (openKey !== this._openKey && typeof document !== 'undefined') {
+      const was = this._openKey;
+      if (!was) this._opener = document.activeElement;
+      this._openKey = openKey;
+      setTimeout(() => {
+        if (openKey) { const d = document.querySelector('[role="dialog"]'); if (d) d.focus(); }
+        else if (this._opener && this._opener.isConnected) this._opener.focus();
+      }, 40);
+    }
+    const UNITS = ['g', 'kg', 'ml', 'l', 'pièce', 'pièces', '—'];
+    const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    const fmt = (r) => Object.assign({}, r, {
+      cookedLabel: r.cooked === 0 ? 'Jamais cuisinée' : (r.cooked === 1 ? 'Cuisinée 1 fois' : 'Cuisinée ' + r.cooked + ' fois'),
+      lastLabel: r.last === null ? 'Pas encore au menu' : (r.last === 0 ? 'Cette semaine' : 'Il y a ' + r.last + ' semaines'),
+      sourceShort: /youtube/i.test(r.source) ? 'YouTube' : (/instagram/i.test(r.source) ? 'Instagram' : 'Lien'),
+      open: () => this.setState({ sel: r.id }),
+    });
+    let list = this.recipes.filter((r) => !query || norm(r.name).includes(norm(query)));
+    if (sort === 'recent') list = list.slice().sort((a, b) => a.order - b.order);
+    if (sort === 'never') list = list.slice().sort((a, b) => a.cooked - b.cooked);
+    if (sort === 'most') list = list.slice().sort((a, b) => b.cooked - a.cooked);
+    const s = sel ? this.recipes.find((r) => r.id === sel) : null;
+    const sorts = [['recent', 'Récentes'], ['never', 'Jamais cuisinées'], ['most', 'Les plus cuisinées']].map(([k, label]) => ({
+      label, on: sort === k, bg: sort === k ? '#2D2848' : 'transparent',
+      font: sort === k ? '700 14px Figtree, sans-serif; color: #fff' : '600 14px Figtree, sans-serif',
+      pick: () => this.setState({ sort: k }),
+    }));
+    const STOP = new Set(['a', 'au', 'aux', 'de', 'des', 'du', 'd', 'la', 'le', 'les', 'l', 'et', 'en', 'avec', 'sans', 'un', 'une', 'sur', 'facon']);
+    const words = (t) => [...new Set(norm(t).replace(/[^a-z0-9]+/g, ' ').split(' ').filter((w) => w && !STOP.has(w)).map((w) => w.replace(/[sx]$/, '')))];
+    let dup = null;
+    if (draft && draft.kind !== 'edit' && draft.name.trim()) {
+      const w = words(draft.name);
+      if (w.length) for (const r of this.recipes) {
+        if (r.id === draft.id) continue;
+        const rw = words(r.name); if (!rw.length) continue;
+        const both = w.filter((x) => rw.includes(x)).length;
+        if (Math.max(both / w.length, both / rw.length) > 0.8) { dup = r; break; }
+      }
+    }
+    const showDup = !!dup && this.state.dupHide !== dup.id;
+    sorts.forEach((x) => { x.bg = x.on ? '#D6CBFD' : 'transparent'; x.font = (x.on ? '800' : '600') + ' 14px Figtree, sans-serif'; });
+    return {
+      subtitle: this.recipes.length + ' recettes dans ton carnet',
+      nAll: this.recipes.length, nTodo: this.todos.length,
+      tabAll: tab === 'all', tabTodo: tab === 'todo',
+      tabAllBg: tab === 'all' ? '#2D2848' : 'transparent', tabAllFg: tab === 'all' ? '#fff' : '#2D2848',
+      tabTodoBg: tab === 'todo' ? '#2D2848' : 'transparent', tabTodoFg: tab === 'todo' ? '#fff' : '#2D2848',
+      showAll: () => this.setState({ tab: 'all' }), showTodo: () => this.setState({ tab: 'todo' }),
+      query, onQuery: (e) => this.setState({ query: e.target.value }),
+      sorts, list: list.map(fmt), empty: list.length === 0, todos: this.todos.map((t) => Object.assign({}, t, { complete: () => this.setState({ draft: this.blankDraft('todo', t) }) })),
+      hasDup: showDup, dupName: dup ? dup.name : '', hideDup: () => this.setState({ dupHide: dup ? dup.id : null }),
+      hasSel: !!s, isView: !!s && !draft, isEdit: !!draft,
+      edit: () => this.setState({ draft: this.makeDraft(s) }),
+      cancel: () => this.setState({ draft: null, dupHide: null }),
+      newRecipe: () => this.setState({ draft: this.blankDraft('new'), dupHide: null }),
+      save: (e) => { e.preventDefault(); const d = this.state.draft;
+        if (d.kind !== 'edit') {
+          if (!d.name.trim()) return;
+          const nid = 'r' + Date.now();
+          this.recipes.unshift({ id: nid, name: d.name, img: d.img, bg: d.bg, cooked: 0, last: null, order: 0, source: '', ings: [], steps: [] });
+          if (d.kind === 'todo') this.todos = this.todos.filter((t) => t.id !== d.todoId);
+          d.id = nid;
+          this.setState({ tab: 'all' });
+        }
+        const r = this.recipes.find((x) => x.id === d.id);
+        r.name = d.name; r.url = d.url; r.source = d.url ? (this.kindOf(d.url) === 'Site de recette' ? 'Voir la recette' : 'Voir sur ' + this.kindOf(d.url)) : '';
+        r.ings = d.ings.filter((i) => i.name).map((i) => [i.name, i.qty ? (i.qty + (i.unit !== '—' ? ' ' + i.unit : '')) : '']);
+        r.steps = d.steps.filter((t) => t.trim());
+        this.setState({ draft: null, sel: r.id }); },
+      onName: (e) => this.patch((d) => { d.name = e.target.value; }),
+      onUrl: (e) => this.patch((d) => { d.url = e.target.value; }),
+      addIng: () => this.patch((d) => { d.ings.push({ name: '', qty: '', unit: '—' }); }),
+      addStep: () => this.patch((d) => { d.steps.push(''); }),
+      draft: draft ? Object.assign({}, draft, {
+        label: draft.kind === 'new' ? 'Nouvelle recette' : (draft.kind === 'todo' ? 'Compléter la recette' : 'Modifier la recette'),
+        saveLabel: draft.kind === 'todo' ? 'Enregistrer comme complète' : 'Enregistrer',
+        canDelete: draft.kind === 'edit',
+        kind: this.kindOf(draft.url),
+        ings: draft.ings.map((i, k) => Object.assign({}, i, { n: k + 1,
+          onName: (e) => this.patch((d) => { d.ings[k].name = e.target.value; }),
+          onQty: (e) => this.patch((d) => { d.ings[k].qty = e.target.value; }),
+          cycleUnit: () => this.patch((d) => { const u = d.ings[k].unit; d.ings[k].unit = UNITS[(UNITS.indexOf(u) + 1) % UNITS.length]; }),
+          remove: () => this.patch((d) => { d.ings.splice(k, 1); }) })),
+        steps: draft.steps.map((text, k) => ({ n: k + 1, text,
+          onText: (e) => this.patch((d) => { d.steps[k] = e.target.value; }),
+          remove: () => this.patch((d) => { d.steps.splice(k, 1); }) })),
+      }) : { name: '', url: '', kind: '', label: '', saveLabel: '', canDelete: false, bg: '#fff', img: '', ings: [], steps: [] },
+      sel: s ? Object.assign(fmt(s), {
+        ings: s.ings.map(([name, qty]) => ({ name, qty })),
+        ingCount: s.ings.length + ' ingrédients',
+        steps: s.steps.map((text, i) => ({ n: i + 1, text })),
+      }) : { name: '', ings: [], steps: [], bg: '#fff', img: '' },
+      close: () => this.setState({ sel: null }),
+      stop: (e) => e.stopPropagation(),
+    };
+  }
+}
+</script>
+</body>
+</html>

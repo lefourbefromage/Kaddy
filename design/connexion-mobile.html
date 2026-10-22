@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Kaddy · A · Connexion mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#2D2848}
+::selection{background:#D6CBFD;color:#2D2848}
+.kd-in{transition:border-color .15s ease,background-color .15s ease;caret-color:#6A57CC}
+.kd-in:hover{background:#fff}
+.kd-in:focus-within{border-color:#6A57CC;background:#fff}
+.kd-in input::placeholder{color:#6B6680}
+.kd-btn{transition:transform .15s ease,background-color .15s ease}
+.kd-btn:hover{background:#3D3760}
+.kd-btn:active{transform:scale(.98)}
+.kd-btn:focus-visible,.kd-eye:focus-visible,.kd-chk:focus-visible{outline:3px solid #9D88F8;outline-offset:3px}
+.kd-mascot{animation:kdIn .6s cubic-bezier(.2,.9,.3,1.15) both}
+.kd-err{animation:kdShake .32s ease both}
+@keyframes kdIn{from{opacity:0;transform:translateY(14px) rotate(-3deg)}to{opacity:1;transform:none}}
+@keyframes kdShake{0%,100%{transform:none}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@media (prefers-reduced-motion: reduce){.kd-in,.kd-btn,.kd-mascot,.kd-err{transition:none;animation:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F0E9E0; font-family: Figtree, system-ui, sans-serif; color: #2D2848">
+  <div style="position: absolute; inset: 0; overflow-y: auto; display: flex; flex-direction: column">
+    <div style="flex: none; position: relative; background: #FEDA4F; border-radius: 0 0 40px 40px; padding: 20px 20px 0; display: flex; flex-direction: column; align-items: center; overflow: hidden; height: 331px; padding-top: 20px">
+      <div style="display: flex; align-items: center; gap: 10px">
+        
+        <img width="314" height="116" decoding="async" src="../public/illustrations/logo-wordmark.webp" alt="Kaddy" style="height: 58px; width: auto; display: block">
+      </div>
+      <p style="margin: 8px 0 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 85%; font-size: 26px; line-height: 1; letter-spacing: -0.02em; text-align: center">On mange quoi ce soir&nbsp;?</p>
+      <img width="900" height="900" decoding="async" class="kd-mascot" src="../public/illustrations/connexion-maison.webp" alt="" style="height: 212px; width: 212px; display: block; margin: 4px 0 0">
+    </div>
+    <main style="flex: 1; padding: 24px 20px 28px; display: flex; flex-direction: column">
+      <h1 style="margin: 0 0 6px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 85%; font-size: 34px; line-height: 1; letter-spacing: -0.02em">Connexion au foyer</h1>
+      <p style="margin: 0 0 20px; font-size: 16px; color: #5F5A70; line-height: 1.4">Le menu, la liste et le Kaddy de ton foyer.</p>
+<form onSubmit="{{ submit }}" novalidate="" style="display: flex; flex-direction: column; gap: 16px; width: 100%">
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <label for="mFoyer" style="font-size: 15px; font-weight: 800">Nom du foyer</label>
+    <div class="kd-in" style="display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 16px; border: 2px solid {{ foyerBorder }}; border-radius: 16px; background: #F6F1EA">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5A70" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-6.5 8 6.5"></path><path d="M6 9.5V19h12V9.5"></path><path d="M10 19v-5h4v5"></path></svg>
+      <input id="mFoyer" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" value="{{ foyer }}" onChange="{{ onFoyer }}" placeholder="ex. Famille Martin" aria-invalid="{{ hasErr }}" aria-describedby="mErr" style="flex: 1; min-width: 0; border: 0; background: transparent; font: 700 17px Figtree, sans-serif; color: #2D2848; outline: none">
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 8px">
+    <label for="mPass" style="font-size: 15px; font-weight: 800">Mot de passe</label>
+    <div class="kd-in" style="display: flex; align-items: center; gap: 10px; height: 56px; padding: 0 6px 0 16px; border: 2px solid {{ passBorder }}; border-radius: 16px; background: #F6F1EA">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5F5A70" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"></rect><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"></path></svg>
+      <input id="mPass" type="{{ passType }}" autocomplete="current-password" value="{{ pass }}" onChange="{{ onPass }}" placeholder="Le mot de passe du foyer" aria-invalid="{{ hasErr }}" aria-describedby="mErr mHint" style="flex: 1; min-width: 0; border: 0; background: transparent; font: 700 17px Figtree, sans-serif; color: #2D2848; outline: none">
+      <button type="button" class="kd-eye" onClick="{{ togglePass }}" aria-label="{{ eyeLabel }}" aria-pressed="{{ showPass }}" style="flex: none; width: 44px; height: 44px; border-radius: 12px; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer">
+        <sc-if value="{{ showPass }}" hint-placeholder-val="{{ false }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12s3.5-6.5 9-6.5 9 6.5 9 6.5-3.5 6.5-9 6.5S3 12 3 12z"></path><circle cx="12" cy="12" r="2.8"></circle><path d="M4 4l16 16"></path></svg></sc-if>
+        <sc-if value="{{ hidePass }}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12s3.5-6.5 9-6.5 9 6.5 9 6.5-3.5 6.5-9 6.5S3 12 3 12z"></path><circle cx="12" cy="12" r="2.8"></circle></svg></sc-if>
+      </button>
+    </div>
+    <span id="mHint" style="font-size: 14px; font-weight: 600; color: #5F5A70">Le même pour tout le foyer.</span>
+  </div>
+  <label style="display: flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; font-size: 15px; font-weight: 700">
+    <input class="kd-chk" type="checkbox" checked="{{ remember }}" onChange="{{ toggleRemember }}" style="position: absolute; opacity: 0; width: 1px; height: 1px">
+    <span aria-hidden="true" style="flex: none; width: 26px; height: 26px; border-radius: 10px; border: 2px solid #2D2848; background: {{ chkBg }}; display: grid; place-items: center"><sc-if value="{{ remember }}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if></span>
+    Rester connecté sur cet appareil
+  </label>
+  <div id="mErr" style="display: contents">
+    <sc-if value="{{ hasErr }}" hint-placeholder-val="{{ false }}"><div class="kd-err" role="alert" style="display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border-radius: 16px; background: #FDD3C6; color: #7A2E17; font-size: 15px; font-weight: 700; line-height: 1.35"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="flex: none; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5M12 16.5v.01"></path></svg><span>{{ errMsg }}</span></div></sc-if>
+  </div>
+  <button type="submit" class="kd-btn" style="display: inline-flex; align-items: center; justify-content: space-between; gap: 12px; height: 60px; padding: 0 8px 0 24px; border-radius: 999px; border: 0; background: #2D2848; color: #fff; font: 800 17px Figtree, sans-serif; cursor: pointer">{{ btnLabel }}<span style="width: 44px; height: 44px; border-radius: 50%; background: #F9D86E; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></button>
+</form>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"etat":{"editor":"enum","options":["vide","erreur"],"default":"vide"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const err = props.etat === 'erreur';
+    this.state = { foyer: err ? 'Famille Martn' : '', pass: err ? 'kaddy2026' : '', showPass: false, remember: true, err: err ? 'bad' : '', busy: false };
+  }
+  renderVals() {
+    const { foyer, pass, showPass, remember, err, busy } = this.state;
+    const msgs = { empty: 'Renseigne le nom du foyer et son mot de passe.', bad: 'Nom du foyer ou mot de passe incorrect. Vérifie l\'orthographe du foyer, les majuscules comptent.' };
+    const red = '#E0603F';
+    return {
+      foyer, pass, showPass, hidePass: !showPass, remember,
+      passType: showPass ? 'text' : 'password',
+      eyeLabel: showPass ? 'Masquer le mot de passe' : 'Afficher le mot de passe',
+      chkBg: remember ? '#F9D86E' : '#fff',
+      hasErr: !!err, errMsg: msgs[err] || '',
+      foyerBorder: err && (err === 'bad' || !foyer.trim()) ? red : 'transparent',
+      passBorder: err && (err === 'bad' || !pass) ? red : 'transparent',
+      btnLabel: busy ? 'Connexion…' : 'Se connecter',
+      onFoyer: (e) => this.setState({ foyer: e.target.value, err: '' }),
+      onPass: (e) => this.setState({ pass: e.target.value, err: '' }),
+      togglePass: () => this.setState({ showPass: !showPass }),
+      toggleRemember: () => this.setState({ remember: !remember }),
+      submit: (e) => {
+        e.preventDefault();
+        if (!foyer.trim() || !pass) { this.setState({ err: 'empty' }); return; }
+        this.setState({ busy: true, err: '' });
+        setTimeout(() => this.setState({ busy: false, err: 'bad' }), 900);
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

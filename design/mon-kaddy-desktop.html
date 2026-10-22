@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Kaddy · A · Mon Kaddy desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#2D2848}
+a{color:#2D2848}a:hover{color:#6A57CC}
+.kd-row{transition:background .15s ease}
+.kd-row:hover{background:#FBF8F3}
+.kd-check{transition:transform .15s ease}
+.kd-row:active .kd-check{transform:scale(.9)}
+@media (prefers-reduced-motion: reduce){.kd-row,.kd-check{transition:none}}
+.kd-box{position:relative;flex:none}
+.kd-tick{position:absolute;inset:0;margin:auto;pointer-events:none;opacity:0}
+.kd-leave{max-height:90px;animation:kdOut .26s .22s cubic-bezier(.5,0,.75,0) forwards}
+.kd-leave .kd-check{background:#6A57CC !important;border-color:#6A57CC !important;animation:kdPop .24s cubic-bezier(.16,1,.3,1) both}
+.kd-leave .kd-tick{opacity:1}
+.kd-leave .kd-tick path{stroke-dasharray:22;stroke-dashoffset:22;animation:kdDraw .2s .05s cubic-bezier(.16,1,.3,1) forwards}
+.kd-leave .kd-name{color:#6B6680;text-decoration:line-through;text-decoration-color:#6A57CC;text-decoration-thickness:2px}
+.kd-back{animation:kdBack .32s cubic-bezier(.16,1,.3,1) both}
+.kd-bumpA{display:inline-block;animation:kdBumpA .34s cubic-bezier(.16,1,.3,1)}
+.kd-bumpB{display:inline-block;animation:kdBumpB .34s cubic-bezier(.16,1,.3,1)}
+.kd-hop{animation:kdHop .6s cubic-bezier(.16,1,.3,1) .1s both}
+.kd-roll{animation:kdRoll .9s cubic-bezier(.16,1,.3,1) both}
+.kd-appear{animation:kdAppear .3s cubic-bezier(.16,1,.3,1) both}
+.kd-bar{transition:width .45s cubic-bezier(.16,1,.3,1)}
+@keyframes kdPop{0%{transform:scale(.82)}100%{transform:scale(1)}}
+@keyframes kdDraw{to{stroke-dashoffset:0}}
+@keyframes kdOut{to{opacity:0;transform:translateX(18px);max-height:0;min-height:0;border-top-width:0}}
+@keyframes kdBack{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+@keyframes kdBumpA{40%{transform:scale(1.22)}100%{transform:none}}
+@keyframes kdBumpB{40%{transform:scale(1.22)}100%{transform:none}}
+@keyframes kdHop{0%{transform:none}30%{transform:translateY(-12px) rotate(-8deg)}62%{transform:translateY(0) rotate(4deg)}100%{transform:none}}
+@keyframes kdRoll{0%{transform:none}35%{transform:translateX(-8px) rotate(-3deg)}70%{transform:translateX(14px) rotate(2deg)}100%{transform:none}}
+@keyframes kdAppear{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.kd-leave,.kd-back,.kd-bumpA,.kd-bumpB,.kd-hop,.kd-roll,.kd-appear,.kd-leave .kd-check{animation:none}.kd-leave{opacity:.55}.kd-leave .kd-tick path{animation:none;stroke-dashoffset:0}.kd-bar{transition:none}}
+:where(button,a,summary,[tabindex]:not([tabindex="-1"])):focus-visible{outline:3px solid #6A57CC;outline-offset:3px}
+:where(input,textarea,select):focus-visible{outline:3px solid #6A57CC !important;outline-offset:2px}
+nav[aria-label="Navigation principale"] :focus-visible{outline-color:#F9D86E}
+[role="dialog"]:focus{outline:none}
+.kd-hit{position:relative}
+.kd-hit::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+.kd-foyer{position:relative}
+.kd-foyer>summary{list-style:none}
+.kd-foyer>summary::-webkit-details-marker{display:none}
+.kd-foyer>summary:hover{background:#EEE7DC}
+.kd-foyer[open]>summary svg.kd-chev{transform:rotate(180deg)}
+.kd-foyer-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:5;min-width:220px;background:#fff;border-radius:22px;padding:6px;box-shadow:0 8px 24px rgba(45,40,72,.14);display:flex;flex-direction:column;gap:2px;animation:kdMenu .18s cubic-bezier(.16,1,.3,1) both}
+.kd-foyer-menu a{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;text-decoration:none;color:#2D2848;font:600 15px Figtree,sans-serif}
+.kd-foyer-menu a:hover{background:#F6F1EA;color:#2D2848}
+@keyframes kdMenu{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.kd-foyer-menu{animation:none}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F0E9E0; display: flex; flex-direction: column; font-family: Figtree, system-ui, sans-serif; color: #2D2848">
+
+<header style="position: sticky; top: 0; z-index: 2; padding: 16px 24px 8px; background: #F0E9E0">
+  <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; background: #fff; border-radius: 999px; padding: 8px 8px 8px 18px">
+    <a href="menu-desktop.html" aria-label="Kaddy, accueil" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+      <img width="128" height="128" decoding="async" src="../public/illustrations/app-icon.webp" alt="" style="width: 46px; height: 46px; display: block">
+      <img width="238" height="88" decoding="async" src="../public/illustrations/logo-wordmark.webp" alt="Kaddy" style="height: 32px; width: auto; display: block">
+    </a>
+    <nav aria-label="Navigation principale" style="margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4px; background: #F6F1EA; border-radius: 999px; padding: 4px">
+      <a href="menu-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>Menu</a>
+      <a href="liste-de-courses-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"></path><circle cx="4.5" cy="6" r="1.2"></circle><circle cx="4.5" cy="12" r="1.2"></circle><circle cx="4.5" cy="18" r="1.2"></circle></svg>Liste de courses</a>
+      <a href="recettes-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5c0-1.1.9-2 2-2h13v14H6c-1.1 0-2 .9-2 2V5z"></path><path d="M4 19c0 1.1.9 2 2 2h13v-4"></path></svg>Recettes</a>
+      <a href="#" aria-current="page" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 18px; border-radius: 999px; background: #2D2848; color: #fff; text-decoration: none; font-weight: 700; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h3l2.5 11h11l2-8H6.5"></path><circle cx="9" cy="19.5" r="1.5"></circle><circle cx="17" cy="19.5" r="1.5"></circle></svg>Mon Kaddy<span style="font-size: 12px; font-weight: 800; background: #F9D86E; color: #2D2848; border-radius: 999px; padding: 2px 8px">{{ left }}</span></a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 6px">
+      <button aria-label="Rechercher une recette" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #F6F1EA; display: grid; place-items: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg></button>
+      <details class="kd-foyer">
+        <summary aria-label="Foyer Famille Martin : réglages et déconnexion" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 6px; border-radius: 999px; background: #F6F1EA; cursor: pointer; font: 700 15px Figtree, sans-serif; color: #2D2848; white-space: nowrap"><span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 50%; background: #FDD3C6; display: grid; place-items: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6.5 8 6.5"></path><path d="M6 9.5V19h12V9.5"></path><path d="M10 19v-5h4v5"></path></svg></span>Famille Martin<svg class="kd-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transition: transform .2s ease"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="kd-foyer-menu">
+          <a href="ordre-des-rayons-desktop.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><path d="M3.5 5l1 1-1 1M3.5 11l1 1-1 1M3.5 17l1 1-1 1"></path></svg>Ordre des rayons</a>
+          <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"></rect><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"></path></svg>Mot de passe du foyer</a>
+          <a href="connexion-desktop.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 16l-4-4 4-4M6 12h10"></path></svg>Se déconnecter</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main style="width: 100%; max-width: 1448px; margin: 0 auto; padding: 32px 48px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+
+  <div style="display: flex; align-items: flex-end; gap: 20px">
+
+    <img width="397" height="280" decoding="async" class="{{ roll }}" src="../public/illustrations/titre-mon-kaddy.webp" alt="" style="height: 140px; width: auto; display: block; margin-bottom: -8px">
+  
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 85%; font-size: 52px; line-height: 1; letter-spacing: -0.02em">Mon Kaddy</h1>
+      <p style="margin: 0; font-size: 16px; color: #5F5A70">Semaine du 19 au 25 octobre · rangé par rayon</p>
+    </div>
+
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px">
+
+    <aside style="flex: 1 1 300px; max-width: 360px; display: flex; flex-direction: column; gap: 16px">
+      <section aria-label="Progression des courses" style="background: #fff; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: baseline; gap: 8px">
+          <span class="{{ doneBump }}" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 80%; font-size: 64px; line-height: .9; letter-spacing: -0.03em">{{ done }}</span>
+          <span style="font-size: 17px; font-weight: 700">sur {{ total }} articles</span>
+        </div>
+        <div role="progressbar" aria-label="Articles pris" aria-valuemin="0" aria-valuemax="{{ total }}" aria-valuenow="{{ done }}" style="height: 14px; border-radius: 999px; background: #EEE7DC; overflow: hidden"><div class="kd-bar" style="width: {{ pct }}; height: 100%; background: #6A57CC; border-radius: 999px"></div></div>
+        <span style="font-size: 15px; font-weight: 600">{{ leftLabel }}</span>
+        <button class="kd-hit" onClick="{{ reset }}" style="align-self: flex-start; height: 40px; padding: 0 16px; border-radius: 999px; border: 0; background: #F6F1EA; font: 700 14px Figtree, sans-serif; color: #2D2848; cursor: pointer">Tout décocher</button>
+      </section>
+
+      <form style="background: #fff; border-radius: 22px; padding: 6px 6px 6px 18px; display: flex; align-items: center; gap: 8px">
+        <label for="addK" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Ajouter un produit hors menu</label>
+        <input id="addK" type="text" placeholder="Ajouter un produit…" style="flex: 1; min-width: 0; height: 44px; border: 0; background: transparent; font: 600 15px Figtree, sans-serif; color: #2D2848; outline: none">
+        <button type="button" aria-label="Ajouter" style="flex: none; width: 44px; height: 44px; border-radius: 12px; border: 0; background: #2D2848; display: grid; place-items: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F9D86E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+      </form>
+
+      <nav aria-label="Rayons" style="background: #fff; border-radius: 22px; padding: 10px; display: flex; flex-direction: column; gap: 2px">
+        <span style="display: flex; align-items: center; justify-content: space-between; padding: 0 0 0 10px"><span style="padding: 6px 0 8px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #6B6680">Rayons</span><a href="ordre-des-rayons-desktop.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; border-radius: 12px; font-size: 13px; font-weight: 700; color: #4B3F8F; text-decoration: underline; text-underline-offset: 3px">Modifier l'ordre</a></span>
+        <sc-for list="{{ rayons }}" as="r" hint-placeholder-count="6">
+          <a href="#ray-{{ r.id }}" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 10px; border-radius: 12px; text-decoration: none; font-size: 15px; font-weight: 600">
+            <span style="flex: none; width: 12px; height: 12px; border-radius: 50%; background: {{ r.dot }}"></span>
+            <span style="flex: 1; text-decoration: {{ r.strike }}; color: {{ r.navColor }}">{{ r.name }}</span>
+            <span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 14px; color: #5F5A70">{{ r.count }}</span>
+          </a>
+        </sc-for>
+      </nav>
+    </aside>
+
+    <div style="flex: 999 1 560px; min-width: 0; columns: 2 380px; column-gap: 16px">
+      <sc-for list="{{ rayons }}" as="r" hint-placeholder-count="6">
+        <section id="ray-{{ r.id }}" aria-label="{{ r.name }}" style="break-inside: avoid; margin: 0 0 16px; background: #fff; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: {{ r.bg }}">
+            <span style="flex: none; width: 60px; height: 52px; display: grid; place-items: center">
+              <sc-if value="{{ r.img }}" hint-placeholder-val="{{ true }}"><img loading="lazy" decoding="async" class="{{ r.hop }}" src="{{ r.img }}" alt="" style="max-width: 64px; max-height: 56px; width: auto; height: auto"></sc-if>
+              <sc-if value="{{ r.noImg }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px">?</span></sc-if>
+            </span>
+            <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+              <h2 style="margin: 0; font-size: 18px; font-weight: 800">{{ r.name }}</h2>
+              <sc-if value="{{ r.hint }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; font-weight: 600; color: #5F5A70">{{ r.hint }}</span></sc-if>
+            </div>
+            <span class="{{ r.bump }}" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 16px; background: #fff; border-radius: 999px; padding: 4px 12px">{{ r.count }}</span>
+          </div>
+
+          <sc-for list="{{ r.todo }}" as="it" hint-placeholder-count="3">
+            <label class="{{ it.rowClass }}" style="display: flex; align-items: center; gap: 14px; min-height: 58px; padding: 0 16px; border-top: 1.5px solid #F3EEE7; cursor: pointer">
+              <span class="kd-box" style="width: 28px; height: 28px"><input class="kd-check" type="checkbox" checked="{{ it.shown }}" onChange="{{ it.toggle }}" aria-label="{{ it.name }}" style="appearance: none; -webkit-appearance: none; width: 28px; height: 28px; margin: 0; border-radius: 10px; border: 2px solid #2D2848; background: #fff; cursor: pointer; display: block"><svg class="kd-tick" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>
+              <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+                <span class="kd-name" style="font-size: 17px; font-weight: 600">{{ it.name }}</span>
+                <sc-if value="{{ it.src }}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #5F5A70">{{ it.src }}</span></sc-if>
+              </span>
+              <sc-if value="{{ it.qty }}" hint-placeholder-val="{{ true }}"><span style="flex: none; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px; background: #EEE7DC; border-radius: 999px; padding: 4px 11px">{{ it.qty }}</span></sc-if>
+            </label>
+          </sc-for>
+
+          <sc-if value="{{ r.allDone }}" hint-placeholder-val="{{ false }}">
+            <div class="{{ r.appear }}" style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 16px; border-top: 1.5px solid #F3EEE7; font-size: 15px; font-weight: 700; color: #3F6B4C"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Rayon terminé</div>
+          </sc-if>
+
+          <sc-if value="{{ r.hasDone }}" hint-placeholder-val="{{ true }}">
+            <button aria-expanded="{{ r.open }}" onClick="{{ r.toggleOpen }}" style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 16px; border: 0; border-top: 1.5px solid #F3EEE7; background: #F6F1EA; font: 600 15px Figtree, sans-serif; color: #2D2848; text-align: left; cursor: pointer">
+              <img width="93" height="64" decoding="async" loading="lazy" src="../public/illustrations/icone-caddie.webp" alt="" style="height: 32px; width: auto">
+              <span style="flex: 1">{{ r.doneLabel }}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transform: {{ r.chevron }}; transition: transform .2s ease"><path d="M6 9l6 6 6-6"></path></svg>
+            </button>
+            <sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
+              <sc-for list="{{ r.doneItems }}" as="it" hint-placeholder-count="2">
+                <label class="kd-row" style="display: flex; align-items: center; gap: 14px; min-height: 52px; padding: 0 16px; border-top: 1.5px solid #F3EEE7; background: #FBF8F3; cursor: pointer">
+                  <span style="position: relative; flex: none; width: 28px; height: 28px"><input type="checkbox" checked="{{ it.checked }}" onChange="{{ it.toggle }}" aria-label="{{ it.name }}" style="appearance: none; -webkit-appearance: none; width: 28px; height: 28px; margin: 0; border-radius: 10px; border: 2px solid #6A57CC; background: #6A57CC; cursor: pointer; display: block"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; left: 5px; top: 5px; pointer-events: none"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span>
+                  <span style="flex: 1; font-size: 16px; font-weight: 600; color: #6B6680; text-decoration: line-through">{{ it.name }}</span>
+                  <sc-if value="{{ it.qty }}" hint-placeholder-val="{{ true }}"><span style="flex: none; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 15px; color: #6B6680">{{ it.qty }}</span></sc-if>
+                </label>
+              </sc-for>
+            </sc-if>
+          </sc-if>
+        </section>
+      </sc-for>
+    </div>
+  </div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const data = [
+      { id: 'fl', name: 'Fruits & légumes', bg: '#CFE6D3', dot: '#5A9868', img: '../public/illustrations/thumbs/rayon-fruits-legumes.webp', items: [
+        ['Avocat', '1 pièce'], ['Champignons', '250 g'], ['Épinards', '200 g'], ['Pommes de terre', '1 kg'],
+        ['Courgettes', '2 pièces', 1], ['Salade verte', '1 pièce', 1], ['Poireau', '1 pièce', 1], ['Patates douces', '2 pièces', 1], ['Pulpe de tomate', '400 g', 1], ['Oignon', '1 pièce', 1],
+      ] },
+      { id: 'bo', name: 'Boucherie & charcuterie', bg: '#FDD3C6', dot: '#F87A56', img: '../public/illustrations/thumbs/rayon-boucherie.webp', items: [
+        ['Poulet', '5 pièces', 0, '2 Gnocchi + 3 One pot'], ['Bacon', '150 g'], ['Jambon', '4 pièces', 1], ['Chorizo', '1 pièce', 1],
+      ] },
+      { id: 'cr', name: 'Crémerie & fromages', bg: '#F8EDC8', dot: '#E6CFA0', img: '../public/illustrations/thumbs/rayon-cremerie.webp', items: [
+        ['Feta', '200 g'], ['Saint-Môret', '60 g'], ['Parmesan', ''], ['Cheddar râpé', ''], ['Gruyère râpé', ''],
+        ['Chèvre bûche', '1 pièce', 1], ['Œufs', '16 pièces', 1, '12 Salade + 4 Soupe'], ['Cheddar', '4 pièces', 1], ['Crème fraîche', '200 ml', 1],
+      ] },
+      { id: 'ep', name: 'Épicerie salée', bg: '#F1E2CC', dot: '#D9A86A', img: '../public/illustrations/thumbs/rayon-epicerie.webp', items: [
+        ['Gnocchis', '500 g'], ['Concentré de tomates', ''], ['Noix', ''], ['Bouillon de légumes', '1 l'],
+      ] },
+      { id: 'bl', name: 'Boulangerie', bg: '#FBE3B8', dot: '#F2C94C', img: '../public/illustrations/thumbs/rayon-boulangerie.webp', items: [
+        ['Buns', '4 pièces'], ['Pain au four', '1 pièce'],
+      ] },
+      { id: 'hy', name: 'Hygiène & entretien', bg: '#DCE7F7', dot: '#8FA9D6', img: '../public/illustrations/rayon-hygiene.webp', items: [
+        ['Papier toilette', '1 pièce', 0, 'Hors menu'], ['Piles AAA', '1 pièce', 0, 'Hors menu'],
+      ] },
+      { id: 'au', name: 'Autres', bg: '#ECE5F5', dot: '#B9A8FF', img: '', hint: 'Rayon à choisir dans Liste de courses', items: [
+        ['Serviettes jour', '', 0, 'Hors menu'], ['Serviettes nuit', '', 0, 'Hors menu'],
+      ] },
+    ];
+    const checked = {};
+    data.forEach((r) => r.items.forEach((it, i) => { checked[r.id + i] = !!it[2]; }));
+    this.data = data;
+    this.initial = Object.assign({}, checked);
+    this.state = { checked, open: {}, leaving: {}, back: {}, touched: {} };
+  }
+  tick(rid, key) {
+    if (this.state.leaving[key]) return;
+    const touched = Object.assign({}, this.state.touched, { [rid]: true });
+    if (!this.state.checked[key]) {
+      this.setState({ leaving: Object.assign({}, this.state.leaving, { [key]: true }), touched });
+      setTimeout(() => {
+        const l = Object.assign({}, this.state.leaving); delete l[key];
+        this.setState({ leaving: l, checked: Object.assign({}, this.state.checked, { [key]: true }) });
+      }, 480);
+    } else {
+      this.setState({ checked: Object.assign({}, this.state.checked, { [key]: false }), back: Object.assign({}, this.state.back, { [key]: true }), touched });
+      setTimeout(() => { const b = Object.assign({}, this.state.back); delete b[key]; this.setState({ back: b }); }, 400);
+    }
+  }
+  renderVals() {
+    const { checked, open, leaving, back, touched } = this.state;
+    let total = 0, done = 0;
+    const rayons = this.data.map((r) => {
+      const all = r.items.map((it, i) => {
+        const key = r.id + i;
+        return {
+          name: it[0], qty: it[1], src: it[3] || '', checked: !!checked[key], shown: !!checked[key] || !!leaving[key],
+          rowClass: 'kd-row' + (leaving[key] ? ' kd-leave' : (back[key] ? ' kd-back' : '')),
+          toggle: () => this.tick(r.id, key),
+        };
+      });
+      all.sort((x, y) => x.name.localeCompare(y.name, 'fr', { sensitivity: 'base' }));
+      const todo = all.filter((x) => !x.checked);
+      const nDone = all.filter((x) => x.shown).length;
+      const doneItems = all.filter((x) => x.checked);
+      total += all.length; done += nDone;
+      const isOpen = !!open[r.id];
+      return {
+        id: r.id, name: r.name, bg: r.bg, dot: r.dot, img: r.img, noImg: !r.img, hint: r.hint || '',
+        todo, doneItems, hasDone: doneItems.length > 0, allDone: todo.length === 0,
+        bump: touched[r.id] ? (nDone % 2 ? 'kd-bumpA' : 'kd-bumpB') : '', hop: touched[r.id] && nDone === all.length ? 'kd-hop' : '', appear: touched[r.id] ? 'kd-appear' : '',
+        count: nDone + ' / ' + all.length,
+        doneLabel: doneItems.length + ' déjà dans le caddie',
+        open: isOpen, chevron: isOpen ? 'rotate(180deg)' : 'none',
+        strike: nDone === all.length ? 'line-through' : 'none', navColor: nDone === all.length ? '#6B6680' : '#2D2848',
+        toggleOpen: () => this.setState({ open: Object.assign({}, this.state.open, { [r.id]: !this.state.open[r.id] }) }),
+      };
+    });
+    const left = total - done;
+    const any = Object.keys(touched).length > 0;
+    return {
+      rayons, total, done, left,
+      doneBump: any ? (done % 2 ? 'kd-bumpA' : 'kd-bumpB') : '', roll: any && left === 0 ? 'kd-roll' : '',
+      pct: Math.round((done / total) * 100) + '%',
+      leftLabel: left === 0 ? 'Tout est dans le caddie. Bonne route !' : (left === 1 ? 'Encore 1 article à prendre.' : 'Encore ' + left + ' articles à prendre.'),
+      reset: () => { const c = {}; Object.keys(this.state.checked).forEach((k) => { c[k] = false; }); this.setState({ checked: c, leaving: {}, back: {}, touched: {} }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

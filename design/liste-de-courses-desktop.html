@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Kaddy · A · Liste de courses desktop</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#2D2848}
+a{color:#2D2848}a:hover{color:#6A57CC}
+:where(button,a,summary,[tabindex]:not([tabindex="-1"])):focus-visible{outline:3px solid #6A57CC;outline-offset:3px}
+:where(input,textarea,select):focus-visible{outline:3px solid #6A57CC !important;outline-offset:2px}
+nav[aria-label="Navigation principale"] :focus-visible{outline-color:#F9D86E}
+[role="dialog"]:focus{outline:none}
+.kd-hit{position:relative}
+.kd-hit::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+.kd-foyer{position:relative}
+.kd-foyer>summary{list-style:none}
+.kd-foyer>summary::-webkit-details-marker{display:none}
+.kd-foyer>summary:hover{background:#EEE7DC}
+.kd-foyer[open]>summary svg.kd-chev{transform:rotate(180deg)}
+.kd-foyer-menu{position:absolute;right:0;top:calc(100% + 8px);z-index:5;min-width:220px;background:#fff;border-radius:22px;padding:6px;box-shadow:0 8px 24px rgba(45,40,72,.14);display:flex;flex-direction:column;gap:2px;animation:kdMenu .18s cubic-bezier(.16,1,.3,1) both}
+.kd-foyer-menu a{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 12px;border-radius:12px;text-decoration:none;color:#2D2848;font:600 15px Figtree,sans-serif}
+.kd-foyer-menu a:hover{background:#F6F1EA;color:#2D2848}
+@keyframes kdMenu{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.kd-foyer-menu{animation:none}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F0E9E0; display: flex; flex-direction: column; font-family: Figtree, system-ui, sans-serif; color: #2D2848">
+
+<header style="position: sticky; top: 0; z-index: 2; padding: 16px 24px 8px; background: #F0E9E0">
+  <div style="max-width: 1400px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; background: #fff; border-radius: 999px; padding: 8px 8px 8px 18px">
+    <a href="menu-desktop.html" aria-label="Kaddy, accueil" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+      <img width="128" height="128" decoding="async" src="../public/illustrations/app-icon.webp" alt="" style="width: 46px; height: 46px; display: block">
+      <img width="238" height="88" decoding="async" src="../public/illustrations/logo-wordmark.webp" alt="Kaddy" style="height: 32px; width: auto; display: block">
+    </a>
+    <nav aria-label="Navigation principale" style="margin: 0 auto; display: flex; flex-wrap: wrap; gap: 4px; background: #F6F1EA; border-radius: 999px; padding: 4px">
+      <a href="menu-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>Menu</a>
+      <a href="#" aria-current="page" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; background: #2D2848; color: #fff; text-decoration: none; font-weight: 700; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"></path><circle cx="4.5" cy="6" r="1.2"></circle><circle cx="4.5" cy="12" r="1.2"></circle><circle cx="4.5" cy="18" r="1.2"></circle></svg>Liste de courses</a>
+      <a href="recettes-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5c0-1.1.9-2 2-2h13v14H6c-1.1 0-2 .9-2 2V5z"></path><path d="M4 19c0 1.1.9 2 2 2h13v-4"></path></svg>Recettes</a>
+      <a href="mon-kaddy-desktop.html" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 18px; border-radius: 999px; color: #2D2848; text-decoration: none; font-weight: 600; font-size: 15px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h3l2.5 11h11l2-8H6.5"></path><circle cx="9" cy="19.5" r="1.5"></circle><circle cx="17" cy="19.5" r="1.5"></circle></svg>Mon Kaddy<span style="font-size: 12px; font-weight: 800; background: #F9D86E; border-radius: 999px; padding: 2px 8px">19</span></a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 6px">
+      <button aria-label="Rechercher une recette" style="width: 44px; height: 44px; border-radius: 50%; border: 0; background: #F6F1EA; display: grid; place-items: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4.5 4.5"></path></svg></button>
+      <details class="kd-foyer">
+        <summary aria-label="Foyer Famille Martin : réglages et déconnexion" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 6px; border-radius: 999px; background: #F6F1EA; cursor: pointer; font: 700 15px Figtree, sans-serif; color: #2D2848; white-space: nowrap"><span aria-hidden="true" style="width: 32px; height: 32px; border-radius: 50%; background: #FDD3C6; display: grid; place-items: center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6.5 8 6.5"></path><path d="M6 9.5V19h12V9.5"></path><path d="M10 19v-5h4v5"></path></svg></span>Famille Martin<svg class="kd-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="transition: transform .2s ease"><path d="M6 9l6 6 6-6"></path></svg></summary>
+        <div class="kd-foyer-menu">
+          <a href="ordre-des-rayons-desktop.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12"></path><path d="M3.5 5l1 1-1 1M3.5 11l1 1-1 1M3.5 17l1 1-1 1"></path></svg>Ordre des rayons</a>
+          <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"></rect><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"></path></svg>Mot de passe du foyer</a>
+          <a href="connexion-desktop.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"></path><path d="M10 16l-4-4 4-4M6 12h10"></path></svg>Se déconnecter</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<main style="width: 100%; max-width: 1448px; margin: 0 auto; padding: 32px 48px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px">
+    <div style="display: flex; align-items: flex-end; gap: 20px">
+      <img width="353" height="280" decoding="async" src="../public/illustrations/titre-liste-de-courses.webp" alt="" style="height: 140px; width: auto; display: block; margin-bottom: -8px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 85%; font-size: 52px; line-height: 1; letter-spacing: -0.02em">Liste de courses</h1>
+        <p style="margin: 0; font-size: 16px; color: #5F5A70">Cette semaine et les suivantes · 1 recette à compléter</p>
+      </div>
+    </div>
+  </header>
+
+  <sc-for list="{{ weeks }}" as="w" hint-placeholder-count="1">
+  <section style="display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: center; gap: 12px; padding: 0 4px">
+      <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 85%; font-size: 26px; letter-spacing: -0.01em">{{ w.title }}</h2>
+      <sc-if value="{{ w.isCurrent }}" hint-placeholder-val="{{ true }}"><span style="font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; background: #D6CBFD; color: #2D2848; border-radius: 999px; padding: 4px 10px">En cours</span></sc-if>
+      <span style="font-size: 14px; color: #5F5A70; font-weight: 600">{{ w.summary }}</span>
+    </div>
+  <div style="columns: 3 400px; column-gap: 16px">
+
+    <sc-for list="{{ w.recipes }}" as="r" hint-placeholder-count="5">
+      <article style="break-inside: avoid; margin: 0 0 16px; background: #fff; border-radius: 28px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: flex-start; gap: 10px">
+          <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+            <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; line-height: 1.15">{{ r.name }}</h2>
+            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #5F5A70; font-weight: 600"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>{{ r.when }}</span>
+          </div>
+          <span style="flex: none; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 14px; background: #F6F1EA; border-radius: 999px; padding: 6px 12px">{{ r.countLabel }}</span>
+          <button class="kd-hit" aria-label="Voir la recette" style="flex: none; width: 36px; height: 36px; border-radius: 50%; border: 0; background: #F6F1EA; display: grid; place-items: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+        </div>
+
+        <sc-if value="{{ r.todo }}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <div style="display: flex; align-items: center; gap: 8px; background: #FFF1DA; border-radius: 16px; padding: 10px 12px; font-size: 14px; font-weight: 600"><span aria-hidden="true" style="flex: none; width: 22px; height: 22px; border-radius: 50%; background: #FFB54D; display: grid; place-items: center; font-weight: 800; font-size: 13px">!</span>À compléter : ses ingrédients seront gardés dans la recette.</div>
+            <div style="display: flex; align-items: center; gap: 16px">
+              <img width="350" height="260" decoding="async" loading="lazy" src="../public/illustrations/recette-a-completer.webp" alt="" style="flex: none; width: 150px; height: auto; display: block">
+              <p style="margin: 0; font-size: 15px; line-height: 1.4">Ajoute le premier ingrédient de <strong>{{ r.name }}</strong>.</p>
+            </div>
+            <div style="position: relative">
+              <label for="addIng" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Ajouter un ingrédient</label>
+              <div style="display: flex; align-items: center; gap: 8px; border: 2px solid #6A57CC; border-radius: 16px; padding: 4px 4px 4px 14px">
+                <input id="addIng" type="text" value="champ" onChange="{{ noop }}" style="flex: 1; min-width: 0; height: 44px; border: 0; background: transparent; font: 600 16px Figtree, sans-serif; color: #2D2848; outline: none">
+                <button aria-label="Ajouter" style="flex: none; width: 44px; height: 44px; border-radius: 12px; border: 0; background: #2D2848; display: grid; place-items: center; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F9D86E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+              </div>
+              <ul role="listbox" aria-label="Suggestions" style="list-style: none; margin: 6px 0 0; padding: 6px; background: #fff; border-radius: 16px; box-shadow: inset 0 0 0 2px #ECE5F5; display: flex; flex-direction: column; gap: 2px">
+                <li role="option" aria-selected="true" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 10px; border-radius: 12px; background: #ECE5F5"><span style="width: 10px; height: 10px; border-radius: 50%; background: #5A9868"></span><span style="flex: 1; font-size: 15px; font-weight: 600"><strong>Champ</strong>ignons</span><span style="font-size: 12px; color: #5F5A70">Fruits &amp; légumes</span></li>
+                <li role="option" aria-selected="false" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 10px; border-radius: 12px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #5A9868"></span><span style="flex: 1; font-size: 15px; font-weight: 600"><strong>Champ</strong>ignons de Paris</span><span style="font-size: 12px; color: #5F5A70">Fruits &amp; légumes</span></li>
+                <li role="option" aria-selected="false" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 10px; border-radius: 12px; color: #6A57CC; font-weight: 700; font-size: 14px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Créer l'article « champ »</li>
+              </ul>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ r.hasIngs }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column">
+            <div aria-hidden="true" style="display: grid; grid-template-columns: minmax(0, 1fr) 72px 84px 32px; gap: 8px; padding: 0 4px 6px; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #6B6680">
+              <span>Ingrédient</span><span>Qté</span><span>Unité</span><span></span>
+            </div>
+            <sc-for list="{{ r.ings }}" as="i" hint-placeholder-count="4">
+              <div style="display: grid; grid-template-columns: minmax(0, 1fr) 72px 84px 32px; gap: 8px; align-items: center; padding: 6px 4px; border-top: 1.5px solid #F3EEE7">
+                <div style="min-width: 0; display: flex; flex-direction: column; gap: 1px">
+                  <span style="font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ i.name }}</span>
+                </div>
+                <input type="text" inputmode="decimal" aria-label="Quantité de {{ i.name }}" value="{{ i.qty }}" placeholder="—" onChange="{{ noop }}" style="width: 100%; height: 40px; box-sizing: border-box; border: 0; border-radius: 10px; background: {{ i.qtyBg }}; text-align: center; font: 800 16px 'Bricolage Grotesque', sans-serif; color: #2D2848">
+                <button class="kd-hit" aria-label="Unité de {{ i.name }} : {{ i.unit }}" style="height: 40px; display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 0 8px 0 10px; border: 0; border-radius: 10px; background: #F6F1EA; font: 700 14px Figtree, sans-serif; color: #2D2848; cursor: pointer">{{ i.unit }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+                <button class="kd-hit" aria-label="Retirer {{ i.name }}" style="width: 32px; height: 32px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6680" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+              </div>
+            </sc-for>
+            <button style="margin-top: 6px; display: flex; align-items: center; gap: 10px; height: 44px; padding: 0 12px; border-radius: 12px; border: 2px dashed #CFC6DA; background: transparent; font: 700 14px Figtree, sans-serif; color: #5F5A70; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Ajouter un ingrédient</button>
+          </div>
+        </sc-if>
+
+      </article>
+    </sc-for>
+
+    <sc-if value="{{ w.isCurrent }}" hint-placeholder-val="{{ true }}">
+    <article style="break-inside: avoid; margin: 0 0 16px; background: #fff; border-radius: 28px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: flex-start; gap: 10px">
+        <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+          <h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; line-height: 1.15">Hors menu</h2>
+          <span style="font-size: 13px; color: #5F5A70; font-weight: 600">Ce qu'il faut acheter en plus des plats</span>
+        </div>
+        <span style="flex: none; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 14px; background: #F6F1EA; border-radius: 999px; padding: 6px 12px">4 produits</span>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 72px 84px 32px; gap: 8px; align-items: center; padding: 6px 4px; border-top: 1.5px solid #F3EEE7">
+          <div style="min-width: 0; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Serviettes jour</span>
+            <button class="kd-hit" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; border: 0; background: #FFF1DA; font: 700 12px Figtree, sans-serif; color: #8A5300; cursor: pointer"><span aria-hidden="true" style="width: 16px; height: 16px; border-radius: 50%; background: #FFB54D; display: grid; place-items: center; font-size: 11px; color: #2D2848">!</span>Choisir un rayon</button>
+          </div>
+          <input type="text" inputmode="decimal" aria-label="Quantité de Serviettes jour" value="" placeholder="—" onChange="{{ noop }}" style="width: 100%; height: 40px; box-sizing: border-box; border: 0; border-radius: 10px; background: #F6F1EA; text-align: center; font: 800 16px 'Bricolage Grotesque', sans-serif; color: #2D2848">
+          <button class="kd-hit" aria-label="Unité de Serviettes jour : —" style="height: 40px; display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 0 8px 0 10px; border: 0; border-radius: 10px; background: #F6F1EA; font: 700 14px Figtree, sans-serif; color: #2D2848; cursor: pointer">—<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+          <button class="kd-hit" aria-label="Retirer Serviettes jour" style="width: 32px; height: 32px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6680" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 72px 84px 32px; gap: 8px; align-items: center; padding: 6px 4px; border-top: 1.5px solid #F3EEE7">
+          <div style="min-width: 0; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Serviettes nuit</span>
+            <button class="kd-hit" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; border: 0; background: #FFF1DA; font: 700 12px Figtree, sans-serif; color: #8A5300; cursor: pointer"><span aria-hidden="true" style="width: 16px; height: 16px; border-radius: 50%; background: #FFB54D; display: grid; place-items: center; font-size: 11px; color: #2D2848">!</span>Choisir un rayon</button>
+          </div>
+          <input type="text" inputmode="decimal" aria-label="Quantité de Serviettes nuit" value="" placeholder="—" onChange="{{ noop }}" style="width: 100%; height: 40px; box-sizing: border-box; border: 0; border-radius: 10px; background: #F6F1EA; text-align: center; font: 800 16px 'Bricolage Grotesque', sans-serif; color: #2D2848">
+          <button class="kd-hit" aria-label="Unité de Serviettes nuit : —" style="height: 40px; display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 0 8px 0 10px; border: 0; border-radius: 10px; background: #F6F1EA; font: 700 14px Figtree, sans-serif; color: #2D2848; cursor: pointer">—<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+          <button class="kd-hit" aria-label="Retirer Serviettes nuit" style="width: 32px; height: 32px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6680" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 72px 84px 32px; gap: 8px; align-items: center; padding: 6px 4px; border-top: 1.5px solid #F3EEE7">
+          <div style="min-width: 0; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Piles AAA</span>
+            <span style="font-size: 12px; color: #5F5A70">Hygiène &amp; entretien</span>
+          </div>
+          <input type="text" inputmode="decimal" aria-label="Quantité de Piles AAA" value="1" placeholder="—" onChange="{{ noop }}" style="width: 100%; height: 40px; box-sizing: border-box; border: 0; border-radius: 10px; background: #F6F1EA; text-align: center; font: 800 16px 'Bricolage Grotesque', sans-serif; color: #2D2848">
+          <button class="kd-hit" aria-label="Unité de Piles AAA : pièce" style="height: 40px; display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 0 8px 0 10px; border: 0; border-radius: 10px; background: #F6F1EA; font: 700 14px Figtree, sans-serif; color: #2D2848; cursor: pointer">pièce<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+          <button class="kd-hit" aria-label="Retirer Piles AAA" style="width: 32px; height: 32px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6680" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0, 1fr) 72px 84px 32px; gap: 8px; align-items: center; padding: 6px 4px; border-top: 1.5px solid #F3EEE7">
+          <div style="min-width: 0; display: flex; flex-direction: column; gap: 2px">
+            <span style="font-size: 15px; font-weight: 600">Papier toilette</span>
+            <span style="font-size: 12px; color: #5F5A70">Tapé « PQ » · Hygiène &amp; entretien</span>
+          </div>
+          <input type="text" inputmode="decimal" aria-label="Quantité de Papier toilette" value="1" placeholder="—" onChange="{{ noop }}" style="width: 100%; height: 40px; box-sizing: border-box; border: 0; border-radius: 10px; background: #F6F1EA; text-align: center; font: 800 16px 'Bricolage Grotesque', sans-serif; color: #2D2848">
+          <button class="kd-hit" aria-label="Unité de Papier toilette : pièce" style="height: 40px; display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 0 8px 0 10px; border: 0; border-radius: 10px; background: #F6F1EA; font: 700 14px Figtree, sans-serif; color: #2D2848; cursor: pointer">pièce<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+          <button class="kd-hit" aria-label="Retirer Papier toilette" style="width: 32px; height: 32px; border-radius: 50%; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6680" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+        </div>
+        <div style="margin-top: 6px; display: flex; align-items: center; gap: 8px; border: 2px dashed #857F98; border-radius: 12px; padding: 2px 2px 2px 12px">
+          <label for="addHors" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Ajouter un produit hors menu</label>
+          <input id="addHors" type="text" placeholder="Ajouter un produit (éponges, café…)" style="flex: 1; min-width: 0; height: 40px; border: 0; background: transparent; font: 600 14px Figtree, sans-serif; color: #2D2848; outline: none">
+          <button class="kd-hit" aria-label="Ajouter" style="flex: none; width: 40px; height: 40px; border-radius: 12px; border: 0; background: #2D2848; display: grid; place-items: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F9D86E" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+        </div>
+      </div>
+    </article>
+    </sc-if>
+  </div>
+  </section>
+  </sc-for>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const G = {
+      leg: ['Légumes', '#5A9868', '#EAF3EC'],
+      fec: ['Féculents', '#F2C94C', '#FCF4DA'],
+      via: ['Viande, poisson', '#F87A56', '#FEE8E1'],
+      lai: ['Laitiers', '#E6CFA0', '#F8F1E3'],
+      aut: ['Autre', '#B8B2C6', '#F3F1F6'],
+    };
+    const ing = (name, qty, unit, g, extra) => {
+      const grp = g ? G[g] : null;
+      return Object.assign({
+        name, qty, unit, mod: false, orig: '',
+        qtyBg: '#F6F1EA',
+        group: grp ? grp[0] : 'À classer',
+        dot: grp ? grp[1] : 'transparent',
+        chipBg: grp ? grp[2] : '#fff',
+        chipBorder: grp ? '0' : '2px dashed #9D88F8',
+      }, extra || {});
+    };
+    const recipe = (name, when, ings, flags) => Object.assign({
+      name, when, ings, hasIngs: ings.length > 0, todo: false, modified: false,
+      countLabel: ings.length ? ings.length + ' ingrédients' : 'Vide',
+    }, flags || {});
+    return {
+      noop: () => {},
+      weeks: [ { title: 'Semaine du 19 octobre', isCurrent: true, summary: '6 plats · 26 ingrédients', recipes: [
+        recipe('Gnocchi crème de courgette', 'Mar. soir · Mer. midi (reste)', [
+          ing('Gnocchis', '500', 'g', 'fec'), ing('Courgettes', '2', 'pièces', 'leg'), ing('Poulet', '2', 'pièces', 'via'),
+          ing('Saint-Môret', '60', 'g', 'lai'), ing('Parmesan', '', '—', 'lai'),
+        ]),
+        recipe('Salade chèvre chaud', 'Mer. soir', [
+          ing('Salade verte', '1', 'pièce', 'leg'), ing('Chèvre bûche', '1', 'pièce', 'lai'), ing('Œufs', '12', 'pièces', 'aut'), ing('Noix', '', '—', null),
+        ]),
+        recipe('One pot butternut', 'Jeu. midi · Ven. midi (reste)', [
+          ing('Poulet', '4', 'pièces', 'via', { mod: true, orig: '3', qtyBg: '#E4DCFD' }), ing('Épinards', '200', 'g', 'leg'), ing('Pulpe de tomate', '400', 'g', 'leg'),
+          ing('Feta', '', '—', 'lai'), ing('Cheddar râpé', '', '—', 'lai'), ing('Concentré de tomates', '', '—', null),
+        ], { modified: true }),
+        recipe('Riz champi poulet', 'Dim. midi', [], { todo: true }),
+        recipe('Soupe œufs', 'Jeu. soir', [
+          ing('Poireau', '1', 'pièce', 'leg'), ing('Pommes de terre', '1', 'kg', 'fec'), ing('Œufs', '4', 'pièces', 'aut'),
+          ing('Gruyère râpé', '', '—', 'lai'), ing('Pain au four', '1', 'pièce', 'fec'), ing('Bouillon de légumes', '1', 'l', 'aut'),
+        ]),
+        recipe('Burger poulet et patate douce', 'Ven. soir', [
+          ing('Patates douces', '2', 'pièces', 'leg'), ing('Buns', '4', 'pièces', 'fec'), ing('Avocat', '1', 'pièce', 'leg'),
+          ing('Bacon', '150', 'g', 'via'), ing('Cheddar', '4', 'pièces', 'lai'),
+        ]),
+      ] },
+      { title: 'Semaine du 26 octobre', isCurrent: false, summary: '2 plats déjà prévus · 8 ingrédients', recipes: [
+        recipe('Pâtes carbonara', 'Lun. 26 midi', [
+          ing('Spaghetti', '500', 'g', 'fec'), ing('Lardons', '200', 'g', 'via'), ing('Œufs', '4', 'pièces', 'aut'), ing('Parmesan', '50', 'g', 'lai'),
+        ]),
+        recipe('Curry de lentilles', 'Mar. 27 soir', [
+          ing('Lentilles corail', '300', 'g', null), ing('Lait de coco', '400', 'ml', null), ing('Oignon', '1', 'pièce', 'leg'), ing('Riz', '250', 'g', 'fec'),
+        ]),
+      ] },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

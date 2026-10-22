@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Kaddy · A · Ordre des rayons mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:#2D2848}
+.kd-scroll{scrollbar-width:none}
+.kd-scroll::-webkit-scrollbar{display:none}
+:where(button,a,summary,[tabindex]:not([tabindex="-1"])):focus-visible{outline:3px solid #6A57CC;outline-offset:3px}
+.kd-rrow{transition:background-color .25s ease}
+.kd-rrow.kd-moved{animation:kdMoved .7s cubic-bezier(.16,1,.3,1)}
+.kd-rrow.kd-drag{opacity:.45}
+.kd-rrow.kd-over{box-shadow:inset 0 3px 0 #6A57CC}
+.kd-mv:disabled{opacity:.3;cursor:default}
+.kd-mv:not(:disabled):hover{background:#EEE7DC}
+.kd-handle{cursor:grab}
+.kd-reset:hover{background:#EEE7DC}
+@keyframes kdMoved{0%{background:#E4DCFD}100%{background:#fff}}
+@media (prefers-reduced-motion: reduce){.kd-rrow.kd-moved{animation:none;background:#F1EDFD}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #F0E9E0; font-family: Figtree, system-ui, sans-serif; color: #2D2848">
+  <div class="kd-scroll" style="position: absolute; inset: 0; overflow-y: auto; padding: 16px 16px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px">
+    <div style="flex: none; display: flex; align-items: center; gap: 10px">
+      <a href="mon-kaddy-mobile.html" aria-label="Retour" style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #fff; display: grid; place-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></a>
+      <span style="font-size: 14px; font-weight: 700; color: #5F5A70">Réglages</span>
+    </div>
+    <header style="flex: none; display: flex; align-items: flex-end; justify-content: space-between; gap: 8px">
+      <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+        <h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-stretch: 85%; font-size: 36px; line-height: 1; letter-spacing: -0.02em">Ordre des rayons</h1>
+      </div>
+      <img width="397" height="280" decoding="async" src="../public/illustrations/titre-mon-kaddy.webp" alt="" style="flex: none; height: 84px; width: auto; margin-bottom: -6px">
+    </header>
+    <p style="margin: 0; font-size: 15px; line-height: 1.45; color: #5F5A70">Range les rayons dans l'ordre où tu les croises au magasin. Mon Kaddy suivra cet ordre.</p>
+    <ol aria-label="Ordre des rayons" style="list-style: none; margin: 0; padding: 0; background: #fff; border-radius: 22px; overflow: hidden">
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="7">
+        <li class="{{ r.cls }}" draggable="true" onDragStart="{{ r.dragStart }}" onDragOver="{{ r.dragOver }}" onDrop="{{ r.drop }}" onDragEnd="{{ r.dragEnd }}" style="display: flex; align-items: center; gap: 10px; min-height: 68px; padding: 8px 8px 8px 10px; border-top: {{ r.sep }}; background: #fff">
+          <span class="kd-handle" aria-hidden="true" title="Glisser pour déplacer" style="flex: none; width: 24px; display: grid; place-items: center; color: #857F98"><svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor"><circle cx="5" cy="4" r="1.7"></circle><circle cx="11" cy="4" r="1.7"></circle><circle cx="5" cy="10" r="1.7"></circle><circle cx="11" cy="10" r="1.7"></circle><circle cx="5" cy="16" r="1.7"></circle><circle cx="11" cy="16" r="1.7"></circle></svg></span>
+          <span aria-hidden="true" style="flex: none; width: 28px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px; color: #5F5A70; text-align: center">{{ r.pos }}</span>
+          <span aria-hidden="true" style="flex: none; width: 48px; height: 48px; border-radius: 16px; background: {{ r.bg }}; display: grid; place-items: center">
+            <sc-if value="{{ r.img }}" hint-placeholder-val="{{ true }}"><img loading="lazy" decoding="async" src="{{ r.img }}" alt="" style="max-width: 40px; max-height: 38px; width: auto; height: auto"></sc-if>
+            <sc-if value="{{ r.noImg }}" hint-placeholder-val="{{ false }}"><span style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px">?</span></sc-if>
+          </span>
+          <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px">
+            <span style="font-size: 16px; font-weight: 700; line-height: 1.2">{{ r.name }}</span>
+            <span style="font-size: 13px; font-weight: 600; color: #5F5A70">{{ r.count }}</span>
+          </span>
+          <button type="button" class="kd-mv" onClick="{{ r.up }}" disabled="{{ r.isFirst }}" aria-label="Monter {{ r.name }}" style="flex: none; width: 44px; height: 44px; border-radius: 12px; border: 0; background: #F6F1EA; display: grid; place-items: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg></button>
+          <button type="button" class="kd-mv" onClick="{{ r.down }}" disabled="{{ r.isLast }}" aria-label="Descendre {{ r.name }}" style="flex: none; width: 44px; height: 44px; border-radius: 12px; border: 0; background: #F6F1EA; display: grid; place-items: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D2848" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+        </li>
+      </sc-for>
+    </ol>
+    <div role="status" aria-live="polite" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">{{ announce }}</div>
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+      <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #3F6B4C"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg>Enregistré pour tout le foyer</span>
+      <button type="button" class="kd-reset" onClick="{{ reset }}" disabled="{{ isDefault }}" style="height: 44px; padding: 0 16px; border-radius: 999px; border: 0; background: #F6F1EA; font: 700 14px Figtree, sans-serif; color: #2D2848; cursor: pointer">Ordre par défaut</button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.aisles = {
+      fl: { name: 'Fruits & légumes', bg: '#CFE6D3', img: '../public/illustrations/thumbs/rayon-fruits-legumes.webp', n: 10 },
+      bo: { name: 'Boucherie & charcuterie', bg: '#FDD3C6', img: '../public/illustrations/thumbs/rayon-boucherie.webp', n: 4 },
+      cr: { name: 'Crémerie & fromages', bg: '#F8EDC8', img: '../public/illustrations/thumbs/rayon-cremerie.webp', n: 9 },
+      ep: { name: 'Épicerie salée', bg: '#F1E2CC', img: '../public/illustrations/thumbs/rayon-epicerie.webp', n: 4 },
+      bl: { name: 'Boulangerie', bg: '#FBE3B8', img: '../public/illustrations/thumbs/rayon-boulangerie.webp', n: 2 },
+      hy: { name: 'Hygiène & entretien', bg: '#DCE7F7', img: '../public/illustrations/rayon-hygiene.webp', n: 2 },
+      au: { name: 'Autres', bg: '#ECE5F5', img: '', n: 2 },
+    };
+    this.def = ['fl', 'bo', 'cr', 'ep', 'bl', 'hy', 'au'];
+    this.state = { order: this.def.slice(), moved: null, drag: null, over: null, announce: '' };
+  }
+  move(from, to) {
+    const o = this.state.order.slice();
+    if (to < 0 || to >= o.length || from === to) return;
+    const [id] = o.splice(from, 1); o.splice(to, 0, id);
+    this.setState({ order: o, moved: id, drag: null, over: null, announce: this.aisles[id].name + ', position ' + (to + 1) + ' sur ' + o.length });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({ moved: null }), 800);
+  }
+  renderVals() {
+    const { order, moved, drag, over, announce } = this.state;
+    const rows = order.map((id, i) => {
+      const a = this.aisles[id];
+      return {
+        name: a.name, bg: a.bg, img: a.img, noImg: !a.img, pos: i + 1,
+        count: a.n + (a.n > 1 ? ' articles cette semaine' : ' article cette semaine'),
+        sep: i === 0 ? '0' : '1.5px solid #F3EEE7',
+        cls: 'kd-rrow' + (moved === id ? ' kd-moved' : '') + (drag === i ? ' kd-drag' : '') + (over === i && drag !== null && drag !== i ? ' kd-over' : ''),
+        isFirst: i === 0, isLast: i === order.length - 1,
+        up: () => this.move(i, i - 1), down: () => this.move(i, i + 1),
+        dragStart: (e) => { try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', id); } catch (x) {} this.setState({ drag: i }); },
+        dragOver: (e) => { e.preventDefault(); if (this.state.over !== i) this.setState({ over: i }); },
+        drop: (e) => { e.preventDefault(); if (this.state.drag !== null) this.move(this.state.drag, i); },
+        dragEnd: () => this.setState({ drag: null, over: null }),
+      };
+    });
+    return {
+      rows, announce,
+      isDefault: order.join() === this.def.join(),
+      reset: () => this.setState({ order: this.def.slice(), moved: null, announce: 'Ordre par défaut rétabli' }),
+    };
+  }
+}
+</script>
+</body>
+</html>

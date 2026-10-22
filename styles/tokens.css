@@ -1,0 +1,128 @@
+/* Kaddy — design tokens
+   Source of truth: DESIGN.md (frontmatter). Import once at the root:
+   app/layout.tsx -> import "@/styles/tokens.css";
+   Fonts: load Bricolage Grotesque (opsz, wdth 75–100, wght 400–800) and
+   Figtree (400–800) with next/font/google and map them to the two
+   variables below (--font-display / --font-body). */
+
+:root {
+  /* ---- Brand ---- */
+  --kd-ink: #2D2848;            /* text, primary buttons, mobile nav */
+  --kd-ink-hover: #3D3760;
+  --kd-violet: #6A57CC;         /* action / state only: focus, ticked, progress */
+  --kd-violet-deep: #4B3F8F;    /* text on lavender */
+  --kd-violet-cap: #9D88F8;     /* mascot colour */
+  --kd-lavender: #D6CBFD;       /* active tab, "En cours" badge */
+  --kd-lavender-soft: #E4DCFD;  /* "Reste" pill */
+  --kd-lavender-mist: #ECE5F5;
+  --kd-sun: #F9D86E;            /* highlighter accent, yellow icon on dark buttons */
+  --kd-sun-logo: #FEDA4F;       /* logo, sign-in panel */
+
+  /* ---- Neutrals ---- */
+  --kd-paper: #F0E9E0;          /* app background */
+  --kd-surface: #FFFFFF;        /* cards, dialogs */
+  --kd-field: #F6F1EA;          /* fields, filled slots, secondary buttons */
+  --kd-surface-subtle: #FBF8F3; /* sunken areas, ticked rows */
+  --kd-track: #EEE7DC;          /* progress track, quantity chips */
+  --kd-divider: #F3EEE7;        /* 1.5px separators */
+  --kd-text-muted: #5F5A70;     /* secondary text  (5.5:1 on paper) */
+  --kd-text-faint: #6B6680;     /* placeholders, ticked items (≥4.5:1) */
+  --kd-stroke-dashed: #857F98;  /* empty slots, "add" fields (≥3:1) */
+
+  /* ---- Status ---- */
+  --kd-todo: #FFB54D;
+  --kd-todo-bg: #FFF1DA;
+  --kd-todo-text: #8A5300;
+  --kd-error: #E0603F;
+  --kd-error-bg: #FDD3C6;
+  --kd-error-text: #7A2E17;
+  --kd-success-text: #3F6B4C;
+
+  /* ---- Aisles (background / dot) ---- */
+  --kd-aisle-produce: #CFE6D3;   --kd-aisle-produce-dot: #5A9868;
+  --kd-aisle-butcher: #FDD3C6;   --kd-aisle-butcher-dot: #F87A56;
+  --kd-aisle-dairy: #F8EDC8;     --kd-aisle-dairy-dot: #E6CFA0;
+  --kd-aisle-grocery: #F1E2CC;   --kd-aisle-grocery-dot: #D9A86A;
+  --kd-aisle-bakery: #FBE3B8;    --kd-aisle-bakery-dot: #F2C94C;
+  --kd-aisle-household: #DCE7F7; --kd-aisle-household-dot: #8FA9D6;
+  --kd-aisle-other: #ECE5F5;     --kd-aisle-other-dot: #B9A8FF;
+
+  /* ---- Typography ---- */
+  --font-display: "Bricolage Grotesque", sans-serif;
+  --font-body: "Figtree", system-ui, sans-serif;
+  --kd-text-display: 800 52px/1 var(--font-display);
+  --kd-text-display-mobile: 800 36px/1 var(--font-display);
+  --kd-text-numeral: 800 56px/.9 var(--font-display);
+  --kd-text-headline: 800 22px/1.15 var(--font-display);
+  --kd-text-title: 700 17px/1.25 var(--font-body);
+  --kd-text-body: 600 15px/1.45 var(--font-body);
+  --kd-text-body-lg: 600 16px/1.45 var(--font-body);
+  --kd-text-body-small: 600 13px/1.35 var(--font-body);
+  --kd-text-label: 800 11px/1.2 var(--font-body);
+  --kd-tracking-display: -0.02em;
+  --kd-tracking-numeral: -0.03em;
+  --kd-tracking-label: 0.08em;
+  --kd-wdth-display: 85;
+  --kd-wdth-numeral: 80;
+
+  /* ---- Radius (decreases as you nest) ---- */
+  --kd-radius-xs: 10px;   /* checkbox */
+  --kd-radius-sm: 12px;   /* field inside a row */
+  --kd-radius-md: 16px;   /* slot, field */
+  --kd-radius-lg: 22px;   /* card, day column */
+  --kd-radius-xl: 28px;   /* summary tile */
+  --kd-radius-dialog: 32px;
+  --kd-radius-panel: 40px;
+  --kd-radius-pill: 999px;
+
+  /* ---- Spacing (4px base) ---- */
+  --kd-space-1: 4px;
+  --kd-space-2: 8px;
+  --kd-space-3: 12px;
+  --kd-space-4: 16px;
+  --kd-space-5: 20px;
+  --kd-space-6: 24px;
+  --kd-space-8: 32px;
+  --kd-space-12: 48px;
+
+  /* ---- Depth (Flat Page Rule: shadows only on floating elements) ---- */
+  --kd-shadow-float: 0 8px 24px rgba(45, 40, 72, .14);
+  --kd-veil: rgba(45, 40, 72, .5);
+  --kd-ring-today: inset 0 0 0 3px var(--kd-violet);
+
+  /* ---- Motion ---- */
+  --kd-ease-out: cubic-bezier(.16, 1, .3, 1);
+  --kd-dur-feedback: 150ms;
+  --kd-dur-state: 250ms;
+  --kd-dur-enter: 450ms;
+
+  /* ---- Interaction ---- */
+  --kd-target: 44px;
+  --kd-focus: 3px solid var(--kd-violet);
+}
+
+/* ---- Base ---- */
+html { background: var(--kd-paper); color: var(--kd-ink); font: var(--kd-text-body); }
+::selection { background: var(--kd-lavender); color: var(--kd-ink); }
+:where(button, a, summary, [tabindex]:not([tabindex="-1"])):focus-visible { outline: var(--kd-focus); outline-offset: 3px; }
+:where(input, textarea, select):focus-visible { outline: var(--kd-focus); outline-offset: 2px; }
+:where(.kd-on-dark) :focus-visible { outline-color: var(--kd-sun); }
+input::placeholder, textarea::placeholder { color: var(--kd-text-faint); opacity: 1; }
+
+/* Invisible hit area: brings a visually smaller control up to 44 × 44 */
+.kd-hit { position: relative; }
+.kd-hit::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: max(100%, var(--kd-target)); height: max(100%, var(--kd-target));
+  transform: translate(-50%, -50%);
+}
+
+/* Type helpers */
+.kd-display { font: var(--kd-text-display); letter-spacing: var(--kd-tracking-display); font-variation-settings: "wdth" var(--kd-wdth-display); }
+.kd-numeral { font: var(--kd-text-numeral); letter-spacing: var(--kd-tracking-numeral); font-variation-settings: "wdth" var(--kd-wdth-numeral); }
+.kd-label { font: var(--kd-text-label); letter-spacing: var(--kd-tracking-label); text-transform: uppercase; }
+@media (max-width: 640px) { .kd-display { font: var(--kd-text-display-mobile); } }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --kd-dur-state: 0ms; --kd-dur-enter: 0ms; }
+}

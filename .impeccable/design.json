@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-22T12:00:00Z",
+  "title": "Design System: Kaddy",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "primary", "displayName": "Encre de nuit", "canonical": "#2D2848" },
+      "violet": { "role": "primary", "displayName": "Violet Kaddy", "canonical": "#6A57CC" },
+      "lavender": { "role": "secondary", "displayName": "Lavande", "canonical": "#D6CBFD" },
+      "sun": { "role": "tertiary", "displayName": "Jaune soleil", "canonical": "#F9D86E" },
+      "paper": { "role": "neutral", "displayName": "Papier crème", "canonical": "#F0E9E0" }
+    },
+    "shadows": [
+      { "name": "float", "value": "0 8px 24px rgba(45, 40, 72, .14)", "purpose": "Floating elements only: mobile nav bar, dialogs, duplicate alert." },
+      { "name": "today-ring", "value": "inset 0 0 0 3px #6A57CC", "purpose": "Today's column in the Menu." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "Arrivals, tick, bumps, progress." },
+      { "name": "duration-feedback", "value": "150ms", "purpose": "Hover, press, colour change." },
+      { "name": "duration-state", "value": "250ms", "purpose": "Accordions, row exit, sheets." },
+      { "name": "focus-ring", "value": "3px solid #6A57CC, offset 3px", "purpose": "Keyboard focus (yellow #F9D86E on navy)." }
+    ],
+    "breakpoints": [ { "name": "mobile", "value": "390px" }, { "name": "desktop", "value": "1440px" } ]
+  },
+  "components": [
+    { "name": "Primary Button", "kind": "button", "refersTo": "button-primary", "description": "Main action of a page.", "html": "<button class=\"kd-btn\">Nouvelle recette<span>+</span></button>", "css": ".kd-btn{display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 8px 0 22px;border:0;border-radius:999px;background:#2D2848;color:#fff;font:700 15px Figtree,sans-serif}.kd-btn span{width:36px;height:36px;border-radius:50%;background:#F9D86E;color:#2D2848;display:grid;place-items:center;font-weight:800}.kd-btn:hover{background:#3D3760}" },
+    { "name": "Reste chip", "kind": "chip", "refersTo": "chip-reste", "description": "Marks a leftover slot.", "html": "<span class=\"kd-reste-chip\">Reste</span>", "css": ".kd-reste-chip{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;background:#E4DCFD;color:#4B3F8F;font:700 12px Figtree,sans-serif}" },
+    { "name": "Empty slot", "kind": "custom", "description": "Menu slot waiting for a dish.", "html": "<button class=\"kd-slot-empty\"><small>SOIR</small>Quel plat ?</button>", "css": ".kd-slot-empty{display:flex;flex-direction:column;gap:6px;width:180px;min-height:120px;padding:12px;border:2px dashed #857F98;border-radius:16px;background:transparent;text-align:left;font:400 16px Figtree,sans-serif;color:#6B6680}.kd-slot-empty small{font-size:11px;font-weight:700;letter-spacing:.08em;color:#5F5A70}" }
+  ],
+  "narrative": {
+    "northStar": "Le carnet de cuisine",
+    "overview": "Kaddy looks like a household's cookbook-notebook: cream paper, pencil, stickers and a mascot in the margins. The UI is soft and round and leaves the personality to the illustrations.",
+    "keyCharacteristics": ["Cream paper and white cards", "Narrow Bricolage Grotesque + Figtree", "A mascot next to every title", "Flat; light shadow only on floating elements", "Pills and large radii"],
+    "rules": [
+      { "name": "Violet = Action", "body": "#6A57CC only on what responds or has just responded.", "section": "colors" },
+      { "name": "Equal Meals", "body": "A leftover has the same weight as a dish; only the lavender pill tells them apart.", "section": "colors" },
+      { "name": "Flat Page", "body": "No shadow on cards, tiles or slots; a shadow means it floats.", "section": "elevation" },
+      { "name": "Single Lettering", "body": "Two families only: Bricolage Grotesque and Figtree.", "section": "typography" }
+    ],
+    "dos": ["Do pair every page title with an illustration of the mascot", "Do keep 44px targets on mobile", "Do provide a reduced-motion path"],
+    "donts": ["Don't use violet as decoration", "Don't add a shadow to a card", "Don't add a third type family", "Don't use sharp angles"]
+  }
+}

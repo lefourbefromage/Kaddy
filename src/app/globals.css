@@ -1,0 +1,48 @@
+/* Minimal reset. Tokens, base type and focus live in styles/tokens.css. */
+
+/* html:root outranks the :root block of tokens.css, so the next/font
+   families win while keeping the fallbacks. */
+html:root {
+  --font-display: var(--font-bricolage), sans-serif;
+  --font-body: var(--font-figtree), system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--kd-paper);
+  color: var(--kd-ink);
+  font: var(--kd-text-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
