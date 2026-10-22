@@ -1,0 +1,147 @@
+.wrap {
+  position: relative;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-2);
+  padding: 2px 2px 2px var(--kd-space-3);
+  border-radius: var(--kd-radius-sm);
+}
+
+.dashed {
+  border: 2px dashed var(--kd-stroke-dashed);
+}
+
+.solid {
+  border: 2px solid var(--kd-violet);
+}
+
+.field:focus-within {
+  border-style: solid;
+  border-color: var(--kd-violet);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: var(--kd-target);
+  border: 0;
+  background: transparent;
+  font: var(--kd-text-body-lg);
+  color: var(--kd-ink);
+  caret-color: var(--kd-violet);
+  outline: none;
+}
+
+.add {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-sm);
+  background: var(--kd-ink);
+  cursor: pointer;
+}
+
+.add svg {
+  fill: none;
+  stroke: var(--kd-sun);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+}
+
+.add:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 6;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--kd-surface);
+  border-radius: var(--kd-radius-md);
+  box-shadow: var(--kd-shadow-float);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--kd-target);
+  padding: 0 10px;
+  border-radius: var(--kd-radius-sm);
+  cursor: pointer;
+}
+
+.option[aria-selected="true"] {
+  background: var(--kd-lavender-mist);
+}
+
+.dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--kd-radius-pill);
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  font: var(--kd-text-body);
+}
+
+.name strong {
+  font-weight: 800;
+}
+
+.alias {
+  color: var(--kd-text-muted);
+}
+
+.aisle {
+  flex: none;
+  font: var(--kd-text-caption);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+}
+
+.create {
+  color: var(--kd-violet-deep);
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+}
+
+@media (min-width: 900px) {
+  .input {
+    height: 40px;
+    font: var(--kd-text-body-medium);
+    font-weight: 600;
+  }
+
+  .add {
+    width: 40px;
+    height: 40px;
+  }
+}

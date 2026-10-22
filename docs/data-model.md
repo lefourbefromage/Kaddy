@@ -62,10 +62,13 @@ households/{hid}/weeks/{weekId}              // weekId = ISO "2026-W43"
     ...                                       // absent key = empty slot
   }
   listOverrides: { "<recipeId>:<key>": { qty?: number, unit?: string, removed?: true } }
+                                              // changes made in the Liste de courses for this week only;
+                                              // adding an ingredient there goes into the recipe itself
   updatedAt
 
 households/{hid}/weeks/{weekId}/extras/{extraId}     // "Hors menu"
   name, key, qty, unit, aisleId | null, createdAt
+  typed?: string                              // what was typed when it differs from the name ("PQ")
 
 households/{hid}/weeks/{weekId}/checks/{itemKey}     // Mon Kaddy ticks: ONE doc per item
   checked: boolean

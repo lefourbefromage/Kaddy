@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { collection, deleteField, doc, onSnapshot, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebase";
+import type { Override } from "./list";
 
 /* ---------- Week & day arithmetic (ISO weeks, local time) ---------- */
 
@@ -66,7 +67,7 @@ export type Slot =
 export type Week = {
   id: string;
   slots: Partial<Record<Day, Partial<Record<Meal, Slot>>>>;
-  listOverrides?: Record<string, { qty?: number; unit?: string; removed?: true }>;
+  listOverrides?: Record<string, Override>; // "<recipeId>:<key>" → change for this week
 };
 
 export const getSlot = (week: Week | undefined, ref: SlotRef) => week?.slots?.[ref.day]?.[ref.meal];

@@ -1,0 +1,478 @@
+/* Liste de courses: design/liste-de-courses-desktop.html + -mobile.html */
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Week ---------- */
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.weekHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--kd-space-2) var(--kd-space-3);
+  padding: 6px var(--kd-space-1) 0;
+}
+
+.weekTitle {
+  font: var(--kd-text-headline-sm);
+}
+
+.current {
+  padding: var(--kd-space-1) 9px;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-lavender);
+  font: var(--kd-text-label);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.weekSummary {
+  font: var(--kd-text-body-small);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+}
+
+.empty {
+  padding: var(--kd-space-5);
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-surface);
+  font: var(--kd-text-body);
+  color: var(--kd-text-muted);
+}
+
+.empty a {
+  color: var(--kd-ink);
+  font-weight: 700;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---------- Card ---------- */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-surface);
+}
+
+/* The open suggestions list overlaps the card below it. */
+.card:focus-within {
+  z-index: 5;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 14px;
+}
+
+.cardHeading {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: inherit;
+}
+
+.cardToggle {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 64px;
+  padding: 10px 0 10px 18px;
+  border: 0;
+  background: transparent;
+  color: var(--kd-ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.chevron {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform var(--kd-dur-state) ease;
+}
+
+.cardToggle[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+.cardText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--kd-text-headline-xs);
+  overflow-wrap: anywhere;
+}
+
+.cardSub {
+  font: var(--kd-text-body-small);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+}
+
+.count {
+  flex: none;
+  padding: 5px 10px;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-field);
+  font: var(--kd-text-body-small);
+  font-family: var(--font-display);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Mobile: the eye leaves the header (titles need the room) for a link inside the card. */
+.eye {
+  display: none;
+}
+
+.openRecipe {
+  order: 1;
+  align-self: flex-start;
+  min-height: var(--kd-target);
+  margin-top: var(--kd-space-1);
+  padding: 0 var(--kd-space-1);
+  border: 0;
+  background: transparent;
+  color: var(--kd-ink);
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.eye {
+  flex: none;
+  place-items: center;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-field);
+  cursor: pointer;
+}
+
+.eye svg {
+  fill: none;
+  stroke: var(--kd-ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 12px 14px 14px;
+  animation: fade 200ms ease-out both;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.todoDot {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-todo);
+  font: var(--kd-text-caption);
+  font-family: var(--font-body);
+  font-weight: 800;
+}
+
+.todoNote {
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-2);
+  margin-bottom: var(--kd-space-2);
+  padding: 10px var(--kd-space-3);
+  border-radius: var(--kd-radius-md);
+  background: var(--kd-todo-bg);
+  font: var(--kd-text-body-medium);
+}
+
+.todoIntro {
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-3);
+  padding: var(--kd-space-1) 0 10px;
+  font: var(--kd-text-body-medium);
+}
+
+.todoArt {
+  flex: none;
+  width: 104px;
+  height: auto;
+}
+
+/* ---------- Rows ---------- */
+.rowHeader,
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 56px 76px 36px;
+  gap: 6px;
+  align-items: center;
+}
+
+.rowHeader {
+  padding: 0 var(--kd-space-1) 6px;
+  font: var(--kd-text-label);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--kd-text-faint);
+}
+
+.row {
+  min-height: 52px;
+  padding: var(--kd-space-1) 0;
+  border-top: 1.5px solid var(--kd-divider);
+}
+
+.rowName {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rowLabel {
+  overflow: hidden;
+  font: var(--kd-text-body);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rowSub {
+  font: var(--kd-text-caption);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+}
+
+.qty,
+.unit {
+  width: 100%;
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-sm);
+  background: var(--kd-field);
+  color: var(--kd-ink);
+}
+
+.qty {
+  text-align: center;
+  font: var(--kd-text-body-lg);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+/* A quantity changed for this week only (DESIGN.md: lavender for the list's adjusted quantities). */
+.qtyModified {
+  background: var(--kd-lavender-soft);
+}
+
+.unit {
+  padding: 0 6px;
+  font: var(--kd-text-body-small);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.remove {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: transparent;
+  cursor: pointer;
+}
+
+.remove svg {
+  fill: none;
+  stroke: var(--kd-text-faint);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.removed {
+  padding: var(--kd-space-2) var(--kd-space-1) 0;
+  border-top: 1.5px solid var(--kd-divider);
+  font: var(--kd-text-body-small);
+  color: var(--kd-text-muted);
+}
+
+.restore {
+  min-height: 32px;
+  padding: 0 var(--kd-space-1);
+  border: 0;
+  background: transparent;
+  color: var(--kd-ink);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.addRow {
+  margin-top: 6px;
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 900px) {
+  .week {
+    gap: var(--kd-space-4);
+  }
+
+  .weekTitle {
+    font: var(--kd-text-headline-lg);
+    letter-spacing: -0.01em;
+    font-variation-settings: "wdth" var(--kd-wdth-display);
+  }
+
+  .weekSummary {
+    font: var(--kd-text-body-medium);
+    font-weight: 600;
+  }
+
+  .columns {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: var(--kd-space-4);
+    align-items: start;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--kd-space-4);
+  }
+
+  .card {
+    padding: var(--kd-space-5);
+    gap: 14px;
+    border-radius: var(--kd-radius-xl);
+  }
+
+  .cardHead {
+    align-items: flex-start;
+    padding: 0;
+  }
+
+  .cardTitle {
+    font: var(--kd-text-headline-sm);
+  }
+
+  .cardText {
+    gap: var(--kd-space-1);
+  }
+
+  .count {
+    padding: 6px var(--kd-space-3);
+    font: var(--kd-text-body-medium);
+    font-family: var(--font-display);
+    font-weight: 800;
+  }
+
+  .cardBody {
+    padding: 0;
+    animation: none;
+  }
+
+  .eye {
+    display: grid;
+  }
+
+  .openRecipe {
+    display: none;
+  }
+
+  .todoArt {
+    width: 150px;
+  }
+
+  .todoIntro {
+    gap: var(--kd-space-4);
+    font: var(--kd-text-body);
+  }
+
+  .rowHeader,
+  .row {
+    grid-template-columns: minmax(0, 1fr) 72px 84px 32px;
+    gap: var(--kd-space-2);
+  }
+
+  .row {
+    min-height: 0;
+    padding: 6px var(--kd-space-1);
+  }
+
+  .qty,
+  .unit {
+    height: 40px;
+    border-radius: var(--kd-radius-xs);
+  }
+
+  .unit {
+    font: var(--kd-text-body-medium);
+    font-weight: 700;
+  }
+
+  .remove {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardBody {
+    animation: none;
+  }
+
+  .chevron {
+    transition: none;
+  }
+}

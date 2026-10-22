@@ -92,7 +92,17 @@ export function createRecipe(householdId: string, input: RecipeInput) {
 export const updateRecipe = (householdId: string, id: string, input: RecipeInput) =>
   updateDoc(doc(recipesOf(householdId), id), toFields(input));
 
-export const deleteRecipe = (householdId: string, id: string) =>
+/** Adds an ingredient to the recipe itself (from the list): a recipe "à compléter" becomes complete. */
+export function appendIngredient(householdId: string, recipe: Recipe, name: string, qty: number | null = null, unit: Unit | null = null) {
+  const ingredients = [...recipe.ingredients, { name: name.trim(), key: keyOf(name), qty, unit }];
+  return updateDoc(doc(recipesOf(householdId), recipe.id), {
+    ingredients,
+    status: "complete",
+    updatedAt: serverTimestamp(),
+  }).catch((e) => console.error("appendIngredient", e));
+}
+
+export const deleteRecipe =(householdId: string, id: string) =>
   deleteDoc(doc(recipesOf(householdId), id));
 
 /** First other recipe whose title is close, ignoring the ones declared "not a duplicate". */
