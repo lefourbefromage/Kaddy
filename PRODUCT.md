@@ -45,7 +45,7 @@ The catalogue only contains the household's own recipes. The list follows the me
 2. **Prepare (Liste de courses).** Check each planned recipe's ingredients and quantities, grouped by week, then add off-menu items.
    - A recipe with no ingredients is flagged "à compléter" (to complete).
 3. **Shop (Mon Kaddy).** In the shop, on a phone, tick items aisle by aisle.
-   - Aisles: Fruits & légumes, Boucherie, Crémerie, Épicerie, Boulangerie, Hygiène, Autres.
+   - Aisles (14, default order, see `data/aisles.json`): Viande & poisson, Fruits & légumes, Pain & pâtisserie, Laitier, œufs & végétal, Charcuterie & traiteur, Produits cuisinés (pizza, gnocchi, fresh pasta, doughs), Surgelés, Épicerie salée, Épicerie sucrée, Boissons, Saveurs du monde, Hygiène & beauté, Entretien & nettoyage, Autres.
 4. **Manage the catalogue (Recettes).** Each recipe has a title, a description, ingredients with quantity and unit, steps, and an optional link to a video or website.
 5. **Weekly summary** on the Menu page: meal-type split, new recipes, ingredients to sort, number of different meals, leftovers, how full the week is, and dishes not cooked in a long time.
 

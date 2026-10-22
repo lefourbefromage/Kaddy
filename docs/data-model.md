@@ -11,20 +11,24 @@
 - "Rester connecté sur cet appareil": `browserLocalPersistence` when checked, `browserSessionPersistence` otherwise.
 - If more households join later, nothing changes: the same database, one more document per household.
 
+## Aisles
+`data/aisles.json` is the single source for the 14 aisles: `id` (the `AisleId` stored everywhere), French `label`, illustration. Its order is the default `aisleOrder` of a new household. Colours: `--kd-aisle-{id}` / `--kd-aisle-{id}-dot` in `styles/tokens.css`.
+
 ## Collections
 
 ```
 catalog/{key}                                // SHARED catalogue of common products (read-only for households)
   name: string                 // "Pommes de terre"
-  aisleId: "fl"|"bo"|"cr"|"ep"|"bl"|"hy"|"au"
+  aisleId: AisleId
   aliases: string[]            // ["pdt", "patates"] → also matched by the autocomplete
   defaultUnit: string | null   // "kg", "pièce"…
   // seeded from data/products.json with scripts/seed-catalog.mjs (taken over from the old "courses" project)
+  // {key} = keyOf(name), unless products.json gives an explicit "key" (see "Product keys")
 
 households/{householdId}
   name: string                 // "Famille Martin"
   slug: string                 // "famille-martin" (= householdId)
-  aisleOrder: string[]         // ["fl","bo","cr","ep","bl","hy","au"]
+  aisleOrder: AisleId[]        // default: the order of data/aisles.json
   createdAt, updatedAt: timestamp
 
 households/{hid}/recipes/{recipeId}
@@ -42,7 +46,7 @@ households/{hid}/recipes/{recipeId}
 
 households/{hid}/ingredients/{key}           // household's own aisle choice (wins over the catalogue)
   name: string
-  aisleId: "fl"|"bo"|"cr"|"ep"|"bl"|"hy"|"au" | null   // null = "Ingrédients à classer"
+  aisleId: AisleId | null   // null = "Ingrédients à classer"
 
 households/{hid}/weeks/{weekId}              // weekId = ISO "2026-W43"
   slots: {
@@ -79,6 +83,13 @@ Two people in the shop tick **different items at the same time**. With one docum
 `titleWords` = title in lowercase, without accents, without small words (`à, au, aux, de, des, du, d, la, le, les, l, et, en, avec, sans, un, une, sur, façon`), without a final s/x.
 - Two titles are close if `max(common/len(A), common/len(B)) > 0.8`.
 - Show the message "Une recette identique semble déjà exister : …", which can be dismissed. Dismissing it adds the other recipe's id to `dismissedDuplicates`.
+
+### Product keys
+`key` = name without accents, lowercase, words joined by `-`, final s/x removed (`keyOf` in `scripts/seed-catalog.mjs`, to reuse as is in the app).
+- Two different products can end up with the same key: "Pâté" and "Pâtes" both give `pate`. In that case `data/products.json` sets an explicit `key` on one of them ("Pâté" → `pate-charcuterie`); the seed script refuses duplicate keys.
+- **Matching a typed ingredient**, in this order:
+  1. exact spelling, accents kept, case ignored, against the household's `ingredients` then the catalogue's `name` and `aliases` ("pâté" → Pâté, "pâtes" → Pâtes);
+  2. otherwise the loose match on `keyOf` (name and aliases), which absorbs missing accents and plurals ("pate" → Pâtes).
 
 ### Product autocomplete
 When typing an ingredient or an off-menu item, the app suggests matches from `catalog` (name + aliases, normalised: no accents, no plural), merged with the household's own `ingredients`. The catalogue is a few hundred entries: load it once into memory (and the offline cache) rather than querying it on every keystroke.

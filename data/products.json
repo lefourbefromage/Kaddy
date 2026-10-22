@@ -1,0 +1,2652 @@
+[
+  {
+    "name": "Bar",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Bavette",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Blanc de poulet",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "blancs de poulet",
+      "filet de poulet",
+      "filets de poulet"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cabillaud",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Calamars",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "encornet",
+      "encornets"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chipolatas",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Colin",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "lieu"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Côte de bœuf",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Côtes de porc",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "cote de porc"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Crevettes",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "crevette"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cuisses de poulet",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "cuisse de poulet"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Dorade",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Entrecôte",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Escalope de dinde",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "escalopes de dinde",
+      "dinde"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Escalope de poulet",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "escalopes de poulet"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Filet mignon",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Gambas",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Gigot d'agneau",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "agneau"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Huîtres",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Magret de canard",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "canard"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Maquereau",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Merguez",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Merlu",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Moules",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Noix de Saint-Jacques",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "saint jacques"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Onglet",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Porc haché",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "porc hache"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Poulet",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "poulet entier"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Rôti de porc",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Rumsteck",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "rumsteak"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sardines fraîches",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Saucisses",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "saucisse"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Saumon",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "pave de saumon",
+      "paves de saumon"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sole",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Steak haché",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "steaks haches"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Thon frais",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Truite",
+    "aisleId": "viande-poisson",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Veau",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "escalope de veau"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Viande hachée",
+    "aisleId": "viande-poisson",
+    "aliases": [
+      "viande hache",
+      "boeuf hache"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Abricots",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Ail",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "gousse d'ail",
+      "gousses d'ail"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Ananas",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Artichaut",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Asperges",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Aubergine",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Avocat",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Banane",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Basilic",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Betterave",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Brocoli",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "brocolis"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Butternut",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "courge butternut"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Carottes",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "carotte"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Céleri",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "celeri branche",
+      "celeri rave"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cerises",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Champignons",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "champignon de paris",
+      "champignons de paris"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chou blanc",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chou rouge",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chou-fleur",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Choux de Bruxelles",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Ciboulette",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Citron jaune",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "citron"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Citron vert",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "lime"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Clémentines",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Concombre",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Coriandre",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "coriandre fraiche"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Courgette",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cresson",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Échalote",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Endives",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Épinards",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "epinard",
+      "pousses d'epinard"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Fenouil",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Fraises",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Framboises",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Fruits rouges",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Gingembre",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "gingembre frais"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Grenade",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Haricots verts",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Herbes fraîches",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Kiwi",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Laitue",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Mâche",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Mangue",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Melon",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Menthe",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "menthe fraiche"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Mûres",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Myrtilles",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Navet",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Nectarines",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Oignons jaunes",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "oignon",
+      "oignons",
+      "oignon jaune"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Oignons nouveaux",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "cebette",
+      "oignon nouveau"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Oignons rouges",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "oignon rouge"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Orange",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pamplemousse",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Panais",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pastèque",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Patate douce",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "patates douces"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pêches",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Persil",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "persil plat"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Petits pois",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Piment rouge",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "piment"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Piment vert",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Poire",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Poireau",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pois gourmands",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Poivron",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "poivron rouge",
+      "poivron jaune",
+      "poivron vert"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pomme",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pommes de terre",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "patates",
+      "patate",
+      "pomme de terre"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Potiron",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "courge"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Radis",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Raisin",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Rhubarbe",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Romarin",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Roquette",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Salade verte",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "salade"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Thym",
+    "aisleId": "fruits-legumes",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tomates",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "tomate"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tomates cerises",
+    "aisleId": "fruits-legumes",
+    "aliases": [
+      "tomate cerise",
+      "tomates cerise"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Baguette",
+    "aisleId": "pain-patisserie",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Biscottes",
+    "aisleId": "pain-patisserie",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Brioche",
+    "aisleId": "pain-patisserie",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Buns",
+    "aisleId": "pain-patisserie",
+    "aliases": [
+      "pain burger",
+      "pains burger"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Croissants",
+    "aisleId": "pain-patisserie",
+    "aliases": [
+      "croissant"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Focaccia",
+    "aisleId": "pain-patisserie",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Naan",
+    "aisleId": "pain-patisserie",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pain",
+    "aisleId": "pain-patisserie",
+    "aliases": [
+      "pain de campagne"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pain aux céréales",
+    "aisleId": "pain-patisserie",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pain bagel",
+    "aisleId": "pain-patisserie",
+    "aliases": [
+      "bagel",
+      "bagels"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pain complet",
+    "aisleId": "pain-patisserie",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pain de mie",
+    "aisleId": "pain-patisserie",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pains au chocolat",
+    "aisleId": "pain-patisserie",
+    "aliases": [
+      "pain au chocolat",
+      "chocolatine"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pita",
+    "aisleId": "pain-patisserie",
+    "aliases": [
+      "pain pita",
+      "pains pita"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Wraps",
+    "aisleId": "pain-patisserie",
+    "aliases": [
+      "wrap",
+      "tortilla",
+      "tortillas",
+      "galette de ble"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Beurre",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "beurre doux",
+      "beurre demi sel"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Boursin",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Brie",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Burrata",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Camembert",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cheddar",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cheddar râpé",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chèvre",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "buche de chevre",
+      "fromage de chevre"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Comté",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Crème de soja",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Crème fraîche",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "creme epaisse"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Crème liquide",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "creme entiere"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Emmental",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "emmental rape"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Faisselle",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Feta",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Fromage blanc",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Gruyère râpé",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "gruyere",
+      "fromage rape"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Kiri",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lait",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lait d'amande",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lait d'avoine",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lait de soja",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Mascarpone",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Mozzarella",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "mozza",
+      "mozzarela"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Œufs",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "oeuf",
+      "oeufs",
+      "eufs"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Parmesan",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "parmigiano"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâte à tartiner fromage",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Petits-suisses",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Raclette",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "fromage a raclette"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Reblochon",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Ricotta",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Roquefort",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Saint-Môret",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "saint moret",
+      "st moret"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Skyr",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Steak végétal",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "steaks vegetaux",
+      "steak vegetarien",
+      "steak de soja"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Yaourt grec",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "yahourt grec"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Yaourts",
+    "aisleId": "laitier-oeufs-vegetal",
+    "aliases": [
+      "yaourt",
+      "yahourt",
+      "yahourts"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Andouillette",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Bacon",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Boudin noir",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chorizo",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Coppa",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Houmous",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Jambon blanc",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [
+      "jambon"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Jambon cru",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [
+      "jambon de parme",
+      "serrano"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lard",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [
+      "poitrine fumee"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lardons",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâté",
+    "key": "pate-charcuterie",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Poulet rôti",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Rillettes",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Rosette",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [
+      "saucisson"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Saumon fumé",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Surimi",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tarama",
+    "aisleId": "charcuterie-traiteur",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Gnocchi",
+    "aisleId": "produits-cuisines",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâte à pizza",
+    "aisleId": "produits-cuisines",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâte brisée",
+    "aisleId": "produits-cuisines",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâte feuilletée",
+    "aisleId": "produits-cuisines",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâte sablée",
+    "aisleId": "produits-cuisines",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâtes fraîches",
+    "aisleId": "produits-cuisines",
+    "aliases": [
+      "pates fraiches",
+      "tagliatelles fraiches"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pinsa",
+    "aisleId": "produits-cuisines",
+    "aliases": [
+      "pinsa romana"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pizza",
+    "aisleId": "produits-cuisines",
+    "aliases": [
+      "pizza fraiche"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Raviolis",
+    "aisleId": "produits-cuisines",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Épinards surgelés",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Frites",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Fruits rouges surgelés",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Glace",
+    "aisleId": "surgeles",
+    "aliases": [
+      "creme glacee"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Légumes surgelés",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Nuggets",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâte feuilletée surgelée",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Petits pois surgelés",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pizza surgelée",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Poêlée de légumes",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Poisson pané",
+    "aisleId": "surgeles",
+    "aliases": [
+      "poissons panes"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sorbet",
+    "aisleId": "surgeles",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Amandes",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Bouillon cube",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "bouillon",
+      "cube de bouillon"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Boulgour",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cacahuètes",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Câpres",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chapelure",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chips",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chips nature",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cœurs d'artichaut",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "coeur d'artichaut",
+      "coeurs d'artichaut",
+      "artichaut en bocal"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cœurs de palmier",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "coeur de palmier"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Concentré de tomates",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "concentre de tomate"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Coriandre moulue",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "coriandre moulu",
+      "coriandre en poudre"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cornichons",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Couscous",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Crackers",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cumin",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Curcuma",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Curry",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "curry en poudre"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Farine",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "farine de ble"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Fécule de maïs",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "maizena"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Flageolets",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Fond de veau",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Fusilli",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Gingembre moulu",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Graines de courge",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Graines de sésame",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "sesame"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Haricots blancs",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "haricot blanc"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Haricots rouges",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "haricot rouge"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Herbes de Provence",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Huile d'olive",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Huile de sésame",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Huile de tournesol",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "huile"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Ketchup",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lasagnes",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "feuilles de lasagne"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Laurier",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "feuilles de laurier"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lentilles",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "lentilles vertes",
+      "lentilles corail"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Levure de boulanger",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Maïs",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "mais en boite"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Mayonnaise",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "mayo"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Moutarde",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Muscade",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "noix de muscade"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Noix",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Noix de cajou",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Olives",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "olives vertes",
+      "olives noires"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Origan",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Paprika",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Paprika fumé",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "paprika fume"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâtes",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "pate",
+      "pates"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâtes papillon",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "papillon",
+      "papillons",
+      "farfalle",
+      "rumo papillon",
+      "rummo papillon"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Penne",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pesto",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Piment d'Espelette",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "piment despelette"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Piment en poudre",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pistaches",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pois chiches",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "pois chiche"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Poivre",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "poivre noir"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Polenta",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Quatre-épices",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Quinoa",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Ras el-hanout",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Riz",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Riz à risotto",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "risotto",
+      "arborio"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Riz basmati",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sardines en boîte",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "sardines"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sauce tomate",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "coulis de tomate",
+      "passata"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sel",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "gros sel",
+      "sel fin"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Semoule",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Spaghettis",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "spaghetti"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tagliatelles",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tapenade",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Thon en boîte",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "thon",
+      "thon en conserve"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Thym séché",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tomates concassées",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "concasse de tomate",
+      "concasse de tomates",
+      "tomate concassee"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tomates en conserve",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "tomate en conserve",
+      "tomates en boite"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tomates pelées",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "tomate pelee"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Vinaigre",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "vinaigre de vin"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Vinaigre balsamique",
+    "aisleId": "epicerie-salee",
+    "aliases": [
+      "balsamique"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Vinaigrette",
+    "aisleId": "epicerie-salee",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Barres de céréales",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Biscuits",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "gateaux",
+      "biscuit"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Bonbons",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cacao",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "cacao en poudre"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cannelle",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cassonade",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "sucre roux"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Céréales",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chocolat au lait",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chocolat noir",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chocolat pâtissier",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Compote",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "compotes"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Confiture",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Crêpes",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Extrait de vanille",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "vanille"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Flocons d'avoine",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "avoine"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Fruits secs",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "raisins secs",
+      "abricots secs"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Granola",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Levure",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "levure chimique"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Madeleines",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Miel",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Muesli",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pâte à tartiner",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "nutella"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pépites de chocolat",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sirop d'érable",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sucre",
+    "aisleId": "epicerie-sucree",
+    "aliases": [
+      "sucre blanc"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sucre glace",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sucre vanillé",
+    "aisleId": "epicerie-sucree",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Bière",
+    "aisleId": "boissons",
+    "aliases": [
+      "bieres"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Café",
+    "aisleId": "boissons",
+    "aliases": [
+      "cafe moulu"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Capsules de café",
+    "aisleId": "boissons",
+    "aliases": [
+      "dosettes de cafe"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Champagne",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Cidre",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Coca-Cola",
+    "aisleId": "boissons",
+    "aliases": [
+      "coca"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Eau",
+    "aisleId": "boissons",
+    "aliases": [
+      "bouteille d'eau"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Eau pétillante",
+    "aisleId": "boissons",
+    "aliases": [
+      "eau gazeuse",
+      "perrier"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Ice tea",
+    "aisleId": "boissons",
+    "aliases": [
+      "iced tea",
+      "thé glacé",
+      "the glace",
+      "lipton ice tea"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Infusion",
+    "aisleId": "boissons",
+    "aliases": [
+      "tisane"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Jus d'orange",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Jus de pomme",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Jus multifruits",
+    "aisleId": "boissons",
+    "aliases": [
+      "jus de fruits"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Kombucha",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Limonade",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Pack d'eau",
+    "aisleId": "boissons",
+    "aliases": [
+      "packs d'eau"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Rhum",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sirop",
+    "aisleId": "boissons",
+    "aliases": [
+      "sirop de grenadine"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Soda",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Thé",
+    "aisleId": "boissons",
+    "aliases": [
+      "the vert",
+      "the noir"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tonic",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Vin blanc",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Vin rosé",
+    "aisleId": "boissons",
+    "aliases": [
+      "rose"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Vin rouge",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Vodka",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Whisky",
+    "aisleId": "boissons",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Chips fajitas",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [
+      "chips fajita",
+      "chips saveur fajitas"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Gyoza",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [
+      "gyozas",
+      "raviolis japonais"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Harissa",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Kit crousti",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [
+      "kit crousty",
+      "kit croustillant"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lait de coco",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Nori",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [
+      "feuilles de nori",
+      "algues nori"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Nouilles chinoises",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Nouilles soba",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [
+      "soba"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Nouilles udon",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [
+      "udon",
+      "udons"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sauce soja",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [
+      "sauce soja salee"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tahini",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [
+      "tahin"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tortilla chips",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [
+      "nachos",
+      "chips tortilla"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Vermicelles de riz",
+    "aisleId": "saveurs-du-monde",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Brosse à dents",
+    "aisleId": "hygiene-beaute",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Coton-tiges",
+    "aisleId": "hygiene-beaute",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Dentifrice",
+    "aisleId": "hygiene-beaute",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Déodorant",
+    "aisleId": "hygiene-beaute",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Gel douche",
+    "aisleId": "hygiene-beaute",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lingettes",
+    "aisleId": "hygiene-beaute",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Mouchoirs",
+    "aisleId": "hygiene-beaute",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Papier toilette",
+    "aisleId": "hygiene-beaute",
+    "aliases": [
+      "pq",
+      "papier wc"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Rasoirs",
+    "aisleId": "hygiene-beaute",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Savon",
+    "aisleId": "hygiene-beaute",
+    "aliases": [
+      "savon de marseille"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Shampoing",
+    "aisleId": "hygiene-beaute",
+    "aliases": [
+      "shampooing"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Adoucissant",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Allumettes",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Éponges",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [
+      "eponge"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Film étirable",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [
+      "film alimentaire",
+      "cellophane"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Javel",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [
+      "eau de javel"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Lessive",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Liquide vaisselle",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Nettoyant multi-usage",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [
+      "nettoyant"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Papier aluminium",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [
+      "aluminium",
+      "alu"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Papier cuisson",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [
+      "papier sulfurise"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Piles",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sacs poubelle",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [
+      "sac poubelle"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Serviettes en papier",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
+    "name": "Sopalin",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [
+      "essuie tout",
+      "essuie-tout"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Tablettes lave-vaisselle",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [
+      "tablettes lave vaisselle",
+      "pastille lave vaisselle",
+      "pastille lavevaisselle"
+    ],
+    "defaultUnit": null
+  },
+  {
+    "name": "Vinaigre blanc",
+    "aisleId": "entretien-nettoyage",
+    "aliases": [],
+    "defaultUnit": null
+  }
+]

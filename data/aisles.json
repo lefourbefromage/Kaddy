@@ -1,0 +1,16 @@
+[
+  { "id": "viande-poisson", "label": "Viande & poisson", "illustration": "rayon-boucherie" },
+  { "id": "fruits-legumes", "label": "Fruits & légumes", "illustration": "rayon-fruits-legumes" },
+  { "id": "pain-patisserie", "label": "Pain & pâtisserie", "illustration": "rayon-boulangerie" },
+  { "id": "laitier-oeufs-vegetal", "label": "Laitier, œufs & végétal", "illustration": "rayon-cremerie" },
+  { "id": "charcuterie-traiteur", "label": "Charcuterie & traiteur", "illustration": null },
+  { "id": "produits-cuisines", "label": "Produits cuisinés", "illustration": null },
+  { "id": "surgeles", "label": "Surgelés", "illustration": null },
+  { "id": "epicerie-salee", "label": "Épicerie salée", "illustration": "rayon-epicerie" },
+  { "id": "epicerie-sucree", "label": "Épicerie sucrée", "illustration": null },
+  { "id": "boissons", "label": "Boissons", "illustration": null },
+  { "id": "saveurs-du-monde", "label": "Saveurs du monde", "illustration": null },
+  { "id": "hygiene-beaute", "label": "Hygiène & beauté", "illustration": "rayon-hygiene" },
+  { "id": "entretien-nettoyage", "label": "Entretien & nettoyage", "illustration": null },
+  { "id": "autres", "label": "Autres", "illustration": null }
+]

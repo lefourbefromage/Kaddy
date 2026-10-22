@@ -3,10 +3,13 @@
 //   npm i -D firebase-admin
 //   GOOGLE_APPLICATION_CREDENTIALS=./service-account.json \
 //   node scripts/create-household.mjs "Famille Martin" "the-household-password"
+// PowerShell:
+//   $env:GOOGLE_APPLICATION_CREDENTIALS="./service-account.json"; node scripts/create-household.mjs "Famille Martin" "the-household-password"
 //
 // The service-account.json file is downloaded from the Firebase console
 // (Project settings > Service accounts). NEVER commit it (add it to .gitignore).
 
+import { readFile } from 'node:fs/promises';
 import { initializeApp, applicationDefault } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore, FieldValue } from 'firebase-admin/firestore';
@@ -28,7 +31,10 @@ export const slugify = (s) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-const DEFAULT_AISLES = ['fl', 'bo', 'cr', 'ep', 'bl', 'hy', 'au'];
+// Default aisle order = the order of data/aisles.json.
+const DEFAULT_AISLES = JSON.parse(
+  await readFile(new URL('../data/aisles.json', import.meta.url), 'utf8'),
+).map((a) => a.id);
 const householdId = slugify(name);
 const email = `${householdId}@foyers.kaddy.app`;
 

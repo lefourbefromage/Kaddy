@@ -38,14 +38,21 @@
   --kd-error-text: #7A2E17;
   --kd-success-text: #3F6B4C;
 
-  /* ---- Aisles (background / dot) ---- */
-  --kd-aisle-produce: #CFE6D3;   --kd-aisle-produce-dot: #5A9868;
-  --kd-aisle-butcher: #FDD3C6;   --kd-aisle-butcher-dot: #F87A56;
-  --kd-aisle-dairy: #F8EDC8;     --kd-aisle-dairy-dot: #E6CFA0;
-  --kd-aisle-grocery: #F1E2CC;   --kd-aisle-grocery-dot: #D9A86A;
-  --kd-aisle-bakery: #FBE3B8;    --kd-aisle-bakery-dot: #F2C94C;
-  --kd-aisle-household: #DCE7F7; --kd-aisle-household-dot: #8FA9D6;
-  --kd-aisle-other: #ECE5F5;     --kd-aisle-other-dot: #B9A8FF;
+  /* ---- Aisles (background / dot), one pair per id of data/aisles.json ---- */
+  --kd-aisle-viande-poisson: #FDD3C6;        --kd-aisle-viande-poisson-dot: #F87A56;
+  --kd-aisle-fruits-legumes: #CFE6D3;        --kd-aisle-fruits-legumes-dot: #5A9868;
+  --kd-aisle-pain-patisserie: #FBE3B8;       --kd-aisle-pain-patisserie-dot: #F2C94C;
+  --kd-aisle-laitier-oeufs-vegetal: #F8EDC8; --kd-aisle-laitier-oeufs-vegetal-dot: #E6CFA0;
+  --kd-aisle-charcuterie-traiteur: #F9D3DD;  --kd-aisle-charcuterie-traiteur-dot: #E06A8C;
+  --kd-aisle-produits-cuisines: #E8EBC9;     --kd-aisle-produits-cuisines-dot: #A2AC4C;
+  --kd-aisle-surgeles: #D2EFEC;              --kd-aisle-surgeles-dot: #45ABA2;
+  --kd-aisle-epicerie-salee: #F1E2CC;        --kd-aisle-epicerie-salee-dot: #D9A86A;
+  --kd-aisle-epicerie-sucree: #F3D8EE;       --kd-aisle-epicerie-sucree-dot: #C879BC;
+  --kd-aisle-boissons: #CFE9F5;              --kd-aisle-boissons-dot: #4FA3CF;
+  --kd-aisle-saveurs-du-monde: #FCDDC2;      --kd-aisle-saveurs-du-monde-dot: #EE8F3E;
+  --kd-aisle-hygiene-beaute: #E6DAF7;        --kd-aisle-hygiene-beaute-dot: #A07FD9;
+  --kd-aisle-entretien-nettoyage: #DCE7F7;   --kd-aisle-entretien-nettoyage-dot: #8FA9D6;
+  --kd-aisle-autres: #EAE5DE;                --kd-aisle-autres-dot: #A39A8E;
 
   /* ---- Typography ---- */
   --font-display: "Bricolage Grotesque", sans-serif;
