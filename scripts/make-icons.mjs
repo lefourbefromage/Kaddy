@@ -1,8 +1,9 @@
 // Generates every app icon from one square source (design/favicon-source.png).
 // Usage: node scripts/make-icons.mjs
 // The source is a yellow rounded square on a black background: it is cropped inside the
-// dark outline, then exported with transparent corners (favicons, manifest "any", logo icon)
+// dark outline, then exported with transparent corners (favicons, manifest "any")
 // or as a full yellow square (apple-touch-icon, maskable: no transparency allowed there).
+// Browser and install icons only: the logo icon in the app (illustrations/app-icon.webp) stays as is.
 
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
@@ -37,7 +38,6 @@ const png = (input, size) => sharp(input).resize(size, size, { kernel: 'lanczos3
 
 for (const size of [16, 32, 48, 192, 512]) await writeFile(OUT(`favicon-${size}.png`), await png(rounded, size));
 await writeFile(OUT('apple-touch-icon.png'), await png(full, 180));
-await writeFile(OUT('illustrations/app-icon.webp'), await sharp(rounded).resize(128, 128).webp({ quality: 90 }).toBuffer());
 
 // Maskable: the artwork inside the 80% safe zone, on a full yellow background.
 const inner = await png(full, 410);
