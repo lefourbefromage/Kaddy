@@ -61,8 +61,15 @@
     max-width: 980px;
   }
 
+  /* short pickers sit in the middle of the screen rather than at the top */
+  .dialog[open]:has(> .narrow) {
+    display: flex;
+    flex-direction: column;
+  }
+
   .narrow {
     max-width: 480px;
+    margin-block: auto;
   }
 }
 
