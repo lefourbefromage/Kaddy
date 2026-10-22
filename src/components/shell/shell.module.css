@@ -432,6 +432,11 @@
     display: none;
   }
 
+  .content {
+    padding-left: var(--kd-space-6);
+    padding-right: var(--kd-space-6);
+  }
+
   .desktopLink {
     padding: 0 14px;
     white-space: nowrap;

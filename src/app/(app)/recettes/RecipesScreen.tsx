@@ -8,8 +8,9 @@ import { useCatalog } from "@/lib/catalog";
 import { fold } from "@/lib/normalize";
 import { cookedLabel, sourceKind, useRecipes, type Recipe } from "@/lib/recipes";
 import { recipeArt } from "@/lib/recipeArt";
-import { RecipeSheet } from "./RecipeSheet";
-import { RecipeForm, type FormMode } from "./RecipeForm";
+import { cookStats, firstFreeSlot, setSlot, useWeeks, whenLabel } from "@/lib/weeks";
+import { RecipeSheet } from "@/components/recipes/RecipeSheet";
+import { RecipeForm, type FormMode } from "@/components/recipes/RecipeForm";
 import styles from "./recettes.module.css";
 
 type Tab = "all" | "todo";
@@ -27,6 +28,9 @@ export function RecipesScreen() {
   const householdId = useHouseholdId();
   const recipes = useRecipes(householdId);
   const catalog = useCatalog();
+  const weeks = useWeeks(householdId);
+  const stats = useMemo(() => cookStats(weeks), [weeks]);
+  const cooked = (r: Recipe) => stats.get(r.id)?.count ?? 0;
 
   const [tab, setTab] = useState<Tab>("all");
   const [sort, setSort] = useState<Sort>("recent");
@@ -48,10 +52,10 @@ export function RecipesScreen() {
       sort === "recent"
         ? created(b) - created(a)
         : sort === "never"
-          ? a.cookedCount - b.cookedCount || byTitle(a, b)
-          : b.cookedCount - a.cookedCount || byTitle(a, b),
+          ? (stats.get(a.id)?.count ?? 0) - (stats.get(b.id)?.count ?? 0) || byTitle(a, b)
+          : (stats.get(b.id)?.count ?? 0) - (stats.get(a.id)?.count ?? 0) || byTitle(a, b),
     );
-  }, [complete, query, sort]);
+  }, [complete, query, sort, stats]);
 
   const opened = openId ? (recipes ?? []).find((r) => r.id === openId) ?? null : null;
 
@@ -179,7 +183,7 @@ export function RecipesScreen() {
                       <span className={styles.cardBody}>
                         <span className={styles.cardTitle}>{r.title}</span>
                         <span className={styles.chips}>
-                          <span className={styles.chip}>{cookedLabel(r.cookedCount)}</span>
+                          <span className={styles.chip}>{cookedLabel(cooked(r))}</span>
                           {kind && (
                             <span className={`${styles.chip} ${styles.chipSource}`}>
                               <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true">
@@ -247,6 +251,16 @@ export function RecipesScreen() {
           householdId={householdId}
           recipe={opened}
           art={recipeArt(opened, catalog)}
+          cookedCount={cooked(opened)}
+          onPlan={
+            weeks
+              ? () => {
+                  const { weekId, ref } = firstFreeSlot(weeks);
+                  setSlot(householdId, weekId, ref, { kind: "recipe", recipeId: opened.id });
+                  return whenLabel(weekId, ref);
+                }
+              : undefined
+          }
           onClose={() => {
             // The opener may be gone (sheet opened after saving): land on the recipe's card.
             const id = openId;

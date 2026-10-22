@@ -28,6 +28,11 @@
   --kd-text-muted: #5F5A70;     /* secondary text  (5.5:1 on paper) */
   --kd-text-faint: #6B6680;     /* placeholders, ticked items (≥4.5:1) */
   --kd-stroke-dashed: #857F98;  /* empty slots, "add" fields (≥3:1) */
+  --kd-stroke-soft: #CFC6DA;    /* decorative dashes on labelled elements */
+  --kd-ink-track: #4A4370;      /* progress track on the dark tile */
+  --kd-dot-empty: #E3DCD0;      /* food-group dot not filled */
+  --kd-dot-empty-on-ink: #5A5480;
+  --kd-dot-empty-stroke: #8E88A0;
 
   /* ---- Status ---- */
   --kd-todo: #FFB54D;
@@ -54,6 +59,14 @@
   --kd-aisle-entretien-nettoyage: #DCE7F7;   --kd-aisle-entretien-nettoyage-dot: #8FA9D6;
   --kd-aisle-autres: #EAE5DE;                --kd-aisle-autres-dot: #A39A8E;
 
+  /* ---- Food groups (Menu dots and plate chart; reuse the aisle dots) ---- */
+  --kd-group-veg: var(--kd-aisle-fruits-legumes-dot);
+  --kd-group-starch: var(--kd-aisle-pain-patisserie-dot);
+  --kd-group-protein: var(--kd-aisle-viande-poisson-dot);
+  --kd-group-dairy: var(--kd-aisle-laitier-oeufs-vegetal-dot);
+  --kd-group-pulses: var(--kd-violet-cap);
+  --kd-group-fruit: #F49AC1;
+
   /* ---- Typography ---- */
   --font-display: "Bricolage Grotesque", sans-serif;
   --font-body: "Figtree", system-ui, sans-serif;
@@ -62,10 +75,13 @@
   --kd-text-display-md: 800 44px/1 var(--font-display);  /* sign-in title */
   --kd-text-display-mobile: 800 36px/1 var(--font-display);
   --kd-text-numeral: 800 56px/.9 var(--font-display);
+  --kd-text-numeral-sm: 800 44px/1 var(--font-display); /* mobile summary tiles */
+  --kd-size-numeral-fluid: clamp(40px, 3.9vw, 56px);       /* desktop bento: 56px at 1440, 40px near 1000 */
   --kd-text-headline-lg: 800 26px/1.1 var(--font-display);
   --kd-text-headline: 800 22px/1.15 var(--font-display);
   --kd-text-headline-sm: 800 20px/1.15 var(--font-display);
   --kd-text-headline-xs: 800 18px/1.15 var(--font-display); /* recipe card name */
+  --kd-text-title-lg: 700 18px/1.25 var(--font-body);
   --kd-text-title: 700 17px/1.25 var(--font-body);
   --kd-text-body: 600 15px/1.45 var(--font-body);
   --kd-text-body-lg: 600 16px/1.45 var(--font-body);

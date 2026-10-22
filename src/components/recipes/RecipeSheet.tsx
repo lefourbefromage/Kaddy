@@ -18,18 +18,24 @@ export function RecipeSheet({
   householdId,
   recipe,
   art,
+  cookedCount,
   onClose,
   onEdit,
   onDeleted,
+  onPlan,
 }: {
   householdId: string;
   recipe: Recipe;
   art: Art;
+  cookedCount: number;
   onClose: () => void;
   onEdit: () => void;
   onDeleted: () => void;
+  /** Puts the recipe in the next free slot; resolves to that slot's label ("jeudi soir"). */
+  onPlan?: () => string;
 }) {
   const [confirming, setConfirming] = useState(false);
+  const [planned, setPlanned] = useState<string | null>(null);
   const kind = sourceKind(recipe.sourceUrl);
   const n = recipe.ingredients.length;
 
@@ -54,7 +60,7 @@ export function RecipeSheet({
             {recipe.title}
           </h2>
           <div className={styles.headChips}>
-            <span className={styles.whiteChip}>{cookedLabel(recipe.cookedCount)}</span>
+            <span className={styles.whiteChip}>{cookedLabel(cookedCount)}</span>
             {kind && recipe.sourceUrl && (
               <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer" className={`${styles.sourceLink} kd-hit`}>
                 <span className={styles.sourcePlay} aria-hidden="true">
@@ -138,6 +144,22 @@ export function RecipeSheet({
           <button type="button" className={styles.ghostDanger} onClick={() => setConfirming(true)}>
             Supprimer
           </button>
+        )}
+        {onPlan && (
+          <span className={styles.planSlot}>
+            <span role="status" className={styles.planned}>
+              {planned && <>Ajoutée au menu : {planned}</>}
+            </span>
+            <button type="button" className={styles.primary} onClick={() => setPlanned(onPlan())}>
+              Mettre au menu
+              <span className={styles.primaryIcon} aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24">
+                  <rect x="3.5" y="5" width="17" height="15" rx="3" />
+                  <path d="M3.5 10h17M8 3v4M16 3v4" />
+                </svg>
+              </span>
+            </button>
+          </span>
         )}
       </div>
     </Modal>

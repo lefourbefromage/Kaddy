@@ -1,0 +1,741 @@
+/* Menu: design/menu-desktop.html (7 day columns) + menu-mobile.html (day strip + one day). */
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Week navigation ---------- */
+.weekNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: var(--kd-surface);
+  border-radius: var(--kd-radius-pill);
+}
+
+.weekArrow {
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-track);
+  color: var(--kd-ink);
+  cursor: pointer;
+}
+
+.weekArrow svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.weekArrow:hover {
+  background: var(--kd-lavender-soft);
+}
+
+.weekLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 112px;
+  padding: 0 var(--kd-space-2);
+}
+
+.weekRange {
+  font: var(--kd-text-body-medium);
+  font-family: var(--font-display);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.weekRelative {
+  font: var(--kd-text-caption);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+}
+
+.backToday {
+  height: var(--kd-target);
+  padding: 0 var(--kd-space-3);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: transparent;
+  color: var(--kd-ink);
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ---------- Mobile day strip ---------- */
+.dayTabs {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--kd-space-1);
+}
+
+.dayTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--kd-space-1);
+  height: 74px;
+  border: 0;
+  border-radius: var(--kd-radius-md);
+  background: var(--kd-surface);
+  color: var(--kd-ink);
+  cursor: pointer;
+}
+
+.dayTabToday {
+  box-shadow: inset 0 0 0 2px var(--kd-violet);
+}
+
+.dayTab[aria-selected="true"] {
+  background: var(--kd-ink);
+  color: var(--kd-surface);
+  box-shadow: none;
+}
+
+.dayTabShort {
+  font: var(--kd-text-caption);
+}
+
+.dayTabNum {
+  font: var(--kd-text-headline-sm);
+  line-height: 1;
+}
+
+.dayTabDots {
+  display: flex;
+  gap: 2px;
+}
+
+.dayTabDots span {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--kd-radius-pill);
+}
+
+.dayTabDots .dayTabDotEmpty {
+  background: var(--kd-dot-empty);
+}
+
+.dayTab[aria-selected="true"] .dayTabDotEmpty {
+  background: var(--kd-dot-empty-on-ink);
+}
+
+/* ---------- Week grid / day ---------- */
+.week {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.grid {
+  display: grid;
+  gap: var(--kd-space-3);
+}
+
+.day {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  animation: fade 200ms ease-out both;
+}
+
+.daySelected {
+  display: flex;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dayHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-2);
+  padding: 0 var(--kd-space-1);
+}
+
+.dayTitle {
+  display: none;
+}
+
+.dayHeading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--kd-space-2);
+  font: var(--kd-text-headline);
+}
+
+.todayBadge {
+  padding: var(--kd-space-1) 10px;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-violet);
+  color: var(--kd-surface);
+  font: var(--kd-text-caption);
+  font-weight: 800;
+}
+
+.dots {
+  display: flex;
+  gap: var(--kd-space-1);
+}
+
+.dot,
+.dotEmpty {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: var(--kd-radius-pill);
+}
+
+.dotEmpty {
+  border: 1.5px dashed var(--kd-dot-empty-stroke);
+}
+
+/* Mobile shows the strip instead of the per-day dots. */
+.day .dots {
+  display: none;
+}
+
+/* ---------- Slots ---------- */
+.slot {
+  position: relative;
+  width: 100%;
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-2);
+  padding: 14px 14px 14px 18px;
+  border: 0;
+  border-radius: var(--kd-radius-lg);
+  color: var(--kd-ink);
+  text-align: left;
+  font: inherit;
+}
+
+.slotEmpty {
+  border: 2px dashed var(--kd-stroke-dashed);
+  background: transparent;
+  cursor: pointer;
+}
+
+.slotEmpty:hover {
+  background: var(--kd-surface-subtle);
+}
+
+.slotPlaceholder {
+  font: var(--kd-text-title);
+  font-weight: 600;
+  color: var(--kd-text-faint);
+}
+
+.slotEditing {
+  border: 2px solid var(--kd-violet);
+  background: var(--kd-surface);
+  cursor: text;
+}
+
+.editingLabel {
+  color: var(--kd-violet);
+}
+
+.slotInput {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: var(--kd-text-title);
+  font-weight: 600;
+  color: var(--kd-ink);
+  caret-color: var(--kd-violet);
+  outline: none;
+}
+
+.flexFill {
+  flex: 1;
+}
+
+.resteButton {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 30px;
+  padding: 0 11px 0 9px;
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-field);
+  color: var(--kd-ink);
+  font: var(--kd-text-body-small);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.resteButton:hover {
+  background: var(--kd-track);
+}
+
+.refresh {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Suggestions under the slot input */
+.suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: -2px;
+  z-index: 6;
+  width: calc(100% + 4px);
+  min-width: 220px;
+  max-width: 320px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--kd-surface);
+  border-radius: var(--kd-radius-md);
+  box-shadow: var(--kd-shadow-float);
+}
+
+.suggestion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  min-height: var(--kd-target);
+  padding: 6px 10px;
+  border-radius: var(--kd-radius-sm);
+  cursor: pointer;
+}
+
+.suggestion[aria-selected="true"] {
+  background: var(--kd-lavender-soft);
+}
+
+.suggestionLabel {
+  font: var(--kd-text-body);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.suggestionHint {
+  font: var(--kd-text-body-small);
+  color: var(--kd-text-muted);
+}
+
+/* "Reste de…" */
+.leftoverPicker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-1);
+}
+
+.leftoverTitle {
+  font: var(--kd-text-body-small);
+  font-weight: 700;
+  color: var(--kd-text-muted);
+}
+
+.leftoverOption {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: var(--kd-target);
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--kd-radius-sm);
+  background: var(--kd-lavender-mist);
+  color: var(--kd-ink);
+  text-align: left;
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.leftoverOption:hover {
+  background: var(--kd-lavender-soft);
+}
+
+.leftoverWhen {
+  font: var(--kd-text-body-small);
+  color: var(--kd-text-muted);
+}
+
+.leftoverNone {
+  font: var(--kd-text-body-small);
+  color: var(--kd-text-muted);
+}
+
+/* Filled */
+.slotFilled {
+  background: var(--kd-surface);
+}
+
+.slotTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kd-space-1);
+}
+
+.restePill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kd-space-1);
+  height: 22px;
+  padding: 0 var(--kd-space-2);
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-lavender-soft);
+  color: var(--kd-violet-deep);
+  font: var(--kd-text-caption);
+}
+
+.dishRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.dish {
+  flex: 1;
+  min-width: 0;
+  font: var(--kd-text-title-lg);
+  overflow-wrap: anywhere;
+}
+
+.slotSub {
+  font: var(--kd-text-body-small);
+  color: var(--kd-text-muted);
+}
+
+.slotActions {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-1);
+}
+
+.eye {
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-field);
+  cursor: pointer;
+}
+
+.eye svg {
+  fill: none;
+  stroke: var(--kd-ink);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.menuWrap {
+  position: relative;
+  margin-left: auto;
+}
+
+.more {
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: transparent;
+  cursor: pointer;
+}
+
+.more svg {
+  fill: var(--kd-ink);
+}
+
+.more:hover {
+  background: var(--kd-track);
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  z-index: 6;
+  min-width: 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background: var(--kd-surface);
+  border-radius: var(--kd-radius-md);
+  box-shadow: var(--kd-shadow-float);
+  animation: fade 150ms ease-out both;
+}
+
+.menuItem {
+  min-height: var(--kd-target);
+  padding: 0 var(--kd-space-3);
+  border: 0;
+  border-radius: var(--kd-radius-sm);
+  background: transparent;
+  color: var(--kd-ink);
+  text-align: left;
+  font: var(--kd-text-body);
+  cursor: pointer;
+}
+
+.menuItem:hover {
+  background: var(--kd-field);
+}
+
+/* ---------- Legend ---------- */
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--kd-space-1);
+  display: none;
+  flex-wrap: wrap;
+  gap: var(--kd-space-2) var(--kd-space-5);
+  font: var(--kd-text-body-small);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 900px) {
+  .weekRange {
+    font: var(--kd-text-title);
+    font-family: var(--font-display);
+    font-weight: 800;
+  }
+
+  .dayTabs {
+    display: none;
+  }
+
+  /* Always the 7 days side by side; type and spacing tighten on medium screens below. */
+  .grid {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .day {
+    display: flex;
+    gap: var(--kd-space-2);
+    padding: 10px;
+    border-radius: var(--kd-radius-lg);
+    background: var(--kd-surface);
+    animation: none;
+  }
+
+  .dayToday {
+    box-shadow: var(--kd-ring-today);
+  }
+
+  .dayHead {
+    padding: 6px 6px 2px;
+  }
+
+  .dayTitle {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .dayName {
+    font: var(--kd-text-body-medium);
+    font-weight: 700;
+  }
+
+  .dayNum {
+    font: var(--kd-text-headline-lg);
+    line-height: 1;
+  }
+
+  .dayToday .dayName,
+  .dayToday .dayNum {
+    color: var(--kd-violet);
+  }
+
+  .dayHeading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .day .dots {
+    display: flex;
+  }
+
+  .slot {
+    min-height: 120px;
+    gap: 6px;
+    padding: var(--kd-space-3);
+    border-radius: var(--kd-radius-md);
+  }
+
+  .slotPlaceholder,
+  .slotInput {
+    font: var(--kd-text-body-lg);
+  }
+
+  .slotInput {
+    height: 26px;
+    font-weight: 600;
+  }
+
+  .slotFilled {
+    background: var(--kd-field);
+  }
+
+  .dish {
+    font: var(--kd-text-body);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .slotPlaceholder,
+  .slotInput {
+    font: var(--kd-text-body);
+  }
+
+  .eye {
+    width: 36px;
+    height: 36px;
+    background: var(--kd-surface);
+  }
+
+  .more {
+    width: 32px;
+    height: 32px;
+  }
+
+  .legend {
+    display: flex;
+  }
+}
+
+/* Medium desktop (900–1279px): columns are ~120px wide, so everything gets smaller. */
+@media (min-width: 900px) and (max-width: 1279px) {
+  .grid {
+    gap: var(--kd-space-2);
+  }
+
+  .day {
+    padding: var(--kd-space-2) 6px;
+    gap: 6px;
+  }
+
+  .dayHead {
+    gap: 6px;
+    padding: var(--kd-space-1) var(--kd-space-1) 0;
+  }
+
+  .dayName {
+    font: var(--kd-text-body-small);
+    font-weight: 700;
+  }
+
+  .dayNum {
+    font: var(--kd-text-headline-sm);
+    line-height: 1;
+  }
+
+  .dots {
+    gap: 3px;
+  }
+
+  .dot,
+  .dotEmpty {
+    width: 9px;
+    height: 9px;
+  }
+
+  .slot {
+    min-height: 96px;
+    padding: 10px;
+    gap: var(--kd-space-1);
+  }
+
+  .dish,
+  .slotPlaceholder,
+  .slotInput {
+    font: var(--kd-text-body-small);
+    font-weight: 700;
+  }
+
+  .slotPlaceholder,
+  .slotInput {
+    font-weight: 600;
+  }
+
+  .slotSub {
+    font: var(--kd-text-caption);
+    font-weight: 600;
+  }
+
+  .restePill {
+    height: 20px;
+    padding: 0 6px;
+  }
+
+  .eye {
+    width: 30px;
+    height: 30px;
+  }
+
+  .eye svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .more {
+    width: 28px;
+    height: 28px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .day,
+  .menu {
+    animation: none;
+  }
+}

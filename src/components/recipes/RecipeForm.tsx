@@ -118,7 +118,9 @@ export function RecipeForm({
         await updateRecipe(householdId, recipe.id, input);
         onSaved(recipe.id);
       } else {
-        onSaved(await createRecipe(householdId, input));
+        const { id, saved } = createRecipe(householdId, input);
+        await saved;
+        onSaved(id);
       }
     } catch {
       setBusy(false);

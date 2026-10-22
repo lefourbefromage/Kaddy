@@ -16,7 +16,7 @@ Kaddy is a household web app (installable PWA). You plan the week's lunches and 
 - Fonts: `next/font/google` → Bricolage Grotesque (variable, axes `wdth` + `wght`) and Figtree, exposed as `--font-display` and `--font-body`.
 
 ## Non-negotiable rules
-- **Interface in French, addressing the user as "tu".** Product vocabulary: créneau, midi/soir, Reste, Hors menu, Ingrédients à classer, Mon Kaddy, foyer.
+- **Interface in French, addressing the user as "tu".** Product vocabulary: repas (never "créneau" in the interface), midi/soir, Reste, Hors menu, Ingrédients à classer, Mon Kaddy, foyer.
 - **No hard-coded colour, radius or font size**: always `var(--kd-…)` from `tokens.css`. If a value is missing, add it to `tokens.css` AND `DESIGN.md`.
 - **Targets of 44 × 44 px minimum** (`.kd-hit` class when the visual is smaller).
 - **Visible focus** on everything that is interactive (`:focus-visible`, already in `tokens.css`).

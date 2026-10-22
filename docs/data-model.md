@@ -42,8 +42,8 @@ households/{hid}/recipes/{recipeId}
                                // (a recipe added from the Menu starts as "todo")
                                // no image field: the card picture comes from the aisle of the
                                // first ingredient found in the catalogue (src/lib/recipeArt.ts)
-  cookedCount: number
-  lastCookedOn: string | null  // "2026-10-21"
+  // "Cuisinée N fois" and the last time are NOT stored: derived from the weeks
+  // (recipe slots up to today, leftovers excluded; cookStats in src/lib/weeks.ts)
   dismissedDuplicates: string[] // ids of recipes declared "not a duplicate"
   createdAt, updatedAt
 
@@ -52,9 +52,13 @@ households/{hid}/ingredients/{key}           // household's own aisle choice (wi
   aisleId: AisleId | null   // null = "Ingrédients à classer"
 
 households/{hid}/weeks/{weekId}              // weekId = ISO "2026-W43"
-  slots: {
-    "mon.lunch": { kind: "recipe", recipeId } |
-                 { kind: "leftover", recipeId, of: "sun.dinner" },
+  slots: {                                    // nested by day then meal: slots.mon.lunch
+    mon: {
+      lunch: { kind: "recipe", recipeId } |
+             { kind: "leftover", recipeId, of: "sun.dinner" } |   // a dish earlier in the same week
+             { kind: "simple", name: "Picnic plage" },            // a meal with no recipe
+      dinner: …
+    },
     ...                                       // absent key = empty slot
   }
   listOverrides: { "<recipeId>:<key>": { qty?: number, unit?: string, removed?: true } }

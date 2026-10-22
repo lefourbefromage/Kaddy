@@ -43,7 +43,7 @@ The catalogue only contains the household's own recipes. The list follows the me
    - A slot holds a recipe or a "Reste" (leftovers).
    - A recipe can be viewed in large format or edited from the slot.
 2. **Prepare (Liste de courses).** Check each planned recipe's ingredients and quantities, grouped by week, then add off-menu items.
-   - A recipe with no ingredients is flagged "à compléter" (to complete).
+   - A recipe with no ingredients is flagged "à compléter" (to complete) in Recettes and Liste de courses only. The Menu never shows that status: a dish typed there can simply be "Indien" (a restaurant night).
 3. **Shop (Mon Kaddy).** In the shop, on a phone, tick items aisle by aisle.
    - Aisles (14, default order, see `data/aisles.json`): Viande & poisson, Fruits & légumes, Pain & pâtisserie, Laitier, œufs & végétal, Charcuterie & traiteur, Produits cuisinés (pizza, gnocchi, fresh pasta, doughs), Surgelés, Épicerie salée, Épicerie sucrée, Boissons, Saveurs du monde, Hygiène & beauté, Entretien & nettoyage, Autres.
 4. **Manage the catalogue (Recettes).** Each recipe has a title, a description, ingredients with quantity and unit, steps, and an optional link to a video or website.
@@ -54,7 +54,7 @@ The catalogue only contains the household's own recipes. The list follows the me
 - **Pages, in navigation order:** Menu, Liste de courses, Recettes, Mon Kaddy.
 - **Interface language:** French, addressing the user as "tu".
 - **Product vocabulary:**
-  - "créneau" (slot): midi (lunch) / soir (dinner);
+  - "repas" (a meal of the week; the code calls it a slot, the interface never says "créneau"): midi (lunch) / soir (dinner);
   - "Reste" (leftovers);
   - "Hors menu" (off-menu);
   - "Ingrédients à classer" (ingredients with no aisle yet);

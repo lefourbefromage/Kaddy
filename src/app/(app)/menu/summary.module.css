@@ -1,0 +1,610 @@
+/* "Bilan de la semaine" + "Pas cuisinées depuis longtemps" (design/menu-*.html) */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-1);
+  padding: 0 var(--kd-space-1);
+}
+
+.title {
+  font: var(--kd-text-headline-lg);
+  font-variation-settings: "wdth" var(--kd-wdth-display);
+}
+
+.headline {
+  font: var(--kd-text-body);
+  color: var(--kd-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 14px var(--kd-space-4);
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-surface);
+}
+
+/* ---- Chart ---- */
+.chartTile {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-2);
+  padding: var(--kd-space-4);
+}
+
+.chartTitle {
+  font: var(--kd-text-headline-xs);
+}
+
+.chartBody {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--kd-space-2);
+}
+
+.chartArea {
+  position: relative;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  min-height: 210px;
+}
+
+.donut {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.donutSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.track {
+  fill: none;
+  stroke: var(--kd-track);
+  stroke-width: 34;
+}
+
+.arc {
+  fill: none;
+  outline: none;
+  cursor: pointer;
+  transition:
+    stroke-width 200ms ease,
+    opacity 200ms ease;
+}
+
+.donutCenter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+
+.donutNumber {
+  font: var(--kd-text-numeral-sm);
+  animation: num-in 250ms ease-out both;
+}
+
+.donutLabel {
+  max-width: 110px;
+  font: var(--kd-text-body-small);
+  font-weight: 700;
+  color: var(--kd-text-muted);
+}
+
+@keyframes num-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+.pop {
+  position: absolute;
+  width: auto;
+  pointer-events: none;
+  animation: pop 350ms cubic-bezier(.34, 1.56, .64, 1) both;
+}
+
+.popVeg {
+  right: 0;
+  top: var(--kd-space-2);
+  height: 96px;
+}
+
+.popStarch {
+  left: 0;
+  bottom: 0;
+  height: 92px;
+}
+
+.popProtein {
+  left: 0;
+  top: var(--kd-space-1);
+  height: 78px;
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: translateY(10px) scale(.7) rotate(-6deg); }
+  to { opacity: 1; transform: none; }
+}
+
+.arc:focus-visible {
+  stroke-width: 40px !important;
+}
+
+.chartHint {
+  font: var(--kd-text-caption);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+  text-align: center;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---- Stat tiles ---- */
+.stat {
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--kd-space-2);
+}
+
+.statLabel {
+  position: relative;
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+}
+
+/* kd-numeral gives family, tracking and width; mobile uses the smaller size of the mockup. */
+.statNumber {
+  position: relative;
+  font: var(--kd-text-numeral-sm);
+}
+
+.statArt {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: auto;
+  height: 80px;
+}
+
+.flip {
+  transform: scaleX(-1);
+}
+
+.dashed {
+  border: 2px dashed var(--kd-stroke-soft);
+  background: transparent;
+}
+
+.muted {
+  color: var(--kd-text-muted);
+}
+
+.statRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--kd-space-2);
+}
+
+.statLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--kd-target);
+  color: var(--kd-ink);
+  font: var(--kd-text-body-small);
+  font-weight: 700;
+}
+
+.lavender {
+  background: var(--kd-lavender);
+}
+
+.sun {
+  background: var(--kd-sun);
+}
+
+.filledTile {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--kd-space-4) 130px var(--kd-space-4) 18px;
+  background: var(--kd-ink);
+  color: var(--kd-surface);
+}
+
+.filledArt {
+  position: absolute;
+  right: var(--kd-space-2);
+  bottom: 6px;
+  width: auto;
+  height: 100px;
+}
+
+.filledRow {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: var(--kd-space-2);
+  font: var(--kd-text-body-medium);
+}
+
+.outOf {
+  color: var(--kd-sun);
+}
+
+.progress {
+  position: relative;
+  height: 12px;
+  overflow: hidden;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-ink-track);
+}
+
+.progressBar {
+  height: 100%;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-sun);
+  transition: width var(--kd-dur-state) var(--kd-ease-out);
+}
+
+/* ---- Forgotten recipes ---- */
+.forgotten {
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-8);
+  padding: 18px 0 18px 18px;
+  overflow: hidden;
+  border-radius: var(--kd-radius-xl);
+  background: var(--kd-surface);
+}
+
+.forgottenMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-3);
+}
+
+.forgottenHead {
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-3);
+  padding-right: 18px;
+}
+
+.forgottenHead .head {
+  flex: 1;
+  padding: 0;
+}
+
+.forgottenTitle {
+  font: var(--kd-text-headline-sm);
+}
+
+.forgottenSub {
+  font: var(--kd-text-body-small);
+  color: var(--kd-text-muted);
+}
+
+.forgottenArtMobile {
+  flex: none;
+  width: auto;
+  height: 76px;
+}
+
+.forgottenArt {
+  display: none;
+}
+
+.forgottenList {
+  list-style: none;
+  margin: 0;
+  padding: 0 18px 0 0;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.forgottenList::-webkit-scrollbar {
+  display: none;
+}
+
+.forgottenItem {
+  flex: none;
+  width: 210px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--kd-space-3) 10px var(--kd-space-3) 14px;
+  border-radius: var(--kd-radius-md);
+  background: var(--kd-field);
+}
+
+.forgottenText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.forgottenName {
+  font: var(--kd-text-body);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.forgottenWhen {
+  font: var(--kd-text-caption);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+}
+
+.replan {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-ink);
+  cursor: pointer;
+}
+
+.replan svg {
+  fill: none;
+  stroke: var(--kd-sun);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+}
+
+.replan:hover {
+  background: var(--kd-ink-hover);
+}
+
+.forgottenStatus {
+  padding-right: 18px;
+  color: var(--kd-success-text);
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+}
+
+.forgottenStatus:empty {
+  display: none;
+}
+
+/* ---- Desktop: the mockup's bento at every width ----
+   chart (2 columns × 2 rows) | 3 stats
+                              | Restes | Semaine remplie (2 columns)
+   Row height, numerals, chart and pictures follow the viewport width. */
+@media (min-width: 900px) {
+  .section {
+    gap: var(--kd-space-4);
+    margin-top: var(--kd-space-3);
+  }
+
+  .title {
+    font: var(--kd-text-display-mobile);
+    letter-spacing: -0.01em;
+  }
+
+  .headline {
+    font: var(--kd-text-body-lg);
+  }
+
+  .grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-auto-rows: clamp(132px, 12.5vw, 184px);
+    gap: var(--kd-space-3);
+  }
+
+  .tile {
+    padding: clamp(14px, 1.4vw, 20px);
+    border-radius: var(--kd-radius-xl);
+  }
+
+  .chartTile {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: clamp(16px, 1.7vw, 24px);
+  }
+
+  .chartTitle {
+    font: var(--kd-text-headline-sm);
+  }
+
+  .chartHint {
+    display: none;
+  }
+
+  .chartArea {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .donut {
+    width: clamp(150px, 16vw, 230px);
+    height: clamp(150px, 16vw, 230px);
+  }
+
+  .popVeg,
+  .popStarch,
+  .popProtein {
+    height: clamp(72px, 9vw, 132px);
+  }
+
+  .popVeg {
+    top: var(--kd-space-4);
+    right: var(--kd-space-2);
+  }
+
+  .popStarch {
+    left: var(--kd-space-2);
+  }
+
+  .stat {
+    min-height: 0;
+  }
+
+  .statLabel {
+    font: var(--kd-text-body-medium);
+    font-weight: 700;
+  }
+
+  .statNumber,
+  .donutNumber {
+    font: var(--kd-text-numeral);
+    font-size: var(--kd-size-numeral-fluid);
+  }
+
+  .statArt {
+    right: clamp(8px, 1vw, 12px);
+    bottom: clamp(8px, 0.8vw, 10px);
+    height: clamp(56px, 7.5vw, 108px);
+  }
+
+  .filledTile {
+    grid-column: span 2;
+    justify-content: space-between;
+    gap: var(--kd-space-3);
+    padding: clamp(14px, 1.4vw, 20px) clamp(120px, 14.5vw, 210px) clamp(14px, 1.4vw, 20px) clamp(16px, 1.7vw, 24px);
+  }
+
+  .filledArt {
+    right: clamp(10px, 1vw, 15px);
+    bottom: clamp(12px, 1.2vw, 18px);
+    height: clamp(68px, 8vw, 115px);
+  }
+
+  .filledRow {
+    font: var(--kd-text-body);
+  }
+
+  .progress {
+    height: 14px;
+  }
+
+  .forgotten {
+    flex-wrap: wrap;
+    gap: var(--kd-space-8) var(--kd-space-12);
+    padding: 40px var(--kd-space-12);
+  }
+
+  .forgottenMain {
+    flex: 999 1 560px;
+    gap: var(--kd-space-5);
+  }
+
+  .forgottenHead {
+    padding: 0;
+  }
+
+  .forgottenTitle {
+    font: var(--kd-text-headline-lg);
+    letter-spacing: -0.01em;
+  }
+
+  .forgottenSub {
+    font: var(--kd-text-body);
+  }
+
+  .forgottenArtMobile {
+    display: none;
+  }
+
+  .forgottenArt {
+    display: block;
+    flex: 1 1 300px;
+    max-width: 360px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .forgottenList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+    gap: var(--kd-space-3);
+    padding: 0;
+    overflow: visible;
+  }
+
+  .forgottenItem {
+    width: auto;
+    padding: 14px 14px 14px var(--kd-space-5);
+    border-radius: var(--kd-radius-lg);
+  }
+
+  .forgottenName {
+    font: var(--kd-text-body-lg);
+    font-weight: 700;
+  }
+
+  .forgottenWhen {
+    font: var(--kd-text-body-small);
+  }
+
+  .forgottenStatus {
+    padding: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .statLabel {
+    font: var(--kd-text-body);
+    font-weight: 700;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc,
+  .progressBar {
+    transition: none;
+  }
+
+  .pop,
+  .donutNumber {
+    animation: none;
+  }
+}

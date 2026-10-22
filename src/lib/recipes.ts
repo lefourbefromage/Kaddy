@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import {
-  addDoc,
   collection,
   deleteDoc,
   doc,
   onSnapshot,
   serverTimestamp,
+  setDoc,
   updateDoc,
   type Timestamp,
 } from "firebase/firestore";
@@ -28,8 +28,6 @@ export type Recipe = {
   ingredients: Ingredient[];
   steps: string[];
   status: "complete" | "todo";
-  cookedCount: number;
-  lastCookedOn: string | null;
   dismissedDuplicates: string[];
   createdAt: Timestamp | null;
   updatedAt: Timestamp | null;
@@ -80,15 +78,15 @@ function toFields(input: RecipeInput) {
   };
 }
 
-export async function createRecipe(householdId: string, input: RecipeInput) {
-  const ref = await addDoc(recipesOf(householdId), {
-    ...toFields(input),
-    description: "",
-    cookedCount: 0,
-    lastCookedOn: null,
-    createdAt: serverTimestamp(),
-  });
-  return ref.id;
+/**
+ * Creates a recipe. The id is known at once, so a caller can use it without waiting for the
+ * server (the Menu fills a slot with it straight away); `saved` resolves once it is stored.
+ * "Cuisinée N fois" is not stored: it is derived from the weeks (cookStats in weeks.ts).
+ */
+export function createRecipe(householdId: string, input: RecipeInput) {
+  const ref = doc(recipesOf(householdId));
+  const saved = setDoc(ref, { ...toFields(input), description: "", createdAt: serverTimestamp() });
+  return { id: ref.id, saved };
 }
 
 export const updateRecipe = (householdId: string, id: string, input: RecipeInput) =>
