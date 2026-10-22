@@ -63,6 +63,20 @@ colors:
   aisle-autres: "#EAE5DE"
   aisle-autres-dot: "#A39A8E"
 typography:
+  hero:
+    fontFamily: "'Bricolage Grotesque', sans-serif"
+    fontSize: "64px"
+    fontWeight: 800
+    lineHeight: 0.98
+    letterSpacing: "-0.025em"
+    fontVariation: "'wdth' 85"
+  display-md:
+    fontFamily: "'Bricolage Grotesque', sans-serif"
+    fontSize: "44px"
+    fontWeight: 800
+    lineHeight: 1
+    letterSpacing: "-0.02em"
+    fontVariation: "'wdth' 85"
   display:
     fontFamily: "'Bricolage Grotesque', sans-serif"
     fontSize: "52px"
@@ -305,6 +319,8 @@ The same pastels are reused for recipe-card backgrounds and the summary tiles. T
 **Character:** a rounded, slightly condensed grotesque that recalls the bubble lettering of the logo, paired with a friendly, very legible humanist sans for the interface.
 
 ### Hierarchy
+- **Hero** (800, 64px, line-height .98): the sign-in tagline "On mange quoi ce soir ?" on the yellow panel.
+- **Display medium** (800, 44px): the sign-in title, which sits in a narrower card.
 - **Display** (800, 52px desktop / 36–40px mobile, line-height 1, tracking −0.02em): page title, always next to its illustration.
 - **Numeral** (800, 56–64px, `wdth` 80, line-height .9): the big numbers of the summary and of Mon Kaddy.
 - **Headline** (800, 20–26px): section titles ("Pas cuisinées depuis longtemps", week headers, recipe sheets).

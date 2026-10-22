@@ -57,13 +57,17 @@
   /* ---- Typography ---- */
   --font-display: "Bricolage Grotesque", sans-serif;
   --font-body: "Figtree", system-ui, sans-serif;
+  --kd-text-hero: 800 64px/.98 var(--font-display);     /* sign-in tagline */
   --kd-text-display: 800 52px/1 var(--font-display);
+  --kd-text-display-md: 800 44px/1 var(--font-display);  /* sign-in title */
   --kd-text-display-mobile: 800 36px/1 var(--font-display);
   --kd-text-numeral: 800 56px/.9 var(--font-display);
+  --kd-text-headline-lg: 800 26px/1.1 var(--font-display);
   --kd-text-headline: 800 22px/1.15 var(--font-display);
   --kd-text-title: 700 17px/1.25 var(--font-body);
   --kd-text-body: 600 15px/1.45 var(--font-body);
   --kd-text-body-lg: 600 16px/1.45 var(--font-body);
+  --kd-text-body-medium: 600 14px/1.4 var(--font-body);
   --kd-text-body-small: 600 13px/1.35 var(--font-body);
   --kd-text-label: 800 11px/1.2 var(--font-body);
   --kd-tracking-display: -0.02em;

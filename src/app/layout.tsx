@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "@/styles/tokens.css";
 import "./globals.css";
 import { bricolage, figtree } from "./fonts";
+import { HouseholdProvider } from "@/components/HouseholdProvider";
 
 const description = "On mange quoi ce soir ?";
 
@@ -50,7 +51,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr" className={`${bricolage.variable} ${figtree.variable}`}>
-      <body>{children}</body>
+      <body>
+        <HouseholdProvider>{children}</HouseholdProvider>
+      </body>
     </html>
   );
 }
