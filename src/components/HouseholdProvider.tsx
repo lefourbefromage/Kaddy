@@ -50,12 +50,17 @@ export function HouseholdProvider({ children }: { children: ReactNode }) {
   // The household document (name, aisle order), kept in sync.
   useEffect(() => {
     if (!householdId) return;
-    return onSnapshot(doc(db, "households", householdId), (snap) => {
-      const household = snap.exists() ? (snap.data() as Household) : null;
-      setState((s) =>
-        s.status === "signedIn" && s.householdId === householdId ? { ...s, household } : s,
-      );
-    });
+    return onSnapshot(
+      doc(db, "households", householdId),
+      (snap) => {
+        const household = snap.exists() ? (snap.data() as Household) : null;
+        setState((s) =>
+          s.status === "signedIn" && s.householdId === householdId ? { ...s, household } : s,
+        );
+      },
+      // Signing out revokes access before this listener is torn down: nothing to report.
+      () => {},
+    );
   }, [householdId]);
 
   return <HouseholdContext.Provider value={state}>{children}</HouseholdContext.Provider>;

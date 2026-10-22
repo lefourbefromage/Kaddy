@@ -381,7 +381,7 @@ Everything is rounded, nothing is sharp. Pills (999px) for buttons, chips, tabs 
 - **Error:** #E0603F border plus a pink message (#FDD3C6 / #7A2E17) with an icon.
 
 ### Navigation
-- **Desktop:** a white pill bar at the top (logo, 4 links, household). The active link has a lavender background.
+- **Desktop:** a white pill bar at the top (logo, 4 links in a field-coloured pill, household menu). The active link is an ink pill with white text, as in every desktop mockup.
 - **Mobile:** a floating navy pill bar at the bottom, with 4 icon + label tabs. The active tab is lavender with ink text. A yellow badge counts the Mon Kaddy items.
 
 ### Menu slot (signature component)
