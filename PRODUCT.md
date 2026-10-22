@@ -89,6 +89,8 @@ The catalogue only contains the household's own recipes. The list follows the me
 - **Sorting in Mon Kaddy:**
   - The order of the aisles can be customised in a setting.
   - Inside each aisle, items are always sorted alphabetically. There is no manual sorting of items.
+  - Mon Kaddy shows the current week. A recipe planned twice in the week counts once, as in the Liste de courses; leftovers add nothing.
+  - "Tout décocher" can be undone for a few seconds ("Rétablir"), so a mis-tap in the shop does not lose every tick.
 - **Planning horizon:** future weeks appear in the list as soon as recipes are planned for them.
 - **Open questions:**
   - whether to share the catalogue later (creator-only editing).

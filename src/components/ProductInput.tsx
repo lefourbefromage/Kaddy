@@ -22,6 +22,7 @@ export function ProductInput({
   onPick,
   dashed = true,
   forRecipe = false,
+  bare = false,
 }: {
   label: string;
   placeholder: string;
@@ -31,6 +32,8 @@ export function ProductInput({
   dashed?: boolean;
   /** Suggest food first (recipe ingredients). */
   forRecipe?: boolean;
+  /** No frame of its own: the field sits in a card (Mon Kaddy). */
+  bare?: boolean;
 }) {
   const uid = useId();
   const [query, setQuery] = useState("");
@@ -76,7 +79,7 @@ export function ProductInput({
 
   return (
     <div className={styles.wrap}>
-      <div className={`${styles.field} ${dashed ? styles.dashed : styles.solid}`}>
+      <div className={`${styles.field} ${bare ? styles.bare : dashed ? styles.dashed : styles.solid}`}>
         <label htmlFor={`${uid}-input`} className={styles.srOnly}>
           {label}
         </label>

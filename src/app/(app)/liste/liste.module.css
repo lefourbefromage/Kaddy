@@ -11,6 +11,7 @@
 
 /* ---------- Week ---------- */
 .week {
+  --columns-gap: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -54,12 +55,6 @@
 .empty a {
   color: var(--kd-ink);
   font-weight: 700;
-}
-
-.cards {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 
 /* ---------- Card ---------- */
@@ -363,6 +358,7 @@
 /* ---------- Desktop ---------- */
 @media (min-width: 900px) {
   .week {
+    --columns-gap: var(--kd-space-4);
     gap: var(--kd-space-4);
   }
 
@@ -375,20 +371,6 @@
   .weekSummary {
     font: var(--kd-text-body-medium);
     font-weight: 600;
-  }
-
-  .columns {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
-    gap: var(--kd-space-4);
-    align-items: start;
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    gap: var(--kd-space-4);
   }
 
   .card {

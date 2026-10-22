@@ -1,0 +1,697 @@
+/* Mon Kaddy: design/mon-kaddy-mobile.html + -desktop.html */
+
+/* Mobile: the subtitle stays short so the title illustration keeps its size. */
+.byAisle {
+  display: none;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Mobile order: progress, aisle chips, then the field. */
+.addCard {
+  order: 1;
+}
+
+/* ---------- Progress ---------- */
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--kd-space-4) 18px 18px;
+  border-radius: var(--kd-radius-xl);
+  background: var(--kd-surface);
+}
+
+.score {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--kd-space-2);
+}
+
+.done {
+  display: inline-block;
+}
+
+.of {
+  font: var(--kd-text-title);
+}
+
+.track {
+  height: 14px;
+  overflow: hidden;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-track);
+}
+
+.bar {
+  height: 100%;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-violet);
+  transition: width var(--kd-dur-enter) var(--kd-ease-out);
+}
+
+.progressFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kd-space-2);
+  font: var(--kd-text-body);
+}
+
+.secondary {
+  flex: none;
+  height: var(--kd-target);
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-field);
+  color: var(--kd-ink);
+  font: var(--kd-text-body-small);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.secondary:disabled {
+  color: var(--kd-text-faint);
+  cursor: default;
+}
+
+/* ---------- Add a product ---------- */
+.addCard {
+  position: relative;
+  z-index: 3; /* the suggestions overlap the aisles below */
+  padding: var(--kd-space-1) var(--kd-space-1) var(--kd-space-1) 6px;
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-surface);
+}
+
+.addCard:focus-within {
+  outline: var(--kd-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- Aisle navigation: chips on mobile, a list on desktop ---------- */
+.aisleNav {
+  display: flex;
+  gap: var(--kd-space-2);
+  margin: 0 calc(-1 * var(--kd-space-4));
+  padding: 0 var(--kd-space-4);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.aisleNav::-webkit-scrollbar {
+  display: none;
+}
+
+.aisleNavHead {
+  display: none;
+}
+
+.aisleLink,
+.orderChip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kd-space-2);
+  height: var(--kd-target);
+  padding: 0 14px 0 var(--kd-space-3);
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-surface);
+  color: var(--kd-ink);
+  text-decoration: none;
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.aisleLinkDone .aisleLinkName {
+  color: var(--kd-text-faint);
+  text-decoration: line-through;
+}
+
+.dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--kd-radius-pill);
+}
+
+.aisleLinkCount {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--kd-text-muted);
+}
+
+.orderChip {
+  gap: 6px;
+  padding: 0 14px;
+  border: 1.5px dashed var(--kd-stroke-dashed);
+  background: transparent;
+}
+
+.orderChip svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Aisles ---------- */
+.aisles {
+  --columns-gap: 14px;
+  min-width: 0;
+}
+
+.empty {
+  padding: var(--kd-space-5);
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-surface);
+  font: var(--kd-text-body);
+  color: var(--kd-text-muted);
+}
+
+.empty a {
+  color: var(--kd-ink);
+  font-weight: 700;
+}
+
+.aisle {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-surface);
+  scroll-margin-top: var(--kd-space-4);
+}
+
+.aisleHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 66px;
+  padding: 10px 14px;
+}
+
+.aisleArt {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 46px;
+}
+
+.aisleImg {
+  width: auto;
+  height: auto;
+  max-width: 56px;
+  max-height: 48px;
+}
+
+.unknown {
+  font: var(--kd-text-headline-xs);
+}
+
+.aisleText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.aisleTitle {
+  font: var(--kd-text-title);
+  font-weight: 800;
+}
+
+.aisleHint {
+  font: var(--kd-text-caption);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+}
+
+.aisleHint a {
+  color: var(--kd-ink);
+}
+
+.aisleCount {
+  flex: none;
+  display: inline-block;
+  padding: var(--kd-space-1) 11px;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-surface);
+  font: var(--kd-text-body);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+/* ---------- Row (signature component, DESIGN.md) ---------- */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 60px;
+  padding: 0 var(--kd-space-4);
+  border-top: 1.5px solid var(--kd-divider);
+  cursor: pointer;
+}
+
+.box {
+  position: relative;
+  flex: none;
+  width: 30px;
+  height: 30px;
+}
+
+.check {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 2px solid var(--kd-ink);
+  border-radius: var(--kd-radius-xs);
+  background: var(--kd-surface);
+  cursor: pointer;
+  transition: transform var(--kd-dur-feedback) ease;
+}
+
+.row:active .check {
+  transform: scale(.9);
+}
+
+.check:checked {
+  border-color: var(--kd-violet);
+  background: var(--kd-violet);
+}
+
+.tick {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  opacity: 0;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--kd-surface);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.check:checked + .tick {
+  opacity: 1;
+}
+
+.rowText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.name {
+  font: var(--kd-text-body-lg);
+  overflow-wrap: anywhere;
+}
+
+.src {
+  font: var(--kd-text-body-small);
+  font-weight: 500;
+  color: var(--kd-text-muted);
+}
+
+.qty {
+  flex: none;
+  padding: var(--kd-space-1) 11px;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-track);
+  font: var(--kd-text-body-lg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Already in the cart */
+.rowInCart {
+  min-height: 52px;
+  background: var(--kd-surface-subtle);
+}
+
+.rowInCart .name {
+  color: var(--kd-text-faint);
+  text-decoration: line-through;
+}
+
+.rowInCart .qty {
+  padding: 0;
+  background: transparent;
+  color: var(--kd-text-faint);
+}
+
+/* Ticked: the box fills, the tick draws itself, the name is struck, then the row slides out. */
+.leaving {
+  max-height: 90px;
+  animation: rowOut 260ms 220ms cubic-bezier(.5, 0, .75, 0) forwards;
+}
+
+.leaving .check {
+  animation: pop 240ms var(--kd-ease-out) both;
+}
+
+.leaving .tick path {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 22;
+  animation: draw 200ms 50ms var(--kd-ease-out) forwards;
+}
+
+.leaving .name {
+  color: var(--kd-text-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--kd-violet);
+  text-decoration-thickness: 2px;
+}
+
+.back {
+  animation: rowBack 320ms var(--kd-ease-out) both;
+}
+
+.aisleDone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 var(--kd-space-4);
+  border-top: 1.5px solid var(--kd-divider);
+  font: var(--kd-text-body);
+  font-weight: 700;
+  color: var(--kd-success-text);
+}
+
+.aisleDone svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cartToggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 var(--kd-space-4);
+  border: 0;
+  border-top: 1.5px solid var(--kd-divider);
+  background: var(--kd-field);
+  color: var(--kd-ink);
+  text-align: left;
+  font: var(--kd-text-body);
+  cursor: pointer;
+}
+
+.cartIcon {
+  width: auto;
+  height: 30px;
+}
+
+.cartLabel {
+  flex: 1;
+}
+
+.chevron {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform var(--kd-dur-state) ease;
+}
+
+.cartToggle[aria-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+
+/* ---------- Little celebrations ---------- */
+.bump {
+  animation: bump 340ms var(--kd-ease-out);
+}
+
+.hop {
+  animation: hop 600ms 100ms var(--kd-ease-out) both;
+}
+
+.roll {
+  animation: roll 900ms var(--kd-ease-out) both;
+}
+
+.appear {
+  animation: appear 300ms var(--kd-ease-out) both;
+}
+
+@keyframes pop {
+  from { transform: scale(.82); }
+  to { transform: scale(1); }
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes rowOut {
+  to {
+    opacity: 0;
+    transform: translateX(18px);
+    max-height: 0;
+    min-height: 0;
+    border-top-width: 0;
+  }
+}
+
+@keyframes rowBack {
+  from { opacity: 0; transform: translateX(-14px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes bump {
+  40% { transform: scale(1.22); }
+  to { transform: none; }
+}
+
+@keyframes hop {
+  30% { transform: translateY(-12px) rotate(-8deg); }
+  62% { transform: translateY(0) rotate(4deg); }
+  to { transform: none; }
+}
+
+@keyframes roll {
+  35% { transform: translateX(-8px) rotate(-3deg); }
+  70% { transform: translateX(14px) rotate(2deg); }
+  to { transform: none; }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- Desktop ---------- */
+@media (min-width: 900px) {
+  .byAisle {
+    display: inline;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 360px minmax(0, 1fr);
+    align-items: start;
+    gap: var(--kd-space-6);
+  }
+
+  .aside {
+    gap: var(--kd-space-4);
+  }
+
+  .addCard {
+    order: 0;
+  }
+
+  .progress {
+    gap: var(--kd-space-3);
+    padding: 22px;
+  }
+
+  .progressFoot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .secondary {
+    height: 40px;
+    padding: 0 var(--kd-space-4);
+    font: var(--kd-text-body-medium);
+    font-weight: 700;
+  }
+
+  .aisleNav {
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 10px;
+    overflow: visible;
+    border-radius: var(--kd-radius-lg);
+    background: var(--kd-surface);
+  }
+
+  .aisleNavHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10px;
+  }
+
+  .aisleNavTitle {
+    padding: 6px 0 var(--kd-space-2);
+    font: var(--kd-text-label);
+    letter-spacing: var(--kd-tracking-label);
+    text-transform: uppercase;
+    color: var(--kd-text-faint);
+  }
+
+  .orderLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--kd-target);
+    padding: 0 10px;
+    border-radius: var(--kd-radius-sm);
+    color: var(--kd-violet-deep);
+    font: var(--kd-text-body-small);
+    font-weight: 700;
+    text-underline-offset: 3px;
+  }
+
+  .aisleLink {
+    gap: 10px;
+    height: auto;
+    min-height: var(--kd-target);
+    padding: 0 10px;
+    border-radius: var(--kd-radius-sm);
+    font: var(--kd-text-body);
+    white-space: normal;
+  }
+
+  .aisleLink:hover {
+    background: var(--kd-field);
+  }
+
+  .aisleLinkName {
+    flex: 1;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .orderChip {
+    display: none;
+  }
+
+  .aisles {
+    --columns-gap: var(--kd-space-4);
+  }
+
+  /* Below the sticky top bar. */
+  .aisle {
+    scroll-margin-top: 104px;
+  }
+
+  .aisleHead {
+    gap: var(--kd-space-3);
+    padding: var(--kd-space-3) var(--kd-space-4);
+  }
+
+  .aisleArt {
+    width: 60px;
+    height: 52px;
+  }
+
+  .aisleImg {
+    max-width: 64px;
+    max-height: 56px;
+  }
+
+  .aisleTitle {
+    font: var(--kd-text-title-lg);
+    font-weight: 800;
+  }
+
+  .aisleHint {
+    font: var(--kd-text-body-small);
+  }
+
+  .aisleCount {
+    padding: var(--kd-space-1) var(--kd-space-3);
+    font: var(--kd-text-body-lg);
+    font-family: var(--font-display);
+    font-weight: 800;
+  }
+
+  .row {
+    min-height: 58px;
+  }
+
+  .rowInCart {
+    min-height: 52px;
+  }
+
+  .box {
+    width: 28px;
+    height: 28px;
+  }
+
+  .cartIcon {
+    height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaving,
+  .leaving .check,
+  .back,
+  .bump,
+  .hop,
+  .roll,
+  .appear {
+    animation: none;
+  }
+
+  .leaving {
+    opacity: .55;
+  }
+
+  .leaving .tick path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .check,
+  .bar,
+  .chevron {
+    transition: none;
+  }
+}

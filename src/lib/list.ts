@@ -16,7 +16,7 @@ import {
 } from "firebase/firestore";
 import { db } from "./firebase";
 import type { Catalog } from "./catalog";
-import type { HouseholdIngredients } from "./ingredients";
+import { aisleOf, type HouseholdIngredients } from "./ingredients";
 import { fold, keyOf } from "./normalize";
 import type { Unit } from "./recipes";
 
@@ -73,6 +73,25 @@ export const addExtra = (householdId: string, weekId: string, extra: Omit<Extra,
   addDoc(extrasOf(householdId, weekId), { ...extra, createdAt: serverTimestamp() }).catch((e) =>
     console.error("addExtra", e),
   );
+
+/** Adds a product picked in a ProductInput, keeping what was typed when it differs ("PQ"). */
+export function addPickedExtra(
+  householdId: string,
+  weekId: string,
+  p: { name: string; key?: string; aisleId: string | null; typed: string },
+  own: HouseholdIngredients | null,
+  catalog: Catalog | null,
+) {
+  const key = p.key ?? keyOf(p.name);
+  return addExtra(householdId, weekId, {
+    name: p.name,
+    key,
+    qty: null,
+    unit: null,
+    aisleId: p.aisleId ?? aisleOf(key, own, catalog),
+    ...(p.typed && fold(p.typed) !== fold(p.name) ? { typed: p.typed } : {}),
+  });
+}
 
 export const updateExtra = (householdId: string, weekId: string, id: string, patch: Partial<Extra>) =>
   updateDoc(doc(extrasOf(householdId, weekId), id), patch).catch((e) => console.error("updateExtra", e));

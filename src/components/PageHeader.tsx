@@ -17,11 +17,14 @@ export function PageHeader({
   title,
   subtitle,
   illustration,
+  illustrationClassName,
   children,
 }: {
   title: string;
   subtitle?: ReactNode;
   illustration: Illustration;
+  /** An extra class on the picture (Mon Kaddy animates it when everything is ticked). */
+  illustrationClassName?: string;
   children?: ReactNode;
 }) {
   return (
@@ -33,7 +36,7 @@ export function PageHeader({
           width={illustration.width}
           height={illustration.height}
           preload
-          className={styles.illustration}
+          className={illustrationClassName ? `${styles.illustration} ${illustrationClassName}` : styles.illustration}
         />
         <div className={styles.text}>
           <h1 className="kd-display">{title}</h1>

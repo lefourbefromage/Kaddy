@@ -8,7 +8,7 @@ import { AISLE_BY_ID } from "@/lib/aisles";
 import type { Catalog } from "@/lib/catalog";
 import { aisleOf, type HouseholdIngredients } from "@/lib/ingredients";
 import {
-  addExtra,
+  addPickedExtra,
   deleteExtra,
   overrideKey,
   setIngredientAisle,
@@ -17,7 +17,6 @@ import {
   type Extra,
   type Override,
 } from "@/lib/list";
-import { fold, keyOf } from "@/lib/normalize";
 import { appendIngredient, formatQty, type Recipe } from "@/lib/recipes";
 import { IngredientRow } from "./IngredientRow";
 import styles from "./liste.module.css";
@@ -304,17 +303,7 @@ export function ExtrasCard({ extras, ...shared }: Shared & { extras: Extra[] }) 
           placeholder="Ajouter un produit (éponges, café…)"
           catalog={catalog}
           own={own}
-          onPick={(p) => {
-            const key = p.key ?? keyOf(p.name);
-            addExtra(householdId, weekId, {
-              name: p.name,
-              key,
-              qty: null,
-              unit: null,
-              aisleId: p.aisleId ?? aisleOf(key, own, catalog),
-              ...(p.typed && fold(p.typed) !== fold(p.name) ? { typed: p.typed } : {}),
-            });
-          }}
+          onPick={(p) => addPickedExtra(householdId, weekId, p, own, catalog)}
         />
       </div>
     </Card>

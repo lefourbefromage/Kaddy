@@ -145,3 +145,9 @@
     height: 40px;
   }
 }
+
+/* Inside a white card that carries the focus ring (Mon Kaddy). */
+.bare,
+.bare:focus-within {
+  border: 0;
+}

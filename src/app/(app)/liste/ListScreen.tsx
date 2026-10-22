@@ -1,7 +1,8 @@
 "use client";
 
-import { Children, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
+import { Columns } from "@/components/Columns";
 import { PageHeader, TITLE_ILLUSTRATIONS } from "@/components/PageHeader";
 import { useHouseholdId } from "@/components/HouseholdProvider";
 import { RecipeSheet } from "@/components/recipes/RecipeSheet";
@@ -30,24 +31,6 @@ import { ExtrasCard, RecipeCard } from "./ListCards";
 import styles from "./liste.module.css";
 
 const SHORT: Record<Day, string> = { mon: "Lun.", tue: "Mar.", wed: "Mer.", thu: "Jeu.", fri: "Ven.", sat: "Sam.", sun: "Dim." };
-
-/**
- * Cards dealt round-robin into fixed columns. CSS columns rebalance whenever a card changes
- * height (typing, suggestions opening), which made cards jump from one column to another.
- */
-function Columns({ count, children }: { count: number; children: React.ReactNode }) {
-  const items = Children.toArray(children);
-  if (count === 1) return <div className={styles.cards}>{items}</div>;
-  return (
-    <div className={styles.columns}>
-      {Array.from({ length: count }, (_, c) => (
-        <div key={c} className={styles.column}>
-          {items.filter((_, i) => i % count === c)}
-        </div>
-      ))}
-    </div>
-  );
-}
 
 type Planned = { recipe: Recipe; slots: { ref: SlotRef; leftover: boolean }[] };
 

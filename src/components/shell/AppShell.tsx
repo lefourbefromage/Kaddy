@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import aisles from "../../../data/aisles.json";
 import { useHousehold } from "../HouseholdProvider";
+import { KaddyProvider, useKaddy } from "../KaddyProvider";
 import { signOutHousehold } from "@/lib/auth";
 import { NAV_LINKS, isActive } from "./nav";
 import {
@@ -35,14 +36,16 @@ export function AppShell({ children }: { children: ReactNode }) {
     .join(", ")}…`;
 
   return (
-    <div className={styles.shell}>
-      <DesktopHeader pathname={pathname} name={name} />
-      <div className={styles.content}>
-        <MobileTopBar name={name} aislePreview={aislePreview} />
-        {children}
+    <KaddyProvider>
+      <div className={styles.shell}>
+        <DesktopHeader pathname={pathname} name={name} />
+        <div className={styles.content}>
+          <MobileTopBar name={name} aislePreview={aislePreview} />
+          {children}
+        </div>
+        <MobileNav pathname={pathname} />
       </div>
-      <MobileNav pathname={pathname} />
-    </div>
+    </KaddyProvider>
   );
 }
 
@@ -88,6 +91,7 @@ function DesktopHeader({ pathname, name }: { pathname: string; name: string }) {
               >
                 <Icon />
                 {label}
+                {href === "/kaddy" && <LeftBadge className={styles.desktopBadge} />}
               </Link>
             );
           })}
@@ -243,9 +247,23 @@ function MobileNav({ pathname }: { pathname: string }) {
           >
             <Icon size={22} strokeWidth={active ? 2.2 : 2} />
             {short}
+            {href === "/kaddy" && <LeftBadge className={styles.mobileBadge} />}
           </Link>
         );
       })}
     </nav>
+  );
+}
+
+/** Yellow counter of the Mon Kaddy items still to pick this week. */
+function LeftBadge({ className }: { className: string }) {
+  const { aisles, total, done } = useKaddy();
+  const left = total - done;
+  if (!aisles || left === 0) return null;
+  return (
+    <span className={className}>
+      {left}
+      <span className={styles.srOnly}> {left === 1 ? "article à prendre" : "articles à prendre"}</span>
+    </span>
   );
 }

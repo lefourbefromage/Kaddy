@@ -378,6 +378,7 @@
 }
 
 .mobileLink {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -388,6 +389,42 @@
   text-decoration: none;
   font: var(--kd-text-caption);
   font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Mon Kaddy counter (DESIGN.md: yellow badge) */
+.mobileBadge,
+.desktopBadge {
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-sun);
+  color: var(--kd-ink);
+  font: var(--kd-text-caption);
+  font-weight: 800;
+}
+
+.mobileBadge {
+  position: absolute;
+  top: var(--kd-space-1);
+  right: 10px;
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  font: var(--kd-text-label);
+}
+
+.desktopBadge {
+  padding: 2px var(--kd-space-2);
+  margin-left: -2px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
   white-space: nowrap;
 }
 
