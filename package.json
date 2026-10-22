@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy:rules": "node --env-file=.env.local scripts/deploy-rules.mjs"
+    "deploy:rules": "node --env-file=.env.local scripts/deploy-rules.mjs",
+    "icons": "node scripts/make-icons.mjs"
   },
   "dependencies": {
     "firebase": "^13.1.0",
@@ -22,6 +23,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
     "firebase-admin": "^14.5.0",
+    "sharp": "^0.35.5",
     "typescript": "^5"
   }
 }
