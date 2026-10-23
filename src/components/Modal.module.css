@@ -17,7 +17,7 @@
 }
 
 .dialog[open] {
-  animation: sheet-up 300ms cubic-bezier(.2, .9, .3, 1.05) both;
+  animation: sheet-up var(--kd-dur-overlay) var(--kd-ease-out) both;
 }
 
 .dialog::backdrop {
@@ -43,7 +43,7 @@
   }
 
   .dialog[open] {
-    animation: fade 200ms ease-out both;
+    animation: fade var(--kd-dur-state) var(--kd-ease-out) both;
   }
 
   .panel {
@@ -54,7 +54,7 @@
     overflow: hidden;
     border-radius: var(--kd-radius-dialog);
     box-shadow: var(--kd-shadow-float);
-    animation: card-up 280ms cubic-bezier(.2, .9, .3, 1.1) both;
+    animation: card-up var(--kd-dur-overlay) var(--kd-ease-out) both;
   }
 
   .wide {

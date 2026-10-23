@@ -360,6 +360,13 @@ The system is flat at rest: surfaces separate by colour fill (paper, then white,
 
 Everything is rounded, nothing is sharp. Pills (999px) for buttons, chips, tabs and the navigation bar; large radii for containers, decreasing as you nest: panel 40 › dialog 32 › tile 28 › card 22 › slot/field 16 › inner field 12 › checkbox 10. Borders are rare: 1.5px separators, 2px dashed for "to fill" areas, 2px violet for the active state. The illustrations are cut out with no frame; they overlap the edges of tiles and title rows.
 
+## Motion
+
+Motion explains a state change; it never decorates. One authored moment: the Mon Kaddy tick (see the row component), timed as its own sequence.
+- **Easing:** `--kd-ease-out` (cubic-bezier(.16, 1, .3, 1)) for every arrival, `--kd-ease-in` (cubic-bezier(.5, 0, .75, 0)) for a row leaving the list. No bounce or elastic curve.
+- **Durations:** `--kd-dur-feedback` 150ms (press, hover), `--kd-dur-state` 250ms (fades, chevrons), `--kd-dur-overlay` 300ms (dialogs, sheets, stickers popping in), `--kd-dur-enter` 450ms (progress bar), `--kd-dur-focal` 600ms (the sign-in mascot, the moved-aisle highlight).
+- **Reduced motion:** the duration tokens drop to 0 and each module keeps a still alternative (a ticked row turns faded instead of sliding out).
+
 ## Components
 
 ### Buttons

@@ -47,7 +47,7 @@
   background: var(--kd-surface);
   border-radius: var(--kd-radius-md);
   box-shadow: var(--kd-shadow-float);
-  animation: fade 150ms ease-out both;
+  animation: fade var(--kd-dur-feedback) var(--kd-ease-out) both;
 }
 
 .item {

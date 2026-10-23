@@ -20,6 +20,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  min-height: var(--kd-target);
   text-decoration: none;
   border-radius: var(--kd-radius-pill);
 }
@@ -160,7 +161,7 @@
   background: var(--kd-surface);
   border-radius: var(--kd-radius-lg);
   box-shadow: var(--kd-shadow-float);
-  animation: menu-in 180ms var(--kd-ease-out) both;
+  animation: menu-in var(--kd-dur-feedback) var(--kd-ease-out) both;
 }
 
 .householdItem {
@@ -226,7 +227,7 @@
 }
 
 .sheet[open] {
-  animation: sheet-up 320ms var(--kd-ease-out) both;
+  animation: sheet-up var(--kd-dur-overlay) var(--kd-ease-out) both;
 }
 
 .sheet::backdrop {

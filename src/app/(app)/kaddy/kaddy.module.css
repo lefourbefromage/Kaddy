@@ -357,10 +357,12 @@
   color: var(--kd-text-faint);
 }
 
-/* Ticked: the box fills, the tick draws itself, the name is struck, then the row slides out. */
+/* Ticked: the box fills, the tick draws itself, the name is struck, then the row slides out.
+   The focal choreography of the app (design/mon-kaddy-*.html): its timings are authored as a
+   sequence, not taken from the duration tokens. */
 .leaving {
   max-height: 90px;
-  animation: rowOut 260ms 220ms cubic-bezier(.5, 0, .75, 0) forwards;
+  animation: rowOut 260ms 220ms var(--kd-ease-in) forwards; /* timings mirrored by LEAVE_MS */
 }
 
 .leaving .check {
@@ -455,7 +457,7 @@
 }
 
 .appear {
-  animation: appear 300ms var(--kd-ease-out) both;
+  animation: appear var(--kd-dur-overlay) var(--kd-ease-out) both;
 }
 
 @keyframes pop {

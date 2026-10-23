@@ -80,7 +80,7 @@
 }
 
 .moved {
-  animation: moved 700ms var(--kd-ease-out);
+  animation: moved var(--kd-dur-focal) var(--kd-ease-out);
 }
 
 @keyframes moved {

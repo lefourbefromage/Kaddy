@@ -121,10 +121,13 @@
   --kd-ring-today: inset 0 0 0 3px var(--kd-violet);
 
   /* ---- Motion ---- */
-  --kd-ease-out: cubic-bezier(.16, 1, .3, 1);
+  --kd-ease-out: cubic-bezier(.16, 1, .3, 1);   /* arrivals: natural deceleration, no bounce */
+  --kd-ease-in: cubic-bezier(.5, 0, .75, 0);    /* exits: a row leaving the list */
   --kd-dur-feedback: 150ms;
   --kd-dur-state: 250ms;
+  --kd-dur-overlay: 300ms;  /* dialogs, sheets, stickers popping in */
   --kd-dur-enter: 450ms;
+  --kd-dur-focal: 600ms;    /* the one authored entrance: the sign-in mascot */
 
   /* ---- Interaction ---- */
   --kd-target: 44px;
@@ -154,5 +157,5 @@ input::placeholder, textarea::placeholder { color: var(--kd-text-faint); opacity
 @media (max-width: 640px) { .kd-display { font: var(--kd-text-display-mobile); } }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --kd-dur-state: 0ms; --kd-dur-enter: 0ms; }
+  :root { --kd-dur-state: 0ms; --kd-dur-overlay: 0ms; --kd-dur-enter: 0ms; --kd-dur-focal: 0ms; }
 }

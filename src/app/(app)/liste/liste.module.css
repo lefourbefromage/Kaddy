@@ -196,7 +196,7 @@
   flex-direction: column;
   gap: 2px;
   padding: 0 12px 14px 14px;
-  animation: fade 200ms ease-out both;
+  animation: fade var(--kd-dur-state) var(--kd-ease-out) both;
 }
 
 @keyframes fade {

@@ -39,7 +39,7 @@
   width: 212px;
   height: 212px;
   margin-top: var(--kd-space-1);
-  animation: mascot-in 600ms cubic-bezier(.2, .9, .3, 1.15) both;
+  animation: mascot-in var(--kd-dur-focal) var(--kd-ease-out) both;
 }
 
 @keyframes mascot-in {
@@ -232,7 +232,7 @@
   font: var(--kd-text-body);
   font-weight: 700;
   line-height: 1.35;
-  animation: shake 320ms ease both;
+  animation: shake var(--kd-dur-overlay) ease both;
 }
 
 .error svg {

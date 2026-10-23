@@ -174,7 +174,7 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
-  transition: transform 180ms ease;
+  transition: transform var(--kd-dur-feedback) ease;
 }
 
 .thumb {
@@ -187,7 +187,7 @@
 .thumbImage {
   width: auto;
   height: 86px;
-  transition: transform 250ms cubic-bezier(.34, 1.56, .64, 1);
+  transition: transform var(--kd-dur-state) var(--kd-ease-out);
 }
 
 .cardBody {
