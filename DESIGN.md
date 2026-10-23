@@ -307,7 +307,7 @@ Each aisle has a pastel background (section header) and a dot (navigation):
 | Entretien & nettoyage | #DCE7F7 | #8FA9D6 |
 | Autres | #EAE5DE | #A39A8E |
 
-The list, order, labels and illustrations of the aisles live in `data/aisles.json`; the tokens are `--kd-aisle-{id}` and `--kd-aisle-{id}-dot`. Eight aisles have no illustration yet (Charcuterie & traiteur, Produits cuisinés, Surgelés, Épicerie sucrée, Boissons, Saveurs du monde, Entretien & nettoyage, Autres): until they exist, the aisle shows its colour and name only.
+The list, order, labels and illustrations of the aisles live in `data/aisles.json`; the tokens are `--kd-aisle-{id}` and `--kd-aisle-{id}-dot`. Each aisle has an object illustration (crayon + gouache, matte, transparent background, no scribble or shadow behind it, so it sits cleanly on the aisle colour), all from one sheet: `design/rayons-planche.webp`, cut by `npm run aisle-art`.
 
 The same pastels are reused for recipe-card backgrounds and the summary tiles. The Menu food-group dots reuse the aisle dots (vegetables #5A9868, starches #F2C94C, meat & fish #F87A56, dairy #E6CFA0), plus fruit #F49AC1.
 

@@ -8,23 +8,13 @@ import { useHouseholdId } from "@/components/HouseholdProvider";
 import { useKaddy } from "@/components/KaddyProvider";
 import { PageHeader, TITLE_ILLUSTRATIONS } from "@/components/PageHeader";
 import { ProductInput } from "@/components/ProductInput";
-import { aisleColor, aisleDot } from "@/lib/aisles";
+import { aisleColor, aisleDot, fitArt } from "@/lib/aisles";
 import { clearChecks, setCheck, sourceLine, type KaddyAisle, type KaddyItem } from "@/lib/kaddy";
 import { addPickedExtra } from "@/lib/list";
 import { formatQty } from "@/lib/recipes";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 import { weekTitle } from "@/lib/weeks";
 import styles from "./kaddy.module.css";
-
-// Aisle pictures: the small thumbnails when they exist (public/illustrations/thumbs).
-const AISLE_ART: Record<string, { src: string; width: number; height: number }> = {
-  "rayon-boucherie": { src: "/illustrations/thumbs/rayon-boucherie.webp", width: 138, height: 112 },
-  "rayon-fruits-legumes": { src: "/illustrations/thumbs/rayon-fruits-legumes.webp", width: 113, height: 112 },
-  "rayon-boulangerie": { src: "/illustrations/thumbs/rayon-boulangerie.webp", width: 120, height: 112 },
-  "rayon-cremerie": { src: "/illustrations/thumbs/rayon-cremerie.webp", width: 140, height: 112 },
-  "rayon-epicerie": { src: "/illustrations/thumbs/rayon-epicerie.webp", width: 110, height: 112 },
-  "rayon-hygiene": { src: "/illustrations/rayon-hygiene.webp", width: 130, height: 112 },
-};
 
 // The row plays its tick, then slides out (kaddy.module.css .leaving): 220ms + 260ms.
 const LEAVE_MS = 480;
@@ -244,27 +234,21 @@ function AisleSection({
   const inCart = aisle.items.filter((i) => checked.has(i.itemKey) && !leaving.has(i.itemKey));
   const n = aisle.items.filter((i) => checked.has(i.itemKey)).length;
   const complete = n === aisle.items.length;
-  const art = aisle.illustration ? AISLE_ART[aisle.illustration] : undefined;
+  const art = aisle.illustration && fitArt(aisle.illustration, 64, 56);
   const titleId = `rayon-${aisle.id}-titre`;
 
   return (
     <section id={`rayon-${aisle.id}`} aria-labelledby={titleId} className={styles.aisle}>
       <div className={styles.aisleHead} style={{ background: aisleColor(aisle.id) }}>
-        {(art || aisle.unclassified) && (
+        {art && (
           <span className={styles.aisleArt}>
-            {art ? (
-              <Image
-                src={art.src}
-                alt=""
-                width={art.width}
-                height={art.height}
-                className={cx(styles.aisleImg, touched && complete && styles.hop)}
-              />
-            ) : (
-              <span aria-hidden="true" className={styles.unknown}>
-                ?
-              </span>
-            )}
+            <Image
+              src={art.src}
+              alt=""
+              width={art.width}
+              height={art.height}
+              className={cx(styles.aisleImg, touched && complete && styles.hop)}
+            />
           </span>
         )}
         <div className={styles.aisleText}>

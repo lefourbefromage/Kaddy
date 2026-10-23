@@ -12,7 +12,7 @@
 - If more households join later, nothing changes: the same database, one more document per household.
 
 ## Aisles
-`data/aisles.json` is the single source for the 14 aisles: `id` (the `AisleId` stored everywhere), French `label`, illustration. Its order is the default `aisleOrder` of a new household. Colours: `--kd-aisle-{id}` / `--kd-aisle-{id}-dot` in `styles/tokens.css`.
+`data/aisles.json` is the single source for the 14 aisles: `id` (the `AisleId` stored everywhere), French `label`, `illustration` (`{ src, width, height }`, cut from `design/rayons-planche.webp` by `npm run aisle-art`). The picture also illustrates the recipes whose first ingredient is in that aisle. Its order is the default `aisleOrder` of a new household. Colours: `--kd-aisle-{id}` / `--kd-aisle-{id}-dot` in `styles/tokens.css`.
 
 ## Collections
 

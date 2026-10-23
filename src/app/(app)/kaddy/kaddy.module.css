@@ -214,14 +214,9 @@
 }
 
 .aisleImg {
-  width: auto;
-  height: auto;
-  max-width: 56px;
-  max-height: 48px;
-}
-
-.unknown {
-  font: var(--kd-text-headline-xs);
+  width: 56px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .aisleText {
@@ -631,8 +626,8 @@
   }
 
   .aisleImg {
-    max-width: 64px;
-    max-height: 56px;
+    width: 64px;
+    height: 56px;
   }
 
   .aisleTitle {

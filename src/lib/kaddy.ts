@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { collection, doc, onSnapshot, serverTimestamp, setDoc, writeBatch } from "firebase/firestore";
 import { db } from "./firebase";
-import { AISLES } from "./aisles";
+import { AISLES, fullOrder, type AisleArt } from "./aisles";
 import type { Catalog } from "./catalog";
 import { aisleOf, type HouseholdIngredients } from "./ingredients";
 import { overrideKey, type Extra } from "./list";
@@ -23,7 +23,7 @@ export type KaddyItem = {
   sources: { label: string; qty: number | null }[]; // recipe titles, or "Hors menu"
 };
 
-export type KaddyAisle = { id: string; label: string; illustration: string | null; unclassified: boolean; items: KaddyItem[] };
+export type KaddyAisle = { id: string; label: string; illustration: AisleArt | null; unclassified: boolean; items: KaddyItem[] };
 
 export const itemKeyOf = (key: string, unit: Unit | null) => `${key}__${unit ?? "-"}`;
 const UNCLASSIFIED = "autres";
@@ -87,8 +87,7 @@ const number = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
 
 /** Aisles in the household's order (unknown ones after), items sorted alphabetically inside. */
 export function byAisle(items: KaddyItem[], aisleOrder: string[]): KaddyAisle[] {
-  const order = [...aisleOrder, ...AISLES.map((a) => a.id).filter((id) => !aisleOrder.includes(id))];
-  return order
+  return fullOrder(aisleOrder)
     .map((id) => {
       const aisle = AISLES.find((a) => a.id === id);
       const inAisle = items

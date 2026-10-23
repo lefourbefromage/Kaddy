@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "deploy:rules": "node --env-file=.env.local scripts/deploy-rules.mjs",
-    "icons": "node scripts/make-icons.mjs"
+    "icons": "node scripts/make-icons.mjs",
+    "aisle-art": "node scripts/cut-aisle-sheet.mjs"
   },
   "dependencies": {
     "firebase": "^13.1.0",

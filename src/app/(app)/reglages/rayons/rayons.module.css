@@ -1,0 +1,265 @@
+/* Ordre des rayons: design/ordre-des-rayons-mobile.html + -desktop.html */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.desktopOnly {
+  display: none;
+}
+
+.intro {
+  max-width: 52ch;
+  font: var(--kd-text-body);
+  color: var(--kd-text-muted);
+}
+
+.back {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kd-space-2);
+  height: var(--kd-target);
+  padding: 0 var(--kd-space-4) 0 var(--kd-space-2);
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-surface);
+  color: var(--kd-ink);
+  text-decoration: none;
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+}
+
+.back svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- List ---------- */
+.list {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-surface);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-2);
+  min-height: 68px;
+  padding: var(--kd-space-2) var(--kd-space-2) var(--kd-space-2) var(--kd-space-1);
+  background: var(--kd-surface);
+  transition: background-color var(--kd-dur-state) ease;
+}
+
+.row + .row {
+  border-top: 1.5px solid var(--kd-divider);
+}
+
+/* The row being dragged follows the pointer: it is lifted in lavender. */
+.dragging {
+  position: relative;
+  z-index: 1;
+  background: var(--kd-lavender-mist);
+}
+
+.moved {
+  animation: moved 700ms var(--kd-ease-out);
+}
+
+@keyframes moved {
+  from { background: var(--kd-lavender-soft); }
+  to { background: var(--kd-surface); }
+}
+
+.handle {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  margin-right: -12px;
+  color: var(--kd-stroke-dashed);
+  cursor: grab;
+  touch-action: none;
+}
+
+.dragging .handle {
+  cursor: grabbing;
+}
+
+.handle svg {
+  fill: currentColor;
+}
+
+.pos {
+  flex: none;
+  width: 24px;
+  text-align: center;
+  font: var(--kd-text-headline-xs);
+  color: var(--kd-text-muted);
+}
+
+.art {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--kd-radius-md);
+}
+
+.artImg {
+  width: 40px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.name {
+  font: var(--kd-text-body-lg);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.count {
+  font: var(--kd-text-body-small);
+  color: var(--kd-text-muted);
+}
+
+.arrow {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-sm);
+  background: var(--kd-field);
+  cursor: pointer;
+  transition: background-color var(--kd-dur-feedback) ease;
+}
+
+.arrow:not(:disabled):hover {
+  background: var(--kd-track);
+}
+
+.arrow:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+.arrow svg {
+  fill: none;
+  stroke: var(--kd-ink);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Footer ---------- */
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--kd-space-3);
+}
+
+.saved {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: var(--kd-text-body-medium);
+  color: var(--kd-success-text);
+}
+
+.saved svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.reset {
+  height: var(--kd-target);
+  padding: 0 var(--kd-space-4);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-field);
+  color: var(--kd-ink);
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reset:not(:disabled):hover {
+  background: var(--kd-track);
+}
+
+.reset:disabled {
+  color: var(--kd-text-faint);
+  cursor: default;
+}
+
+/* ---------- Desktop: a narrow centred column (760px in the mockup) ---------- */
+@media (min-width: 900px) {
+  .page {
+    width: 100%;
+    max-width: 664px;
+    margin: 0 auto;
+    gap: var(--kd-space-5);
+  }
+
+  .desktopOnly {
+    display: inline;
+  }
+
+  .intro {
+    font: var(--kd-text-body-lg);
+  }
+
+  .row {
+    gap: 10px;
+  }
+
+  .pos {
+    width: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moved {
+    animation: none;
+    background: var(--kd-lavender-mist);
+  }
+
+  .row,
+  .arrow {
+    transition: none;
+  }
+}
