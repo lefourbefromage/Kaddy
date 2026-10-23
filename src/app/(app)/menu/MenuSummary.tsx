@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AISLE_BY_ID, type AisleArt } from "@/lib/aisles";
 import { GROUPS, type GroupId } from "@/lib/foodGroups";
 import styles from "./summary.module.css";
 
@@ -16,14 +17,16 @@ export type SummaryData = {
   filled: number;
 };
 
-// Illustration that pops next to the chart for some groups (design/menu-*.html).
-const POP: Partial<Record<GroupId, { src: string; width: number; height: number; className: string }>> = {
-  veg: { src: "/illustrations/rayon-fruits-legumes.webp", width: 265, height: 264, className: "popVeg" },
-  starch: { src: "/illustrations/rayon-boulangerie.webp", width: 278, height: 260, className: "popStarch" },
-  protein: { src: "/illustrations/rayon-boucherie.webp", width: 321, height: 260, className: "popProtein" },
-  dairy: { src: "/illustrations/rayon-cremerie.webp", width: 324, height: 260, className: "popVeg" },
-  pulses: { src: "/illustrations/recette-lentilles.webp", width: 318, height: 260, className: "popStarch" },
-  fruit: { src: "/illustrations/recette-pomme.webp", width: 298, height: 260, className: "popVeg" },
+// Illustration that pops next to the chart for the focused group (design/menu-*.html): the
+// picture of the matching aisle (data/aisles.json); pulses take the tin of Épicerie salée.
+const popArt = (aisleId: string, className: string) => ({ ...AISLE_BY_ID.get(aisleId)!.illustration, className });
+const POP: Record<GroupId, AisleArt & { className: string }> = {
+  veg: popArt("fruits-legumes", "popVeg"),
+  starch: popArt("pain-patisserie", "popStarch"),
+  protein: popArt("viande-poisson", "popProtein"),
+  dairy: popArt("laitier-oeufs-vegetal", "popVeg"),
+  pulses: popArt("epicerie-salee", "popStarch"),
+  fruit: popArt("fruits-legumes", "popVeg"),
 };
 
 function headline(d: SummaryData) {

@@ -4,24 +4,18 @@ import type { Recipe } from "./recipes";
 
 export type Art = { src: string; width: number; height: number; background: string };
 
-// Sizes of public/illustrations/*.webp, for next/image.
-const SIZES: Record<string, [number, number]> = {
-  "recette-a-completer": [350, 260],
-  "recette-confiture": [333, 260],
-  "recette-lentilles": [318, 260],
-  "recette-pomme": [298, 260],
-};
-
-const art = (name: string, background: string): Art => {
-  const [width, height] = SIZES[name];
-  return { src: `/illustrations/${name}.webp`, width, height, background };
-};
-
 // A recipe ingredient filed there is a mistake, not a reason to show soap on the recipe.
 const NOT_FOOD = new Set(["hygiene-beaute", "entretien-nettoyage", "autres"]);
 
-export const TODO_ART = art("recette-a-completer", "var(--kd-lavender-mist)");
-const FALLBACKS = ["recette-pomme", "recette-lentilles", "recette-confiture"];
+export const TODO_ART: Art = {
+  src: "/illustrations/recette-a-completer.webp",
+  width: 350,
+  height: 260,
+  background: "var(--kd-lavender-mist)",
+};
+
+// No ingredient found in the catalogue: one of these aisles, picked from the id.
+const FALLBACKS = ["produits-cuisines", "epicerie-salee", "epicerie-sucree"];
 
 /**
  * A recipe's thumbnail, derived from its ingredients (no image is stored): the illustration
@@ -36,5 +30,6 @@ export function recipeArt(recipe: Pick<Recipe, "id" | "ingredients">, catalog: C
   }
   // Stable pick from the id, so a recipe keeps its picture.
   const n = [...recipe.id].reduce((h, c) => h + c.charCodeAt(0), 0);
-  return art(FALLBACKS[n % FALLBACKS.length], aisleColor("epicerie-salee"));
+  const aisleId = FALLBACKS[n % FALLBACKS.length];
+  return { ...AISLE_BY_ID.get(aisleId)!.illustration, background: aisleColor(aisleId) };
 }
