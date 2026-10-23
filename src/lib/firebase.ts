@@ -1,6 +1,12 @@
 import { getApp, getApps, initializeApp, type FirebaseOptions } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import {
+  getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+  type Firestore,
+} from "firebase/firestore";
 
 // Web app config, public by design (access is enforced by firestore.rules).
 // Next inlines NEXT_PUBLIC_* only when each variable is read by its full name.
@@ -16,7 +22,21 @@ const firebaseConfig: FirebaseOptions = {
 // One instance per page, including across Fast Refresh reloads.
 export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+export const db = openFirestore();
+
+/**
+ * Offline mode: Firestore keeps its data in IndexedDB, shared by every open tab. The menu,
+ * the list and Mon Kaddy still show without network, and changes made offline (ticks
+ * included) are sent when it comes back. The server render has no IndexedDB: memory cache.
+ */
+function openFirestore(): Firestore {
+  if (typeof window === "undefined") return getFirestore(app);
+  try {
+    return initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+  } catch {
+    return getFirestore(app); // already initialised (Fast Refresh)
+  }
+}
 
 // Technical domain of the household Auth users (see docs/data-model.md).
 export const HOUSEHOLD_EMAIL_DOMAIN =

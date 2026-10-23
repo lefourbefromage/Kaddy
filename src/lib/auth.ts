@@ -6,7 +6,8 @@ import {
   signOut,
 } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
-import { auth } from "./firebase";
+import { clearIndexedDbPersistence, terminate } from "firebase/firestore";
+import { auth, db } from "./firebase";
 import { householdEmail, slugify } from "./household";
 
 export type SignInError = "bad" | "tooMany" | "network" | "unknown";
@@ -40,4 +41,12 @@ export async function signInHousehold(
   }
 }
 
-export const signOutHousehold = () => signOut(auth);
+/** Signs out and leaves nothing of the household on this device, the offline copy included. */
+export async function signOutHousehold() {
+  await signOut(auth);
+  await terminate(db);
+  // Refused while another tab still has the database open: that tab keeps its copy.
+  await clearIndexedDbPersistence(db).catch(() => {});
+  // A terminated Firestore cannot be reopened: a fresh page, which sends to /connexion.
+  window.location.reload();
+}

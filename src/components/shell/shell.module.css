@@ -392,6 +392,57 @@
   white-space: nowrap;
 }
 
+/* The page itself: same rhythm as the content column. Focused by the skip link only. */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-4);
+  outline: none;
+}
+
+/* "Aller au contenu": first stop of the keyboard, hidden until focused. */
+.skip {
+  position: fixed;
+  top: var(--kd-space-2);
+  left: var(--kd-space-2);
+  z-index: 10;
+  padding: var(--kd-space-3) var(--kd-space-4);
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-ink);
+  color: var(--kd-surface);
+  font: var(--kd-text-body);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip:focus-visible {
+  transform: none;
+  outline-color: var(--kd-sun);
+}
+
+/* Offline banner */
+.offline {
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-2);
+  padding: 10px var(--kd-space-4);
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-sun);
+  color: var(--kd-ink);
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+}
+
+.offline svg {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* Mon Kaddy counter (DESIGN.md: yellow badge) */
 .mobileBadge,
 .desktopBadge {
@@ -446,8 +497,12 @@
     background: var(--kd-paper);
   }
 
-  .content {
+  .content,
+  .main {
     gap: 28px;
+  }
+
+  .content {
     padding: var(--kd-space-8) var(--kd-space-12) 64px;
   }
 

@@ -4,6 +4,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useOffline } from "next/offline";
 import aisles from "../../../data/aisles.json";
 import { useHousehold } from "../HouseholdProvider";
 import { KaddyProvider, useKaddy } from "../KaddyProvider";
@@ -38,10 +39,16 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <KaddyProvider>
       <div className={styles.shell}>
+        <a href="#contenu" className={styles.skip}>
+          Aller au contenu
+        </a>
         <DesktopHeader pathname={pathname} name={name} />
         <div className={styles.content}>
           <MobileTopBar name={name} aislePreview={aislePreview} />
-          {children}
+          <OfflineBanner />
+          <main id="contenu" tabIndex={-1} className={styles.main}>
+            {children}
+          </main>
         </div>
         <MobileNav pathname={pathname} />
       </div>
@@ -152,6 +159,23 @@ function HouseholdMenu({ pathname, name }: { pathname: string; name: string }) {
         </button>
       </div>
     </details>
+  );
+}
+
+/** Shown while the network is down: the app keeps working on its offline copy. */
+function OfflineBanner() {
+  const offline = useOffline();
+  return (
+    <p role="status" className={offline ? styles.offline : styles.srOnly}>
+      {offline && (
+        <>
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 3l18 18M8.5 8.6A5.5 5.5 0 0 0 7 18h10.5M16.5 8.3A5.5 5.5 0 0 1 21 13.6" />
+          </svg>
+          Hors ligne : tu peux continuer, tes changements partiront dès que le réseau revient.
+        </>
+      )}
+    </p>
   );
 }
 
