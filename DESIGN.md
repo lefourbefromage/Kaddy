@@ -314,7 +314,7 @@ The same pastels are reused for recipe-card backgrounds and the summary tiles. T
 ### Named Rules
 **The Violet = Action Rule.** #6A57CC appears only on what responds or has just responded (focus, ticked, progress, active slot). For a decorative accent, use lavender or yellow.
 
-**The Equal Meals Rule.** A leftover is a meal like any other: same background as a filled slot, distinguished only by the lavender "Reste" pill.
+**The Equal Meals Rule.** A leftover is a meal like any other: same card as a filled slot, distinguished by the lavender "Reste" pill and a very slight lavender tint (the slot background mixed 55/45 with lavender-mist).
 
 ## Typography
 
@@ -351,7 +351,7 @@ The system is flat at rest: surfaces separate by colour fill (paper, then white,
 ### Shadow Vocabulary
 - **Floating** (`box-shadow: 0 8px 24px rgba(45, 40, 72, .14)`): mobile navigation bar, dialogs and sheets, the duplicate alert.
 - **Veil** (`background: rgba(45, 40, 72, .5)`): behind desktop dialogs.
-- **Today's ring** (`box-shadow: inset 0 0 0 3px #6A57CC`): highlights today's column.
+- **Today's ring** (`box-shadow: inset 0 0 0 3px #6A57CC`): highlights today's column, together with a lavender-mist column background (filled slots turn white on it) and the date number in a violet disc with white text.
 
 ### Named Rules
 **The Flat Page Rule.** Nothing that belongs to the page (cards, tiles, slots) gets a shadow. A shadow means "this floats".
@@ -393,7 +393,7 @@ Everything is rounded, nothing is sharp. Pills (999px) for buttons, chips, tabs 
 - **Empty:** 2px dashed (#857F98) border, "Midi" or "Soir" label, "Quel plat ?". It is a button.
 - **Active:** 2px solid violet border, white background, transparent field, small secondary "Reste" button.
 - **Filled:** field background, dish name in title style, eye and "…" buttons.
-- **Reste:** the same background as a filled slot, plus the lavender "Reste" pill and the subtitle "de mardi soir".
+- **Reste:** a filled slot with a very slight lavender tint and the lavender "Reste" pill; no subtitle (the source meal isn't shown).
 
 ### Mon Kaddy row (signature component)
 - 60px row with a 30px rounded box, then the name, then the quantity chip.

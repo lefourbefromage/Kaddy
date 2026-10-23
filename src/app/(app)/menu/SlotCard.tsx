@@ -4,7 +4,7 @@ import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 
 import { Modal } from "@/components/Modal";
 import { areClose, fold, titleWords } from "@/lib/normalize";
 import type { Recipe } from "@/lib/recipes";
-import { parseSlotKey, slotLabel, type Slot, type SlotRef } from "@/lib/weeks";
+import { slotLabel, type Slot, type SlotRef } from "@/lib/weeks";
 import styles from "./menu.module.css";
 
 export type Choice =
@@ -247,15 +247,10 @@ function FilledSlot({
 }: Props & { slot: Slot }) {
   const recipe = slot.kind === "simple" ? undefined : recipesById.get(slot.recipeId);
   const name = slot.kind === "simple" ? slot.name : (recipe?.title ?? "Recette supprimée");
-  const sub =
-    slot.kind === "leftover"
-      ? `de ${slotLabel(parseSlotKey(slot.of))}`
-      : slot.kind === "simple"
-        ? "Repas simple"
-        : null;
+  const sub = slot.kind === "simple" ? "Repas simple" : null;
 
   return (
-    <div className={`${styles.slot} ${styles.slotFilled}`}>
+    <div className={`${styles.slot} ${styles.slotFilled} ${slot.kind === "leftover" ? styles.slotLeftover : ""}`}>
       <div className={styles.slotTop}>
         <span className="kd-label">{mealLabel(slotRef)}</span>
         {slot.kind === "leftover" && (

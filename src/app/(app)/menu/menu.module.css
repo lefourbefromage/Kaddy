@@ -436,7 +436,13 @@
 
 /* Filled */
 .slotFilled {
-  background: var(--kd-surface);
+  --slot-bg: var(--kd-surface);
+  background: var(--slot-bg);
+}
+
+/* Leftovers: the same card with a hint of lavender, whatever the card colour. */
+.slotLeftover {
+  background: color-mix(in srgb, var(--slot-bg) 55%, var(--kd-lavender-mist));
 }
 
 .slotTop {
@@ -629,9 +635,37 @@
     line-height: 1;
   }
 
-  .dayToday .dayName,
+  /* Today: lavender column, white cards, the date in a violet disc. */
+  .dayToday {
+    background: var(--kd-lavender-mist);
+  }
+
+  .dayToday .slotFilled {
+    --slot-bg: var(--kd-surface);
+  }
+
+  .dayToday .slotFilled .eye {
+    background: var(--kd-field);
+  }
+
+  .dayToday .dayName {
+    color: var(--kd-violet-deep);
+  }
+
   .dayToday .dayNum {
-    color: var(--kd-violet);
+    display: grid;
+    place-items: center;
+    min-width: 1.6em;
+    height: 1.6em;
+    margin: -0.3em -0.15em -0.3em 0;
+    padding: 0 0.2em;
+    border-radius: var(--kd-radius-pill);
+    background: var(--kd-violet);
+    color: var(--kd-surface);
+  }
+
+  .dayToday .dayTitle {
+    align-items: center;
   }
 
   .dayHeading {
@@ -665,7 +699,7 @@
   }
 
   .slotFilled {
-    background: var(--kd-field);
+    --slot-bg: var(--kd-field);
   }
 
   .dish {
