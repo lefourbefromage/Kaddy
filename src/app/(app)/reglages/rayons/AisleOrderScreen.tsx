@@ -69,32 +69,52 @@ export function AisleOrderScreen() {
   function onDragStart(e: PointerEvent<HTMLSpanElement>, id: string) {
     if (e.pointerType === "mouse" && e.button !== 0) return;
     e.preventDefault();
-    e.currentTarget.setPointerCapture(e.pointerId);
     setDrag({ id, order: saved });
   }
 
-  function onDragMove(e: PointerEvent<HTMLSpanElement>) {
-    if (!drag || !listRef.current) return;
-    if (e.clientY < EDGE) window.scrollBy(0, -12);
-    else if (e.clientY > window.innerHeight - EDGE) window.scrollBy(0, 12);
-    // New place = number of other rows whose middle is above the pointer.
-    let to = 0;
-    [...listRef.current.children].forEach((row, i) => {
-      if (drag.order[i] === drag.id) return;
-      const r = row.getBoundingClientRect();
-      if (e.clientY > r.top + r.height / 2) to++;
-    });
-    if (drag.order.indexOf(drag.id) === to) return;
-    const next = drag.order.filter((id) => id !== drag.id);
-    next.splice(to, 0, drag.id);
-    setDrag({ ...drag, order: next });
-  }
-
-  function onDragEnd() {
+  // The rest of the gesture is followed on the window, not with pointer capture on the handle:
+  // the row moves in the DOM as it is reordered, which drops the capture.
+  const latest = useRef({ saved, save });
+  useEffect(() => {
+    latest.current = { saved, save };
+  });
+  useEffect(() => {
     if (!drag) return;
-    if (drag.order.join() !== saved.join()) save(drag.order, drag.id);
-    setDrag(null);
-  }
+    const move = (e: globalThis.PointerEvent) => {
+      const list = listRef.current;
+      if (!list) return;
+      if (e.clientY < EDGE) window.scrollBy(0, -12);
+      else if (e.clientY > window.innerHeight - EDGE) window.scrollBy(0, 12);
+      // New place = number of other rows whose middle is above the pointer.
+      let to = 0;
+      [...list.children].forEach((row, i) => {
+        if (drag.order[i] === drag.id) return;
+        const r = row.getBoundingClientRect();
+        if (e.clientY > r.top + r.height / 2) to++;
+      });
+      if (drag.order.indexOf(drag.id) === to) return;
+      const next = drag.order.filter((id) => id !== drag.id);
+      next.splice(to, 0, drag.id);
+      setDrag({ ...drag, order: next });
+    };
+    const drop = () => {
+      const { saved, save } = latest.current;
+      if (drag.order.join() !== saved.join()) save(drag.order, drag.id);
+      setDrag(null);
+    };
+    // An interrupted gesture (call, notification, the browser taking over) drops the drag.
+    const cancel = () => setDrag(null);
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", drop);
+    window.addEventListener("pointercancel", cancel);
+    window.addEventListener("blur", cancel);
+    return () => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", drop);
+      window.removeEventListener("pointercancel", cancel);
+      window.removeEventListener("blur", cancel);
+    };
+  }, [drag]);
 
   return (
     <div className={styles.page}>
@@ -130,9 +150,6 @@ export function AisleOrderScreen() {
                 aria-hidden="true"
                 title="Glisser pour déplacer"
                 onPointerDown={(e) => onDragStart(e, id)}
-                onPointerMove={onDragMove}
-                onPointerUp={onDragEnd}
-                onPointerCancel={() => setDrag(null)}
               >
                 <svg width="16" height="20" viewBox="0 0 16 20">
                   <circle cx="5" cy="4" r="1.7" />

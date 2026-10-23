@@ -225,7 +225,7 @@ export function RecipeCard({
                   {r.ing.name}{" "}
                   <button
                     type="button"
-                    className={styles.restore}
+                    className={`${styles.restore} kd-hit`}
                     onClick={() => setOverride(householdId, weekId, overrideKey(recipe.id, r.ing.key), null)}
                   >
                     Rétablir<span className={styles.srOnly}> {r.ing.name}</span>
