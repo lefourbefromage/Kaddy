@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, getDocsFromCache, type QuerySnapshot } from "firebase/firestore";
 import { db } from "./firebase";
 import { keyOf } from "./normalize";
 
@@ -22,8 +22,32 @@ export type Catalog = {
 // A few hundred read-only entries: loaded once per session, kept in memory (docs/data-model.md).
 let pending: Promise<Catalog> | null = null;
 
+// The catalogue barely changes (scripts/seed-catalog.mjs): the offline copy is used, and the
+// server is read again at most once a day, instead of ~400 billed reads on every app start.
+const FETCHED_AT = "kaddy.catalog.fetchedAt";
+const REFRESH_MS = 24 * 60 * 60 * 1000;
+
+async function read(): Promise<QuerySnapshot> {
+  const ref = collection(db, "catalog");
+  let fetchedAt = 0;
+  try {
+    fetchedAt = Number(localStorage.getItem(FETCHED_AT)) || 0;
+  } catch {}
+  if (Date.now() - fetchedAt < REFRESH_MS) {
+    const cached = await getDocsFromCache(ref).catch(() => null);
+    if (cached && !cached.empty) return cached;
+  }
+  const snap = await getDocs(ref);
+  if (!snap.metadata.fromCache) {
+    try {
+      localStorage.setItem(FETCHED_AT, String(Date.now()));
+    } catch {}
+  }
+  return snap;
+}
+
 async function load(): Promise<Catalog> {
-  const snap = await getDocs(collection(db, "catalog"));
+  const snap = await read();
   const products = snap.docs.map((d) => ({ key: d.id, ...(d.data() as Omit<CatalogProduct, "key">) }));
   const byKey = new Map<string, CatalogProduct>();
   for (const p of products) byKey.set(p.key, p);

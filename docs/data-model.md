@@ -102,7 +102,7 @@ Two people in the shop tick **different items at the same time**. With one docum
   2. otherwise the loose match on `keyOf` (name and aliases), which absorbs missing accents and plurals ("pate" → Pâtes).
 
 ### Product autocomplete
-When typing an ingredient or an off-menu item, the app suggests matches from `catalog` (name + aliases, normalised: no accents, no plural), merged with the household's own `ingredients`. The catalogue is a few hundred entries: load it once into memory (and the offline cache) rather than querying it on every keystroke.
+When typing an ingredient or an off-menu item, the app suggests matches from `catalog` (name + aliases, normalised: no accents, no plural), merged with the household's own `ingredients`. The catalogue is a few hundred entries: load it once into memory rather than querying it on every keystroke. It is read from the offline copy, and from the server at most once a day (`src/lib/catalog.ts`).
 
 ## Security rules (`firestore.rules`)
 See the `firestore.rules` file at the root. Summary:
