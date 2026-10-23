@@ -152,7 +152,9 @@
   display: none;
   flex-direction: column;
   gap: 10px;
-  animation: fade var(--kd-dur-state) var(--kd-ease-out) both;
+  /* backwards, not both: a filled-in opacity keeps a stacking context that traps the
+     slot suggestions under the summary below. */
+  animation: fade var(--kd-dur-state) var(--kd-ease-out) backwards;
 }
 
 .daySelected {
@@ -313,6 +315,8 @@
   max-width: 320px;
   margin: 0;
   padding: 6px;
+  overflow-y: auto; /* max-height set by useDropdownSpace */
+  overscroll-behavior: contain;
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -320,6 +324,12 @@
   background: var(--kd-surface);
   border-radius: var(--kd-radius-md);
   box-shadow: var(--kd-shadow-float);
+}
+
+/* Not enough room below (bottom bar, keyboard): opens above the slot. */
+.suggestions[data-up] {
+  top: auto;
+  bottom: calc(100% + 6px);
 }
 
 .suggestion {

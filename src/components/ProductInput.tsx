@@ -1,11 +1,12 @@
 "use client";
 
-import { useId, useMemo, useState, type KeyboardEvent } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { AISLE_BY_ID, aisleDot } from "@/lib/aisles";
 import type { Catalog } from "@/lib/catalog";
 import type { HouseholdIngredients } from "@/lib/ingredients";
 import { searchProducts, type ProductSuggestion } from "@/lib/list";
 import { fold } from "@/lib/normalize";
+import { useDropdownSpace } from "@/lib/useDropdownSpace";
 import styles from "./ProductInput.module.css";
 
 export type PickedProduct = { name: string; key?: string; aisleId: string | null; typed: string };
@@ -51,6 +52,14 @@ export function ProductInput({
   const current = Math.min(active, Math.max(options.length - 1, 0));
   const expanded = open && options.length > 0;
 
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  useDropdownSpace(wrapRef, listRef, expanded);
+  // The list scrolls when it is short on room: keep the active option in view.
+  useEffect(() => {
+    if (expanded) document.getElementById(`${uid}-opt-${current}`)?.scrollIntoView({ block: "nearest" });
+  }, [expanded, current, uid]);
+
   function pick(o: ProductSuggestion | { create: string }) {
     const typed = query.trim();
     if ("create" in o) onPick({ name: o.create, aisleId: null, typed });
@@ -78,7 +87,7 @@ export function ProductInput({
   }
 
   return (
-    <div className={styles.wrap}>
+    <div ref={wrapRef} className={styles.wrap}>
       <div className={`${styles.field} ${bare ? styles.bare : dashed ? styles.dashed : styles.solid}`}>
         <label htmlFor={`${uid}-input`} className={styles.srOnly}>
           {label}
@@ -117,7 +126,7 @@ export function ProductInput({
         </button>
       </div>
       {expanded && (
-        <ul id={`${uid}-list`} role="listbox" aria-label="Suggestions" className={styles.list}>
+        <ul ref={listRef} id={`${uid}-list`} role="listbox" aria-label="Suggestions" className={styles.list}>
           {options.map((o, i) => (
             <li
               key={"create" in o ? "create" : o.key}

@@ -5,6 +5,7 @@ import { Modal } from "@/components/Modal";
 import { areClose, fold, titleWords } from "@/lib/normalize";
 import type { Recipe } from "@/lib/recipes";
 import { slotLabel, type Slot, type SlotRef } from "@/lib/weeks";
+import { useDropdownSpace } from "@/lib/useDropdownSpace";
 import styles from "./menu.module.css";
 
 export type Choice =
@@ -65,6 +66,25 @@ function SlotEditor({ slotRef, recipes, leftoverSources, onCancel, onChoose }: P
     inputRef.current?.focus();
   }, []);
 
+  // A tap outside the slot cancels the entry. Not left to blur: Safari doesn't focus a tapped
+  // button, so a tap on "Reste" or a leftover blurs the field with no relatedTarget and would
+  // close the slot before the click lands. A click, not a pointerdown, so scrolling the page
+  // with the keyboard open keeps the entry; attached after the click that opened the slot.
+  const cancelRef = useRef(onCancel);
+  useEffect(() => {
+    cancelRef.current = onCancel;
+  });
+  useEffect(() => {
+    const cancel = (e: MouseEvent) => {
+      if (!boxRef.current?.contains(e.target as Node)) cancelRef.current();
+    };
+    const t = window.setTimeout(() => document.addEventListener("click", cancel));
+    return () => {
+      clearTimeout(t);
+      document.removeEventListener("click", cancel);
+    };
+  }, []);
+
   const options = useMemo(() => {
     const q = query.trim();
     if (!q) return [] as Option[];
@@ -86,6 +106,13 @@ function SlotEditor({ slotRef, recipes, leftoverSources, onCancel, onChoose }: P
   }, [query, recipes]);
 
   const current = Math.min(active, Math.max(options.length - 1, 0));
+
+  const listRef = useRef<HTMLUListElement>(null);
+  useDropdownSpace(boxRef, listRef, options.length > 0);
+  // The list scrolls when it is short on room: keep the active option in view.
+  useEffect(() => {
+    if (options.length) document.getElementById(`${uid}-opt-${current}`)?.scrollIntoView({ block: "nearest" });
+  }, [options.length, current, uid]);
 
   function onKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "ArrowDown" && options.length) {
@@ -109,8 +136,9 @@ function SlotEditor({ slotRef, recipes, leftoverSources, onCancel, onChoose }: P
       ref={boxRef}
       className={`${styles.slot} ${styles.slotEditing}`}
       onBlur={(e) => {
-        // Leaving the slot (click elsewhere, Tab out) cancels the entry.
-        if (!boxRef.current?.contains(e.relatedTarget as Node | null)) onCancel();
+        // Focus moved to another element (Tab out, another slot): cancel. A blur to nowhere
+        // is left to the outside-click listener above.
+        if (e.relatedTarget && !boxRef.current?.contains(e.relatedTarget as Node)) onCancel();
       }}
       // clicks inside the leftover dialog bubble here through the DOM: leave them alone
       onClick={(e) => {
@@ -143,7 +171,7 @@ function SlotEditor({ slotRef, recipes, leftoverSources, onCancel, onChoose }: P
       />
 
       {options.length > 0 && (
-        <ul id={`${uid}-list`} role="listbox" aria-label="Suggestions" className={styles.suggestions}>
+        <ul ref={listRef} id={`${uid}-list`} role="listbox" aria-label="Suggestions" className={styles.suggestions}>
           {options.map((o, i) => (
             <li
               key={o.id}

@@ -38,8 +38,9 @@
   left: 0;
   z-index: 7;
   width: 240px;
-  max-height: 320px;
+  max-height: 320px; /* lowered by useDropdownSpace when the room is short */
   overflow-y: auto;
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -48,6 +49,12 @@
   border-radius: var(--kd-radius-md);
   box-shadow: var(--kd-shadow-float);
   animation: fade var(--kd-dur-feedback) var(--kd-ease-out) both;
+}
+
+/* Not enough room below (bottom bar, keyboard): opens above the chip. */
+.menu[data-up] {
+  top: auto;
+  bottom: calc(100% + 6px);
 }
 
 .item {

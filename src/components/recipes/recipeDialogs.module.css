@@ -349,6 +349,11 @@
   gap: var(--kd-space-2);
 }
 
+/* In this column, flex: 1 would squash the button to its icon's height. */
+.planSlot .primary {
+  flex: none;
+}
+
 .planned {
   color: var(--kd-success-text);
   font: var(--kd-text-body-medium);
@@ -578,7 +583,7 @@
 
 .rowUnit {
   padding: 0 var(--kd-space-2);
-  font: var(--kd-text-body-medium);
+  font: var(--kd-text-body-lg); /* 16px: below that, iOS zooms in on focus */
   font-weight: 700;
   cursor: pointer;
 }
@@ -779,6 +784,11 @@
 
   .rowName {
     font: var(--kd-text-body);
+  }
+
+  .rowUnit {
+    font: var(--kd-text-body-medium);
+    font-weight: 700;
   }
 
   .remove {

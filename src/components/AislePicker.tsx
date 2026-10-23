@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { AISLES, aisleColor, aisleDot } from "@/lib/aisles";
+import { useDropdownSpace } from "@/lib/useDropdownSpace";
 import styles from "./AislePicker.module.css";
 
 /** "Choisir un rayon": a chip that opens the list of aisles. */
@@ -10,6 +11,8 @@ export function AislePicker({ name, onPick }: { name: string; onPick: (aisleId: 
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  useDropdownSpace(ref, menuRef, open);
 
   useEffect(() => {
     if (!open) return;
@@ -46,7 +49,7 @@ export function AislePicker({ name, onPick }: { name: string; onPick: (aisleId: 
         Choisir un rayon
       </button>
       {open && (
-        <div id={`${uid}-menu`} role="group" aria-label={`Rayon de ${name}`} className={styles.menu}>
+        <div ref={menuRef} id={`${uid}-menu`} role="group" aria-label={`Rayon de ${name}`} className={styles.menu}>
           {AISLES.map((a) => (
             <button
               key={a.id}

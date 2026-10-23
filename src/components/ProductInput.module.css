@@ -76,6 +76,8 @@
   z-index: 6;
   margin: 0;
   padding: 6px;
+  overflow-y: auto; /* max-height set by useDropdownSpace */
+  overscroll-behavior: contain;
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -83,6 +85,12 @@
   background: var(--kd-surface);
   border-radius: var(--kd-radius-md);
   box-shadow: var(--kd-shadow-float);
+}
+
+/* Not enough room below (bottom bar, keyboard): opens above the field. */
+.list[data-up] {
+  top: auto;
+  bottom: calc(100% + 6px);
 }
 
 .option {

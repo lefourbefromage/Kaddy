@@ -309,7 +309,7 @@
 
 .unit {
   padding: 0 6px;
-  font: var(--kd-text-body-small);
+  font: var(--kd-text-body-lg); /* 16px: below that, iOS zooms in on focus */
   font-weight: 700;
   cursor: pointer;
 }

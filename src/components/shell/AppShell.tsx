@@ -258,7 +258,7 @@ function MobileTopBar({ name, aislePreview }: { name: string; aislePreview: stri
 
 function MobileNav({ pathname }: { pathname: string }) {
   return (
-    <nav aria-label="Navigation principale" className={`${styles.mobileNav} kd-on-dark`}>
+    <nav aria-label="Navigation principale" className={`${styles.mobileNav} kd-on-dark`} data-bottom-bar>
       {NAV_LINKS.map((link) => {
         const { href, short, Icon } = link;
         const active = isActive(pathname, link);

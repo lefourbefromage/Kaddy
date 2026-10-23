@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AISLE_BY_ID, type AisleArt } from "@/lib/aisles";
@@ -39,6 +39,9 @@ function headline(d: SummaryData) {
 
 export function MenuSummary({ data }: { data: SummaryData }) {
   const [focus, setFocus] = useState<GroupId | null>(null);
+  // Focus at the start of a press: a tap also fires mouseenter and focus, which already pick
+  // the arc, so the click toggles from what was shown before the tap.
+  const beforePress = useRef<GroupId | null | undefined>(undefined);
   const present = GROUPS.filter((g) => data.groupCounts[g.id] > 0);
   const total = present.reduce((n, g) => n + data.groupCounts[g.id], 0);
   const focused = focus ? GROUPS.find((g) => g.id === focus) : null;
@@ -68,7 +71,12 @@ export function MenuSummary({ data }: { data: SummaryData }) {
         <figure className={`${styles.tile} ${styles.chartTile}`}>
           <figcaption className={styles.chartTitle}>Ce qu’il y a dans les assiettes</figcaption>
           <div className={styles.chartBody}>
-          <div className={styles.chartArea} onMouseLeave={() => setFocus(null)}>
+          <div
+            className={styles.chartArea}
+            onPointerLeave={(e) => {
+              if (e.pointerType === "mouse") setFocus(null);
+            }}
+          >
             {pop && (
               <Image
                 key={focus}
@@ -101,10 +109,19 @@ export function MenuSummary({ data }: { data: SummaryData }) {
                       role="button"
                       aria-label={`${g.label} : ${data.groupCounts[g.id]}`}
                       aria-pressed={focus === g.id}
-                      onMouseEnter={() => setFocus(g.id)}
+                      onPointerEnter={(e) => {
+                        if (e.pointerType === "mouse") setFocus(g.id);
+                      }}
+                      onPointerDown={() => {
+                        beforePress.current = focus;
+                      }}
                       onFocus={() => setFocus(g.id)}
                       onBlur={() => setFocus(null)}
-                      onClick={() => setFocus(focus === g.id ? null : g.id)}
+                      onClick={() => {
+                        const shown = beforePress.current === undefined ? focus : beforePress.current;
+                        beforePress.current = undefined;
+                        setFocus(shown === g.id ? null : g.id);
+                      }}
                       onKeyDown={(e) => {
                         if (e.key !== "Enter" && e.key !== " ") return;
                         e.preventDefault();
