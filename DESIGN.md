@@ -364,8 +364,9 @@ Everything is rounded, nothing is sharp. Pills (999px) for buttons, chips, tabs 
 
 Motion explains a state change; it never decorates. One authored moment: the Mon Kaddy tick (see the row component), timed as its own sequence.
 - **Easing:** `--kd-ease-out` (cubic-bezier(.16, 1, .3, 1)) for every arrival, `--kd-ease-in` (cubic-bezier(.5, 0, .75, 0)) for a row leaving the list. No bounce or elastic curve.
-- **Durations:** `--kd-dur-feedback` 150ms (press, hover), `--kd-dur-state` 250ms (fades, chevrons), `--kd-dur-overlay` 300ms (dialogs, sheets, stickers popping in), `--kd-dur-enter` 450ms (progress bar), `--kd-dur-focal` 600ms (the sign-in mascot, the moved-aisle highlight).
+- **Durations:** `--kd-dur-feedback` 150ms (press, hover), `--kd-dur-state` 250ms (fades, chevrons), `--kd-dur-overlay` 300ms (dialogs, sheets, stickers popping in), `--kd-dur-enter` 450ms (progress bar), `--kd-dur-focal` 600ms (the sign-in mascot, the moved-aisle highlight). `--kd-dur-pulse` 1400ms: the one loop, loading placeholders breathing while Firestore answers.
 - **Reduced motion:** the duration tokens drop to 0 and each module keeps a still alternative (a ticked row turns faded instead of sliding out).
+- **Loading:** a screen waiting for its data shows placeholder cards in its own layout plus a visible "Chargement de …" line (never a blank page). Still under reduced motion.
 
 ## Components
 

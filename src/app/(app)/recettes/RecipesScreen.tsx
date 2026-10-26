@@ -3,6 +3,7 @@
 import { useMemo, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import { PageHeader, TITLE_ILLUSTRATIONS } from "@/components/PageHeader";
+import { LoadingCards } from "@/components/LoadingCards";
 import { useHouseholdId } from "@/components/HouseholdProvider";
 import { useCatalog } from "@/lib/catalog";
 import { fold } from "@/lib/normalize";
@@ -156,7 +157,9 @@ export function RecipesScreen() {
         )}
       </div>
 
-      {tab === "all" ? (
+      {recipes === null ? (
+        <LoadingCards label="Chargement du carnet…" />
+      ) : tab === "all" ? (
         <div id="panneau-all" role="tabpanel" aria-labelledby="onglet-all">
           {recipes !== null && list.length > 0 && (
             <ul className={styles.grid}>

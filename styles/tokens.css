@@ -128,6 +128,7 @@
   --kd-dur-overlay: 300ms;  /* dialogs, sheets, stickers popping in */
   --kd-dur-enter: 450ms;
   --kd-dur-focal: 600ms;    /* the one authored entrance: the sign-in mascot */
+  --kd-dur-pulse: 1400ms;   /* loading placeholders breathing, looped */
 
   /* ---- Interaction ---- */
   --kd-target: 44px;

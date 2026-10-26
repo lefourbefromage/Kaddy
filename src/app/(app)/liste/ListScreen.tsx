@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Columns } from "@/components/Columns";
+import { LoadingCards } from "@/components/LoadingCards";
 import { PageHeader, TITLE_ILLUSTRATIONS } from "@/components/PageHeader";
 import { useHouseholdId } from "@/components/HouseholdProvider";
 import { RecipeSheet } from "@/components/recipes/RecipeSheet";
@@ -101,6 +102,8 @@ export function ListScreen() {
         }
         illustration={TITLE_ILLUSTRATIONS.liste}
       />
+
+      {loading && <LoadingCards label="Chargement de ta liste…" />}
 
       {!loading &&
         shown.map(({ weekId, week, planned }) => {

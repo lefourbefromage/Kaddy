@@ -1,0 +1,96 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-3);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-2);
+  margin: 0;
+  padding: 6px var(--kd-space-1) 0;
+  font: var(--kd-text-body-small);
+  font-weight: 600;
+  color: var(--kd-text-muted);
+}
+
+.spinner {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid var(--kd-track);
+  border-top-color: var(--kd-violet);
+  border-radius: var(--kd-radius-pill);
+  animation: spin var(--kd-dur-pulse) linear infinite;
+}
+
+.screen {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: var(--kd-space-4);
+  background: var(--kd-paper);
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-2);
+  padding: var(--kd-space-4);
+  border-radius: var(--kd-radius-lg);
+  background: var(--kd-surface);
+  animation: pulse var(--kd-dur-pulse) ease-in-out infinite both;
+}
+
+.lineTitle,
+.lineSub {
+  display: block;
+  height: 14px;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-track);
+}
+
+.lineTitle {
+  width: 55%;
+  height: 18px;
+}
+
+.lineSub {
+  width: 35%;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .55; }
+}
+
+@media (min-width: 900px) {
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--kd-space-4);
+  }
+
+  .card {
+    min-height: 120px;
+  }
+}
+
+/* Still: the line alone says it is loading. */
+@media (prefers-reduced-motion: reduce) {
+  .spinner,
+  .card {
+    animation: none;
+  }
+}
