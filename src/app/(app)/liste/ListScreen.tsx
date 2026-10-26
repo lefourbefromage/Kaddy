@@ -148,20 +148,25 @@ export function ListScreen() {
                     onOpen={() => setSheetId(p.recipe.id)}
                   />
                 ))}
-                {isCurrent && (
-                  <ExtrasCard
-                    householdId={householdId}
-                    weekId={weekId}
-                    catalog={catalog}
-                    own={own}
-                    collapsible={!desktop}
-                    extras={extras ?? []}
-                  />
-                )}
               </Columns>
             </section>
           );
         })}
+
+      {!loading && (
+        <section aria-labelledby="hors-menu" className={`${styles.week} ${styles.extras}`}>
+          <div className={styles.weekHead}>
+            <h2 id="hors-menu" className={styles.weekTitle}>
+              Hors menu
+            </h2>
+            <span className={styles.weekSummary}>
+              En plus des plats de cette semaine
+              {extras?.length ? ` · ${extras.length} produit${extras.length > 1 ? "s" : ""}` : ""}
+            </span>
+          </div>
+          <ExtrasCard householdId={householdId} weekId={thisWeek} catalog={catalog} own={own} extras={extras ?? []} />
+        </section>
+      )}
 
       {sheetRecipe && !editing && (
         <RecipeSheet

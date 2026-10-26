@@ -17,6 +17,21 @@
   gap: 10px;
 }
 
+/* "Hors menu": its own zone at the very bottom, set apart from the recipes by a rule. */
+.extras {
+  margin-top: var(--kd-space-6);
+  padding-top: var(--kd-space-6);
+  border-top: 1.5px solid var(--kd-stroke-soft);
+}
+
+.extrasCard {
+  max-width: 720px;
+}
+
+.extrasCard .cardBody {
+  padding-top: 14px;
+}
+
 .weekHead {
   display: flex;
   flex-wrap: wrap;

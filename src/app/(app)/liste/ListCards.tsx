@@ -256,56 +256,50 @@ export function RecipeCard({
 
 /* ---------- "Hors menu" ---------- */
 
-export function ExtrasCard({ extras, ...shared }: Shared & { extras: Extra[] }) {
-  const { householdId, weekId, catalog, own, collapsible } = shared;
+/** No head of its own: it sits under the "Hors menu" title, at the bottom of the page. */
+export function ExtrasCard({ extras, ...shared }: Omit<Shared, "collapsible"> & { extras: Extra[] }) {
+  const { householdId, weekId, catalog, own } = shared;
   return (
-    <Card
-      title="Hors menu"
-      sub="Ce qu’il faut acheter en plus des plats"
-      count={extras.length === 1 ? "1 produit" : `${extras.length} produits`}
-      collapsible={collapsible}
-      defaultOpen
-    >
-      {extras.length > 0 && <RowHeader />}
-      {extras.map((x) => {
-        const aisleId = x.aisleId ?? aisleOf(x.key, own, catalog);
-        return (
-          <IngredientRow
-            key={x.id}
-            name={x.name}
-            qty={x.qty}
-            unit={x.unit}
-            sub={
-              aisleId ? (
-                <span className={styles.rowSub}>
-                  {x.typed ? `Tapé « ${x.typed} » · ` : ""}
-                  {AISLE_BY_ID.get(aisleId)?.label}
-                </span>
-              ) : (
-                <AisleLine
-                  householdId={householdId}
-                  name={x.name}
-                  ingKey={x.key}
-                  aisleId={null}
-                  onPicked={(a) => updateExtra(householdId, weekId, x.id, { aisleId: a })}
-                />
-              )
-            }
-            onQty={(qty) => updateExtra(householdId, weekId, x.id, { qty })}
-            onUnit={(unit) => updateExtra(householdId, weekId, x.id, { unit })}
-            onRemove={() => deleteExtra(householdId, weekId, x.id)}
+    <article className={`${styles.card} ${styles.extrasCard}`}>
+      <div className={styles.cardBody}>
+        {extras.length > 0 && <RowHeader />}
+        {extras.map((x) => {
+          const aisleId = x.aisleId ?? aisleOf(x.key, own, catalog);
+          return (
+            <IngredientRow
+              key={x.id}
+              name={x.name}
+              qty={x.qty}
+              unit={x.unit}
+              sub={
+                aisleId ? (
+                  <span className={styles.rowSub}>{AISLE_BY_ID.get(aisleId)?.label}</span>
+                ) : (
+                  <AisleLine
+                    householdId={householdId}
+                    name={x.name}
+                    ingKey={x.key}
+                    aisleId={null}
+                    onPicked={(a) => updateExtra(householdId, weekId, x.id, { aisleId: a })}
+                  />
+                )
+              }
+              onQty={(qty) => updateExtra(householdId, weekId, x.id, { qty })}
+              onUnit={(unit) => updateExtra(householdId, weekId, x.id, { unit })}
+              onRemove={() => deleteExtra(householdId, weekId, x.id)}
+            />
+          );
+        })}
+        <div className={styles.addRow}>
+          <ProductInput
+            label="Ajouter un produit hors menu"
+            placeholder="Ajouter un produit (éponges, café…)"
+            catalog={catalog}
+            own={own}
+            onPick={(p) => addPickedExtra(householdId, weekId, p, own, catalog)}
           />
-        );
-      })}
-      <div className={styles.addRow}>
-        <ProductInput
-          label="Ajouter un produit hors menu"
-          placeholder="Ajouter un produit (éponges, café…)"
-          catalog={catalog}
-          own={own}
-          onPick={(p) => addPickedExtra(householdId, weekId, p, own, catalog)}
-        />
+        </div>
       </div>
-    </Card>
+    </article>
   );
 }
