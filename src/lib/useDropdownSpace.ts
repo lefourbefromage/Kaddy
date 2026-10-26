@@ -42,12 +42,19 @@ export function useDropdownSpace(
 function fit(anchor: HTMLElement | null, list: HTMLElement | null) {
   if (!anchor || !list) return;
   const vv = window.visualViewport;
-  const top = (vv?.offsetTop ?? 0) + MARGIN;
+  let top = (vv?.offsetTop ?? 0) + MARGIN;
   let bottom = (vv ? vv.offsetTop + vv.height : window.innerHeight) - MARGIN;
+  const dialog = anchor.closest("dialog");
   // The floating bottom bar (mobile) covers the page, but not a modal dialog.
   const bar = document.querySelector<HTMLElement>("[data-bottom-bar]");
-  if (bar?.getClientRects().length && !anchor.closest("dialog")) {
+  if (bar?.getClientRects().length && !dialog) {
     bottom = Math.min(bottom, bar.getBoundingClientRect().top - MARGIN);
+  }
+  // In a dialog, the panel clips what overflows it (desktop card): stay inside it.
+  const panel = dialog?.firstElementChild?.getBoundingClientRect();
+  if (panel) {
+    top = Math.max(top, panel.top + MARGIN);
+    bottom = Math.min(bottom, panel.bottom - MARGIN);
   }
 
   const r = anchor.getBoundingClientRect();

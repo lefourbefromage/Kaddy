@@ -6,7 +6,7 @@ import { PageHeader, TITLE_ILLUSTRATIONS } from "@/components/PageHeader";
 import { useHouseholdId } from "@/components/HouseholdProvider";
 import { useCatalog } from "@/lib/catalog";
 import { fold } from "@/lib/normalize";
-import { cookedLabel, sourceKind, useRecipes, type Recipe } from "@/lib/recipes";
+import { cookedLabel, deleteRecipe, sourceKind, useRecipes, type Recipe } from "@/lib/recipes";
 import { recipeArt } from "@/lib/recipeArt";
 import { cookStats, firstFreeSlot, setSlot, useWeeks, whenLabel } from "@/lib/weeks";
 import { RecipeSheet } from "@/components/recipes/RecipeSheet";
@@ -37,6 +37,8 @@ export function RecipesScreen() {
   const [query, setQuery] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
   const [form, setForm] = useState<{ mode: FormMode; recipe: Recipe | null } | null>(null);
+  // "À compléter" row asking "Supprimer ?" (one at a time).
+  const [confirmId, setConfirmId] = useState<string | null>(null);
 
   const complete = useMemo(() => (recipes ?? []).filter((r) => r.status === "complete"), [recipes]);
   const todos = useMemo(
@@ -227,14 +229,58 @@ export function RecipesScreen() {
                 <span className={styles.todoTitle}>{r.title}</span>
                 <span>Aucun ingrédient</span>
               </div>
-              <button
-                type="button"
-                className={styles.todoButton}
-                onClick={() => setForm({ mode: "todo", recipe: r })}
-                aria-label={`Compléter ${r.title}`}
-              >
-                Compléter
-              </button>
+              {confirmId === r.id ? (
+                <span className={styles.todoActions} role="group" aria-label={`Supprimer ${r.title} ?`}>
+                  <button
+                    type="button"
+                    className={styles.todoDanger}
+                    onClick={() => {
+                      setConfirmId(null);
+                      deleteRecipe(householdId, r.id);
+                      document.getElementById("onglet-todo")?.focus();
+                    }}
+                  >
+                    Supprimer
+                  </button>
+                  <button
+                    type="button"
+                    className={styles.todoKeep}
+                    id={`garder-${r.id}`}
+                    onClick={() => {
+                      setConfirmId(null);
+                      setTimeout(() => document.getElementById(`supprimer-${r.id}`)?.focus(), 0);
+                    }}
+                  >
+                    Garder
+                  </button>
+                </span>
+              ) : (
+                <span className={styles.todoActions}>
+                  <button
+                    type="button"
+                    className={styles.todoButton}
+                    onClick={() => setForm({ mode: "todo", recipe: r })}
+                    aria-label={`Compléter ${r.title}`}
+                  >
+                    Compléter
+                  </button>
+                  <button
+                    id={`supprimer-${r.id}`}
+                    type="button"
+                    className={styles.todoDelete}
+                    onClick={() => {
+                      setConfirmId(r.id);
+                      setTimeout(() => document.getElementById(`garder-${r.id}`)?.focus(), 0);
+                    }}
+                    aria-label={`Supprimer ${r.title}`}
+                    title="Supprimer"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4.5 7h15M10 4h4M6.5 7l.8 11.2A2 2 0 0 0 9.3 20h5.4a2 2 0 0 0 2-1.8L17.5 7M10 11v5M14 11v5" />
+                    </svg>
+                  </button>
+                </span>
+              )}
             </div>
           ))}
           {recipes !== null && todos.length === 0 && (

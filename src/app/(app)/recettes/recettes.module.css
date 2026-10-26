@@ -315,6 +315,60 @@
   cursor: pointer;
 }
 
+.todoActions {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--kd-space-1);
+}
+
+.todoDelete,
+.todoKeep,
+.todoDanger {
+  flex: none;
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.todoDelete {
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  background: transparent;
+}
+
+.todoDelete svg {
+  fill: none;
+  stroke: var(--kd-text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.todoDelete:hover {
+  background: var(--kd-error-bg);
+}
+
+.todoDelete:hover svg {
+  stroke: var(--kd-error-text);
+}
+
+.todoDanger {
+  padding: 0 var(--kd-space-4);
+  background: var(--kd-error-bg);
+  color: var(--kd-error-text);
+}
+
+.todoKeep {
+  padding: 0 var(--kd-space-3);
+  background: transparent;
+  color: var(--kd-ink);
+}
+
 /* ---- Desktop ---- */
 @media (min-width: 900px) {
   .newButton {

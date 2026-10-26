@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { UNITS, parseQty, type Unit } from "@/lib/recipes";
+import { UNITS, parseQty, unitLabel, type Unit } from "@/lib/recipes";
 import styles from "./liste.module.css";
 
 const qtyText = (n: number | null | undefined) => (n == null ? "" : String(n).replace(".", ","));
@@ -67,7 +67,7 @@ export function IngredientRow({
         <option value="">—</option>
         {UNITS.map((u) => (
           <option key={u} value={u}>
-            {u === "pièce" && (qty ?? 0) > 1 ? "pièces" : u}
+            {unitLabel(u, qty)}
           </option>
         ))}
       </select>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useId, useMemo, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { Modal } from "@/components/Modal";
+import { useKaddy } from "@/components/KaddyProvider";
 import type { Catalog } from "@/lib/catalog";
 import { TODO_ART, recipeArt } from "@/lib/recipeArt";
 import {
@@ -13,11 +14,13 @@ import {
   parseQty,
   safeUrl,
   sourceKind,
+  unitLabel,
   updateRecipe,
   type Recipe,
   type Unit,
 } from "@/lib/recipes";
 import { keyOf } from "@/lib/normalize";
+import { IngredientNameInput } from "./IngredientNameInput";
 import styles from "./recipeDialogs.module.css";
 
 export type FormMode = "new" | "edit" | "todo";
@@ -60,6 +63,7 @@ export function RecipeForm({
   onDeleted: () => void;
 }) {
   const uid = useId();
+  const { own } = useKaddy();
 
   const [title, setTitle] = useState(recipe?.title ?? "");
   const [url, setUrl] = useState(recipe?.sourceUrl ?? "");
@@ -76,6 +80,30 @@ export function RecipeForm({
   const [busy, setBusy] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const titleRef = useRef<HTMLInputElement>(null);
+  const [announce, setAnnounce] = useState("");
+  const stepsRef = useRef<HTMLOListElement>(null);
+  const refocus = useRef<{ id: number; dir: "up" | "down" } | null>(null);
+
+  function moveStep(from: number, to: number, dir: "up" | "down") {
+    if (to < 0 || to >= steps.length) return;
+    const next = [...steps];
+    const [step] = next.splice(from, 1);
+    next.splice(to, 0, step);
+    setSteps(next);
+    setAnnounce(`Étape déplacée en position ${to + 1} sur ${next.length}`);
+    refocus.current = { id: step.id, dir };
+  }
+
+  // Once the step has moved in the DOM, keep the focus on its arrow (the other one at either end).
+  useEffect(() => {
+    const r = refocus.current;
+    const row = r && stepsRef.current?.querySelector(`[data-step="${r.id}"]`);
+    if (!r || !row) return;
+    refocus.current = null;
+    const wanted = row.querySelector<HTMLButtonElement>(`[data-dir="${r.dir}"]`);
+    const other = row.querySelector<HTMLButtonElement>(`[data-dir="${r.dir === "up" ? "down" : "up"}"]`);
+    (wanted && !wanted.disabled ? wanted : other)?.focus();
+  });
 
   // Duplicate check: only while creating (PRODUCT.md), never blocking.
   const duplicate = useMemo(
@@ -131,7 +159,7 @@ export function RecipeForm({
   const label = LABELS[mode];
 
   const deleteControl =
-    mode === "edit" && recipe ? (
+    mode !== "new" && recipe ? (
       confirming ? (
         <span className={styles.confirm} role="group" aria-label="Confirmer la suppression">
           <button
@@ -264,16 +292,13 @@ export function RecipeForm({
             const name = row.name.trim() || `ingrédient ${i + 1}`;
             return (
               <div key={row.id} className={styles.row}>
-                <input
+                <IngredientNameInput
                   id={`${uid}-row-${row.id}`}
-                  type="text"
-                  aria-label={`Ingrédient ${i + 1}`}
-                  placeholder="Ingrédient"
+                  label={`Ingrédient ${i + 1}`}
                   value={row.name}
-                  list={`${uid}-catalog`}
-                  autoComplete="off"
-                  className={styles.rowName}
-                  onChange={(e) => patchRow(row.id, { name: e.target.value })}
+                  catalog={catalog}
+                  own={own}
+                  onChange={(name) => patchRow(row.id, { name })}
                 />
                 <input
                   type="text"
@@ -293,7 +318,7 @@ export function RecipeForm({
                   <option value="">—</option>
                   {UNITS.map((u) => (
                     <option key={u} value={u}>
-                      {u}
+                      {unitLabel(u, parseQty(row.qty))}
                     </option>
                   ))}
                 </select>
@@ -310,9 +335,6 @@ export function RecipeForm({
               </div>
             );
           })}
-          <datalist id={`${uid}-catalog`}>
-            {catalog?.products.map((p) => <option key={p.key} value={p.name} />)}
-          </datalist>
           <button
             type="button"
             className={styles.add}
@@ -333,33 +355,66 @@ export function RecipeForm({
           <h3 id={`${uid}-steps`} className={styles.sectionTitle}>
             Préparation
           </h3>
-          {steps.map((step, i) => (
-            <div key={step.id} className={styles.stepRow}>
-              <span className={`${styles.stepNumber} ${styles.stepNumberEdit}`} aria-hidden="true">
-                {i + 1}
-              </span>
-              <textarea
-                id={`${uid}-step-${step.id}`}
-                aria-label={`Étape ${i + 1}`}
-                rows={2}
-                value={step.text}
-                className={styles.stepInput}
-                onChange={(e) =>
-                  setSteps((ss) => ss.map((s) => (s.id === step.id ? { ...s, text: e.target.value } : s)))
-                }
-              />
-              <button
-                type="button"
-                aria-label={`Retirer l’étape ${i + 1}`}
-                className={`${styles.remove} ${styles.removeStep} kd-hit`}
-                onClick={() => setSteps((ss) => ss.filter((s) => s.id !== step.id))}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M6 6l12 12M18 6L6 18" />
-                </svg>
-              </button>
-            </div>
-          ))}
+          <ol ref={stepsRef} className={styles.stepList} aria-labelledby={`${uid}-steps`}>
+            {steps.map((step, i) => (
+              <li key={step.id} data-step={step.id} className={styles.stepRow}>
+                <span className={`${styles.stepNumber} ${styles.stepNumberEdit}`} aria-hidden="true">
+                  {i + 1}
+                </span>
+                <textarea
+                  id={`${uid}-step-${step.id}`}
+                  aria-label={`Étape ${i + 1}`}
+                  rows={3}
+                  value={step.text}
+                  className={styles.stepInput}
+                  onChange={(e) =>
+                    setSteps((ss) => ss.map((s) => (s.id === step.id ? { ...s, text: e.target.value } : s)))
+                  }
+                />
+                {steps.length > 1 && (
+                  <span className={styles.stepMoves}>
+                    <button
+                      type="button"
+                      data-dir="up"
+                      className={styles.stepMove}
+                      disabled={i === 0}
+                      aria-label={`Monter l’étape ${i + 1}`}
+                      onClick={() => moveStep(i, i - 1, "up")}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 15l6-6 6 6" />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      data-dir="down"
+                      className={styles.stepMove}
+                      disabled={i === steps.length - 1}
+                      aria-label={`Descendre l’étape ${i + 1}`}
+                      onClick={() => moveStep(i, i + 1, "down")}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    </button>
+                  </span>
+                )}
+                <button
+                  type="button"
+                  aria-label={`Retirer l’étape ${i + 1}`}
+                  className={`${styles.remove} ${styles.removeStep} kd-hit`}
+                  onClick={() => setSteps((ss) => ss.filter((s) => s.id !== step.id))}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" />
+                  </svg>
+                </button>
+              </li>
+            ))}
+          </ol>
+          <div role="status" aria-live="polite" className={styles.srOnly}>
+            {announce}
+          </div>
           <button
             type="button"
             className={styles.add}

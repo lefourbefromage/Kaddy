@@ -36,7 +36,7 @@ households/{hid}/recipes/{recipeId}
   titleWords: string[]         // normalised words (no accents, no small words, singular) → duplicate detection
   description: string
   sourceUrl: string | null     // YouTube, Instagram, recipe site
-  ingredients: { name: string, key: string, qty: number | null, unit: "g"|"kg"|"ml"|"l"|"pièce"|null }[]
+  ingredients: { name: string, key: string, qty: number | null, unit: "g"|"kg"|"ml"|"cl"|"l"|"CC"|"CS"|"pincée"|"pièce"|null }[]
   steps: string[]
   status: "complete" | "todo"  // derived on every save: "todo" when there is no ingredient
                                // (a recipe added from the Menu starts as "todo")

@@ -163,7 +163,7 @@ export function ProductInput({
 }
 
 /** Bold on the part of the name that matches (accent-insensitive). */
-function Highlight({ text, query }: { text: string; query: string }) {
+export function Highlight({ text, query }: { text: string; query: string }) {
   const i = fold(text).indexOf(fold(query.trim()));
   if (i < 0 || !query.trim()) return <>{text}</>;
   const end = i + query.trim().length;

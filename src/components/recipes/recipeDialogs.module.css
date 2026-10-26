@@ -633,10 +633,61 @@
   color: var(--kd-ink);
 }
 
+.stepList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--kd-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .stepRow {
   display: flex;
   align-items: flex-start;
   gap: var(--kd-space-2);
+}
+
+/* Up / down, stacked beside the step (same arrows as Ordre des rayons). */
+.stepMoves {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.stepMove {
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-sm);
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--kd-dur-feedback) ease;
+}
+
+.stepMove:not(:disabled):hover {
+  background: var(--kd-field);
+}
+
+.stepMove:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
+.stepMove svg {
+  fill: none;
+  stroke: var(--kd-ink);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Ingredient suggestions: wider than the name column, over the quantity and unit. */
+.suggestions {
+  right: auto;
+  width: max(100%, 280px);
 }
 
 .stepNumberEdit {
@@ -854,5 +905,9 @@
 @media (prefers-reduced-motion: reduce) {
   .dup {
     animation: none;
+  }
+
+  .stepMove {
+    transition: none;
   }
 }

@@ -14,7 +14,7 @@ import {
 import { db } from "./firebase";
 import { areClose, keyOf, titleWords } from "./normalize";
 
-export const UNITS = ["g", "kg", "ml", "l", "pièce"] as const;
+export const UNITS = ["g", "kg", "ml", "cl", "l", "CC", "CS", "pincée", "pièce"] as const;
 export type Unit = (typeof UNITS)[number];
 
 export type Ingredient = { name: string; key: string; qty: number | null; unit: Unit | null };
@@ -102,7 +102,7 @@ export function appendIngredient(householdId: string, recipe: Recipe, name: stri
   }).catch((e) => console.error("appendIngredient", e));
 }
 
-export const deleteRecipe =(householdId: string, id: string) =>
+export const deleteRecipe = (householdId: string, id: string) =>
   deleteDoc(doc(recipesOf(householdId), id));
 
 /** First other recipe whose title is close, ignoring the ones declared "not a duplicate". */
@@ -119,9 +119,13 @@ export function findDuplicate(title: string, recipes: Recipe[], exceptId: string
 
 const number = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
 
+/** "2 pièces", "3 pincées"; the other units never take an s. */
+export const unitLabel = (unit: Unit, qty: number | null) =>
+  (unit === "pièce" || unit === "pincée") && (qty ?? 0) > 1 ? `${unit}s` : unit;
+
 export const formatQty = (qty: number | null, unit: Unit | null) => {
   if (qty == null) return "";
-  const u = unit === "pièce" && qty > 1 ? "pièces" : unit;
+  const u = unit && unitLabel(unit, qty);
   return u ? `${number.format(qty)} ${u}` : number.format(qty);
 };
 
