@@ -65,16 +65,34 @@
   color: var(--kd-text-muted);
 }
 
+/* Back to this week: a filled lavender pill, so it reads as a button next to the arrows. */
 .backToday {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   height: var(--kd-target);
-  padding: 0 var(--kd-space-3);
+  padding: 0 14px 0 var(--kd-space-3);
   border: 0;
   border-radius: var(--kd-radius-pill);
-  background: transparent;
-  color: var(--kd-ink);
+  background: var(--kd-lavender-soft);
+  color: var(--kd-violet-deep);
   font: var(--kd-text-body-medium);
   font-weight: 700;
+  white-space: nowrap;
   cursor: pointer;
+}
+
+.backToday svg {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.backToday:hover {
+  background: var(--kd-lavender);
 }
 
 /* ---------- Mobile day strip ---------- */

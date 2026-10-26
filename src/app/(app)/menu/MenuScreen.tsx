@@ -221,6 +221,10 @@ export function MenuScreen() {
           </button>
           {weekId !== thisWeek && (
             <button type="button" className={styles.backToday} onClick={() => goToWeek(thisWeek)}>
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.5" y="5" width="17" height="15" rx="3" />
+                <path d="M3.5 10h17M8 3v4M16 3v4M12 14.5h.01" />
+              </svg>
               Aujourd’hui
             </button>
           )}
