@@ -1,7 +1,7 @@
 // Move every household from the 14 old aisles to the 27 aisles of data/aisles.json (October 2026).
 // Run it AFTER scripts/seed-catalog.mjs, so the catalogue already holds the new aisles.
-// Usage: GOOGLE_APPLICATION_CREDENTIALS=./service-account.json node scripts/migrate-aisles.mjs [--dry]
-// PowerShell: $env:GOOGLE_APPLICATION_CREDENTIALS="./service-account.json"; node scripts/migrate-aisles.mjs --dry
+// Usage: node scripts/migrate-aisles.mjs [--dry]
+// (reads ./service-account.json, or the key named by GOOGLE_APPLICATION_CREDENTIALS)
 //
 // For each household:
 // - aisleOrder: a renamed aisle keeps its place; a split aisle is replaced, at its place, by the
@@ -12,7 +12,7 @@
 // Idempotent: ids that still exist are left as they are.
 
 import { readFile } from 'node:fs/promises';
-import { initializeApp, applicationDefault } from 'firebase-admin/app';
+import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
 // Must stay identical to keyOf in scripts/seed-catalog.mjs (importing it would run the seed).
@@ -70,7 +70,9 @@ const newOrder = (order) => {
   return out;
 };
 
-initializeApp({ credential: applicationDefault() });
+// Same key as scripts/deploy-rules.mjs: GOOGLE_APPLICATION_CREDENTIALS, or ./service-account.json.
+const keyPath = process.env.GOOGLE_APPLICATION_CREDENTIALS ?? './service-account.json';
+initializeApp({ credential: cert(JSON.parse(await readFile(keyPath, 'utf8'))) });
 const db = getFirestore();
 const writer = db.bulkWriter();
 let changes = 0;

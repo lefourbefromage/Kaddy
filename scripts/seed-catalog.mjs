@@ -1,6 +1,6 @@
 // Seed the shared product catalogue (catalog/{key}) from data/products.json.
-// Usage: GOOGLE_APPLICATION_CREDENTIALS=./service-account.json node scripts/seed-catalog.mjs
-// PowerShell: $env:GOOGLE_APPLICATION_CREDENTIALS="./service-account.json"; node scripts/seed-catalog.mjs
+// Usage: node scripts/seed-catalog.mjs
+// (reads ./service-account.json, or the key named by GOOGLE_APPLICATION_CREDENTIALS)
 // Expected format of data/products.json:
 //   [{ "name": "Pommes de terre", "aisleId": "fruits-legumes", "aliases": ["pdt", "patates"], "defaultUnit": "kg" }, ...]
 // Optional "key": overrides keyOf(name) when two names normalise to the same key
@@ -8,7 +8,7 @@
 // Idempotent: the document id is the normalised key, so re-running updates without duplicates.
 
 import { readFile } from 'node:fs/promises';
-import { initializeApp, applicationDefault } from 'firebase-admin/app';
+import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
 const aisles = JSON.parse(await readFile(new URL('../data/aisles.json', import.meta.url), 'utf8'));
@@ -29,7 +29,9 @@ for (const p of products) {
   byKey.set(key, p.name);
 }
 
-initializeApp({ credential: applicationDefault() });
+// Same key as scripts/deploy-rules.mjs: GOOGLE_APPLICATION_CREDENTIALS, or ./service-account.json.
+const keyPath = process.env.GOOGLE_APPLICATION_CREDENTIALS ?? './service-account.json';
+initializeApp({ credential: cert(JSON.parse(await readFile(keyPath, 'utf8'))) });
 const db = getFirestore();
 const writer = db.bulkWriter();
 for (const p of products) {

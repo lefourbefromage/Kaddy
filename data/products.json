@@ -1199,7 +1199,8 @@
     "name": "Crème fraîche",
     "aisleId": "cremerie-yaourts",
     "aliases": [
-      "creme epaisse"
+      "creme epaisse",
+      "crème fraîche épaisse"
     ],
     "defaultUnit": null
   },
@@ -2012,7 +2013,8 @@
     "aliases": [
       "concasse de tomate",
       "concasse de tomates",
-      "tomate concassee"
+      "tomate concassee",
+      "pulpe de tomates"
     ],
     "defaultUnit": null
   },
@@ -2121,7 +2123,8 @@
     "aisleId": "assaisonnements-condiments",
     "aliases": [
       "bouillon",
-      "cube de bouillon"
+      "cube de bouillon",
+      "bouillon de légumes"
     ],
     "defaultUnit": null
   },
@@ -2466,6 +2469,12 @@
     "defaultUnit": null
   },
   {
+    "name": "Orzo",
+    "aisleId": "pates-riz-feculents",
+    "aliases": [],
+    "defaultUnit": null
+  },
+  {
     "name": "Pâtes",
     "aisleId": "pates-riz-feculents",
     "aliases": [
@@ -2533,7 +2542,8 @@
     "aisleId": "pates-riz-feculents",
     "aliases": [
       "risotto",
-      "arborio"
+      "arborio",
+      "riz arborio"
     ],
     "defaultUnit": null
   },
