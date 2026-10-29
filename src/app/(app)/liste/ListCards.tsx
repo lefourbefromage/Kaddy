@@ -4,7 +4,7 @@ import { useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { AislePicker } from "@/components/AislePicker";
 import { ProductInput } from "@/components/ProductInput";
-import { AISLE_BY_ID } from "@/lib/aisles";
+import { AISLE_BY_ID, knownAisle } from "@/lib/aisles";
 import type { Catalog } from "@/lib/catalog";
 import { aisleOf, type HouseholdIngredients } from "@/lib/ingredients";
 import { keyOf } from "@/lib/normalize";
@@ -294,7 +294,7 @@ export function ExtrasCard({ extras, ...shared }: Omit<Shared, "collapsible"> & 
       <div className={styles.cardBody}>
         {extras.length > 0 && <RowHeader />}
         {extras.map((x) => {
-          const aisleId = x.aisleId ?? aisleOf(x.key, own, catalog);
+          const aisleId = knownAisle(x.aisleId) ?? aisleOf(x.key, own, catalog);
           return (
             <IngredientRow
               key={x.id}

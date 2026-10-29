@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { collection, doc, onSnapshot, serverTimestamp, setDoc, writeBatch } from "firebase/firestore";
 import { db } from "./firebase";
-import { AISLES, fullOrder, type AisleArt } from "./aisles";
+import { AISLES, fullOrder, knownAisle, type AisleArt } from "./aisles";
 import type { Catalog } from "./catalog";
 import { aisleOf, type HouseholdIngredients } from "./ingredients";
 import { overrideKey, type Extra } from "./list";
@@ -74,7 +74,7 @@ export function kaddyItems(
       add(ing.key, ing.name, qty, unit, aisleOf(ing.key, own, catalog), recipe.title);
     }
   }
-  for (const x of extras) add(x.key, x.name, x.qty, x.unit, x.aisleId ?? aisleOf(x.key, own, catalog), "Hors menu");
+  for (const x of extras) add(x.key, x.name, x.qty, x.unit, knownAisle(x.aisleId) ?? aisleOf(x.key, own, catalog), "Hors menu");
   return [...items.values()];
 }
 

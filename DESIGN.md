@@ -34,32 +34,58 @@ colors:
   error-bg: "#FDD3C6"
   error-text: "#7A2E17"
   success-text: "#3F6B4C"
-  aisle-viande-poisson: "#FDD3C6"
-  aisle-viande-poisson-dot: "#F87A56"
+  aisle-viandes-volailles: "#FDD3C6"
+  aisle-viandes-volailles-dot: "#F87A56"
+  aisle-poissonnerie: "#CDE0EE"
+  aisle-poissonnerie-dot: "#3E78B2"
   aisle-fruits-legumes: "#CFE6D3"
   aisle-fruits-legumes-dot: "#5A9868"
-  aisle-pain-patisserie: "#FBE3B8"
-  aisle-pain-patisserie-dot: "#F2C94C"
-  aisle-laitier-oeufs-vegetal: "#F8EDC8"
-  aisle-laitier-oeufs-vegetal-dot: "#E6CFA0"
-  aisle-charcuterie-traiteur: "#F9D3DD"
-  aisle-charcuterie-traiteur-dot: "#E06A8C"
+  aisle-boulangerie: "#FBE3B8"
+  aisle-boulangerie-dot: "#F2C94C"
+  aisle-lait-oeufs: "#F8EDC8"
+  aisle-lait-oeufs-dot: "#E6CFA0"
+  aisle-cremerie-yaourts: "#E3ECF3"
+  aisle-cremerie-yaourts-dot: "#9DB4CC"
+  aisle-desserts: "#FCE0D0"
+  aisle-desserts-dot: "#F09A6E"
+  aisle-fromages: "#F5E6C0"
+  aisle-fromages-dot: "#C9A13B"
+  aisle-charcuterie: "#F9D3DD"
+  aisle-charcuterie-dot: "#E06A8C"
   aisle-produits-cuisines: "#E8EBC9"
   aisle-produits-cuisines-dot: "#A2AC4C"
   aisle-surgeles: "#D2EFEC"
   aisle-surgeles-dot: "#45ABA2"
-  aisle-epicerie-salee: "#F1E2CC"
-  aisle-epicerie-salee-dot: "#D9A86A"
+  aisle-conserves-legumes: "#DDE6E1"
+  aisle-conserves-legumes-dot: "#7E9A8F"
+  aisle-plats-cuisines: "#EFE3C2"
+  aisle-plats-cuisines-dot: "#B08A2E"
+  aisle-assaisonnements-condiments: "#F5D5CA"
+  aisle-assaisonnements-condiments-dot: "#C4573A"
+  aisle-pates-riz-feculents: "#F1E2CC"
+  aisle-pates-riz-feculents-dot: "#D9A86A"
+  aisle-aperitif: "#E0E8C8"
+  aisle-aperitif-dot: "#7A9440"
+  aisle-produits-du-monde: "#FCDDC2"
+  aisle-produits-du-monde-dot: "#EE8F3E"
+  aisle-bio-vegetal: "#D8EDC9"
+  aisle-bio-vegetal-dot: "#6FAE4A"
+  aisle-boissons-chaudes: "#E6D6CC"
+  aisle-boissons-chaudes-dot: "#8A5A44"
   aisle-epicerie-sucree: "#F3D8EE"
   aisle-epicerie-sucree-dot: "#C879BC"
+  aisle-aide-cuisine: "#F4EBDD"
+  aisle-aide-cuisine-dot: "#C2A27C"
+  aisle-friandises: "#FAD6E8"
+  aisle-friandises-dot: "#E46AA8"
   aisle-boissons: "#CFE9F5"
   aisle-boissons-dot: "#4FA3CF"
-  aisle-saveurs-du-monde: "#FCDDC2"
-  aisle-saveurs-du-monde-dot: "#EE8F3E"
-  aisle-hygiene-beaute: "#E6DAF7"
-  aisle-hygiene-beaute-dot: "#A07FD9"
+  aisle-hygiene: "#E6DAF7"
+  aisle-hygiene-dot: "#A07FD9"
   aisle-entretien-nettoyage: "#DCE7F7"
   aisle-entretien-nettoyage-dot: "#8FA9D6"
+  aisle-maison-loisirs: "#E4E4EC"
+  aisle-maison-loisirs-dot: "#7D7F99"
   aisle-autres: "#EAE5DE"
   aisle-autres-dot: "#A39A8E"
 typography:
@@ -292,22 +318,35 @@ Each aisle has a pastel background (section header) and a dot (navigation):
 
 | Aisle | Background | Dot |
 |---|---|---|
-| Viande & poisson | #FDD3C6 | #F87A56 |
+| Viandes & volailles | #FDD3C6 | #F87A56 |
+| Poissonnerie | #CDE0EE | #3E78B2 |
 | Fruits & légumes | #CFE6D3 | #5A9868 |
-| Pain & pâtisserie | #FBE3B8 | #F2C94C |
-| Laitier, œufs & végétal | #F8EDC8 | #E6CFA0 |
-| Charcuterie & traiteur | #F9D3DD | #E06A8C |
+| Boulangerie | #FBE3B8 | #F2C94C |
+| Lait & œufs | #F8EDC8 | #E6CFA0 |
+| Crèmerie & yaourts | #E3ECF3 | #9DB4CC |
+| Desserts | #FCE0D0 | #F09A6E |
+| Fromages | #F5E6C0 | #C9A13B |
+| Charcuterie | #F9D3DD | #E06A8C |
 | Produits cuisinés | #E8EBC9 | #A2AC4C |
 | Surgelés | #D2EFEC | #45ABA2 |
-| Épicerie salée | #F1E2CC | #D9A86A |
+| Conserves de légumes | #DDE6E1 | #7E9A8F |
+| Plats cuisinés | #EFE3C2 | #B08A2E |
+| Assaisonnements & condiments | #F5D5CA | #C4573A |
+| Pâtes, riz & féculents | #F1E2CC | #D9A86A |
+| Apéritif | #E0E8C8 | #7A9440 |
+| Produits du monde | #FCDDC2 | #EE8F3E |
+| Bio & végétal | #D8EDC9 | #6FAE4A |
+| Boissons chaudes | #E6D6CC | #8A5A44 |
 | Épicerie sucrée | #F3D8EE | #C879BC |
+| Aide à la cuisine | #F4EBDD | #C2A27C |
+| Friandises | #FAD6E8 | #E46AA8 |
 | Boissons | #CFE9F5 | #4FA3CF |
-| Saveurs du monde | #FCDDC2 | #EE8F3E |
-| Hygiène & beauté | #E6DAF7 | #A07FD9 |
+| Hygiène | #E6DAF7 | #A07FD9 |
 | Entretien & nettoyage | #DCE7F7 | #8FA9D6 |
+| Maison & loisirs | #E4E4EC | #7D7F99 |
 | Autres | #EAE5DE | #A39A8E |
 
-The list, order, labels and illustrations of the aisles live in `data/aisles.json`; the tokens are `--kd-aisle-{id}` and `--kd-aisle-{id}-dot`. Each aisle has an object illustration (crayon + gouache, matte, transparent background, no scribble or shadow behind it, so it sits cleanly on the aisle colour), all from one sheet: `design/rayons-planche.webp`, cut by `npm run aisle-art`.
+The list, order, labels and illustrations of the aisles live in `data/aisles.json`; the tokens are `--kd-aisle-{id}` and `--kd-aisle-{id}-dot`. Each aisle has an object illustration (crayon + gouache, matte, transparent background, no scribble or shadow behind it, so it sits cleanly on the aisle colour), all from one sheet: `design/rayons-planche.webp`, cut by `npm run aisle-art`. Since the split into 27 aisles (October 2026), the aisles created by the split borrow the closest existing picture (Poissonnerie the one of Viandes & volailles, Fromages the dairy one…) until each has its own; `npm run aisle-art` refuses to run while the sheet has fewer cells than aisles.
 
 The same pastels are reused for recipe-card backgrounds and the summary tiles. The Menu food-group dots reuse the aisle dots (vegetables #5A9868, starches #F2C94C, meat & fish #F87A56, dairy #E6CFA0), plus fruit #F49AC1.
 

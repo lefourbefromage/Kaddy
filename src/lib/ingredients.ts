@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "./firebase";
+import { knownAisle } from "./aisles";
 import type { Catalog } from "./catalog";
 
 /** The household's own aisle choices (households/{hid}/ingredients/{key}), which win over the catalogue. */
@@ -26,6 +27,6 @@ export function useHouseholdIngredients(householdId: string) {
 /** Aisle of an ingredient: the household's choice, then the catalogue; null = "Ingrédients à classer". */
 export function aisleOf(key: string, own: HouseholdIngredients | null, catalog: Catalog | null): string | null {
   const mine = own?.get(key);
-  if (mine) return mine.aisleId;
-  return catalog?.byKey.get(key)?.aisleId ?? null;
+  if (mine) return knownAisle(mine.aisleId);
+  return knownAisle(catalog?.byKey.get(key)?.aisleId);
 }

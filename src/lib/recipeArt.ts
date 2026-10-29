@@ -5,7 +5,7 @@ import type { Recipe } from "./recipes";
 export type Art = { src: string; width: number; height: number; background: string };
 
 // A recipe ingredient filed there is a mistake, not a reason to show soap on the recipe.
-const NOT_FOOD = new Set(["hygiene-beaute", "entretien-nettoyage", "autres"]);
+const NOT_FOOD = new Set(["hygiene", "entretien-nettoyage", "maison-loisirs", "autres"]);
 
 export const TODO_ART: Art = {
   src: "/illustrations/recette-a-completer.webp",
@@ -15,7 +15,7 @@ export const TODO_ART: Art = {
 };
 
 // No ingredient found in the catalogue: one of these aisles, picked from the id.
-const FALLBACKS = ["produits-cuisines", "epicerie-salee", "epicerie-sucree"];
+const FALLBACKS = ["produits-cuisines", "pates-riz-feculents", "epicerie-sucree"];
 
 /**
  * A recipe's thumbnail, derived from its ingredients (no image is stored): the illustration

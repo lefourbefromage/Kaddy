@@ -13,6 +13,12 @@ const NOISE = 60; // px: specks smaller than this are dropped
 const SOLID = 40; // alpha: blobs are joined on clearly opaque pixels only (faint edges would bridge items)
 
 const aisles = JSON.parse(await readFile('data/aisles.json', 'utf8'));
+if (aisles.length > GRID * GRID) {
+  // Since the split into 27 aisles, several aisles borrow another one's picture: this script would
+  // overwrite them with the wrong cells. A new sheet (or one picture per aisle) is needed first.
+  console.error(`${aisles.length} aisles but a ${GRID}×${GRID} sheet: draw a bigger sheet first.`);
+  process.exit(1);
+}
 const { data, info } = await sharp(SHEET).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
 const { width: W, height: H } = info;
 const cellW = W / GRID;

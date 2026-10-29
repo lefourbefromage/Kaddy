@@ -24,7 +24,8 @@ let pending: Promise<Catalog> | null = null;
 
 // The catalogue barely changes (scripts/seed-catalog.mjs): the offline copy is used, and the
 // server is read again at most once a day, instead of ~400 billed reads on every app start.
-const FETCHED_AT = "kaddy.catalog.fetchedAt";
+// Renamed (".v2") when the aisles change, so every phone reads the new catalogue at once.
+const FETCHED_AT = "kaddy.catalog.fetchedAt.v2";
 const REFRESH_MS = 24 * 60 * 60 * 1000;
 
 async function read(): Promise<QuerySnapshot> {

@@ -44,26 +44,39 @@
   --kd-success-text: #3F6B4C;
 
   /* ---- Aisles (background / dot), one pair per id of data/aisles.json ---- */
-  --kd-aisle-viande-poisson: #FDD3C6;        --kd-aisle-viande-poisson-dot: #F87A56;
-  --kd-aisle-fruits-legumes: #CFE6D3;        --kd-aisle-fruits-legumes-dot: #5A9868;
-  --kd-aisle-pain-patisserie: #FBE3B8;       --kd-aisle-pain-patisserie-dot: #F2C94C;
-  --kd-aisle-laitier-oeufs-vegetal: #F8EDC8; --kd-aisle-laitier-oeufs-vegetal-dot: #E6CFA0;
-  --kd-aisle-charcuterie-traiteur: #F9D3DD;  --kd-aisle-charcuterie-traiteur-dot: #E06A8C;
-  --kd-aisle-produits-cuisines: #E8EBC9;     --kd-aisle-produits-cuisines-dot: #A2AC4C;
-  --kd-aisle-surgeles: #D2EFEC;              --kd-aisle-surgeles-dot: #45ABA2;
-  --kd-aisle-epicerie-salee: #F1E2CC;        --kd-aisle-epicerie-salee-dot: #D9A86A;
-  --kd-aisle-epicerie-sucree: #F3D8EE;       --kd-aisle-epicerie-sucree-dot: #C879BC;
-  --kd-aisle-boissons: #CFE9F5;              --kd-aisle-boissons-dot: #4FA3CF;
-  --kd-aisle-saveurs-du-monde: #FCDDC2;      --kd-aisle-saveurs-du-monde-dot: #EE8F3E;
-  --kd-aisle-hygiene-beaute: #E6DAF7;        --kd-aisle-hygiene-beaute-dot: #A07FD9;
-  --kd-aisle-entretien-nettoyage: #DCE7F7;   --kd-aisle-entretien-nettoyage-dot: #8FA9D6;
-  --kd-aisle-autres: #EAE5DE;                --kd-aisle-autres-dot: #A39A8E;
+  --kd-aisle-viandes-volailles: #FDD3C6;           --kd-aisle-viandes-volailles-dot: #F87A56;
+  --kd-aisle-poissonnerie: #CDE0EE;                --kd-aisle-poissonnerie-dot: #3E78B2;
+  --kd-aisle-fruits-legumes: #CFE6D3;              --kd-aisle-fruits-legumes-dot: #5A9868;
+  --kd-aisle-boulangerie: #FBE3B8;                 --kd-aisle-boulangerie-dot: #F2C94C;
+  --kd-aisle-lait-oeufs: #F8EDC8;                  --kd-aisle-lait-oeufs-dot: #E6CFA0;
+  --kd-aisle-cremerie-yaourts: #E3ECF3;            --kd-aisle-cremerie-yaourts-dot: #9DB4CC;
+  --kd-aisle-desserts: #FCE0D0;                    --kd-aisle-desserts-dot: #F09A6E;
+  --kd-aisle-fromages: #F5E6C0;                    --kd-aisle-fromages-dot: #C9A13B;
+  --kd-aisle-charcuterie: #F9D3DD;                 --kd-aisle-charcuterie-dot: #E06A8C;
+  --kd-aisle-produits-cuisines: #E8EBC9;           --kd-aisle-produits-cuisines-dot: #A2AC4C;
+  --kd-aisle-surgeles: #D2EFEC;                    --kd-aisle-surgeles-dot: #45ABA2;
+  --kd-aisle-conserves-legumes: #DDE6E1;           --kd-aisle-conserves-legumes-dot: #7E9A8F;
+  --kd-aisle-plats-cuisines: #EFE3C2;              --kd-aisle-plats-cuisines-dot: #B08A2E;
+  --kd-aisle-assaisonnements-condiments: #F5D5CA;  --kd-aisle-assaisonnements-condiments-dot: #C4573A;
+  --kd-aisle-pates-riz-feculents: #F1E2CC;         --kd-aisle-pates-riz-feculents-dot: #D9A86A;
+  --kd-aisle-aperitif: #E0E8C8;                    --kd-aisle-aperitif-dot: #7A9440;
+  --kd-aisle-produits-du-monde: #FCDDC2;           --kd-aisle-produits-du-monde-dot: #EE8F3E;
+  --kd-aisle-bio-vegetal: #D8EDC9;                 --kd-aisle-bio-vegetal-dot: #6FAE4A;
+  --kd-aisle-boissons-chaudes: #E6D6CC;            --kd-aisle-boissons-chaudes-dot: #8A5A44;
+  --kd-aisle-epicerie-sucree: #F3D8EE;             --kd-aisle-epicerie-sucree-dot: #C879BC;
+  --kd-aisle-aide-cuisine: #F4EBDD;                --kd-aisle-aide-cuisine-dot: #C2A27C;
+  --kd-aisle-friandises: #FAD6E8;                  --kd-aisle-friandises-dot: #E46AA8;
+  --kd-aisle-boissons: #CFE9F5;                    --kd-aisle-boissons-dot: #4FA3CF;
+  --kd-aisle-hygiene: #E6DAF7;                     --kd-aisle-hygiene-dot: #A07FD9;
+  --kd-aisle-entretien-nettoyage: #DCE7F7;         --kd-aisle-entretien-nettoyage-dot: #8FA9D6;
+  --kd-aisle-maison-loisirs: #E4E4EC;              --kd-aisle-maison-loisirs-dot: #7D7F99;
+  --kd-aisle-autres: #EAE5DE;                      --kd-aisle-autres-dot: #A39A8E;
 
   /* ---- Food groups (Menu dots and plate chart; reuse the aisle dots) ---- */
   --kd-group-veg: var(--kd-aisle-fruits-legumes-dot);
-  --kd-group-starch: var(--kd-aisle-pain-patisserie-dot);
-  --kd-group-protein: var(--kd-aisle-viande-poisson-dot);
-  --kd-group-dairy: var(--kd-aisle-laitier-oeufs-vegetal-dot);
+  --kd-group-starch: var(--kd-aisle-boulangerie-dot);
+  --kd-group-protein: var(--kd-aisle-viandes-volailles-dot);
+  --kd-group-dairy: var(--kd-aisle-lait-oeufs-dot);
   --kd-group-pulses: var(--kd-violet-cap);
   --kd-group-fruit: #F49AC1;
 

@@ -7,6 +7,9 @@ export type Aisle = { id: string; label: string; illustration: AisleArt };
 export const AISLES: Aisle[] = aisleList;
 export const AISLE_BY_ID = new Map(AISLES.map((a) => [a.id, a]));
 
+/** An aisle id that still exists, or null: a retired id (old catalogue copy, data not migrated yet) means "à classer". */
+export const knownAisle = (id: string | null | undefined) => (id && AISLE_BY_ID.has(id) ? id : null);
+
 /** CSS colour tokens of an aisle (styles/tokens.css). */
 export const aisleColor = (id: string) => `var(--kd-aisle-${id})`;
 export const aisleDot = (id: string) => `var(--kd-aisle-${id}-dot)`;

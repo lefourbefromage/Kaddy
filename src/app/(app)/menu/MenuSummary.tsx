@@ -18,14 +18,14 @@ export type SummaryData = {
 };
 
 // Illustration that pops next to the chart for the focused group (design/menu-*.html): the
-// picture of the matching aisle (data/aisles.json); pulses take the tin of Épicerie salée.
+// picture of the matching aisle (data/aisles.json); pulses take the tin of Conserves de légumes.
 const popArt = (aisleId: string, className: string) => ({ ...AISLE_BY_ID.get(aisleId)!.illustration, className });
 const POP: Record<GroupId, AisleArt & { className: string }> = {
   veg: popArt("fruits-legumes", "popVeg"),
-  starch: popArt("pain-patisserie", "popStarch"),
-  protein: popArt("viande-poisson", "popProtein"),
-  dairy: popArt("laitier-oeufs-vegetal", "popVeg"),
-  pulses: popArt("epicerie-salee", "popStarch"),
+  starch: popArt("boulangerie", "popStarch"),
+  protein: popArt("viandes-volailles", "popProtein"),
+  dairy: popArt("lait-oeufs", "popVeg"),
+  pulses: popArt("conserves-legumes", "popStarch"),
   fruit: popArt("fruits-legumes", "popVeg"),
 };
 

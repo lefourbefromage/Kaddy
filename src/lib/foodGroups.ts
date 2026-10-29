@@ -21,6 +21,7 @@ const FRUITS = keys(
   "Abricots", "Ananas", "Banane", "Cerises", "Clémentines", "Fraises", "Framboises", "Fruits rouges",
   "Grenade", "Kiwi", "Mangue", "Melon", "Mûres", "Myrtilles", "Nectarines", "Orange", "Pamplemousse",
   "Pastèque", "Pêches", "Poire", "Pomme", "Raisin", "Rhubarbe", "Fruits rouges surgelés", "Compote", "Fruits secs",
+  "Dattes", "Pruneaux", "Figues",
 );
 // Herbs and aromatics season a dish; they don't make it a "vegetable" meal.
 const AROMATICS = keys(
@@ -34,7 +35,17 @@ const STARCHES = keys(
   "Boulgour", "Semoule", "Couscous", "Polenta", "Nouilles udon", "Nouilles soba", "Nouilles chinoises",
   "Vermicelles de riz", "Frites", "Maïs",
 );
-const PULSES = keys("Lentilles", "Pois chiches", "Haricots rouges", "Haricots blancs", "Flageolets", "Houmous");
+const PULSES = keys(
+  "Lentilles", "Lentilles en conserve", "Lentilles cuisinées", "Pois cassés", "Pois chiches", "Haricots rouges",
+  "Haricots blancs", "Flageolets", "Houmous", "Falafels",
+  // Soy and wheat proteins: the plant side of the plate
+  "Steak végétal", "Soja pané", "Tofu", "Tofu fumé", "Nuggets végétaux", "Galettes végétales", "Seitan", "Protéines végétales",
+);
+// Fruits & légumes also holds nuts and seeds: they garnish a dish without making it a vegetable meal.
+const NUTS = keys(
+  "Amandes", "Noix", "Noix de cajou", "Noix de pécan", "Noisettes", "Pistaches", "Pignons de pin",
+  "Graines de courge", "Graines de sésame", "Graines de chia", "Graines de lin",
+);
 const FROZEN_VEG = keys("Épinards surgelés", "Petits pois surgelés", "Légumes surgelés", "Poêlée de légumes");
 
 export function groupOf(product: CatalogProduct): GroupId | null {
@@ -44,14 +55,19 @@ export function groupOf(product: CatalogProduct): GroupId | null {
   if (FRUITS.has(k)) return "fruit";
   switch (product.aisleId) {
     case "fruits-legumes":
-      return AROMATICS.has(k) ? null : "veg";
-    case "viande-poisson":
-    case "charcuterie-traiteur":
+      return AROMATICS.has(k) || NUTS.has(k) ? null : "veg";
+    case "viandes-volailles":
+    case "poissonnerie":
+    case "charcuterie":
       return "protein";
-    case "laitier-oeufs-vegetal":
+    case "lait-oeufs":
+    case "cremerie-yaourts":
+    case "fromages":
+    case "bio-vegetal":
       return "dairy";
-    case "pain-patisserie":
+    case "boulangerie":
     case "produits-cuisines":
+    case "pates-riz-feculents":
       return "starch";
     case "surgeles":
       return FROZEN_VEG.has(k) ? "veg" : k === keyOf("Poisson pané") || k === keyOf("Nuggets") ? "protein" : null;

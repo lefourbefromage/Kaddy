@@ -111,7 +111,7 @@ export const setIngredientAisle = (householdId: string, key: string, name: strin
 export type ProductSuggestion = { name: string; key: string; aisleId: string | null; matched: string };
 
 // Aisles that never hold a recipe ingredient: ranked last when filling a recipe.
-const NOT_COOKING = new Set(["boissons", "hygiene-beaute", "entretien-nettoyage"]);
+const NOT_COOKING = new Set(["boissons", "hygiene", "entretien-nettoyage", "maison-loisirs"]);
 
 /**
  * Up to `limit` products whose name or an alias matches what is typed (accents and plurals
