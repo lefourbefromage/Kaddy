@@ -9,7 +9,7 @@
     "lint": "eslint",
     "deploy:rules": "node --env-file=.env.local scripts/deploy-rules.mjs",
     "icons": "node scripts/make-icons.mjs",
-    "aisle-art": "node scripts/cut-aisle-sheet.mjs"
+    "aisle-art": "node scripts/aisle-art.mjs"
   },
   "dependencies": {
     "firebase": "^13.1.0",
