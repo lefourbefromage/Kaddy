@@ -1,4 +1,4 @@
-// Turns one picture per aisle, design/rayons/{id}.png (see design/prompts-rayons.md), into
+// Turns one picture per aisle, design/rayons/{id}.webp or .png (see design/prompts-rayons.md), into
 // public/illustrations/rayons/{id}.webp and writes each picture's size into data/aisles.json.
 // Aisles without a source picture keep their current illustration.
 // Usage: node scripts/aisle-art.mjs [design/rayons]
@@ -18,10 +18,15 @@ await mkdir(OUT, { recursive: true });
 const missing = [];
 
 for (const aisle of aisles) {
-  const source = `${SRC}/${aisle.id}.png`;
-  try {
-    await access(source);
-  } catch {
+  let source;
+  for (const ext of ['webp', 'png']) {
+    try {
+      await access(`${SRC}/${aisle.id}.${ext}`);
+      source = `${SRC}/${aisle.id}.${ext}`;
+      break;
+    } catch {}
+  }
+  if (!source) {
     missing.push(aisle.id);
     continue;
   }

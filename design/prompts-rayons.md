@@ -8,9 +8,11 @@ The pictures are shown small: 64 × 56 px in Mon Kaddy, 40 × 38 px in Ordre des
 
 1. The prompts ask for a plain white background: `npm run aisle-art` removes it. Don't ask for transparency in a chat interface: ChatGPT then paints a grey-and-white checkerboard into the picture, which can't be removed. Through the API, GPT Image's `background: transparent` parameter works too (with the same prompt).
 2. Square, 1024 × 1024 or larger, PNG.
-3. Attach two or three of the current pictures as style references, as the reference for both style and level of detail: `public/illustrations/rayons/fruits-legumes.webp`, `epicerie-sucree.webp` and `surgeles.webp`. Once the first new pictures are accepted, use them as references instead, so the series doesn't drift. If a result is still too detailed, reply "simpler: fewer, larger shapes and broader strokes, like the reference pictures" rather than regenerating from scratch.
-4. Each prompt = the **style block** below, followed by the aisle's **subject**. Send them together, with the style block always unchanged.
-5. Save each result as `design/rayons/{id}.png` (the `id` from `data/aisles.json`).
+3. **One new conversation per picture.** In a long ChatGPT conversation each picture builds on the previous ones and gets a little more detailed every time. Start a fresh one for each aisle, so every picture starts from the same prompt and the same references.
+4. Attach the same three references every time, as the reference for both style and level of detail: the simplest accepted pictures, `design/rayons/fruits-legumes.webp`, `poissonnerie.webp` and `lait-oeufs.webp`. Fewer references hold the style better than many: with the whole series attached, the model averages them.
+5. Each prompt = the **style block** below, followed by the aisle's **subject**. Send them together, with the style block always unchanged.
+6. If a result is still too detailed, reply "simpler: fewer, larger shapes and broader strokes, like the reference pictures" once; if that doesn't do it, start a new conversation rather than going on.
+7. Save each result as `design/rayons/{id}.webp` or `.png` (the `id` from `data/aisles.json`).
 
 ## Style block (shared by every prompt)
 
@@ -23,7 +25,7 @@ The picture shows one or two everyday grocery items, seen at a slight three-quar
 
 The background is flat, solid pure white (#FFFFFF), the same white edge to edge, with no table, no ground line, no cast shadow, no halo, no paper texture and no stray marks around the items. Any white or very pale item has a soft grey or tinted shaded edge so it stands apart from the white background. Packaging is generic and has no lettering: where a real product would carry a label, it shows a simple picture of what it contains instead. The picture must stay recognisable when shrunk to 40 pixels wide, so every item has a clear, distinctive outline and a strong colour.
 
-No text, no letters, no numbers, no logos, no brand names, no watermark. Square 1:1.
+No text, no letters, no numbers, no logos, no brand names, no watermark. Match the level of detail of the attached reference pictures; when in doubt, draw less. Square 1:1.
 ```
 
 ## Subjects
@@ -57,7 +59,7 @@ Subject: a glass bottle of milk with a blue cap and a wide blue band around its 
 
 ### cremerie-yaourts: Crèmerie & yaourts (on #E3ECF3)
 ```
-Subject: a round white yoghurt pot with its foil lid peeled half back and a little white yoghurt showing, next to a block of butter half unwrapped from gold foil paper. Dominant colours: white and buttery yellow with gold.
+Subject: a round yoghurt pot with a wide strawberry-red band around it and a simple strawberry drawn on the band, its lid closed, next to a plain rectangular block of yellow butter lying on its paper wrapper, opened out flat and smooth. Dominant colours: strawberry red and buttery yellow.
 ```
 
 ### desserts: Desserts (on #FCE0D0)
@@ -72,7 +74,7 @@ Subject: a round camembert in a light wooden box, with one wedge cut out to show
 
 ### charcuterie: Charcuterie (on #F9D3DD)
 ```
-Subject: a dry saucisson with a dusty white skin and a tied string at one end, with two round slices in front showing deep red meat speckled with white fat, and a folded pink slice of cooked ham beside them. Dominant colours: deep red and pink, with the white skin.
+Subject: a short dry saucisson with a smooth pale skin and a small knot of string at one end, its front end cut to show the deep red inside with a few large white dots of fat, and one round slice lying in front of it. Dominant colours: deep red and creamy white.
 ```
 
 ### produits-cuisines: Produits cuisinés (on #E8EBC9)
@@ -168,4 +170,4 @@ Subject: a brown kraft paper grocery bag, slightly crumpled, filled with a leafy
 ## After generation
 
 - Check each picture at 40 px wide on its aisle colour: it should still read as its aisle and not look like a neighbour (Lait & œufs / Crèmerie / Fromages / Bio & végétal, Conserves / Plats cuisinés, Desserts / Friandises / Épicerie sucrée).
-- `npm run aisle-art` turns `design/rayons/{id}.png` into `public/illustrations/rayons/{id}.webp` and writes the sizes into `data/aisles.json`.
+- `npm run aisle-art` turns `design/rayons/{id}.webp` (or `.png`) into `public/illustrations/rayons/{id}.webp` and writes the sizes into `data/aisles.json`.

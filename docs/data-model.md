@@ -12,7 +12,7 @@
 - If more households join later, nothing changes: the same database, one more document per household.
 
 ## Aisles
-`data/aisles.json` is the single source for the 27 aisles: `id` (the `AisleId` stored everywhere), French `label`, `illustration` (`{ src, width, height }`, made from `design/rayons/{id}.png` by `npm run aisle-art`; until an aisle has its own picture, it borrows the one of a neighbouring aisle). The picture also illustrates the recipes whose first ingredient is in that aisle. Its order is the default `aisleOrder` of a new household. Colours: `--kd-aisle-{id}` / `--kd-aisle-{id}-dot` in `styles/tokens.css`.
+`data/aisles.json` is the single source for the 27 aisles: `id` (the `AisleId` stored everywhere), French `label`, `illustration` (`{ src, width, height }`, made from `design/rayons/{id}.webp` (or `.png`) by `npm run aisle-art`; until an aisle has its own picture, it borrows the one of a neighbouring aisle). The picture also illustrates the recipes whose first ingredient is in that aisle. Its order is the default `aisleOrder` of a new household. Colours: `--kd-aisle-{id}` / `--kd-aisle-{id}-dot` in `styles/tokens.css`.
 
 **Changing aisle ids.** An `aisleId` is stored in `catalog/`, in `households/{hid}.aisleOrder`, in `ingredients/{key}` and in the `extras`. When an aisle is renamed or split: reseed the catalogue (`scripts/seed-catalog.mjs`), then run a migration over the households (the October 2026 split into 27 aisles: `scripts/migrate-aisles.mjs`, `--dry` first), and rename `FETCHED_AT` in `src/lib/catalog.ts` so phones drop their day-old copy of the catalogue. Until then the app treats an id it no longer knows as "Ingrédients à classer" (`knownAisle` in `src/lib/aisles.ts`).
 
