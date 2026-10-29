@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type Ref } from "react";
 import { AISLE_BY_ID, aisleDot } from "@/lib/aisles";
 import type { Catalog } from "@/lib/catalog";
 import type { HouseholdIngredients } from "@/lib/ingredients";
@@ -24,6 +24,7 @@ export function ProductInput({
   dashed = true,
   forRecipe = false,
   bare = false,
+  inputRef,
 }: {
   label: string;
   placeholder: string;
@@ -35,6 +36,8 @@ export function ProductInput({
   forRecipe?: boolean;
   /** No frame of its own: the field sits in a card (Mon Kaddy). */
   bare?: boolean;
+  /** Lets the list bring the focus back here once a new row's quantity and unit are set. */
+  inputRef?: Ref<HTMLInputElement>;
 }) {
   const uid = useId();
   const [query, setQuery] = useState("");
@@ -93,6 +96,7 @@ export function ProductInput({
           {label}
         </label>
         <input
+          ref={inputRef}
           id={`${uid}-input`}
           type="text"
           role="combobox"

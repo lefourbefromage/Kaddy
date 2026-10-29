@@ -76,6 +76,10 @@ export function KaddyScreen() {
     setUndo(null);
   }
 
+  // A finished aisle sinks below the ones still to do, once its last row has slid out.
+  const finished = (a: KaddyAisle) => a.items.every((i) => checked.has(i.itemKey) && !leaving.has(i.itemKey));
+  const ordered = aisles && [...aisles.filter((a) => !finished(a)), ...aisles.filter(finished)];
+
   const left = total - done;
   const allDone = total > 0 && left === 0;
   const anyTouched = touched.size > 0;
@@ -156,7 +160,7 @@ export function KaddyScreen() {
                     Modifier l’ordre
                   </Link>
                 </span>
-                {aisles.map((a) => {
+                {ordered!.map((a) => {
                   const n = a.items.filter((i) => checked.has(i.itemKey)).length;
                   const complete = n === a.items.length;
                   return (
@@ -187,7 +191,7 @@ export function KaddyScreen() {
               </p>
             ) : (
               <Columns count={twoColumns ? 2 : 1}>
-                {aisles.map((a) => (
+                {ordered!.map((a) => (
                   <AisleSection
                     key={a.id}
                     aisle={a}
@@ -261,9 +265,17 @@ function AisleSection({
             </span>
           )}
         </div>
-        <span key={n} className={cx(styles.aisleCount, touched && styles.bump)}>
-          {n}/{aisle.items.length}
-        </span>
+        {complete ? (
+          <span className={cx(styles.aisleCount, styles.aisleComplete, touched && styles.bump)}>
+            <svg width="18" height="18" viewBox="0 0 24 24" role="img" aria-label="Rayon terminé">
+              <path d="M5 12.5l4.5 4.5L19 7" />
+            </svg>
+          </span>
+        ) : (
+          <span key={n} className={cx(styles.aisleCount, touched && styles.bump)}>
+            {n}/{aisle.items.length}
+          </span>
+        )}
       </div>
 
       {todo.map((item) => (
@@ -275,15 +287,6 @@ function AisleSection({
           onToggle={() => onToggle(item)}
         />
       ))}
-
-      {todo.length === 0 && (
-        <div className={cx(styles.aisleDone, touched && styles.appear)}>
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M5 12.5l4.5 4.5L19 7" />
-          </svg>
-          Rayon terminé
-        </div>
-      )}
 
       {inCart.length > 0 && (
         <>

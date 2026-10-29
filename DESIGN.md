@@ -285,7 +285,7 @@ A warm, slightly retro palette: navy ink and violet for structure, cream for pap
 ### Status
 - **To complete:** #FFB54D (dot "!"), #FFF1DA (background), #8A5300 (text).
 - **Error:** #E0603F (field border), #FDD3C6 (message background), #7A2E17 (text).
-- **Success:** #3F6B4C ("Rayon terminé").
+- **Success:** #3F6B4C (the tick that replaces the counter of a finished aisle in Mon Kaddy).
 
 ### Aisles
 Each aisle has a pastel background (section header) and a dot (navigation):

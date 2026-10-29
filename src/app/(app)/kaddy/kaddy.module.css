@@ -253,6 +253,22 @@
   font-weight: 800;
 }
 
+/* Finished: the counter becomes a tick. */
+.aisleComplete {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  color: var(--kd-success-text);
+}
+
+.aisleComplete svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* ---------- Row (signature component, DESIGN.md) ---------- */
 .row {
   display: flex;
@@ -386,26 +402,6 @@
   animation: rowBack 320ms var(--kd-ease-out) both;
 }
 
-.aisleDone {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 52px;
-  padding: 0 var(--kd-space-4);
-  border-top: 1.5px solid var(--kd-divider);
-  font: var(--kd-text-body);
-  font-weight: 700;
-  color: var(--kd-success-text);
-}
-
-.aisleDone svg {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
 .cartToggle {
   display: flex;
   align-items: center;
@@ -456,10 +452,6 @@
   animation: roll 900ms var(--kd-ease-out) both;
 }
 
-.appear {
-  animation: appear var(--kd-dur-overlay) var(--kd-ease-out) both;
-}
-
 @keyframes pop {
   from { transform: scale(.82); }
   to { transform: scale(1); }
@@ -499,11 +491,6 @@
   35% { transform: translateX(-8px) rotate(-3deg); }
   70% { transform: translateX(14px) rotate(2deg); }
   to { transform: none; }
-}
-
-@keyframes appear {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: none; }
 }
 
 /* ---------- Desktop ---------- */
@@ -672,8 +659,7 @@
   .back,
   .bump,
   .hop,
-  .roll,
-  .appear {
+  .roll {
     animation: none;
   }
 

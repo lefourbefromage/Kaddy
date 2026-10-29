@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { AislePicker } from "@/components/AislePicker";
 import { ProductInput } from "@/components/ProductInput";
 import { AISLE_BY_ID } from "@/lib/aisles";
 import type { Catalog } from "@/lib/catalog";
 import { aisleOf, type HouseholdIngredients } from "@/lib/ingredients";
+import { keyOf } from "@/lib/normalize";
 import {
   addPickedExtra,
   deleteExtra,
@@ -20,6 +21,26 @@ import {
 import { appendIngredient, formatQty, type Recipe } from "@/lib/recipes";
 import { IngredientRow } from "./IngredientRow";
 import styles from "./liste.module.css";
+
+/**
+ * The row just added from a card's field: it takes the focus for its quantity, then hands it
+ * back to the field (IngredientRow `onNext`).
+ */
+function useEntry() {
+  const [key, setKey] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  return {
+    inputRef,
+    start: (k: string) => setKey(k),
+    next: (k: string) =>
+      k === key
+        ? () => {
+            setKey(null);
+            inputRef.current?.focus();
+          }
+        : undefined,
+  };
+}
 
 type Shared = {
   householdId: string;
@@ -138,6 +159,7 @@ export function RecipeCard({
   onOpen: () => void;
 }) {
   const { householdId, weekId, catalog, own, collapsible } = shared;
+  const entry = useEntry();
   const todo = recipe.ingredients.length === 0;
   const rows = recipe.ingredients.map((ing) => {
     const o = overrides[overrideKey(recipe.id, ing.key)];
@@ -214,6 +236,7 @@ export function RecipeCard({
               onQty={(qty) => write(r.ing.key, r.ing, { qty, unit: r.unit })}
               onUnit={(unit) => write(r.ing.key, r.ing, { qty: r.qty, unit })}
               onRemove={() => setOverride(householdId, weekId, overrideKey(recipe.id, r.ing.key), { removed: true })}
+              onNext={entry.next(r.ing.key)}
             />
           ))}
           {removed.length > 0 && (
@@ -247,7 +270,11 @@ export function RecipeCard({
           own={own}
           dashed={!todo}
           forRecipe
-          onPick={(p) => appendIngredient(householdId, recipe, p.name)}
+          inputRef={entry.inputRef}
+          onPick={(p) => {
+            appendIngredient(householdId, recipe, p.name);
+            entry.start(keyOf(p.name));
+          }}
         />
       </div>
     </Card>
@@ -259,6 +286,9 @@ export function RecipeCard({
 /** No head of its own: it sits under the "Hors menu" title, at the bottom of the page. */
 export function ExtrasCard({ extras, ...shared }: Omit<Shared, "collapsible"> & { extras: Extra[] }) {
   const { householdId, weekId, catalog, own } = shared;
+  const entry = useEntry();
+  // Several extras can share a product: the one just added is the last of them.
+  const lastOf = new Map(extras.map((x) => [x.key, x.id]));
   return (
     <article className={`${styles.card} ${styles.extrasCard}`}>
       <div className={styles.cardBody}>
@@ -287,6 +317,7 @@ export function ExtrasCard({ extras, ...shared }: Omit<Shared, "collapsible"> & 
               onQty={(qty) => updateExtra(householdId, weekId, x.id, { qty })}
               onUnit={(unit) => updateExtra(householdId, weekId, x.id, { unit })}
               onRemove={() => deleteExtra(householdId, weekId, x.id)}
+              onNext={lastOf.get(x.key) === x.id ? entry.next(x.key) : undefined}
             />
           );
         })}
@@ -296,7 +327,11 @@ export function ExtrasCard({ extras, ...shared }: Omit<Shared, "collapsible"> & 
             placeholder="Ajouter un produit (éponges, café…)"
             catalog={catalog}
             own={own}
-            onPick={(p) => addPickedExtra(householdId, weekId, p, own, catalog)}
+            inputRef={entry.inputRef}
+            onPick={(p) => {
+              addPickedExtra(householdId, weekId, p, own, catalog);
+              entry.start(p.key ?? keyOf(p.name));
+            }}
           />
         </div>
       </div>

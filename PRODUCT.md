@@ -88,6 +88,7 @@ The catalogue only contains the household's own recipes. The list follows the me
   - A product found in neither the catalogue nor the household's choices goes into "Ingrédients à classer".
 - **Sorting in Mon Kaddy:**
   - The order of the aisles can be customised in a setting.
+  - A finished aisle (every item ticked) moves below the aisles still to do, its counter replaced by a tick.
   - Inside each aisle, items are always sorted alphabetically. There is no manual sorting of items.
   - Mon Kaddy shows the current week. A recipe planned twice in the week counts once, as in the Liste de courses; leftovers add nothing.
   - "Tout décocher" can be undone for a few seconds ("Rétablir"), so a mis-tap in the shop does not lose every tick.
