@@ -1,6 +1,6 @@
 # Aisle illustration prompts
 
-One picture per aisle, 27 in all, in the original crayon + gouache style (see `DESIGN.md`, section Aisles). They replace the old 4×4 sheet `design/rayons-planche.webp`, whose 14 pictures cannot cover the 27 aisles of `data/aisles.json`.
+One picture per aisle, 27 in all, in the original crayon + gouache style (see `DESIGN.md`, section Aisles). They replaced the old 4×4 sheet of 14 pictures, which could not cover the 27 aisles of `data/aisles.json`.
 
 The pictures are shown small: 64 × 56 px in Mon Kaddy, 40 × 38 px in Ordre des rayons, and larger in the page headers and the Menu summary. Each one sits on its aisle's pastel (`--kd-aisle-{id}`), so every subject below is chosen to stand out against that colour and to look different from the neighbouring aisles.
 
