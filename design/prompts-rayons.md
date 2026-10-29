@@ -6,20 +6,22 @@ The pictures are shown small: 64 × 56 px in Mon Kaddy, 40 × 38 px in Ordre des
 
 ## How to generate
 
-1. Pick a model that can output a transparent PNG (for example GPT Image with `background: transparent`). Otherwise ask for a plain white background and remove it afterwards.
+1. The prompts ask for a plain white background: `npm run aisle-art` removes it. Don't ask for transparency in a chat interface: ChatGPT then paints a grey-and-white checkerboard into the picture, which can't be removed. Through the API, GPT Image's `background: transparent` parameter works too (with the same prompt).
 2. Square, 1024 × 1024 or larger, PNG.
-3. Attach two or three of the current pictures as style references: `public/illustrations/rayons/fruits-legumes.webp`, `epicerie-sucree.webp` and `surgeles.webp`. Once the first new pictures are accepted, use them as references instead, so the series doesn't drift.
+3. Attach two or three of the current pictures as style references, as the reference for both style and level of detail: `public/illustrations/rayons/fruits-legumes.webp`, `epicerie-sucree.webp` and `surgeles.webp`. Once the first new pictures are accepted, use them as references instead, so the series doesn't drift. If a result is still too detailed, reply "simpler: fewer, larger shapes and broader strokes, like the reference pictures" rather than regenerating from scratch.
 4. Each prompt = the **style block** below, followed by the aisle's **subject**. Send them together, with the style block always unchanged.
 5. Save each result as `design/rayons/{id}.png` (the `id` from `data/aisles.json`).
 
 ## Style block (shared by every prompt)
 
 ```
-A hand-drawn illustration in wax crayon and gouache, with the soft, chalky, matte texture of oil pastel on paper: visible grainy crayon strokes over flat opaque gouache fills, warm saturated colours, a light cream highlight on each object and a slightly deeper tone of the same colour on its shaded side. Shapes are simple, rounded and a little chunky, as in a children's picture book, with soft coloured edges and no black outlines.
+A simple, stylised hand-drawn illustration in wax crayon and gouache, like a sticker in a children's picture book: soft, chalky, matte crayon texture over flat opaque colour, warm saturated colours, no black outlines.
+
+Keep it simple, not realistic. Each item is made of a few large, rounded, slightly chunky shapes. Each shape is filled with one main colour, plus one lighter tone for a soft highlight and one darker tone on its shaded side, laid down in broad, even crayon strokes. Leave out fine detail: no marbling, no grain of the meat, no pores, no fibres, no crumbs, no glossy reflections, no small speckles beyond a few large dots where they define the item.
 
 The picture shows one or two everyday grocery items, seen at a slight three-quarter angle from just above eye level, overlapping a little and grouped tightly so that together they form one compact silhouette. The group is centred in a square frame and fills about 80% of it, with an even margin on every side.
 
-The items float on their own on a fully transparent background (if transparency is not possible, a flat pure white background), with no table, no ground line, no cast shadow, no halo, no paper texture and no stray marks or crumbs around them. Packaging is generic and has no lettering: where a real product would carry a label, it shows a simple picture of what it contains instead. The picture must stay recognisable when shrunk to 40 pixels wide, so every item has a clear, distinctive outline and a strong colour.
+The background is flat, solid pure white (#FFFFFF), the same white edge to edge, with no table, no ground line, no cast shadow, no halo, no paper texture and no stray marks around the items. Any white or very pale item has a soft grey or tinted shaded edge so it stands apart from the white background. Packaging is generic and has no lettering: where a real product would carry a label, it shows a simple picture of what it contains instead. The picture must stay recognisable when shrunk to 40 pixels wide, so every item has a clear, distinctive outline and a strong colour.
 
 No text, no letters, no numbers, no logos, no brand names, no watermark. Square 1:1.
 ```
