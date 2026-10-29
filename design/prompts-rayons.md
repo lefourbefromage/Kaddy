@@ -8,9 +8,9 @@ The pictures are shown small: 64 × 56 px in Mon Kaddy, 40 × 38 px in Ordre des
 
 1. The prompts ask for a plain white background: `npm run aisle-art` removes it. Don't ask for transparency in a chat interface: ChatGPT then paints a grey-and-white checkerboard into the picture, which can't be removed. Through the API, GPT Image's `background: transparent` parameter works too (with the same prompt).
 2. Square, 1024 × 1024 or larger, PNG.
-3. **One new conversation per picture.** In a long ChatGPT conversation each picture builds on the previous ones and gets a little more detailed every time. Start a fresh one for each aisle, so every picture starts from the same prompt and the same references.
-4. Attach the same three references every time, as the reference for both style and level of detail: the simplest accepted pictures, `design/rayons/fruits-legumes.webp`, `poissonnerie.webp` and `lait-oeufs.webp`. Fewer references hold the style better than many: with the whole series attached, the model averages them.
-5. Each prompt = the **style block** below, followed by the aisle's **subject**. Send them together, with the style block always unchanged.
+3. **Short conversations.** In a long ChatGPT conversation each picture builds on the previous ones and gets a little more detailed every time. Keep each conversation to 3 or 4 pictures (see step 5), so every picture starts close to the same prompt and the same references.
+4. Attach the same three references to every new conversation, as the reference for both style and level of detail: the simplest accepted pictures, `design/rayons/fruits-legumes.webp`, `poissonnerie.webp` and `lait-oeufs.webp`. Fewer references hold the style better than many: with the whole series attached, the model averages them.
+5. Each prompt = the **style block** below, followed by the aisle's **subject**. Send them together, with the style block always unchanged. To go on in the same conversation, paste only the next subject block: its first line points the model back to the references. After 3 or 4 pictures, or as soon as one is clearly more detailed than the references, start a new conversation with the full style block again.
 6. If a result is still too detailed, reply "simpler: fewer, larger shapes and broader strokes, like the reference pictures" once; if that doesn't do it, start a new conversation rather than going on.
 7. Save each result as `design/rayons/{id}.webp` or `.png` (the `id` from `data/aisles.json`).
 
@@ -34,136 +34,190 @@ Subjects come from the products of each aisle in `data/products.json`. Where an 
 
 ### viandes-volailles: Viandes & volailles (on #FDD3C6)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a golden roast chicken drumstick with a pale knobbly bone end, leaning against a thick raw beef steak (an entrecôte), deep red with a creamy white rim of fat. Dominant colours: golden orange and deep red.
 ```
 
 ### poissonnerie: Poissonnerie (on #CDE0EE)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a whole fresh sardine-like fish with a slate-blue back, silvery belly and a round dark eye, lying diagonally, with two curled pink-orange cooked prawns in front of it. Dominant colours: slate blue and coral pink.
 ```
 
 ### fruits-legumes: Fruits & légumes (on #CFE6D3)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a long orange carrot with a bushy green leafy top, leaning against a round shiny red apple with a short brown stalk and one green leaf. Dominant colours: orange and red, with green leaves.
 ```
 
 ### boulangerie: Boulangerie (on #FBE3B8)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a golden-brown baguette with three diagonal scored cuts, lying diagonally, with a plump flaky croissant in front of it. Dominant colours: deep golden brown and amber.
 ```
 
 ### lait-oeufs: Lait & œufs (on #F8EDC8)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a glass bottle of milk with a blue cap and a wide blue band around its middle, standing upright, with two brown hen's eggs resting at its foot. Dominant colours: milky white with cobalt blue, and russet brown eggs.
 ```
 
 ### cremerie-yaourts: Crèmerie & yaourts (on #E3ECF3)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a round yoghurt pot with a wide strawberry-red band around it and a simple strawberry drawn on the band, its lid closed, next to a plain rectangular block of yellow butter lying on its paper wrapper, opened out flat and smooth. Dominant colours: strawberry red and buttery yellow.
 ```
 
 ### desserts: Desserts (on #FCE0D0)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a small glass verrine filled with dark chocolate mousse, standing behind a wobbly crème caramel flan on a little white plate, the flan pale yellow with glossy amber caramel running down its sides. Dominant colours: chocolate brown and caramel amber.
 ```
 
 ### fromages: Fromages (on #F5E6C0)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a round camembert in a light wooden box, with one wedge cut out to show the soft creamy inside under its white bloomy rind, and in front of it a wedge of blue cheese with blue-green veins. Dominant colours: chalky white rind, light wood, and blue-green veins.
 ```
 
 ### charcuterie: Charcuterie (on #F9D3DD)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a short dry saucisson with a smooth pale skin and a small knot of string at one end, its front end cut to show the deep red inside with a few large white dots of fat, and one round slice lying in front of it. Dominant colours: deep red and creamy white.
 ```
 
 ### produits-cuisines: Produits cuisinés (on #E8EBC9)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a slice of quiche lorraine with a golden pastry crust and a pale yellow egg filling dotted with bits of bacon, in front of a small rectangular tray of fresh square ravioli under clear film. Dominant colours: golden pastry and pale yellow pasta.
 ```
 
 ### surgeles: Surgelés (on #D2EFEC)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a clear plastic bag of frozen green peas with blue sealed edges and a white snowflake printed on it, with three loose peas and two clear ice cubes beside it. Dominant colours: bright pea green and cobalt blue.
 ```
 
 ### conserves-legumes: Conserves de légumes (on #DDE6E1)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a squat tin can with a bright yellow label showing a picture of a corn cob, standing next to a glass jar of chickpeas with a gold metal lid. Dominant colours: sunny yellow and beige, with silver and gold metal.
 ```
 
 ### plats-cuisines: Plats cuisinés (on #EFE3C2)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a round tin can with its lid rolled half open, showing a hot cassoulet inside (white beans in a red-brown sauce with a piece of sausage), and in front of it a flat open sardine tin with three silver sardines in oil. Dominant colours: red-brown sauce and silver metal.
 ```
 
 ### assaisonnements-condiments: Assaisonnements & condiments (on #F5D5CA)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a tall glass bottle of olive oil, greenish-gold, with a cork stopper, standing beside a dark wooden pepper mill. Dominant colours: olive green and gold, and dark brown wood.
 ```
 
 ### pates-riz-feculents: Pâtes, riz & féculents (on #F1E2CC)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: an upright bundle of dry spaghetti tied in the middle with a brown string, with a small heap of penne pasta at its foot. Dominant colours: wheat yellow and warm ochre.
 ```
 
 ### aperitif: Apéritif (on #E0E8C8)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a small round terracotta bowl full of glossy green olives, next to a few golden ridged potato crisps spilling out of an opened foil snack bag. Dominant colours: olive green, terracotta and golden yellow.
 ```
 
 ### produits-du-monde: Produits du monde (on #FCDDC2)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a dark glass soy sauce bottle with a red cap, standing beside a blue-and-white striped bowl of white rice with a pair of wooden chopsticks resting in it. Dominant colours: near-black brown, red and blue-and-white.
 ```
 
 ### bio-vegetal: Bio & végétal (on #D8EDC9)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a tall beige carton of oat milk with a green leaf and a golden oat sprig drawn on it, beside a small cluster of bright green edamame pods. Dominant colours: oat beige and fresh green.
 ```
 
 ### boissons-chaudes: Boissons chaudes (on #E6D6CC)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a kraft paper coffee bag folded at the top, with a few dark roasted coffee beans spilling at its foot, and a paper tea bag with a turquoise tag on a string leaning against it. Dominant colours: kraft brown, dark coffee brown and turquoise.
 ```
 
 ### epicerie-sucree: Épicerie sucrée (on #F3D8EE)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a jar of strawberry jam with a red-and-white gingham cloth over its lid, tied with a string, next to a small stack of three golden butter biscuits with scalloped edges. Dominant colours: jam red and golden biscuit.
 ```
 
 ### aide-cuisine: Aide à la cuisine (on #F4EBDD)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a plain white paper bag of flour, folded open at the top with a little flour showing and a wooden scoop in it, next to a small heap of white sugar cubes. Dominant colours: white and light grey, with a pale wooden scoop and a soft blue band at the bottom of the bag for contrast.
 ```
 
 ### friandises: Friandises (on #FAD6E8)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a milk chocolate bar half unwrapped from red paper and silver foil, with one square snapped off, next to a round spiral lollipop in red, yellow and blue on a white stick. Dominant colours: chocolate brown, red and bright candy colours.
 ```
 
 ### boissons: Boissons (on #CFE9F5)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a clear plastic water bottle with a blue cap and a blue label band, beside an orange juice carton with a picture of an orange and a green leaf on it. Dominant colours: clear blue and bright orange.
 ```
 
 ### hygiene: Hygiène (on #E6DAF7)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a soft white roll of toilet paper with a few sheets hanging down, and a blue toothbrush with white bristles leaning against it. Dominant colours: white with lavender shading, and cobalt blue.
 ```
 
 ### entretien-nettoyage: Entretien & nettoyage (on #DCE7F7)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a spray bottle of cleaner with a white trigger head and turquoise liquid, beside a rectangular kitchen sponge with a yellow soft side and a green scrubbing side. Dominant colours: turquoise, yellow and green.
 ```
 
 ### maison-loisirs: Maison & loisirs (on #E4E4EC)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a classic glass light bulb with a warm yellow glow inside and a silver screw base, next to two cylindrical batteries with a copper-coloured top and a black body. Dominant colours: warm yellow, copper and black.
 ```
 
 ### autres: Autres (on #EAE5DE)
 ```
+Same style block and same level of detail as the three reference pictures (not as the previous result).
+
 Subject: a brown kraft paper grocery bag, slightly crumpled, filled with a leafy green lettuce, a red tomato and a golden baguette sticking out of the top. Dominant colours: kraft brown, with green, red and golden accents.
 ```
 
