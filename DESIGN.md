@@ -442,6 +442,10 @@ Motion explains a state change; it never decorates. One authored moment: the Mon
 - **Filled:** field background, dish name in title style, eye and "…" buttons.
 - **Reste:** a filled slot with a very slight lavender tint and the lavender "Reste" pill; no subtitle (the source meal isn't shown).
 
+### Shared menu picture
+- **Button:** "Partager", a white pill next to the week navigation (same 50px height), share icon, lavender on hover. Its label briefly becomes "Image copiée" / "Image téléchargée".
+- **Picture:** drawn on a canvas from the tokens (`src/app/(app)/menu/menuImage.ts`), 760px wide at 2×, paper background. Title illustration + "Menu" + the week, then one white card per day (name, date, food-group dots) holding the midi and soir slots as in the app (field, Reste tint and pill, dashed and "—" when empty; dish names on 3 lines at most), then the legend and the wordmark. Portrait on purpose: it stays readable on a phone in a chat.
+
 ### Mon Kaddy row (signature component)
 - 60px row with a 30px rounded box, then the name, then the quantity chip.
 - When ticked:

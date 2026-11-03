@@ -42,6 +42,7 @@ The catalogue only contains the household's own recipes. The list follows the me
 1. **Plan (Menu).** On a desktop or a phone, fill the week's 14 slots: lunch and dinner from Monday to Sunday.
    - A slot holds a recipe or a "Reste" (leftovers).
    - A recipe can be viewed in large format or edited from the slot.
+   - **Partager** (share) turns the displayed week into a portrait picture (7 rows, midi | soir, food-group dots and legend), to send in a chat app. On a phone it opens the share sheet; on a computer it copies the picture to the clipboard (then a download if copying is refused).
 2. **Prepare (Liste de courses).** Check each planned recipe's ingredients and quantities, grouped by week, then add off-menu items.
    - A recipe with no ingredients is flagged "à compléter" (to complete) in Recettes and Liste de courses only. The Menu never shows that status: a dish typed there can simply be "Indien" (a restaurant night).
 3. **Shop (Mon Kaddy).** In the shop, on a phone, tick items aisle by aisle.

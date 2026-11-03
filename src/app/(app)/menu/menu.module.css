@@ -95,6 +95,41 @@
   background: var(--kd-lavender);
 }
 
+/* "Partager": a white pill like the week navigation, on the paper background. */
+.shareButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--kd-space-2);
+  height: calc(var(--kd-target) + 6px);
+  padding: 0 var(--kd-space-5) 0 var(--kd-space-4);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-surface);
+  color: var(--kd-ink);
+  font: var(--kd-text-body-medium);
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.shareButton svg {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.shareButton:hover:not(:disabled) {
+  background: var(--kd-lavender-soft);
+}
+
+.shareButton:disabled {
+  color: var(--kd-text-faint);
+  cursor: default;
+}
+
 /* ---------- Mobile day strip ---------- */
 .dayTabs {
   display: grid;

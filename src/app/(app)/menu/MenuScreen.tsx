@@ -39,6 +39,8 @@ import {
   type SlotRef,
 } from "@/lib/weeks";
 import { ForgottenRecipes, MenuSummary, type SummaryData } from "./MenuSummary";
+import type { ShareMeal, ShareWeek } from "./menuImage";
+import { ShareMenuButton } from "./ShareMenuButton";
 import { SlotCard, type Choice, type LeftoverSource } from "./SlotCard";
 import styles from "./menu.module.css";
 
@@ -148,6 +150,28 @@ export function MenuScreen() {
     return { dishes, groupCounts, newRecipes, toClassify: unknown.size, different: meals.size, leftovers, filled };
   }, [week, weekId, recipes, recipesById, catalog, ownIngredients]);
 
+  // What the "Partager" picture shows.
+  const shareWeek: ShareWeek = useMemo(() => {
+    const meal = (ref: SlotRef): ShareMeal => {
+      const slot = getSlot(week, ref);
+      if (!slot) return { kind: "empty" };
+      if (slot.kind === "simple") return { kind: "dish", name: slot.name };
+      const name = recipesById.get(slot.recipeId)?.title ?? "Recette supprimée";
+      return { kind: slot.kind === "leftover" ? "leftover" : "dish", name };
+    };
+    return {
+      subtitle: weekTitle(weekId),
+      days: DAYS.map((day) => ({
+        day,
+        name: capitalize(DAY_LABELS[day]),
+        date: dateOf(weekId, day).getDate(),
+        groups: [...dayGroups.get(day)!],
+        lunch: meal({ day, meal: "lunch" }),
+        dinner: meal({ day, meal: "dinner" }),
+      })),
+    };
+  }, [week, weekId, recipesById, dayGroups]);
+
   const forgotten = useMemo(() => {
     const plannedHere = new Set(
       ALL_SLOTS.map((ref) => getSlot(week, ref)).flatMap((s) => (s && s.kind !== "simple" ? [s.recipeId] : [])),
@@ -229,6 +253,11 @@ export function MenuScreen() {
             </button>
           )}
         </div>
+        <ShareMenuButton
+          week={shareWeek}
+          filename={`menu-${isoDate(mondayOf(weekId))}.png`}
+          ready={recipes != null && weeks != null}
+        />
       </PageHeader>
 
       {/* Mobile: one day at a time, picked in this strip. */}
