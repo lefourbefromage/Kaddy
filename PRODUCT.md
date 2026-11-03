@@ -40,7 +40,7 @@ The catalogue only contains the household's own recipes. The list follows the me
 ## Operating Context
 
 1. **Plan (Menu).** On a desktop or a phone, fill the week's 14 slots: lunch and dinner from Monday to Sunday.
-   - A slot holds a recipe or a "Reste" (leftovers).
+   - A slot holds a recipe or a "Reste" (leftovers) of a dish earlier in the week. On Monday, the Sunday lunch and dinner of the previous week are offered too.
    - A recipe can be viewed in large format or edited from the slot.
    - **Partager** (share) turns the displayed week into a portrait picture (7 rows, midi | soir, food-group dots and legend), to send in a chat app. On a phone it opens the share sheet; on a computer it copies the picture to the clipboard (then a download if copying is refused).
 2. **Prepare (Liste de courses).** Check each planned recipe's ingredients and quantities, grouped by week, then add off-menu items.

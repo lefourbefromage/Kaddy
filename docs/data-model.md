@@ -57,7 +57,8 @@ households/{hid}/weeks/{weekId}              // weekId = ISO "2026-W43"
   slots: {                                    // nested by day then meal: slots.mon.lunch
     mon: {
       lunch: { kind: "recipe", recipeId } |
-             { kind: "leftover", recipeId, of: "sun.dinner" } |   // a dish earlier in the same week
+             { kind: "leftover", recipeId, of: "sun.dinner" } |   // a dish earlier in the same week;
+                                                                 // on Monday also last Sunday: of: "2026-W42/sun.dinner"
              { kind: "simple", name: "Picnic plage" },            // a meal with no recipe
       dinner: …
     },

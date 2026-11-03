@@ -14,6 +14,7 @@ import {
   ALL_SLOTS,
   DAYS,
   DAY_LABELS,
+  MEAL_LABELS,
   clearSlot,
   cookStats,
   dateOf,
@@ -29,6 +30,7 @@ import {
   since,
   slotIndex,
   slotKey,
+  slotLabel,
   todayIso,
   useWeeks,
   weekIdOf,
@@ -191,15 +193,24 @@ export function MenuScreen() {
     return [...old, ...never].slice(0, 6);
   }, [recipes, stats, week]);
 
-  const leftoverSourcesFor = (ref: SlotRef): LeftoverSource[] =>
-    ALL_SLOTS.filter((r) => slotIndex(r) < slotIndex(ref))
+  // The dishes earlier in the week, most recent first; on Monday, last week's Sunday too.
+  const leftoverSourcesFor = (ref: SlotRef): LeftoverSource[] => {
+    const source = (w: typeof week, r: SlotRef, key: string, when: string): LeftoverSource[] => {
+      const s = getSlot(w, r);
+      const recipe = s?.kind === "recipe" ? recipesById.get(s.recipeId) : undefined;
+      return recipe ? [{ recipeId: recipe.id, title: recipe.title, key, when }] : [];
+    };
+    const thisWeekSources = ALL_SLOTS.filter((r) => slotIndex(r) < slotIndex(ref))
       .reverse()
-      .flatMap((r) => {
-        const s = getSlot(week, r);
-        const recipe = s?.kind === "recipe" ? recipesById.get(s.recipeId) : undefined;
-        return recipe ? [{ recipeId: recipe.id, title: recipe.title, key: slotKey(r), ref: r }] : [];
-      })
-      .slice(0, 4);
+      .flatMap((r) => source(week, r, slotKey(r), slotLabel(r)));
+    if (ref.day !== "mon") return thisWeekSources.slice(0, 4);
+    const prevId = shiftWeek(weekId, -1);
+    const sunday = dayMonth.format(dateOf(prevId, "sun"));
+    const lastSunday = (["dinner", "lunch"] as const).flatMap((meal) =>
+      source(weeks?.get(prevId), { day: "sun", meal }, `${prevId}/${slotKey({ day: "sun", meal })}`, `dimanche ${sunday} ${MEAL_LABELS[meal]}`),
+    );
+    return [...thisWeekSources, ...lastSunday];
+  };
 
   const sheetRecipe = sheetId ? recipesById.get(sheetId) : undefined;
 

@@ -16,8 +16,11 @@ export type Choice =
 
 type Option = { id: string; label: string; hint?: string; choice: Choice };
 
-/** A dish earlier in the week that this slot can be the leftovers of. */
-export type LeftoverSource = { recipeId: string; title: string; key: string; ref: SlotRef };
+/**
+ * A dish earlier in the week (or last Sunday, for Monday) that this slot can be the leftovers of.
+ * key: "tue.dinner" in the same week, "2026-W44/sun.dinner" in the previous one.
+ */
+export type LeftoverSource = { recipeId: string; title: string; key: string; when: string };
 
 type Props = {
   slotRef: SlotRef;
@@ -251,13 +254,19 @@ function LeftoverDialog({
                 onClick={() => onChoose({ kind: "leftover", recipeId: s.recipeId, of: s.key })}
               >
                 <span className={styles.leftoverDish}>{s.title}</span>
-                <span className={styles.leftoverWhen}>{slotLabel(s.ref)}</span>
+                <span className={styles.leftoverWhen}>{s.when}</span>
               </button>
             </li>
           ))}
         </ul>
       ) : (
-        <p className={styles.leftoverNone}>Aucun plat plus tôt dans la semaine.</p>
+        <p className={styles.leftoverNone}>
+          {slotRef.day !== "mon"
+            ? "Aucun plat plus tôt dans la semaine."
+            : slotRef.meal === "lunch"
+              ? "Aucun plat dimanche dernier."
+              : "Aucun plat dimanche dernier ni ce midi."}
+        </p>
       )}
     </Modal>
   );
