@@ -334,7 +334,13 @@ export function RecipesScreen() {
           catalog={catalog}
           onCancel={() => setForm(null)}
           onSaved={(id) => {
+            const moreTodos = form.mode === "todo" && todos.some((r) => r.id !== id);
             setForm(null);
+            if (moreTodos) {
+              // Still recipes to fill in: stay on "À compléter", focus back on its tab (the row is gone).
+              setTimeout(() => document.getElementById("onglet-todo")?.focus(), 0);
+              return;
+            }
             setTab("all");
             setOpenId(id);
           }}
