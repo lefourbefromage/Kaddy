@@ -93,12 +93,14 @@
   bottom: calc(100% + 6px);
 }
 
+/* Dot and name on the first line, the aisle underneath: long names keep the full width. */
 .option {
-  display: flex;
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
   align-items: center;
-  gap: 10px;
+  column-gap: 10px;
   min-height: var(--kd-target);
-  padding: 0 10px;
+  padding: 6px 10px;
   border-radius: var(--kd-radius-sm);
   cursor: pointer;
 }
@@ -115,9 +117,9 @@
 }
 
 .name {
-  flex: 1;
   min-width: 0;
   font: var(--kd-text-body);
+  overflow-wrap: anywhere;
 }
 
 .name strong {
@@ -129,13 +131,14 @@
 }
 
 .aisle {
-  flex: none;
+  grid-column: 2;
   font: var(--kd-text-caption);
   font-weight: 600;
   color: var(--kd-text-muted);
 }
 
 .create {
+  display: flex;
   color: var(--kd-violet-deep);
   font: var(--kd-text-body-medium);
   font-weight: 700;
