@@ -137,14 +137,24 @@ export function moveSlot(householdId: string, weekId: string, week: Week | undef
   };
   const renamed = new Map<string, string>([[slotKey(from), slotKey(to)]]);
   if (other) renamed.set(slotKey(to), slotKey(from));
+  const order = ALL_SLOTS.map(slotKey);
   for (const ref of ALL_SLOTS) {
     const s = getSlot(week, ref);
-    const target = s?.kind === "leftover" ? renamed.get(s.of) : undefined;
-    if (!s || !target) continue;
+    if (s?.kind !== "leftover") continue;
+    const here = slotKey(ref);
+    const newHere = renamed.get(here) ?? here;
+    const newOf = renamed.get(s.of) ?? s.of;
+    if (newOf === s.of && newHere === here) continue;
+    // A leftover can't come before (or on) its dish: it is removed when a move puts it there.
+    if (order.indexOf(newOf) >= order.indexOf(newHere)) {
+      fields[slotPath(parseSlotKey(newHere))] = deleteField();
+      continue;
+    }
+    if (newOf === s.of) continue;
     // A moved slot is written whole above: patch its value rather than add a conflicting child path.
-    if (slotKey(ref) === slotKey(from)) fields[slotPath(to)] = { ...s, of: target };
-    else if (slotKey(ref) === slotKey(to)) fields[slotPath(from)] = { ...s, of: target };
-    else fields[`${slotPath(ref)}.of`] = target;
+    if (here === slotKey(from)) fields[slotPath(to)] = { ...s, of: newOf };
+    else if (here === slotKey(to)) fields[slotPath(from)] = { ...s, of: newOf };
+    else fields[`${slotPath(ref)}.of`] = newOf;
   }
   return updateDoc(doc(weeksOf(householdId), weekId), fields).catch((e) => console.error("moveSlot", e));
 }
