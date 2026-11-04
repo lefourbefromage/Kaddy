@@ -508,6 +508,115 @@
   background: color-mix(in srgb, var(--slot-bg) 55%, var(--kd-lavender-mist));
 }
 
+/* "Fait": the meal fades out, the ticked button keeps full strength. */
+.slotDone {
+  background: color-mix(in srgb, var(--slot-bg) 50%, transparent);
+}
+
+.slotDone > :not(.slotActions) {
+  opacity: var(--kd-opacity-done);
+}
+
+/* Its buttons step aside: hidden, back on hover or keyboard focus. Touch screens have no
+   hover, so there they stay, faded like the meal. */
+.slotDone .slotActions {
+  transition: opacity var(--kd-dur-feedback) var(--kd-ease-out);
+}
+
+@media (hover: hover) {
+  .slotDone .slotActions {
+    opacity: 0;
+  }
+
+  .slotDone:hover .slotActions,
+  .slotDone:focus-within .slotActions {
+    opacity: 1;
+  }
+}
+
+@media (hover: none) {
+  .slotDone .slotActions {
+    opacity: var(--kd-opacity-done);
+  }
+}
+
+/* Drag & drop: the dragged meal fades, the slot under the pointer turns lavender with a violet ring. */
+.slotFilled[draggable="true"] {
+  cursor: grab;
+}
+
+.slotDragging {
+  opacity: var(--kd-opacity-done);
+}
+
+/* The copy following the pointer (dragGhost.ts): it floats, so it takes the floating shadow. */
+.dragGhost {
+  position: fixed;
+  z-index: 50;
+  margin: 0;
+  pointer-events: none;
+  box-shadow: var(--kd-shadow-float);
+  will-change: transform;
+}
+
+.slot.slotDropTarget {
+  border-color: var(--kd-violet);
+  background: var(--kd-lavender-mist);
+  box-shadow: var(--kd-ring-drop);
+  animation: wiggle var(--kd-dur-wiggle) var(--kd-ease-out) infinite;
+}
+
+/* The slot under a dragged meal sways gently: "drop it here". */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-1.2deg); }
+  75% { transform: rotate(1.2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Still: the lavender fill and the violet ring say it alone. */
+  .slot.slotDropTarget {
+    animation: none;
+  }
+}
+
+.doneButton {
+  display: grid;
+  place-items: center;
+  width: var(--kd-target);
+  height: var(--kd-target);
+  border: 0;
+  border-radius: var(--kd-radius-pill);
+  background: var(--kd-field);
+  color: var(--kd-text-faint);
+  cursor: pointer;
+  transition: background var(--kd-dur-feedback) var(--kd-ease-out), color var(--kd-dur-feedback) var(--kd-ease-out);
+}
+
+.doneButton svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.doneButton:hover {
+  color: var(--kd-ink);
+}
+
+/* Ticked: a plain undo button, like the eye. */
+.doneButton[aria-pressed="true"] {
+  color: var(--kd-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doneButton,
+  .slotDone .slotActions {
+    transition: none;
+  }
+}
+
 .slotTop {
   display: flex;
   align-items: center;
@@ -600,26 +709,28 @@
   right: 0;
   bottom: calc(100% + 4px);
   z-index: 6;
-  min-width: 190px;
+  min-width: 160px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 6px;
+  gap: 0;
+  padding: var(--kd-space-1);
   background: var(--kd-surface);
   border-radius: var(--kd-radius-md);
   box-shadow: var(--kd-shadow-float);
   animation: fade var(--kd-dur-feedback) var(--kd-ease-out) both;
 }
 
+/* Compact rows: small text, the compact target (CLAUDE.md). */
 .menuItem {
-  min-height: var(--kd-target);
-  padding: 0 var(--kd-space-3);
+  min-height: var(--kd-target-compact);
+  padding: 0 10px;
   border: 0;
   border-radius: var(--kd-radius-sm);
   background: transparent;
   color: var(--kd-ink);
   text-align: left;
-  font: var(--kd-text-body);
+  font: var(--kd-text-body-small);
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -776,7 +887,8 @@
     font: var(--kd-text-body);
   }
 
-  .eye {
+  .eye,
+  .doneButton {
     width: 36px;
     height: 36px;
     background: var(--kd-surface);

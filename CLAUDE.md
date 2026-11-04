@@ -18,7 +18,7 @@ Kaddy is a household web app (installable PWA). You plan the week's lunches and 
 ## Non-negotiable rules
 - **Interface in French, addressing the user as "tu".** Product vocabulary: repas (never "créneau" in the interface), midi/soir, Reste, Hors menu, Ingrédients à classer, Mon Kaddy, foyer.
 - **No hard-coded colour, radius or font size**: always `var(--kd-…)` from `tokens.css`. If a value is missing, add it to `tokens.css` AND `DESIGN.md`.
-- **Targets of 44 × 44 px minimum** (`.kd-hit` class when the visual is smaller).
+- **Targets of 44 × 44 px minimum** (`.kd-hit` class when the visual is smaller). Single exception: the rows of an action menu ("…" menu, household menu) use `--kd-target-compact` (32 px high, full menu width), above the WCAG 2.2 AA minimum of 24 × 24 px. Never go below 24 px.
 - **Visible focus** on everything that is interactive (`:focus-visible`, already in `tokens.css`).
 - **Violet `--kd-violet` reserved for action/state**; no shadow on cards; two type families only.
 - Every page title is paired with its illustration (`public/illustrations/titre-*.webp`).

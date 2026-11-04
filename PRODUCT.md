@@ -42,6 +42,8 @@ The catalogue only contains the household's own recipes. The list follows the me
 1. **Plan (Menu).** On a desktop or a phone, fill the week's 14 slots: lunch and dinner from Monday to Sunday.
    - A slot holds a recipe or a "Reste" (leftovers) of a dish earlier in the week. On Monday, the Sunday lunch and dinner of the previous week are offered too.
    - A recipe can be viewed in large format or edited from the slot.
+   - A meal can be ticked **Fait** (done): it stays in the menu, faded, and is locked: it can't be changed, moved, swapped or removed until it is unticked.
+   - A meal can be **moved** to another slot of the same week: drag & drop on a computer, "Déplacer…" in the "…" menu on a phone. Onto a filled slot, the two meals swap; a "Reste" of a moved dish follows it.
    - **Partager** (share) turns the displayed week into a portrait picture (7 rows, midi | soir, food-group dots and legend), to send in a chat app. On a phone it opens the share sheet; on a computer it copies the picture to the clipboard (then a download if copying is refused).
 2. **Prepare (Liste de courses).** Check each planned recipe's ingredients and quantities, grouped by week, then add off-menu items.
    - A recipe with no ingredients is flagged "à compléter" (to complete) in Recettes and Liste de courses only. The Menu never shows that status: a dish typed there can simply be "Indien" (a restaurant night).

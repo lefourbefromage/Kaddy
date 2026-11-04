@@ -388,9 +388,11 @@ The same pastels are reused for recipe-card backgrounds and the summary tiles. T
 The system is flat at rest: surfaces separate by colour fill (paper, then white, then field). Light shadows are allowed only for floating elements, where they explain that the element sits above the content.
 
 ### Shadow Vocabulary
-- **Floating** (`box-shadow: 0 8px 24px rgba(45, 40, 72, .14)`): mobile navigation bar, dialogs and sheets, the duplicate alert.
+- **Floating** (`box-shadow: 0 8px 24px rgba(45, 40, 72, .14)`): mobile navigation bar, dialogs and sheets, the duplicate alert, the Menu meal being dragged.
 - **Veil** (`background: rgba(45, 40, 72, .5)`): behind desktop dialogs.
 - **Today's ring** (`box-shadow: inset 0 0 0 3px #6A57CC`): highlights today's column, together with a lavender-mist column background (filled slots turn white on it) and the date number in a violet disc with white text.
+- **Drop ring** (`--kd-ring-drop`, `inset 0 0 0 2px #6A57CC`): the Menu slot under a dragged meal, on a lavender-mist fill.
+- **Done fade** (`--kd-opacity-done`, .45): a Menu meal ticked "Fait" (its content and its fill; its buttons hide until hover), and the meal being dragged.
 
 ### Named Rules
 **The Flat Page Rule.** Nothing that belongs to the page (cards, tiles, slots) gets a shadow. A shadow means "this floats".
@@ -403,7 +405,7 @@ Everything is rounded, nothing is sharp. Pills (999px) for buttons, chips, tabs 
 
 Motion explains a state change; it never decorates. One authored moment: the Mon Kaddy tick (see the row component), timed as its own sequence.
 - **Easing:** `--kd-ease-out` (cubic-bezier(.16, 1, .3, 1)) for every arrival, `--kd-ease-in` (cubic-bezier(.5, 0, .75, 0)) for a row leaving the list. No bounce or elastic curve.
-- **Durations:** `--kd-dur-feedback` 150ms (press, hover), `--kd-dur-state` 250ms (fades, chevrons), `--kd-dur-overlay` 300ms (dialogs, sheets, stickers popping in), `--kd-dur-enter` 450ms (progress bar), `--kd-dur-focal` 600ms (the sign-in mascot, the moved-aisle highlight). `--kd-dur-pulse` 1400ms: the one loop, loading placeholders breathing while Firestore answers.
+- **Durations:** `--kd-dur-feedback` 150ms (press, hover), `--kd-dur-state` 250ms (fades, chevrons), `--kd-dur-overlay` 300ms (dialogs, sheets, stickers popping in), `--kd-dur-enter` 450ms (progress bar), `--kd-dur-focal` 600ms (the sign-in mascot, the moved-aisle highlight). `--kd-dur-pulse` 1400ms: loading placeholders breathing while Firestore answers. `--kd-dur-wiggle` 500ms: the other loop, the Menu slot under a dragged meal swaying ±1.2° (none under reduced motion).
 - **Reduced motion:** the duration tokens drop to 0 and each module keeps a still alternative (a ticked row turns faded instead of sliding out).
 - **Loading:** a screen waiting for its data shows placeholder cards in its own layout plus a visible "Chargement de …" line (never a blank page). Still under reduced motion.
 
@@ -436,11 +438,16 @@ Motion explains a state change; it never decorates. One authored moment: the Mon
 - **Desktop:** a white pill bar at the top (logo, 4 links in a field-coloured pill, household menu). The active link is an ink pill with white text, as in every desktop mockup.
 - **Mobile:** a floating navy pill bar at the bottom, with 4 icon + label tabs. The active tab is lavender with ink text. A yellow badge counts the Mon Kaddy items.
 
+### Action menus
+- The "…" menu of a Menu slot and the household menu: white, radius 16–22px, floating shadow, 4px inner padding, no gap between rows. Rows are compact: text 600/13px, 10px side padding, `--kd-target-compact` (32px) high. The one exception to the 44px target, still above the WCAG 2.2 AA 24px minimum.
+
 ### Menu slot (signature component)
 - **Empty:** 2px dashed (#857F98) border, "Midi" or "Soir" label, "Quel plat ?". It is a button.
 - **Active:** 2px solid violet border, white background, transparent field, small secondary "Reste" button.
 - **Filled:** field background, dish name in title style, eye and "…" buttons.
 - **Reste:** a filled slot with a very slight lavender tint and the lavender "Reste" pill; no subtitle (the source meal isn't shown).
+- **Fait:** a round check button first in the actions row (field background, faint check; ticked: the same disc with an ink undo arrow instead of the check, title "Marquer comme pas encore fait"). A ticked meal fades with `--kd-opacity-done` and its buttons are hidden, back on hover or keyboard focus; on touch screens (no hover) they stay, faded. A ticked meal keeps only undo and the eye: no "…" menu, no drag, no drop, and it is left out of "Déplacer vers quel repas ?".
+- **Moving:** on a computer, a filled slot is dragged onto another slot of the week (a filled one swaps); the target shows the drop ring and sways gently (wiggle). The dragged meal is a floating copy that follows the pointer with a slight lag, lifts (scale 1.04, floating shadow), tilts up to 10° with the horizontal speed and swings back upright when the pointer stops; the slot it left stays faded. Under reduced motion, the browser's own still drag image. On a phone and with the keyboard, "Déplacer…" in the "…" menu opens "Déplacer vers quel repas ?" (the 13 other slots, "Libre" or "Échanger avec …").
 
 ### Shared menu picture
 - **Button:** "Partager", a white pill next to the week navigation (same 50px height), share icon, lavender on hover. Its label briefly becomes "Image copiée" / "Image téléchargée".

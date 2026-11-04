@@ -153,11 +153,11 @@
   right: 0;
   top: calc(100% + var(--kd-space-2));
   z-index: 5;
-  min-width: 220px;
+  min-width: 180px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 6px;
+  gap: 0;
+  padding: var(--kd-space-1);
   background: var(--kd-surface);
   border-radius: var(--kd-radius-lg);
   box-shadow: var(--kd-shadow-float);
@@ -167,16 +167,16 @@
 .householdItem {
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: var(--kd-target);
-  padding: 0 var(--kd-space-3);
+  gap: var(--kd-space-2);
+  min-height: var(--kd-target-compact);
+  padding: 0 10px;
   border: 0;
   border-radius: var(--kd-radius-sm);
   background: transparent;
   color: var(--kd-ink);
   text-decoration: none;
   text-align: left;
-  font: var(--kd-text-body);
+  font: var(--kd-text-body-small);
   cursor: pointer;
 }
 

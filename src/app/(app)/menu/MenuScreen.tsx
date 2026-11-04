@@ -24,8 +24,10 @@ import {
   isoDate,
   isoDaysAgo,
   mondayOf,
+  moveSlot,
   relativeWeek,
   setSlot,
+  setSlotDone,
   shiftWeek,
   since,
   slotIndex,
@@ -43,7 +45,7 @@ import {
 import { ForgottenRecipes, MenuSummary, type SummaryData } from "./MenuSummary";
 import type { ShareMeal, ShareWeek } from "./menuImage";
 import { ShareMenuButton } from "./ShareMenuButton";
-import { SlotCard, type Choice, type LeftoverSource } from "./SlotCard";
+import { MoveDialog, SlotCard, type Choice, type LeftoverSource } from "./SlotCard";
 import styles from "./menu.module.css";
 
 const SHORT: Record<Day, string> = { mon: "Lun", tue: "Mar", wed: "Mer", thu: "Jeu", fri: "Ven", sat: "Sam", sun: "Dim" };
@@ -65,6 +67,7 @@ export function MenuScreen() {
   const [selectedDay, setSelectedDay] = useState<Day>(todayDay);
   const [editing, setEditing] = useState<string | null>(null);
   const [sheetId, setSheetId] = useState<string | null>(null);
+  const [moving, setMoving] = useState<SlotRef | null>(null);
   const [form, setForm] = useState<{ mode: FormMode; recipe: Recipe } | null>(null);
 
   const recipesById = useMemo(() => new Map((recipes ?? []).map((r) => [r.id, r])), [recipes]);
@@ -367,6 +370,9 @@ export function MenuScreen() {
                       onChoose={(c) => choose(ref, c)}
                       onClear={() => clearSlot(householdId, weekId, ref)}
                       onOpenRecipe={(r) => setSheetId(r.id)}
+                      onToggleDone={() => setSlotDone(householdId, weekId, ref, !getSlot(week, ref)?.done)}
+                      onMove={(from) => moveSlot(householdId, weekId, week, from, ref)}
+                      onAskMove={() => setMoving(ref)}
                     />
                   );
                 })}
@@ -391,6 +397,22 @@ export function MenuScreen() {
 
       <MenuSummary data={summary} />
       <ForgottenRecipes items={forgotten} onPlan={plan} />
+
+      {moving && (
+        <MoveDialog
+          from={moving}
+          options={ALL_SLOTS.map((ref) => {
+            const s = getSlot(week, ref);
+            const dish = !s ? null : s.kind === "simple" ? s.name : (recipesById.get(s.recipeId)?.title ?? "Recette supprimée");
+            return { ref, dish, done: !!s?.done };
+          })}
+          onClose={() => setMoving(null)}
+          onPick={(to) => {
+            moveSlot(householdId, weekId, week, moving, to);
+            setMoving(null);
+          }}
+        />
+      )}
 
       {sheetRecipe && !form && (
         <RecipeSheet

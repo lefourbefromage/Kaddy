@@ -132,6 +132,8 @@
   --kd-shadow-float: 0 8px 24px rgba(45, 40, 72, .14);
   --kd-veil: rgba(45, 40, 72, .5);
   --kd-ring-today: inset 0 0 0 3px var(--kd-violet);
+  --kd-ring-drop: inset 0 0 0 2px var(--kd-violet);     /* Menu slot under a dragged meal */
+  --kd-opacity-done: .45;                                /* Menu meal ticked "Fait", meal being dragged */
 
   /* ---- Motion ---- */
   --kd-ease-out: cubic-bezier(.16, 1, .3, 1);   /* arrivals: natural deceleration, no bounce */
@@ -142,9 +144,11 @@
   --kd-dur-enter: 450ms;
   --kd-dur-focal: 600ms;    /* the one authored entrance: the sign-in mascot */
   --kd-dur-pulse: 1400ms;   /* loading placeholders breathing, looped */
+  --kd-dur-wiggle: 500ms;   /* Menu slot under a dragged meal, looped */
 
   /* ---- Interaction ---- */
   --kd-target: 44px;
+  --kd-target-compact: 32px; /* rows of an action menu (WCAG 2.2 AA asks 24px) */
   --kd-focus: 3px solid var(--kd-violet);
 }
 

@@ -59,10 +59,11 @@ export const ALL_SLOTS: SlotRef[] = DAYS.flatMap((day) => MEALS.map((meal) => ({
 
 /* ---------- Firestore ---------- */
 
-export type Slot =
+export type Slot = (
   | { kind: "recipe"; recipeId: string }
   | { kind: "leftover"; recipeId: string; of: string } // of = "tue.dinner", same week
-  | { kind: "simple"; name: string }; // a meal with no recipe ("Picnic plage")
+  | { kind: "simple"; name: string } // a meal with no recipe ("Picnic plage")
+) & { done?: boolean }; // ticked "Fait" in the menu
 
 export type Week = {
   id: string;
@@ -102,16 +103,55 @@ export function useWeeks(householdId: string) {
 
 /** Fills a slot. Not awaited by the UI: the local write shows up at once (latency compensation). */
 export function setSlot(householdId: string, weekId: string, ref: SlotRef, slot: Slot) {
+  // mergeFields, not merge: the new meal replaces the old one whole (no stray recipeId, of or done).
   return setDoc(
     doc(weeksOf(householdId), weekId),
     { slots: { [ref.day]: { [ref.meal]: slot } }, updatedAt: serverTimestamp() },
-    { merge: true },
+    { mergeFields: [slotPath(ref), "updatedAt"] },
   ).catch((e) => console.error("setSlot", e));
+}
+
+const slotPath = ({ day, meal }: SlotRef) => `slots.${day}.${meal}`;
+
+/** Ticks or unticks "Fait" on a filled slot. */
+export function setSlotDone(householdId: string, weekId: string, ref: SlotRef, done: boolean) {
+  return updateDoc(doc(weeksOf(householdId), weekId), {
+    [`${slotPath(ref)}.done`]: done ? true : deleteField(),
+    updatedAt: serverTimestamp(),
+  }).catch((e) => console.error("setSlotDone", e));
+}
+
+/**
+ * Moves a meal to another slot of the same week; a meal already there takes the freed place
+ * (swap). Leftovers pointing at a moved dish follow it.
+ */
+export function moveSlot(householdId: string, weekId: string, week: Week | undefined, from: SlotRef, to: SlotRef) {
+  const moving = getSlot(week, from);
+  const other = getSlot(week, to);
+  // A ticked meal was eaten: it never moves, neither dragged nor swapped away.
+  if (!moving || moving.done || other?.done || slotKey(from) === slotKey(to)) return;
+  const fields: Record<string, unknown> = {
+    [slotPath(to)]: moving,
+    [slotPath(from)]: other ?? deleteField(),
+    updatedAt: serverTimestamp(),
+  };
+  const renamed = new Map<string, string>([[slotKey(from), slotKey(to)]]);
+  if (other) renamed.set(slotKey(to), slotKey(from));
+  for (const ref of ALL_SLOTS) {
+    const s = getSlot(week, ref);
+    const target = s?.kind === "leftover" ? renamed.get(s.of) : undefined;
+    if (!s || !target) continue;
+    // A moved slot is written whole above: patch its value rather than add a conflicting child path.
+    if (slotKey(ref) === slotKey(from)) fields[slotPath(to)] = { ...s, of: target };
+    else if (slotKey(ref) === slotKey(to)) fields[slotPath(from)] = { ...s, of: target };
+    else fields[`${slotPath(ref)}.of`] = target;
+  }
+  return updateDoc(doc(weeksOf(householdId), weekId), fields).catch((e) => console.error("moveSlot", e));
 }
 
 export function clearSlot(householdId: string, weekId: string, ref: SlotRef) {
   return updateDoc(doc(weeksOf(householdId), weekId), {
-    [`slots.${ref.day}.${ref.meal}`]: deleteField(),
+    [slotPath(ref)]: deleteField(),
     updatedAt: serverTimestamp(),
   }).catch((e) => console.error("clearSlot", e));
 }

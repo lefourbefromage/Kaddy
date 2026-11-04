@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useId, useMemo, useRef, useState, type DragEvent, type KeyboardEvent } from "react";
 import { Modal } from "@/components/Modal";
 import { areClose, fold, titleWords } from "@/lib/normalize";
 import type { Recipe } from "@/lib/recipes";
-import { slotLabel, type Slot, type SlotRef } from "@/lib/weeks";
+import { parseSlotKey, slotKey, slotLabel, type Slot, type SlotRef } from "@/lib/weeks";
 import { useDropdownSpace } from "@/lib/useDropdownSpace";
+import { startDragGhost } from "./dragGhost";
 import styles from "./menu.module.css";
 
 export type Choice =
@@ -34,6 +35,11 @@ type Props = {
   onChoose: (choice: Choice) => void;
   onClear: () => void;
   onOpenRecipe: (recipe: Recipe) => void;
+  onToggleDone: () => void;
+  /** A meal of the week was dropped here (swap when this slot is filled). */
+  onMove: (from: SlotRef) => void;
+  /** "Déplacer…" in the "…" menu: the keyboard and phone way to move. */
+  onAskMove: () => void;
 };
 
 export function SlotCard(props: Props) {
@@ -45,9 +51,57 @@ export function SlotCard(props: Props) {
 
 const mealLabel = (ref: SlotRef) => (ref.meal === "lunch" ? "Midi" : "Soir");
 
-function EmptySlot({ slotRef, onEdit }: Props) {
+/* ---------- Drag & drop (mouse only; phones and keyboards use "Déplacer…") ---------- */
+
+const DRAG_TYPE = "application/x-kaddy-slot";
+
+function useFinePointer() {
+  const [fine, setFine] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(pointer: fine)");
+    const update = () => setFine(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return fine;
+}
+
+function useSlotDrop(slotRef: SlotRef, onMove: (from: SlotRef) => void) {
+  const [over, setOver] = useState(false);
+  const accepts = (e: DragEvent) => e.dataTransfer.types.includes(DRAG_TYPE);
+  return {
+    over,
+    handlers: {
+      onDragOver: (e: DragEvent) => {
+        if (!accepts(e)) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+        setOver(true);
+      },
+      onDragLeave: (e: DragEvent) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOver(false);
+      },
+      onDrop: (e: DragEvent) => {
+        if (!accepts(e)) return;
+        e.preventDefault();
+        setOver(false);
+        const from = e.dataTransfer.getData(DRAG_TYPE);
+        if (from && from !== slotKey(slotRef)) onMove(parseSlotKey(from));
+      },
+    },
+  };
+}
+
+function EmptySlot({ slotRef, onEdit, onMove }: Props) {
+  const drop = useSlotDrop(slotRef, onMove);
   return (
-    <button type="button" className={`${styles.slot} ${styles.slotEmpty}`} onClick={onEdit}>
+    <button
+      type="button"
+      className={`${styles.slot} ${styles.slotEmpty} ${drop.over ? styles.slotDropTarget : ""}`}
+      onClick={onEdit}
+      {...drop.handlers}
+    >
       <span className="kd-label">{mealLabel(slotRef)}</span>
       <span className={styles.slotPlaceholder}>Quel plat ?</span>
       <span className={styles.srOnly}>, {slotLabel(slotRef)}, vide</span>
@@ -281,13 +335,39 @@ function FilledSlot({
   onEdit,
   onClear,
   onOpenRecipe,
+  onToggleDone,
+  onMove,
+  onAskMove,
 }: Props & { slot: Slot }) {
   const recipe = slot.kind === "simple" ? undefined : recipesById.get(slot.recipeId);
   const name = slot.kind === "simple" ? slot.name : (recipe?.title ?? "Recette supprimée");
   const sub = slot.kind === "simple" ? "Repas simple" : null;
+  // A ticked meal was eaten: it stays put (no drag, no drop, no "…"); untick it to change it.
+  const draggable = useFinePointer() && !slot.done;
+  const [dragging, setDragging] = useState(false);
+  const drop = useSlotDrop(slotRef, onMove);
 
+  const classes = [
+    styles.slot,
+    styles.slotFilled,
+    slot.kind === "leftover" && styles.slotLeftover,
+    slot.done && styles.slotDone,
+    dragging && styles.slotDragging,
+    drop.over && !dragging && !slot.done && styles.slotDropTarget,
+  ];
   return (
-    <div className={`${styles.slot} ${styles.slotFilled} ${slot.kind === "leftover" ? styles.slotLeftover : ""}`}>
+    <div
+      className={classes.filter(Boolean).join(" ")}
+      draggable={draggable || undefined}
+      onDragStart={(e) => {
+        e.dataTransfer.setData(DRAG_TYPE, slotKey(slotRef));
+        e.dataTransfer.effectAllowed = "move";
+        startDragGhost(e, styles.dragGhost);
+        setDragging(true);
+      }}
+      onDragEnd={() => setDragging(false)}
+      {...(slot.done ? {} : drop.handlers)}
+    >
       <div className={styles.slotTop}>
         <span className="kd-label">{mealLabel(slotRef)}</span>
         {slot.kind === "leftover" && (
@@ -302,6 +382,19 @@ function FilledSlot({
       </span>
       {sub && <span className={styles.slotSub}>{sub}</span>}
       <div className={styles.slotActions}>
+        <button
+          type="button"
+          className={`${styles.doneButton} kd-hit`}
+          aria-pressed={!!slot.done}
+          aria-label={`Fait : ${name}`}
+          title={slot.done ? "Marquer comme pas encore fait" : "Marquer comme fait"}
+          onClick={onToggleDone}
+        >
+          {/* Ticked: the button offers the way back (undo arrow), the fade already says "fait". */}
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            {slot.done ? <path d="M9 14 4 9l5-5M4 9h10.5a5.5 5.5 0 0 1 0 11H11" /> : <path d="M5 12.5l4.5 4.5L19 7.5" />}
+          </svg>
+        </button>
         {slot.kind === "recipe" && recipe && (
           <button
             type="button"
@@ -316,14 +409,26 @@ function FilledSlot({
             </svg>
           </button>
         )}
-        <SlotMenu label={`Actions du repas ${slotLabel(slotRef)}`} onChange={onEdit} onClear={onClear} />
+        {!slot.done && (
+          <SlotMenu label={`Actions du repas ${slotLabel(slotRef)}`} onChange={onEdit} onMove={onAskMove} onClear={onClear} />
+        )}
       </div>
     </div>
   );
 }
 
 /** The "…" menu of a filled slot. */
-function SlotMenu({ label, onChange, onClear }: { label: string; onChange: () => void; onClear: () => void }) {
+function SlotMenu({
+  label,
+  onChange,
+  onMove,
+  onClear,
+}: {
+  label: string;
+  onChange: () => void;
+  onMove: () => void;
+  onClear: () => void;
+}) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -378,6 +483,16 @@ function SlotMenu({ label, onChange, onClear }: { label: string; onChange: () =>
             className={styles.menuItem}
             onClick={() => {
               setOpen(false);
+              onMove();
+            }}
+          >
+            Déplacer…
+          </button>
+          <button
+            type="button"
+            className={styles.menuItem}
+            onClick={() => {
+              setOpen(false);
               onClear();
             }}
           >
@@ -386,6 +501,51 @@ function SlotMenu({ label, onChange, onClear }: { label: string; onChange: () =>
         </div>
       )}
     </div>
+  );
+}
+
+/** "Déplacer vers quel repas ?": the other slots of the week (ticked ones excepted); a filled one swaps. */
+export function MoveDialog({
+  from,
+  options,
+  onClose,
+  onPick,
+}: {
+  from: SlotRef;
+  options: { ref: SlotRef; dish: string | null; done: boolean }[];
+  onClose: () => void;
+  onPick: (to: SlotRef) => void;
+}) {
+  const uid = useId();
+  const capitalize = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
+  return (
+    <Modal labelledBy={`${uid}-title`} onClose={onClose} narrow>
+      <div className={styles.leftoverHead}>
+        <div className={styles.leftoverHeadText}>
+          <span className="kd-label">{slotLabel(from)}</span>
+          <h2 id={`${uid}-title`} className={styles.leftoverTitle}>
+            Déplacer vers quel repas ?
+          </h2>
+        </div>
+        <button type="button" aria-label="Fermer" className={styles.leftoverClose} onClick={onClose}>
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      </div>
+      <ul className={styles.leftoverList}>
+        {options
+          .filter((o) => slotKey(o.ref) !== slotKey(from) && !o.done)
+          .map((o) => (
+            <li key={slotKey(o.ref)}>
+              <button type="button" className={styles.leftoverOption} onClick={() => onPick(o.ref)}>
+                <span className={styles.leftoverDish}>{capitalize(slotLabel(o.ref))}</span>
+                <span className={styles.leftoverWhen}>{o.dish ? `Échanger avec ${o.dish}` : "Libre"}</span>
+              </button>
+            </li>
+          ))}
+      </ul>
+    </Modal>
   );
 }
 
