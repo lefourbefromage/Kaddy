@@ -45,4 +45,4 @@ jobs:
           # Day-to-day work happens on develop; PRs go there, main stays the release branch.
           base_branch: develop
           claude_args: |
-            --allowedTools "Bash(npm run lint),Bash(npm run build),Bash(npx tsc --noEmit)"
+            --allowedTools "Bash(npm run lint:*),Bash(npm run build:*),Bash(npx eslint:*),Bash(npx tsc:*),Bash(npx next typegen:*)"
